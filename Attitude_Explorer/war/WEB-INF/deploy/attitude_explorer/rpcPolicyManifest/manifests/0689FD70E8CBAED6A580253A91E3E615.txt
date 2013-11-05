@@ -1,0 +1,2 @@
+serviceClass: main.client.interfaces.AnalyticService
+path: 52748A82FB5FA62AE4386662B82A1860.gwt.rpc
