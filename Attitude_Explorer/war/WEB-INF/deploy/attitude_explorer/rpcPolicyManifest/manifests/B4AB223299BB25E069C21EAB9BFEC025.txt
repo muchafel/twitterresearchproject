@@ -1,2 +1,0 @@
-serviceClass: main.client.interfaces.AnalyticService
-path: 4DB2E0AC9FE27CD0D537084A3CA5A523.gwt.rpc
