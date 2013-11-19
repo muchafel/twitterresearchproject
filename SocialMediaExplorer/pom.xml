@@ -60,6 +60,18 @@
         <version>[3.0,)</version>
     </dependency>
     
+    <dependency>
+	<groupId>org.twitter4j</groupId>
+	<artifactId>twitter4j-stream</artifactId>
+	<version>3.0.3</version>
+	</dependency>
+    
+    <dependency>
+		<groupId>com.ibm.icu</groupId>
+		<artifactId>icu4j</artifactId>
+		<version>3.4.4</version>
+	</dependency>
+    
   </dependencies>
 
   <build>
@@ -88,7 +100,7 @@
         <!-- Plugin configuration. There are many available options, see 
           gwt-maven-plugin documentation at codehaus.org -->
         <configuration>
-          <runTarget>Harr.html</runTarget>
+          <runTarget>Start.html</runTarget>
           <hostedWebapp>${webappDirectory}</hostedWebapp>
           <i18nMessagesBundle>ude.SocialMediaExplorer.client.Messages</i18nMessagesBundle>
         </configuration>
