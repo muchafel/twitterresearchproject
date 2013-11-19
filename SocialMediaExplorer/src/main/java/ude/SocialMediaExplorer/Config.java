@@ -1,5 +1,7 @@
 package ude.SocialMediaExplorer;
 
+import java.util.ArrayList;
+
 /**
  * A place for all configurable params
  * @author henrikdetjen
@@ -7,17 +9,31 @@ package ude.SocialMediaExplorer;
  */
 public class Config {
 	
-	// input / twitter-connection
-	public static String twitter_ConsumerKey = "CR8dliXroJBFtdfVsDdsuQ";
-	public static String twitter_ConsumerSecret = "g3QYMQDxCbvtAFFNTXAfroeKO2cKGbWyHsa6bSCUws";
-	public static String twitter_AccessToken = "40204501-kyDmOOh9Yqk9BBzgzT8eDKHLwocKcNirI9eqALFzo";
-	public static String twitter_AccessTokenSecret = "Q9ZizMtfmECcr3X6SGWB8LLqbPtLvFtFqYFQrYuzq7U";
-	public static int twitter_result_restriction = 50;
+	// auth
+	public static String twitter_ConsumerKey = "Y9I5pvM8aUhJiUFKj4XxgQ";
+	public static String twitter_ConsumerSecret = "doQ84Y3mtge6kIxus3zFeKK2t8AdC3FRwuNVXPs9iB4";
+	public static String twitter_AccessToken = "2159056350-Jb6q09GoUeJJvGHj4qmM4mDNwA4hFURgU1gOg76";
+	public static String twitter_AccessTokenSecret = "hlghHUIQLL9RMWvcKU36obLwqKMesRL2gIzfVBFxZEDWY";
+	public static int twitter_result_restriction = 20;
 		
-	// output
-	public static String location_tweets = "files/tweets/";
+	// io
+	public static String location_tweets = "/files/rawdata/tweets/";
+	public static String location_results = "/files/results/";
 	
-	//...
+	//crawler
+	public static long crawler_newFileInterval = 1000*60*60*24*7; //ms
+	@SuppressWarnings("serial")
+	public static ArrayList<String> crawler_hashtags = new ArrayList<String>() {{
+		add("#tatort");
+		add("#spiegeltv");
+		add("#sterntv");
+		add("#terrax");
+		add("#guentherjauch");
+		add("#annewill");
+		add("#fashionhero");
+		add("#tvog");
+		add("#halligalli");
+	}};
 	
 
 }

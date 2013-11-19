@@ -1,62 +1,34 @@
 package ude.SocialMediaExplorer.analysis;
 
-import java.util.concurrent.Callable;
+import ude.SocialMediaExplorer.data.model.Post;
+import ude.SocialMediaExplorer.data.model.PostList;
+import ude.SocialMediaExplorer.data.providing.DataProviding;
+import ude.SocialMediaExplorer.data.providing.stored.TwitterJSONFileReader;
 
 
-
-
-
-
-//import twitter4j.Status;
-import ude.SocialMediaExplorer.analysis.components.language.Language;
-import ude.SocialMediaExplorer.analysis.components.language.LanguageClassificator;
-import ude.SocialMediaExplorer.analysis.interfaces.LanguageClassification;
-import ude.SocialMediaExplorer.data.Status;
-import ude.SocialMediaExplorer.data.StatusList;
-import ude.SocialMediaExplorer.data.mining.DataMining;
-import ude.SocialMediaExplorer.data.mining.twitter.TweetReader_REST;
-import ude.SocialMediaExplorer.shared.Response;
-
-/**
- * App core: searches data for hashtag and analyzes them, afterwards a client response will be created
- * @author henrikdetjen
- *
- */
-public class Analysis implements Callable<Response>{
+public class Analysis extends Thread{
 
 	String hashtag;
-	DataMining dataGrabber;
-	LanguageClassification lanuageClassificator;
-	
-	public Analysis(String hashtag){
-		this.hashtag = hashtag;
-		dataGrabber = new TweetReader_REST();
-		lanuageClassificator = new LanguageClassificator();
-	}
+	DataProviding dataProvider;
 
-	public Response call() throws Exception {
-		//get Data
-		StatusList states = dataGrabber.getStates(hashtag);
+	public Analysis(String hashtag) {
+		dataProvider = new TwitterJSONFileReader();
 		
-		ResultManager resultManager = new ResultManager();
+	}
+	
+	public void run() {
 		
-		for (Status s : states){
+		try {
+			PostList posts = dataProvider.getPosts(hashtag);
 			
-			Result result = new Result();
+			for (Post p : posts){
+//				analyze(p);
+			}
 			
-			//ANALYZE 
-			Language l = lanuageClassificator.getLanguage(s.getMessage());
-			result.test = s.getMessage();
-			//result.setLanguage(l); TODO: specify result
-			//...TODO: add further steps i.e rating
-			
-			resultManager.addResult(result);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		System.out.println("called!");
-//				... states -(analayse state)-> analysis.Result -(aggregation)-> analysis.ResultList -(extract information)-> shared.Response 
-//				 ... 
-		return resultManager.createResponse();
 	}
-	
+
 }
