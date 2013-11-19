@@ -4,6 +4,6 @@
   <inherits name='ude.SocialMediaExplorer.Start' />
 
   <!-- Specify the path to any remote services.                   -->
-  <servlet path="/Start/greet" class="ude.SocialMediaExplorer.server.GreetingServiceImpl" />
+  <!-- servlet path="/Start/greet" class="ude.SocialMediaExplorer.server.GreetingServiceImpl" / -->
 
 </module>
