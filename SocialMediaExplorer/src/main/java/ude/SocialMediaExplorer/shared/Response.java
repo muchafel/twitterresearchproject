@@ -11,6 +11,7 @@ import java.util.ArrayList;
 @SuppressWarnings("serial")
 public class Response implements Serializable {
 	
+	
 	ArrayList<String> list = new ArrayList<String>();
 	public void addString(String s){
 		list.add(s);

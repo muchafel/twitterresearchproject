@@ -1,4 +1,4 @@
-package ude.SocialMediaExplorer.client.interfaces;
+package ude.SocialMediaExplorer.client.rmi;
 
 import ude.SocialMediaExplorer.shared.Response;
 

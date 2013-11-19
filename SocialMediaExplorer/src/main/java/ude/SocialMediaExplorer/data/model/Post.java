@@ -1,11 +1,11 @@
-package ude.SocialMediaExplorer.data;
+package ude.SocialMediaExplorer.data.model;
 
 /**
- * Represents the data base in a normalized way 
+ * Represents the data base
  * @author henrikdetjen
  *
  */
-public class Status {
+public class Post {
 	
 	/**
 	 * the user who posted the dataset
@@ -19,16 +19,20 @@ public class Status {
 	 * how many times the msg was shared/retweeted
 	 */
 	private int shared = 0;
-	
+	/**
+	 * the id 
+	 */
+	private String id = "";	
+
 	/*
 	 * Constructors
 	 */
-	public Status(){
+	public Post(){
 	}
-	public Status (String message){
+	public Post (String message){
 		this.message = message;
 	}
-	public Status(String message, String user){
+	public Post(String message, String user){
 		this.message = message;
 		this.user = user;
 	}
@@ -53,6 +57,12 @@ public class Status {
 	}
 	public void setShared(int shared) {
 		this.shared = shared;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	

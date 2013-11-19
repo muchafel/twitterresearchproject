@@ -1,8 +1,10 @@
 package ude.SocialMediaExplorer.server;
 
 
-import ude.SocialMediaExplorer.analysis.Analysis;
-import ude.SocialMediaExplorer.client.interfaces.AnalyticService;
+import ude.SocialMediaExplorer.client.rmi.AnalyticService;
+import ude.SocialMediaExplorer.data.model.PostList;
+import ude.SocialMediaExplorer.data.providing.DataProviding;
+import ude.SocialMediaExplorer.data.providing.stored.TwitterJSONFileReader;
 import ude.SocialMediaExplorer.shared.Response;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -19,32 +21,22 @@ public class AnalyticServiceImpl extends RemoteServiceServlet implements Analyti
 			throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		try {
-			return new Analysis(hashtag).call();
+			Response resp = new Response();
+			DataProviding  d = new TwitterJSONFileReader();
+			PostList p = d.getPosts(hashtag);
+			String s = p.makeString();
+			
+			System.out.println(hashtag);
+			System.out.println(p.size());
+			System.out.println(s);
+			
+			resp.addString(s);
+			return resp;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new Response();
 		}
 	}
-
-	
-	//Async
-//	@Override
-//	public void analyseHashtag(String hashtag, AsyncCallback<Result> callback)
-//			throws IllegalArgumentException {
-//		//no php, html code etc.
-//		String input = FieldVerifier.escapeHtml(hashtag);
-//		//"#hashtag" -> "hashtag"
-//		if (input.charAt(0) == '#')
-//			input = input.replaceFirst("#", "");
-//		//call analysis with input
-//		try {
-//			Result r = new Analysis(input).call();
-//			callback.onSuccess(r);
-//		} catch (Exception e) {
-//			callback.onFailure(e);
-//		}
-//		
-//	}
 
 }
