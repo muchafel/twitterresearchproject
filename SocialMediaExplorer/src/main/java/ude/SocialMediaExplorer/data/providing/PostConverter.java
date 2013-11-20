@@ -17,7 +17,7 @@ public class PostConverter {
 		Post s = new Post();
 		s.setMessage(s4j.getText());
 		s.setUser(s4j.getUser().getName());
-		s.setShared(s4j.getRetweetCount());
+		s.setShared((int) s4j.getRetweetCount());
 		return s;
 	}
 }
