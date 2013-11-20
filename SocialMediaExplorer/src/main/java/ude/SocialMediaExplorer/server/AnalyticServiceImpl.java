@@ -1,10 +1,14 @@
 package ude.SocialMediaExplorer.server;
 
 
+import java.io.Serializable;
+
 import ude.SocialMediaExplorer.client.rmi.AnalyticService;
 import ude.SocialMediaExplorer.data.model.PostList;
 import ude.SocialMediaExplorer.data.providing.DataProviding;
 import ude.SocialMediaExplorer.data.providing.stored.TwitterJSONFileReader;
+import ude.SocialMediaExplorer.data.result.IResultPooling;
+import ude.SocialMediaExplorer.data.result.ResultPoolingImpl;
 import ude.SocialMediaExplorer.shared.Response;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -22,6 +26,10 @@ public class AnalyticServiceImpl extends RemoteServiceServlet implements Analyti
 		// TODO Auto-generated method stub
 		try {
 			Response resp = new Response();
+			
+//			IResultPooling pooler = new ResultPoolingImpl();
+//			resp.setCe(pooler.pool());
+//			
 			DataProviding  d = new TwitterJSONFileReader();
 			PostList p = d.getPosts(hashtag);
 			String s = p.makeString();
@@ -38,5 +46,4 @@ public class AnalyticServiceImpl extends RemoteServiceServlet implements Analyti
 			return new Response();
 		}
 	}
-
 }
