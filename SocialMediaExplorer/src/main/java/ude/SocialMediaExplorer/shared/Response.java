@@ -15,7 +15,6 @@ public class Response implements Serializable {
 	
 	ClusterElement ce;
 	
-	
 	public ClusterElement getCe() {
 		return ce;
 	}
