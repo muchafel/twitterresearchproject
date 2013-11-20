@@ -3,6 +3,8 @@ package ude.SocialMediaExplorer.shared;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
+
 /**
  * Shared data representation (all infos for clients ui should be written in here)
  * @author henrikdetjen
@@ -11,7 +13,17 @@ import java.util.ArrayList;
 @SuppressWarnings("serial")
 public class Response implements Serializable {
 	
+	ClusterElement ce;
 	
+	
+	public ClusterElement getCe() {
+		return ce;
+	}
+
+	public void setCe(ClusterElement ce) {
+		this.ce = ce;
+	}
+
 	ArrayList<String> list = new ArrayList<String>();
 	public void addString(String s){
 		list.add(s);
