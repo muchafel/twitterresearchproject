@@ -26,16 +26,18 @@ import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
 public class Analysis extends Thread{
 
 	private PostList postList;
+	private List<JCas> tweetCases;
 
 	public Analysis(PostList postList) {
 		this.postList=postList;
+		tweetCases= new ArrayList<JCas>();
 	}
 	
 	public void run() {
 		
 		try {
 			for (Post p : postList){
-				JCas jcas = analyzeTweet(p);
+				tweetCases.add(analyzeTweet(p));
 			}
 			
 		} catch (Exception e) {
@@ -49,7 +51,9 @@ public class Analysis extends Thread{
         builder.add(createEngineDescription(LanguageIdentifier.class));
         builder.add(createEngineDescription(BreakIteratorSegmenter.class));
         builder.add(createEngineDescription(OpenNlpPosTagger.class));
-
+        builder.add(createEngineDescription(SentimentAnnotator.class));
+       
+        
         AnalysisEngine engine = builder.createAggregate();
 
         JCas jcas = engine.newJCas();
@@ -58,6 +62,7 @@ public class Analysis extends Thread{
         DocumentMetaData.create(jcas);
 
         engine.process(jcas);
+        
         return jcas;
 	}
 
