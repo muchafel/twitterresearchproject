@@ -9,11 +9,11 @@ public class TestAnalysis {
 	public static void main(String[] args) {
 		
 		Post p1 = new Post();
-		p1.setMessage("EINSTIEGSDROGE:Der 1. Tony Braun #Thriller entführt dich in den Kopf des Killers. @BCSchiller http://t.co/qZbH9r265W #tatort #bestseller");
+		p1.setMessage("Michael spaziert zum Rhein.");
 		Post p2 = new Post();
-		p2.setMessage("Sergio Pettis #tatort Gracias http://t.co/h4C4JoG7pw Sabella #forumbeasiswa");
+		p2.setMessage("Ich bin gehen!");
 		Post p3 = new Post();
-		p3.setMessage("Dienstag, 22:00 Uhr auf NDR: \u201eRuhe sanft\u201c, http://t.co/fQ1ywZUaad #Tatort");
+		p3.setMessage("Ameisen sind keine Attribute?");
 		
 		PostList pl = new PostList();
 		pl.add(p1);
