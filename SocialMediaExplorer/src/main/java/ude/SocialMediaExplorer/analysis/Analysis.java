@@ -43,6 +43,9 @@ public class Analysis extends Thread{
 			for (Post p : postList){
 				tweetCases.add(analyzeTweet(p));
 			}
+			for (JCas jcas : tweetCases){
+				
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
