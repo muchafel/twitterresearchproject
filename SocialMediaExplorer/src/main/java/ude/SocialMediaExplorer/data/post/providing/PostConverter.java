@@ -1,6 +1,6 @@
 package ude.SocialMediaExplorer.data.post.providing;
 
-import ude.SocialMediaExplorer.data.post.model.Post;
+import ude.SocialMediaExplorer.data.post.Post;
 
 
 

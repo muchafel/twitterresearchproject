@@ -1,6 +1,6 @@
 package ude.SocialMediaExplorer.data.post.providing;
 
-import ude.SocialMediaExplorer.data.post.model.PostList;
+import ude.SocialMediaExplorer.data.post.PostList;
 import ude.SocialMediaExplorer.data.utils.time.TimeSpan;
 
 /**
