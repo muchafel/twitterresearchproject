@@ -1,13 +1,24 @@
 package ude.SocialMediaExplorer.client;
 
+import java.util.Date;
+
 import ude.SocialMediaExplorer.data.utils.time.TimeStamp;
 
 public class TestTimeStamp {
 	public static void main(String[] args) {
-		System.out.println(
-				TimeStamp.getShort()
-				+ "\n" +
-				TimeStamp.getLong()
-				);
+		try {
+			System.out.println(
+					TimeStamp.getShort()
+					+ "\n" +
+					TimeStamp.reverseShort( TimeStamp.getShort() ).toString()
+					+ "\n" +
+					TimeStamp.getLong()
+					+ "\n" +
+					TimeStamp.reverseLong( TimeStamp.getLong() ).toString()
+					);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

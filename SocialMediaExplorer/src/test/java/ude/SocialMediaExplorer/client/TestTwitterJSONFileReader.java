@@ -9,8 +9,8 @@ public class TestTwitterJSONFileReader {
 		TwitterJSONFileReader bla =  new TwitterJSONFileReader();
 		
 		try {
-//			bla.getPosts("tatort").print();
-			bla.getPosts("TATORT",new TimeSpan(TimeStamp.reverseLong("20131119102440"))).print();
+			bla.getPosts("tatort").print();
+			bla.getPosts("TATORT", new TimeSpan( TimeStamp.reverseLong("20131119102430") )).print();
 			bla.getPosts("gibts nicht...").print();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

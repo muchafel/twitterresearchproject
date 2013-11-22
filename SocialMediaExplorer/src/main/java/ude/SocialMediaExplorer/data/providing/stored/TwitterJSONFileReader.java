@@ -1,8 +1,6 @@
 package ude.SocialMediaExplorer.data.providing.stored;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import twitter4j.Status;
@@ -11,10 +9,9 @@ import ude.SocialMediaExplorer.Config;
 import ude.SocialMediaExplorer.data.model.PostList;
 import ude.SocialMediaExplorer.data.providing.DataProviding;
 import ude.SocialMediaExplorer.data.providing.PostConverter;
+import ude.SocialMediaExplorer.data.utils.io.FileFilter;
 import ude.SocialMediaExplorer.data.utils.io.JSONReader;
-import ude.SocialMediaExplorer.data.utils.io.TextFileReader;
 import ude.SocialMediaExplorer.data.utils.time.TimeSpan;
-import ude.SocialMediaExplorer.data.utils.time.TimeStamp;
 
 /**
  * reads posts from filesystem
@@ -29,14 +26,16 @@ public class TwitterJSONFileReader implements DataProviding{
 		PostList result = new PostList();
 		
 		File dir = new File(Config.location_tweets + hashtag);
-		if ( dir.exists()  ){
+		if ( dir.exists()  && dir.isDirectory() ){
 			File[] files = dir.listFiles();
 			for (File file : files){
-				JSONReader reader= new JSONReader(file.getAbsolutePath());
-				List<String> lines = reader.readJSON();
-				for(String line : lines){
-					Status s = DataObjectFactory.createStatus(line);
-					result.add(PostConverter.fromTwitter(s) );
+				if ( file.getName().contains(".json") ){
+					JSONReader reader = new JSONReader(file.getAbsolutePath());
+					List<String> lines = reader.readJSON();
+					for(String line : lines){
+						Status s = DataObjectFactory.createStatus(line);
+						result.add( PostConverter.fromTwitter(s) );
+					}
 				}
 			}
 		}
@@ -51,23 +50,16 @@ public class TwitterJSONFileReader implements DataProviding{
 		//Folder
 		File dir = new File(Config.location_tweets + hashtag);
 		if ( dir.exists() && dir.isDirectory() ){
-			File[] files = dir.listFiles();
+			File[] files = FileFilter.getFilesByTimePeriod(dir, timespan);
 			//files
-			for (File f : files){
-				//check time
-				String timestamp = f.getName().replaceAll(".json", "").split("_")[0];
-				try{
-					Date d = TimeStamp.reverseLong(timestamp);
-					//if in timespan
-					if ( timespan.includes(d) ){
-						ArrayList<String> lines = TextFileReader.read(f.getAbsolutePath());
-						for(String line : lines){
-							Status s = DataObjectFactory.createStatus(line);
-							result.add( PostConverter.fromTwitter(s) );
-						}
+			for (File file : files){
+				if ( file.getName().contains(".json") ){
+					JSONReader reader = new JSONReader(file.getAbsolutePath());
+					List<String> lines = reader.readJSON();
+					for(String line : lines){
+						Status s = DataObjectFactory.createStatus(line);
+						result.add( PostConverter.fromTwitter(s) );
 					}
-				}catch(Exception e){
-					System.out.println(e.getMessage());
 				}
 			}
 		}
