@@ -1,7 +1,7 @@
 package ude.SocialMediaExplorer.data.post.providing.live;
 
 import ude.SocialMediaExplorer.Config;
-import ude.SocialMediaExplorer.data.post.model.PostList;
+import ude.SocialMediaExplorer.data.post.PostList;
 import ude.SocialMediaExplorer.data.post.providing.IPostProviding;
 import ude.SocialMediaExplorer.data.post.providing.PostConverter;
 import ude.SocialMediaExplorer.data.utils.connections.TwitterConnector;
