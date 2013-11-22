@@ -11,22 +11,22 @@ import com.ibm.icu.text.SimpleDateFormat;
  */
 public class TimeStamp {
 	/**
-	 * get a Timestamp in format YYYYMMdd
+	 * get a Timestamp in format yyyyMMdd
 	 * @return {@link String}
 	 */
 	public static String getShort(){
 		SimpleDateFormat format = new SimpleDateFormat();
-		format.applyLocalizedPattern("YYYYMMdd");
+		format.applyLocalizedPattern("yyyyMMdd");
 		return format.format(new Date());
 	}
 	/**
-	 * creates a Timestamp in format YYYYMMdd
+	 * creates a Timestamp in format yyyyMMdd
 	 * @param d {@link Date}
 	 * @return {@link String}
 	 */
 	public static String createShort(Date d){
 		SimpleDateFormat format = new SimpleDateFormat();
-		format.applyLocalizedPattern("YYYYMMdd");
+		format.applyLocalizedPattern("yyyyMMdd");
 		return format.format(d);
 	}
 	/**
@@ -36,26 +36,26 @@ public class TimeStamp {
 	 */
 	public static Date reverseShort(String s) throws Exception{
 		SimpleDateFormat format = new SimpleDateFormat();
-		format.applyLocalizedPattern("YYYYMMdd");
+		format.applyLocalizedPattern("yyyyMMdd");
 		return format.parse(s);
 	}
 	/**
-	 * get a Timestamp in format YYYYMMddHHmmss
+	 * get a Timestamp in format yyyyMMddHHmmss
 	 * @return {@link String}
 	 */
 	public static String getLong(){
 		SimpleDateFormat format = new SimpleDateFormat();
-		format.applyLocalizedPattern("YYYYMMddHHmmss");
+		format.applyLocalizedPattern("yyyyMMddHHmmss");
 		return format.format(new Date());
 	}
 	/**
-	 * creates a Timestamp in format YYYYMMddHHmmss 
+	 * creates a Timestamp in format yyyyMMddHHmmss 
 	 * @param d {@link Date}
 	 * @return {@link String}
 	 */
 	public static String createLong(Date d){
 		SimpleDateFormat format = new SimpleDateFormat();
-		format.applyLocalizedPattern("YYYYMMddHHmmss");
+		format.applyLocalizedPattern("yyyyMMddHHmmss");
 		return format.format(d);
 	}
 	/**
@@ -65,7 +65,7 @@ public class TimeStamp {
 	 */
 	public static Date reverseLong(String s) throws Exception{
 		SimpleDateFormat format = new SimpleDateFormat();
-		format.applyLocalizedPattern("YYYYMMddHHmmss");
+		format.applyLocalizedPattern("yyyyMMddHHmmss");
 		return format.parse(s);
 	}
 }
