@@ -20,6 +20,11 @@ package ude.SocialMediaExplorer.shared;
  * JavaScript (such as Widgets) cannot be run on the server.
  * </p>
  */
+/**
+ * 
+ * @author henrikdetjen
+ *
+ */
 public class FieldVerifier {
 
   /**
@@ -30,13 +35,37 @@ public class FieldVerifier {
    * that usernames, passwords, email addresses, URLs, and other fields have the
    * proper syntax.
    *
-   * @param name the name to validate
+   * @param input the name to validate
    * @return true if valid, false if invalid
    */
-  public static boolean isValidName(String name) {
-    if (name == null) {
+  public static boolean test(String input) {
+    if (input == null) {
       return false;
     }
-    return name.length() > 3;
+    return input.length() >= 2; //min 2 signs
   }
+  
+  public static String clean(String input){
+	  
+//	  // prevent code snippets from executing, i.e. php/html/js
+//	  input = input.replaceAll("<", "");
+//	  input = input.replace(">", "");
+//	  input = input.replaceAll("?", "");
+//	  input = input.replaceAll("$", "");
+//	  input = input.replaceAll("=", "");
+//	  input = input.replaceAll("(", "");
+//	  input = input.replaceAll(")", "");
+//	  input = input.replaceAll("[", "");
+//	  input = input.replaceAll("]", "");
+//	  
+//	  //remove hashtags, whitespaces and brackets etc.
+//	  input = input.replaceAll("#", "");
+//	  input = input.replaceAll(" ", "");
+	  
+	  // Umlaute?
+	  
+	  return input;
+	  
+  }
+  
 }

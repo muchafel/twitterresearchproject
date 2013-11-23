@@ -1,6 +1,10 @@
 package ude.SocialMediaExplorer.shared.exchangeFormat;
 
-public class Sentiment {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Sentiment implements Serializable{
+	
 	private double positive;
 	private double negative;
 	

@@ -10,7 +10,7 @@ import ude.SocialMediaExplorer.data.post.PostList;
 import ude.SocialMediaExplorer.data.post.providing.IPostProviding;
 import ude.SocialMediaExplorer.data.post.providing.PostConverter;
 import ude.SocialMediaExplorer.data.utils.io.FileFilter;
-import ude.SocialMediaExplorer.data.utils.io.JSONReader;
+import ude.SocialMediaExplorer.data.utils.io.TextFileReader;
 import ude.SocialMediaExplorer.data.utils.time.TimeSpan;
 
 /**
@@ -25,13 +25,12 @@ public class TwitterJSONFileReader implements IPostProviding{
 		hashtag = hashtag.toLowerCase();
 		PostList result = new PostList();
 		
-		File dir = new File(Config.location_tweets + hashtag);
+		File dir = new File(Config.get_location_tweets() + hashtag);
 		if ( dir.exists()  && dir.isDirectory() ){
 			File[] files = dir.listFiles();
 			for (File file : files){
 				if ( file.getName().contains(".json") ){
-					JSONReader reader = new JSONReader(file.getAbsolutePath());
-					List<String> lines = reader.readJSON();
+					List<String> lines = TextFileReader.read(file.getAbsolutePath());
 					for(String line : lines){
 						Status s = DataObjectFactory.createStatus(line);
 						result.add( PostConverter.fromTwitter(s) );
@@ -48,14 +47,13 @@ public class TwitterJSONFileReader implements IPostProviding{
 		
 		PostList result = new PostList();
 		//Folder
-		File dir = new File(Config.location_tweets + hashtag);
+		File dir = new File(Config.get_location_tweets() + hashtag);
 		if ( dir.exists() && dir.isDirectory() ){
 			File[] files = FileFilter.getFilesByTimePeriod(dir, timespan);
 			//files
 			for (File file : files){
 				if ( file.getName().contains(".json") ){
-					JSONReader reader = new JSONReader(file.getAbsolutePath());
-					List<String> lines = reader.readJSON();
+					List<String> lines = TextFileReader.read(file.getAbsolutePath());
 					for(String line : lines){
 						Status s = DataObjectFactory.createStatus(line);
 						result.add( PostConverter.fromTwitter(s) );

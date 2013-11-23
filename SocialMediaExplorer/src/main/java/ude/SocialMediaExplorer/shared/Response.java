@@ -22,7 +22,7 @@ public class Response implements Serializable {
 	public void setCe(ClusterElement ce) {
 		this.ce = ce;
 	}
-
+	
 	ArrayList<String> list = new ArrayList<String>();
 	public void addString(String s){
 		list.add(s);
@@ -38,6 +38,10 @@ public class Response implements Serializable {
 			res += s+"\n";
 		}
 		return res;
+	}
+	
+	public String asHTML(){
+		return toString().replaceAll("\n", "<br />");
 	}
 
 	
