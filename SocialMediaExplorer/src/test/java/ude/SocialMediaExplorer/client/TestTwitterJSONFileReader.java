@@ -1,6 +1,6 @@
 package ude.SocialMediaExplorer.client;
 
-import ude.SocialMediaExplorer.data.providing.stored.TwitterJSONFileReader;
+import ude.SocialMediaExplorer.data.post.providing.stored.TwitterJSONFileReader;
 import ude.SocialMediaExplorer.data.utils.time.TimeSpan;
 import ude.SocialMediaExplorer.data.utils.time.TimeStamp;
 

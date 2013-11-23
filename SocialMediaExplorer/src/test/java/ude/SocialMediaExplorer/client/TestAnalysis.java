@@ -1,8 +1,8 @@
 package ude.SocialMediaExplorer.client;
 
 import ude.SocialMediaExplorer.analysis.Analysis;
-import ude.SocialMediaExplorer.data.model.Post;
-import ude.SocialMediaExplorer.data.model.PostList;
+import ude.SocialMediaExplorer.data.post.Post;
+import ude.SocialMediaExplorer.data.post.PostList;
 
 public class TestAnalysis {
 	

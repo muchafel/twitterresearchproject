@@ -1,7 +1,7 @@
 package ude.SocialMediaExplorer.client;
 
-import ude.SocialMediaExplorer.data.model.PostList;
-import ude.SocialMediaExplorer.data.providing.live.TwitterRESTReader;
+import ude.SocialMediaExplorer.data.post.PostList;
+import ude.SocialMediaExplorer.data.post.providing.live.TwitterRESTReader;
 
 public class TestRESTReader {
 
@@ -15,7 +15,7 @@ public class TestRESTReader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for (ude.SocialMediaExplorer.data.model.Post s : states){
+		for (ude.SocialMediaExplorer.data.post.Post s : states){
 			System.out.println(s.getUser() + " -> " + s.getMessage());
 		}
 		
