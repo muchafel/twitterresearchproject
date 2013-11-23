@@ -49,7 +49,7 @@ public class HashtagStreamWriter {
 		//normalize hashtag
 		this.hashtag=hashtag.replaceAll("#", "");
 		//set file location
-		this.path = Config.location_tweets + this.hashtag;
+		this.path = Config.get_location_tweets() + this.hashtag;
 		
 		//make folder for hashtag (if not already existing)
 		try {

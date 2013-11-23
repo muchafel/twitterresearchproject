@@ -1,10 +1,10 @@
 package ude.SocialMediaExplorer.shared.exchangeFormat;
 
-import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.List;
-import java.util.Vector;
 
-public class ClusterElement {
+@SuppressWarnings("serial")
+public class ClusterElement implements Serializable{
 	private String name;
 	private Sentiment sentiment;
 	private List<ClusterElement> subcluster;

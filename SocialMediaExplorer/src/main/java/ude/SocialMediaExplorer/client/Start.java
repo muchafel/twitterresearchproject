@@ -36,7 +36,7 @@ public class Start implements EntryPoint {
 	  /**
 	   * Create a remote service proxy to talk to the server-side Greeting service.
 	   */
-	  private final AnalyticServiceAsync greetingService = GWT.create(AnalyticService.class);
+	  private final AnalyticServiceAsync proxy = GWT.create(AnalyticService.class);
 
 	  private final Messages messages = GWT.create(Messages.class);
 
@@ -115,8 +115,9 @@ public class Start implements EntryPoint {
 	        // First, we validate the input.
 	        errorLabel.setText("");
 	        String textToServer = nameField.getText();
-	        if (!FieldVerifier.isValidName(textToServer)) {
-	          errorLabel.setText("Please enter at least four characters");
+	        textToServer = FieldVerifier.clean(textToServer);
+	        if (!FieldVerifier.test(textToServer)) {
+	          errorLabel.setText("Please enter at least two characters");
 	          return;
 	        }
 
@@ -124,7 +125,7 @@ public class Start implements EntryPoint {
 	        sendButton.setEnabled(false);
 	        textToServerLabel.setText(textToServer);
 	        serverResponseLabel.setText("");
-	        greetingService.analyseHashtag(textToServer, new AsyncCallback<Response>() {
+	        proxy.analyseHashtag(textToServer, new AsyncCallback<Response>() {
 	        	
 	          public void onFailure(Throwable caught) {
 	            // Show the RPC error message to the user
@@ -138,7 +139,7 @@ public class Start implements EntryPoint {
 	          public void onSuccess(Response result) {
 	            dialogBox.setText("Remote Procedure Call");
 	            serverResponseLabel.removeStyleName("serverResponseLabelError");
-	            serverResponseLabel.setHTML(result.toString());
+	            serverResponseLabel.setHTML(result.asHTML());
 	            dialogBox.center();
 	            closeButton.setFocus(true);
 	          }

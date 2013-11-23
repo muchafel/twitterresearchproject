@@ -19,10 +19,10 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.textcat.LanguageIdentifier;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import ude.SocialMediaExplorer.data.model.Post;
-import ude.SocialMediaExplorer.data.model.PostList;
-import ude.SocialMediaExplorer.data.providing.DataProviding;
-import ude.SocialMediaExplorer.data.providing.stored.TwitterJSONFileReader;
+import ude.SocialMediaExplorer.data.post.Post;
+import ude.SocialMediaExplorer.data.post.PostList;
+import ude.SocialMediaExplorer.data.post.providing.IPostProviding;
+import ude.SocialMediaExplorer.data.post.providing.stored.TwitterJSONFileReader;
 import ude.SocialMediaExplorer.data.utils.time.TimeSpan;
 
 

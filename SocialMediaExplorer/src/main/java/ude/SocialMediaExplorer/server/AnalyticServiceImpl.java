@@ -1,14 +1,13 @@
 package ude.SocialMediaExplorer.server;
 
 
-import java.io.Serializable;
+import javax.swing.InputVerifier;
 
 import ude.SocialMediaExplorer.client.rmi.AnalyticService;
-import ude.SocialMediaExplorer.data.model.PostList;
-import ude.SocialMediaExplorer.data.providing.DataProviding;
-import ude.SocialMediaExplorer.data.providing.stored.TwitterJSONFileReader;
-import ude.SocialMediaExplorer.data.result.IResultPooling;
-import ude.SocialMediaExplorer.data.result.ResultPoolingImpl;
+import ude.SocialMediaExplorer.data.post.PostList;
+import ude.SocialMediaExplorer.data.post.providing.IPostProviding;
+import ude.SocialMediaExplorer.data.post.providing.stored.TwitterJSONFileReader;
+import ude.SocialMediaExplorer.shared.FieldVerifier;
 import ude.SocialMediaExplorer.shared.Response;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -23,14 +22,17 @@ public class AnalyticServiceImpl extends RemoteServiceServlet implements Analyti
 
 	public Response analyseHashtag(String hashtag)
 			throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+
+		//clean input
+		hashtag = FieldVerifier.clean(hashtag);
+		
 		try {
 			Response resp = new Response();
 			
 //			IResultPooling pooler = new ResultPoolingImpl();
 //			resp.setCe(pooler.pool());
 //			
-			DataProviding  d = new TwitterJSONFileReader();
+			IPostProviding  d = new TwitterJSONFileReader();
 			PostList p = d.getPosts(hashtag);
 			String s = p.makeString();
 			

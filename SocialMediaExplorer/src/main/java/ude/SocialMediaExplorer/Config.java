@@ -17,8 +17,14 @@ public class Config {
 	public static int twitter_result_restriction = 20;
 		
 	// io
-	public static String location_tweets = "files/rawdata/tweets/";
-	public static String location_results = "files/results/";
+	private static String location_tweets = "files/rawdata/tweets/";
+	public static String get_location_tweets(){
+		return location_tweets;
+	}
+	private static String location_results = "files/results/";
+	public static String get_location_results(){
+		return location_results;
+	}
 	
 	//crawler
 	public static long crawler_newFileInterval = 1000*60*60*24*7; //ms
