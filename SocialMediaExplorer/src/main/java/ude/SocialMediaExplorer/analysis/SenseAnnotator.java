@@ -26,6 +26,7 @@ public class SenseAnnotator extends JCasAnnotator_ImplBase{
 			targetView.setDocumentLanguage(aJCas.getDocumentLanguage());
 			
 	        for (Token t : tagdesc) {
+	        	
 	        	String sense=this.getSense(t);
 	        	newText+=sense;
 	        }
