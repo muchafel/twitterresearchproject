@@ -19,10 +19,10 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.textcat.LanguageIdentifier;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import ude.SocialMediaExplorer.data.post.Post;
-import ude.SocialMediaExplorer.data.post.PostList;
-import ude.SocialMediaExplorer.data.post.providing.IPostProviding;
-import ude.SocialMediaExplorer.data.post.providing.stored.TwitterJSONFileReader;
+import ude.SocialMediaExplorer.data.model.Post;
+import ude.SocialMediaExplorer.data.model.PostList;
+import ude.SocialMediaExplorer.data.providing.DataProviding;
+import ude.SocialMediaExplorer.data.providing.stored.TwitterJSONFileReader;
 import ude.SocialMediaExplorer.data.utils.time.TimeSpan;
 
 
@@ -44,7 +44,7 @@ public class Analysis extends Thread{
 				tweetCases.add(analyzeTweet(p));
 			}
 			for (JCas jcas : tweetCases){
-				
+				//TODO serialize it!
 			}
 			
 		} catch (Exception e) {
@@ -70,9 +70,9 @@ public class Analysis extends Thread{
 
         engine.process(jcas);
         
-        System.out.println(jcas.getDocumentText());
-        System.out.println(jcas.getView("Sentiment").getDocumentText());
-        System.out.println(jcas.getView("Sense").getDocumentText());
+        System.out.println("Original text: "+jcas.getDocumentText());
+        System.out.println("Sentiments : "+jcas.getView("Sentiment").getDocumentText());
+        System.out.println("Senses: "+jcas.getView("Sense").getDocumentText());
         
         return jcas;
 	}
