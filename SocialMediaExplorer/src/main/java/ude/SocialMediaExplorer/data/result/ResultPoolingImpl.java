@@ -4,7 +4,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import ude.SocialMediaExplorer.data.utils.io.CASReader;
-import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
+
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.*;
 
 public class ResultPoolingImpl implements IResultPooling {
