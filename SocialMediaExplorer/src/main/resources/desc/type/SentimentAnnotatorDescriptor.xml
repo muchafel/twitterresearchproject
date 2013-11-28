@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
-  <primitive>true</primitive>  <annotatorImplementationName/>
+  <primitive>true</primitive>  <annotatorImplementationName>ude.SocialMediaExplorer.analysis.SentimentAnnotator</annotatorImplementationName>
   <analysisEngineMetaData>
-    <name>aeDescriptor</name>
+    <name>SentimentAnnotatorDescriptor</name>
     <description/>
     <version>1.0</version>
     <vendor/>
@@ -12,7 +12,7 @@
     <typeSystemDescription>
       <types>
         <typeDescription>
-          <name>Sentiment</name>
+          <name>ude.SocialMediaExplorer.analysis.Sentiment</name>
           <description/>
           <supertypeName>uima.tcas.Annotation</supertypeName>
           <features>
