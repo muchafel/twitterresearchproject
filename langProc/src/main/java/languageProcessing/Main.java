@@ -10,7 +10,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		JSONReader fileReader = new JSONReader("C:/Users/Michael/workspace/langProc/src/test/resources/names/tvog_20131031.json");
+		JSONReader fileReader = new JSONReader("src/test/resources/names/tvog_20131031.json");
 		fileReader.readJSON();
 		List<String> list =fileReader.getTextList();
 		MostFrequentFinder finder= new MostFrequentFinder();
