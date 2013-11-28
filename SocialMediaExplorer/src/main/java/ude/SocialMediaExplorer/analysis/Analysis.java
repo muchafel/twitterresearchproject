@@ -71,7 +71,7 @@ public class Analysis extends Thread{
         builder.add(createEngineDescription(LanguageIdentifier.class));
         builder.add(createEngineDescription(BreakIteratorSegmenter.class));
         builder.add(createEngineDescription(OpenNlpPosTagger.class));
-        builder.add(createEngineDescription(SentimentAnnotatorSO.class));
+        builder.add(createEngineDescription(SentimentAnnotator.class));
         builder.add(createEngineDescription(SenseAnnotator.class));
         
         AnalysisEngine engine = builder.createAggregate();
@@ -87,6 +87,11 @@ public class Analysis extends Thread{
         engine.process(jcas);
         
         System.out.println("Original text: "+jcas.getDocumentText());
+        FSIterator<AnnotationFS> annotationIterator = jcas.getCas().getAnnotationIndex().iterator();
+        while (annotationIterator.hasNext()) {
+                AnnotationFS annotation = annotationIterator.next();
+                System.out.println(annotation.getCoveredText());
+        }
         System.out.println("Sentiments : "+jcas.getView("Sentiment").getDocumentText());
         System.out.println("Senses: "+jcas.getView("Sense").getDocumentText());
         
