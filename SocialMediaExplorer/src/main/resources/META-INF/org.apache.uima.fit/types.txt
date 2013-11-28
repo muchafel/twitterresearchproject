@@ -1,0 +1,3 @@
+classpath*:desc/type/SentimentAnnotatorDescriptor.xml
+classpath*:desc/type/Sentiment.xml
+
