@@ -20,7 +20,6 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 
 public class CASWriter {
 	
-	public TemporaryFolder testFolder = new TemporaryFolder();
 
 	public void write(JCas jcas) throws Exception {
 		
