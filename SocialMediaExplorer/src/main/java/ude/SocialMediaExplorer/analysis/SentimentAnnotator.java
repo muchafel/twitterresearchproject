@@ -8,6 +8,7 @@ import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 
+import ude.SocialMediaExplorer.type.SentimentAnno;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class SentimentAnnotator extends JCasAnnotator_ImplBase{
@@ -17,10 +18,10 @@ private ArrayList<Token> tokens;
 		
 		tokens = new ArrayList<Token>(select(aJCas,Token.class));
         for (Token t : tokens){
-        	Sentiment annotation = new Sentiment(aJCas);
+        	SentimentAnno annotation = new SentimentAnno(aJCas);
         	annotation.setBegin(t.getBegin());
         	annotation.setEnd(t.getEnd());
-        	annotation.setPositive(isPositiv(t));
+        	annotation.setSentimentValue(Boolean.toString(isPositiv(t)));
         	annotation.addToIndexes();
         	
         }
