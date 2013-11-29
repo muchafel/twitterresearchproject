@@ -1,11 +1,10 @@
 package ude.SocialMediaExplorer.data.result;
 
+import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
+
 import org.apache.uima.cas.CAS;
-import org.apache.uima.resource.ResourceInitializationException;
 
 import ude.SocialMediaExplorer.data.utils.io.CASReader;
-
-import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.*;
 
 public class ResultPoolingImpl implements IResultPooling {
 
