@@ -1,7 +1,5 @@
 package ude.SocialMediaExplorer.client;
 
-import java.util.Date;
-
 import ude.SocialMediaExplorer.data.utils.time.TimeStamp;
 
 public class TestTimeStamp {
