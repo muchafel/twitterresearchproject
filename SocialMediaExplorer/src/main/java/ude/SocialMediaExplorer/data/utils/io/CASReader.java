@@ -1,8 +1,6 @@
 package ude.SocialMediaExplorer.data.utils.io;
 
 
-import java.io.File;
-
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
