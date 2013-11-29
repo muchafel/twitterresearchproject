@@ -1,8 +1,6 @@
 package ude.SocialMediaExplorer.server;
 
 
-import javax.swing.InputVerifier;
-
 import ude.SocialMediaExplorer.client.rmi.AnalyticService;
 import ude.SocialMediaExplorer.data.post.PostList;
 import ude.SocialMediaExplorer.data.post.providing.IPostProviding;
