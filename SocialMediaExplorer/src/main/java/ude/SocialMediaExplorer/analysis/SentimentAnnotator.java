@@ -8,7 +8,7 @@ import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 
-import ude.SocialMediaExplorer.type.SentimentAnno;
+import ude.SocialMediaExplorer.analysis.type.SentimentAnno;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class SentimentAnnotator extends JCasAnnotator_ImplBase{
