@@ -10,6 +10,8 @@ import org.apache.uima.jcas.JCas;
 
 import ude.SocialMediaExplorer.analysis.type.SentimentAnno;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import static ude.SocialMediaExplorer.analysis.Analysis.lexEnglish;
+import static ude.SocialMediaExplorer.analysis.Analysis.lexGerman;;
 
 public class SentimentAnnotator extends JCasAnnotator_ImplBase{
 private ArrayList<Token> tokens;
@@ -17,18 +19,30 @@ private ArrayList<Token> tokens;
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
 		
 		tokens = new ArrayList<Token>(select(aJCas,Token.class));
+		String language= aJCas.getDocumentLanguage();
         for (Token t : tokens){
         	SentimentAnno annotation = new SentimentAnno(aJCas);
         	annotation.setBegin(t.getBegin());
         	annotation.setEnd(t.getEnd());
-        	annotation.setSentimentValue(Boolean.toString(isPositiv(t)));
+        	
+        	annotation.setSentimentValue(Boolean.toString(isPositiv(t,language)));
+        	
         	annotation.addToIndexes();
         	
         }
 		
 	}
-	private boolean isPositiv(Token t) {
-		
+	private boolean isPositiv(Token t,String language) {
+		if(language.equals("De")){
+			if(lexGerman.getSentiment(t.getCoveredText(), language)==1){
+				return true;
+			}
+		}
+		if(language.equals("En")){
+			if(lexEnglish.getSentiment(t.getCoveredText(), language)==1){
+				return true;
+			}
+		}
 		return false;
 	}
 
