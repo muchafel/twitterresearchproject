@@ -14,7 +14,7 @@ public class ResultPoolingImpl implements IResultPooling {
 	public void pool() throws Exception {
 		// TODO Aus CAS sinnvolle Clusterbilden und als ClusterElement zurückgeben
 		
-		cas = reader.read(createTypeSystemDescription());
+//		cas = reader.read(createTypeSystemDescription());
 		
 		
 	}
