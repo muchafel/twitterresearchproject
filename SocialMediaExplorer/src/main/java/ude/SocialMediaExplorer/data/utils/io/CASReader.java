@@ -19,6 +19,7 @@ public class CASReader {
 	
 	public CAS read(TypeSystemDescription aTSD) throws Exception {
 		System.out.println("--- READING ---");
+		@SuppressWarnings("deprecation")
 		CollectionReader reader = CollectionReaderFactory.createReader(
 				BinaryCasReader.class, ResourceCollectionReaderBase.PARAM_PATH,
 				testFolder.getRoot().getPath(),
