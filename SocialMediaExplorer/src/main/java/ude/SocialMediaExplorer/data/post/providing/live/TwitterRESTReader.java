@@ -1,15 +1,15 @@
 package ude.SocialMediaExplorer.data.post.providing.live;
 
-import twitter4j.Query;
-import twitter4j.QueryResult;
-import twitter4j.Status;
-import twitter4j.Twitter;
 import ude.SocialMediaExplorer.Config;
 import ude.SocialMediaExplorer.data.post.PostList;
 import ude.SocialMediaExplorer.data.post.providing.IPostProviding;
 import ude.SocialMediaExplorer.data.post.providing.PostConverter;
 import ude.SocialMediaExplorer.data.utils.connections.TwitterConnector;
 import ude.SocialMediaExplorer.data.utils.time.TimeSpan;
+import twitter4j.Query;
+import twitter4j.QueryResult;
+import twitter4j.Status;
+import twitter4j.Twitter;
 
 /**
  * gets posts via twitter rest api {@link TwitterConnector}
