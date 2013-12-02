@@ -16,7 +16,7 @@ public class CASWriter {
 		
 		AggregateBuilder builder = new AggregateBuilder();
 		builder.add(createEngineDescription(BinaryCasWriter.class, BinaryCasWriter.PARAM_FORMAT, "4",
-		BinaryCasWriter.PARAM_TARGET_LOCATION, "serializedCases"));
+		BinaryCasWriter.PARAM_TARGET_LOCATION, "files/serializedCases"));
 		AnalysisEngine engine = builder.createAggregate();
 		engine.process(jcas);
 	}
