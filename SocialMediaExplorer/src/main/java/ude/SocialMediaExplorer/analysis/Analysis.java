@@ -33,7 +33,10 @@ import ude.SocialMediaExplorer.data.utils.time.TimeSpan;
 
 public class Analysis extends Thread{
 
+static SentimentLexicon lexEnglish = new SentimentLexicon("En");
+static SentimentLexicon lexGerman= new SentimentLexicon("De");
 	private PostList postList;
+	
 	private List<JCas> tweetCases;
 	private CASWriter casWriter;
 
@@ -45,9 +48,9 @@ public class Analysis extends Thread{
 	
 	public void run() {
 		casWriter= new CASWriter();
-//		SentimentLexicon lexEnglish= new SentimentLexicon("En");
+	
 //		System.out.println(lexEnglish.getSentiment("abnormal", "En"));
-//		SentimentLexicon lexGerman= new SentimentLexicon("De");
+		
 //		System.out.println(lexGerman.getSentiment("erzürnte", "De"));
 		try {
 			// adding information per tweet
@@ -82,7 +85,7 @@ public class Analysis extends Thread{
 
         DocumentMetaData.create(jcas);
         //TODO ID aus Tweet generieren
-        DocumentMetaData.get(jcas).setDocumentId("Igel");
+        DocumentMetaData.get(jcas).setDocumentId(p.getId());
         
         engine.process(jcas);
         
@@ -90,7 +93,8 @@ public class Analysis extends Thread{
         FSIterator<AnnotationFS> annotationIterator = jcas.getCas().getAnnotationIndex().iterator();
         while (annotationIterator.hasNext()) {
                 AnnotationFS annotation = annotationIterator.next();
-                System.out.println(annotation.getCoveredText());
+                System.out.println("[" + annotation.getCoveredText() + "]");
+                System.out.println(annotation.toString());
         }
 //        System.out.println("Sentiments : "+jcas.getView("Sentiment").getDocumentText());
 //        System.out.println("Senses: "+jcas.getView("Sense").getDocumentText());
