@@ -1,6 +1,6 @@
 
 /* First created by JCasGen Fri Nov 29 09:50:45 CET 2013 */
-package ude.SocialMediaExplorer.type;
+package ude.SocialMediaExplorer.analysis.type;
 
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
