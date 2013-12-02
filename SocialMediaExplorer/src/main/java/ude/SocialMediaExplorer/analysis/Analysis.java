@@ -92,8 +92,8 @@ public class Analysis extends Thread{
                 AnnotationFS annotation = annotationIterator.next();
                 System.out.println(annotation.getCoveredText());
         }
-        System.out.println("Sentiments : "+jcas.getView("Sentiment").getDocumentText());
-        System.out.println("Senses: "+jcas.getView("Sense").getDocumentText());
+//        System.out.println("Sentiments : "+jcas.getView("Sentiment").getDocumentText());
+//        System.out.println("Senses: "+jcas.getView("Sense").getDocumentText());
         
         return jcas;
 	}
