@@ -58,6 +58,7 @@ public class ClusterElement implements Serializable{
 
 	public void setSubcluster(List<ClusterElement> subcluster) {
 		this.subcluster = subcluster;
+		this.isLeaf=false;
 	}
 
 	public boolean isRoot() {
@@ -66,6 +67,7 @@ public class ClusterElement implements Serializable{
 
 	public void setRoot(boolean isRoot) {
 		this.isRoot = isRoot;
+		this.isLeaf=false;
 	}
 
 	public boolean isLeaf() {
@@ -74,6 +76,7 @@ public class ClusterElement implements Serializable{
 
 	public void setLeaf(boolean isLeaf) {
 		this.isLeaf = isLeaf;
+		this.isRoot=false;
 	}
 	
 	
