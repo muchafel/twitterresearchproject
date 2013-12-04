@@ -28,19 +28,23 @@ private ArrayList<Token> tokens;
         	annotation.setSentimentValue(Boolean.toString(isPositiv(t,language)));
         	
         	annotation.addToIndexes();
-        	
         }
-		
 	}
 	private boolean isPositiv(Token t,String language) {
 		if(language.equals("De")){
 			if(lexGerman.getSentiment(t.getCoveredText(), language)==1){
 				return true;
 			}
+			else if(lexGerman.getSentiment(t.getCoveredText(), language)==-1){
+				return false;
+			}
 		}
 		if(language.equals("En")){
 			if(lexEnglish.getSentiment(t.getCoveredText(), language)==1){
 				return true;
+			}
+			else if(lexEnglish.getSentiment(t.getCoveredText(), language)==-1){
+				return false;
 			}
 		}
 		return false;

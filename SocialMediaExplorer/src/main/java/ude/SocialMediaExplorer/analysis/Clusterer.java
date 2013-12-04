@@ -46,33 +46,28 @@ public class Clusterer {
 				printCluster(c);
 			}
 		}
-		
 	}
-
+///TODO add Sentiment
 	private static ClusterElement createClusterElements(List<JCas> jCases,String cluster,List<String> headers) {
 		ClusterElement c;
-		List<ClusterElement> subClusters= new ArrayList<ClusterElement>();
-		if(cluster==null){
-			c= new ClusterElement("TopCluster",new Sentiment(),null);
-			headers= new ArrayList<String>();
+		List<ClusterElement> subClusters = new ArrayList<ClusterElement>();
+		if (cluster == null) {
+			c = new ClusterElement("TopCluster", new Sentiment(), null);
+			headers = new ArrayList<String>();
+		} else {
+			c = new ClusterElement(cluster, new Sentiment(), null);
 		}
-		else{
-			c= new ClusterElement(cluster,new Sentiment(),null);
-		}
-		
-		for (JCas jcas : jCases){
-//			System.out.println("Original text: "+jcas.getDocumentText()+" ----------------------");
-			
+		for (JCas jcas : jCases) {
+			// System.out.println("Original text: "+jcas.getDocumentText()+" ----------------------");
 			FSIndex senseIndex = jcas.getAnnotationIndex(SenseAnno.type);
 			Iterator senseIterator = senseIndex.iterator();
-			
 			while (senseIterator.hasNext()) {
 				SenseAnno sense = (SenseAnno) senseIterator.next();
 				if (!headers.contains(sense.getSenseValue())) {
 					// System.out.println("Sense:"+sense.getSenseValue());
 					headers.add(sense.getSenseValue());
 					subClusters.add(createClusterElements(jCases,
-							sense.getSenseValue(),headers));
+							sense.getSenseValue(), headers));
 				}
 			}
 		}
