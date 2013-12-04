@@ -16,6 +16,7 @@ import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
@@ -59,7 +60,7 @@ static SentimentLexicon lexGerman= new SentimentLexicon("De");
 			// form clusters
 
 			for (JCas jcas : tweetCases){
-				casWriter.write(jcas);
+				casWriter.write(jcas,"Tatort");
 			}
 			
 		} catch (Exception e) {
