@@ -37,11 +37,25 @@ public class Start implements EntryPoint {
 		ClusterElement ce2 = new ClusterElement();
 		ce2.setRoot(false);
 		ce2.setLeaf(true);
-		ce2.setName("asd");
+		ce2.setName("cluster1");
 		ce2.setSentiment(s);
+		
+		ClusterElement ce3 = new ClusterElement();
+		ce3.setRoot(false);
+		ce3.setLeaf(true);
+		ce3.setName("cluster2");
+		ce3.setSentiment(s);
+		
+		ClusterElement ce4 = new ClusterElement();
+		ce4.setRoot(false);
+		ce4.setLeaf(true);
+		ce4.setName("cluster3");
+		ce4.setSentiment(s);
 		
 		ArrayList<ClusterElement> l = new ArrayList<ClusterElement>();
 		l.add(ce2);
+		l.add(ce3);
+		l.add(ce4);
 		
 		ClusterElement ce = new ClusterElement();
 		ce.setRoot(true);
@@ -50,8 +64,7 @@ public class Start implements EntryPoint {
 		ce.setSentiment(s);
 		
 		ce.setSubcluster(l); 		
-		
-//		ClusterElement ce3 = ResultPoolingImpl.getClusters("Tatort");
+	 
 		RootPanel.get("content").add(new ClusterVisualization(ce));
 		
 	  }
