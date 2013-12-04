@@ -24,8 +24,10 @@ public class ClusterVisualization extends Composite{
 		initWidget(uiBinder.createAndBindUi(this));
 		
 		ArrayList<String> names = new ArrayList<String>();
-		names.add(ce.getName());
-		
+
+		for (ClusterElement c : ce.getSubcluster()){
+			names.add(c.getName());
+		}
 		for (String name : names) {
 		      listBox.addItem(name);
 		}
