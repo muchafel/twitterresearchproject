@@ -10,10 +10,10 @@ import java.util.ArrayList;
 public class Config {
 	
 	// auth
-	public static String twitter_ConsumerKey = "Y9I5pvM8aUhJiUFKj4XxgQ";
-	public static String twitter_ConsumerSecret = "doQ84Y3mtge6kIxus3zFeKK2t8AdC3FRwuNVXPs9iB4";
-	public static String twitter_AccessToken = "2159056350-Jb6q09GoUeJJvGHj4qmM4mDNwA4hFURgU1gOg76";
-	public static String twitter_AccessTokenSecret = "hlghHUIQLL9RMWvcKU36obLwqKMesRL2gIzfVBFxZEDWY";
+	public static String twitter_ConsumerKey = "";
+	public static String twitter_ConsumerSecret = "";
+	public static String twitter_AccessToken = "";
+	public static String twitter_AccessTokenSecret = "";
 	public static int twitter_result_restriction = 20;
 		
 	// io
