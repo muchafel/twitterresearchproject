@@ -5,6 +5,8 @@ import ude.SocialMediaExplorer.client.rmi.AnalyticService;
 import ude.SocialMediaExplorer.data.post.PostList;
 import ude.SocialMediaExplorer.data.post.providing.IPostProviding;
 import ude.SocialMediaExplorer.data.post.providing.stored.TwitterJSONFileReader;
+import ude.SocialMediaExplorer.data.result.IResultPooling;
+import ude.SocialMediaExplorer.data.result.ResultPoolingImpl;
 import ude.SocialMediaExplorer.shared.FieldVerifier;
 import ude.SocialMediaExplorer.shared.Response;
 
@@ -22,13 +24,14 @@ public class AnalyticServiceImpl extends RemoteServiceServlet implements Analyti
 			throws IllegalArgumentException {
 
 		//clean input
+		//deprecated --> entfällt da dropdown
 		hashtag = FieldVerifier.clean(hashtag);
 		
 		try {
 			Response resp = new Response();
 			
-//			IResultPooling pooler = new ResultPoolingImpl();
-//			resp.setCe(pooler.pool());
+			IResultPooling pooler = new ResultPoolingImpl();
+			//resp.(pooler.getClusters("Tatort"));
 //			
 			IPostProviding  d = new TwitterJSONFileReader();
 			PostList p = d.getPosts(hashtag);

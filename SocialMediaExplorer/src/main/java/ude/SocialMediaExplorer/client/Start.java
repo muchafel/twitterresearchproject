@@ -22,7 +22,7 @@ public class Start implements EntryPoint {
 		RootPanel.get("content").add(new MainPage());
 		
 		RootPanel.get("footer").add(new Footer());
-		
+//		
 		
 	  }
 }
