@@ -46,5 +46,28 @@ public class FileFilter {
 		}
 		return result.toArray( new File[result.size()] );
 	}
+	public static File[] getFoldersByTimePeriod(File dir, TimeSpan ts) throws Exception{
+		ArrayList<File> result = new ArrayList<File>();
+		if ( dir.exists()  && dir.isDirectory() ){
+			File[] files = dir.listFiles();
+			for (File file : files){
+				if ( file.isDirectory()&& file.getName().contains("_") ){
+					//check time
+					String timestamp = file.getName().split("_")[0];
+					Date d;
+					try{
+						d = TimeStamp.reverseLong(timestamp);
+					}catch(Exception e){
+						d = TimeStamp.reverseLong(timestamp);
+					}
+					//if in timespan
+					if ( ts.includes(d) ){
+						result.add(file);
+					}
+				}
+			}
+		}
+		return result.toArray( new File[result.size()] );
+	}
 	
 }

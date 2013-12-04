@@ -21,9 +21,10 @@ public class ResultPoolingImpl implements IResultPooling {
 
 	public ClusterElement getClusters(String hashtag) throws Exception {
 		CASReader reader= new CASReader();
+		String directory= "files/serializedCases/"+hashtag;
 		List<JCas> jCases= new ArrayList<JCas>();
 		try {
-			jCases=reader.read("files/serializedCases");
+			jCases=reader.read(directory);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

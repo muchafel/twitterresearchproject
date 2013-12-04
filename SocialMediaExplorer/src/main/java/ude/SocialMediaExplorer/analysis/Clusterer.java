@@ -28,10 +28,11 @@ public class Clusterer {
 	 */
 	public static void main(String[] args) {
 		
+		String directory= "files/serializedCases/"+"Tatort";
 		CASReader reader= new CASReader();
 		List<JCas> jCases= new ArrayList<JCas>();
 		try {
-			jCases=reader.read("files/serializedCases");
+			jCases=reader.read(directory);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
