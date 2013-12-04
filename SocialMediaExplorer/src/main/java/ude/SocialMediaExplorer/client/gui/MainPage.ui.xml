@@ -40,10 +40,7 @@
 		
 	        
 	    </b:Row>
-	        
-       <div id="visu" align="center">
-           Visualization
-       </div>
+
 	        
 	    
 	</g:HTMLPanel>
