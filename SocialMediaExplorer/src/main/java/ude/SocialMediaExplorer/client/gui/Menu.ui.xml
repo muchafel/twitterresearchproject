@@ -1,0 +1,27 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+	    
+	    <b:Row>
+	    	<b:PageHeader subtext="Trendanalyse wöchentlicher TV Sendungen">Social Media Explorer</b:PageHeader>	        
+	    </b:Row>
+	    
+	    <b:Row>
+		    <b:Navbar>
+			    <!-- b:Brand>Nav</b:Brand -->
+			    <b:Nav>
+			        <b:NavLink>Hauptseite</b:NavLink>
+			        <b:NavLink>Andere Seite</b:NavLink>
+			    </b:Nav>
+			</b:Navbar>
+	    </b:Row>
+	    
+	</g:HTMLPanel>
+</ui:UiBinder> 
