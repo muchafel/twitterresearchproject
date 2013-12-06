@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.*;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -36,8 +39,12 @@ public class Clusterer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		ClusterElement clusterElement=createClusterElements(jCases, null,null);
-		printCluster(clusterElement);
+		OrthographyCluster oCluster= new OrthographyCluster();
+		Map<String,Set<String>> orthographyClusters= oCluster.cluster(jCases);
+		System.out.println(orthographyClusters);
+		
+//		ClusterElement clusterElement=createClusterElements(jCases, null,null);
+//		printCluster(clusterElement);
 	}
 
 	private static void printCluster(ClusterElement clusterElement) {
