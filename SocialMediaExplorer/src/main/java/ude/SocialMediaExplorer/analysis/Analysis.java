@@ -72,7 +72,8 @@ static SentimentLexicon lexGerman= new SentimentLexicon("De");
 		
         AggregateBuilder builder = new AggregateBuilder();
         builder.add(createEngineDescription(LanguageIdentifier.class));
-        builder.add(createEngineDescription(BreakIteratorSegmenter.class));
+        builder.add(createEngineDescription(TweetTokenizer.class));
+//        builder.add(createEngineDescription(BreakIteratorSegmenter.class));
         builder.add(createEngineDescription(OpenNlpPosTagger.class));
         builder.add(createEngineDescription(SentimentAnnotator.class));
         builder.add(createEngineDescription(SenseAnnotator.class));
