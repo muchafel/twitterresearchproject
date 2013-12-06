@@ -229,6 +229,18 @@
 			<version>1.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>
+				de.tudarmstadt.ukp.dkpro.core.arktools-gpl
+			</artifactId>
+			<version>1.5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.cmu.cs</groupId>
+			<artifactId>ark-tweet-nlp</artifactId>
+			<version>0.3.2</version>
+		</dependency>
 	</dependencies>
 
 
