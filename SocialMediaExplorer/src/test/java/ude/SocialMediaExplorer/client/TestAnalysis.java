@@ -10,13 +10,13 @@ public class TestAnalysis {
 	public static void main(String[] args) {
 		
 		Post p1 = new Post();
-		p1.setMessage("Michael spaziert zum  schönen Rhein.");
+		p1.setMessage("RT @Michael spaziert zum  schönen Rhein :) <3 <3 <3.");
 		p1.setId("1");
 		Post p2 = new Post();
-		p2.setMessage("Ich bin gutes Fleisch!");
+		p2.setMessage(" Ich bin! gutes Fleisch wtf");
 		p2.setId("2");
 		Post p3 = new Post();
-		p3.setMessage("Ameisen sind keine schlechten Attribute?");
+		p3.setMessage("Ameisen sind keine schlechten Attribute #ftw ");
 		p3.setId("3");
 		
 		PostList pl = new PostList();
