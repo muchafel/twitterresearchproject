@@ -1,6 +1,7 @@
 package ude.SocialMediaExplorer.analysis;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -25,15 +26,16 @@ public class OrthographyCluster {
 			// System.out.println("Original text: "+jcas.getDocumentText()+" ----------------------");
 			FSIndex senseIndex = jcas.getAnnotationIndex(SenseAnno.type);
 			Iterator senseIterator = senseIndex.iterator();
+			// gets all SenseAnnos from all jcases
 			while (senseIterator.hasNext()) {
 				SenseAnno sense = (SenseAnno) senseIterator.next();
 				rawSenses.add(sense.getSenseValue());
 				}
 			}
-		
+		//do clustering over all jcases
 		Map<String, Set<String>> result=this.distanceClustering(rawSenses);
 		
-		return null;
+		return result;
 	}
 
 	private Map<String, Set<String>> distanceClustering(List<String> rawSenses) {
@@ -44,8 +46,8 @@ public class OrthographyCluster {
 		int linkId=0;
 		for(int i=0; i<rawSenses.size();i++){
 			for(int j=(i+1); j<rawSenses.size();j++){
-				System.out.println("i: " + i + " : " + rawSenses.get(i) + " j: "
-						+ j + " : " + rawSenses.get(j));
+//				System.out.println("i: " + i + " : " + rawSenses.get(i) + " j: "
+//						+ j + " : " + rawSenses.get(j));
 				try {
 					// /TODO: normalize somehow on wordlength
 					/// TODO: <5 überdenken!
@@ -55,15 +57,15 @@ public class OrthographyCluster {
 								new MyLink(calcWeight(rawSenses.get(i),rawSenses.get(j)), 1.0, linkId),
 								rawSenses.get(i), rawSenses.get(j));
 					//}
-					System.out.println("Edge with: i: " + i + " : " + rawSenses.get(i)
-							+ " j: " + j + " : " + rawSenses.get(j)
-							+ " Similarity:"
-							+  String.valueOf(calcWeight(rawSenses.get(i), rawSenses.get(j))));
+//					System.out.println("Edge with: i: " + i + " : " + rawSenses.get(i)
+//							+ " j: " + j + " : " + rawSenses.get(j)
+//							+ " Similarity:"
+//							+  String.valueOf(calcWeight(rawSenses.get(i), rawSenses.get(j))));
 					linkId++;}
 				} catch (Exception e) {
 					e.printStackTrace();
-					System.out.println("i: " + i + " : " + rawSenses.get(i)
-							+ " j: " + j + " : " + rawSenses.get(j));
+//					System.out.println("i: " + i + " : " + rawSenses.get(i)
+//							+ " j: " + j + " : " + rawSenses.get(j));
 				}
 			}
 		}
@@ -96,15 +98,16 @@ public class OrthographyCluster {
 		while (iter.hasNext()) {
 			Set<String> cluster=iter.next();
 			Iterator<String> iter2 = cluster.iterator();
-				int temp0=0;
+				double temp0=0.0;
 				String name=null;
 				while (iter2.hasNext()) {
 					String tempName=iter2.next();
-					System.out.println("Kandidat : "+tempName+" mit degree "+g.inDegree(tempName));
-					if(g.inDegree(tempName)>=temp0){
+					//System.out.println("Kandidat : "+tempName+" mit degree "+g.inDegree(tempName));
+					double inDegree =getInDegreeg(g.getInEdges(tempName));
+					if(inDegree>=temp0){
 						name=tempName;
-						temp0=g.inDegree(tempName);
-						System.out.println("Genommen: "+tempName+" mit degree "+temp0);
+						temp0=inDegree;
+						//System.out.println("Genommen: "+tempName+" mit degree "+temp0);
 					}
 					
 				}
@@ -116,7 +119,17 @@ public class OrthographyCluster {
 		
 		return clusterNames;
 	}
- //calculates the weight from a normalized levensthein distance minus 1. Everything that's under 0 will be assumed as totally different -->0
+
+private double getInDegreeg(Collection<MyLink> inEdges) {
+	double result=0.0;
+	Iterator<MyLink> iter = inEdges.iterator();
+	while(iter.hasNext()){
+		result+= iter.next().weight;
+	}
+		return result;
+	}
+
+	//calculates the weight from a normalized levensthein distance minus 1. Everything that's under 0 will be assumed as totally different -->0
 	private double calcWeight(String node1, String node2) {
 		double levensthein= LevenshteinDistance(node1,node2);
 		double length=node1.length();
@@ -129,53 +142,52 @@ public class OrthographyCluster {
 	// --> http://de.wikipedia.org/wiki/Levenshtein-Distanz
 	private static int LevenshteinDistance(String node1, String node2) {
 		if (node1 == null || node2 == null) {
-		      throw new IllegalArgumentException("Strings must not be null");
-		    }    
-		    int n = node1.length(); // length of s
-		    int m = node2.length(); // length of t
+			throw new IllegalArgumentException("Strings must not be null");
+		}
+		// lengths of the nodes 
+		int length1 = node1.length(); 
+		int length2 = node2.length(); 
+
+		//two costArrays for comparison
+		int costArray1[] = new int[length1 + 1]; 
+		int costArray2[] = new int[length1 + 1]; 
+		int temp[]; // placeholder for swapping
+
+		// indexes of strings 'node1' and 'node2'
+		int i; 
+		int j; 
+		char jcount; // jth character of node1
+		int cost; //temporary costs
 		
-		    if (n == 0) {
-		      return m;
-		    } 
-		    else if (m == 0) {
-		      return n;
-		    }
-		 
-		    int p[] = new int[n+1]; //'previous' cost array, horizontally
-		    int d[] = new int[n+1]; // cost array, horizontally
-		    int _d[]; //placeholder to assist in swapping p and d
-		 
-		    // indexes into strings s and t
-		    int i; // iterates through s
-		    int j; // iterates through t
-		 
-		    char t_j; // jth character of t
-		 
-		    int cost; // cost
-		 
-		    for (i = 0; i<=n; i++) {
-		       p[i] = i;
-		    }
-		     
-		    for (j = 1; j<=m; j++) {
-		       t_j = node2.charAt(j-1);
-		       d[0] = j;
-		     
-		       for (i=1; i<=n; i++) {
-		          cost = node1.charAt(i-1)==t_j ? 0 : 1;
-		          // minimum of cell to the left+1, to the top+1, diagonally left and up +cost                         
-		          d[i] = Math.min(Math.min(d[i-1]+1, p[i]+1),  p[i-1]+cost);  
-		       }
-		 
-		       // copy current distance counts to 'previous row' distance counts
-		       _d = p;
-		       p = d;
-		       d = _d;
-		    }
-		     
-		    // our last action in the above loop was to switch d and p, so p now
-		    // actually has the most recent cost counts
-		    return p[n];
+		//if one lenght is zero the  distance is equal the length of the second
+		if (length1 == 0) {
+			return length2;
+		} else if (length2 == 0) {
+			return length1;
+		}
+
+		for (i = 0; i <= length1; i++) {
+			costArray1[i] = i;
+		}
+
+		for (j = 1; j <= length2; j++) {
+			jcount = node2.charAt(j - 1);
+			costArray2[0] = j;
+
+			for (i = 1; i <= length1; i++) {
+				cost = node1.charAt(i - 1) == jcount ? 0 : 1;
+				// minimum of cell to the left+1, to the top+1, diagonally left
+				// and up +cost
+				costArray2[i] = Math.min(Math.min(costArray2[i-1] + 1, costArray1[i]+1), costArray1[i-1]
+						+ cost);
+			}
+			// copy current distance counts to 'previous row' distance counts
+			temp = costArray1;
+			costArray1 = costArray2;
+			costArray2 = temp;
+		}
+
+		return costArray1[length1];
 	}
 
 }
