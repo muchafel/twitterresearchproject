@@ -41,7 +41,7 @@ public class Clusterer {
 		}
 		OrthographyCluster oCluster= new OrthographyCluster();
 		Map<String,Set<String>> orthographyClusters= oCluster.cluster(jCases);
-		System.out.println(orthographyClusters);
+		System.out.println("gefundene Orthographiecluster: "+orthographyClusters);
 		
 //		ClusterElement clusterElement=createClusterElements(jCases, null,null);
 //		printCluster(clusterElement);
