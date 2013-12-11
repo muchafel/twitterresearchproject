@@ -15,28 +15,29 @@
 		
 	    <b:Row>
 	        
-		  <b:Column size="6" offset="1">
+		  <b:Column size="6" offset="3">
 		 	   <b:WellForm type="HORIZONTAL">
 				  <b:Fieldset>
 				    <b:ControlGroup>
-				      <b:ControlLabel for="input01">TV Sendung</b:ControlLabel>
+				      <b:ControlLabel for="listSeries">TV Sendung</b:ControlLabel>
 				      <b:Controls>
 				        <!-- If you add id attribute to element,You should use b:id attribute. -->
-				        <b:TextBox alternateSize="XLARGE" b:id="input01"></b:TextBox>
+				        <b:ListBox ui:field="listSeries" b:id="listSeries"></b:ListBox>
 				        <b:HelpBlock>Wähle eine Tv-Sendung</b:HelpBlock>
+				        <b:Button>OK</b:Button>
 				      </b:Controls>
 				    </b:ControlGroup>
 				  </b:Fieldset>
 				</b:WellForm>
 		  </b:Column>
 		  
-		  <b:Column size="4">
+		  <!-- b:Column size="4">
 		      <b:Hero>
 			    <b:Heading size="2">Hi #</b:Heading>
 			    <b:Paragraph>Some Text.</b:Paragraph>
 			    <b:Paragraph>More text.</b:Paragraph>
 			</b:Hero>
-		  </b:Column>
+		  </b:Column-->
 		
 	        
 	    </b:Row>
