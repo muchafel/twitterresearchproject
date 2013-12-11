@@ -65,7 +65,7 @@ public class Start implements EntryPoint {
 		
 		ce.setSubcluster(l); 		
 	 
-		RootPanel.get("content").add(new ClusterVisualization(ce));
+		RootPanel.get("content").add(new ClusterVisualization("tatort", ce));
 		
 	  }
 }
