@@ -24,11 +24,11 @@ public class Start implements EntryPoint {
 	   */
 	  public void onModuleLoad() {
 		  
-		RootPanel.get("menu").add(new Menu());
+		RootPanel.get().add(new Menu());
 		  
-		RootPanel.get("content").add(new MainPage());
+		RootPanel.get().add(new MainPage());
 		
-		RootPanel.get("footer").add(new Footer());
+		RootPanel.get().add(new Footer());
 		
 		Sentiment s = new Sentiment();
 		s.setNegative(0.5);
@@ -65,7 +65,7 @@ public class Start implements EntryPoint {
 		
 		ce.setSubcluster(l); 		
 	 
-		RootPanel.get("content").add(new ClusterVisualization("tatort", ce));
+		RootPanel.get().add(new ClusterVisualization("tatort", ce));
 		
 	  }
 }

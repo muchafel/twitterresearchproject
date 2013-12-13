@@ -2,6 +2,7 @@ package ude.SocialMediaExplorer.client.gui;
 
 import java.util.ArrayList;
 
+import ude.SocialMediaExplorer.data.utils.io.ConfigReader;
 import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
 
 import com.github.gwtbootstrap.client.ui.ListBox;
@@ -28,6 +29,7 @@ public class MainPage extends Composite {
 		names.add("tvog");
 		names.add("sterntv");
 		names.add("berlintagundnacht");
+
 		for (String name : names) {
 			listSeries.addItem(name);
 		}
