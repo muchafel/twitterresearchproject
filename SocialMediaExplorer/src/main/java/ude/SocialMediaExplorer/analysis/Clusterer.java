@@ -59,7 +59,6 @@ public class Clusterer {
 		//annotate orthography and frequnezy to cases
 		
 		
-		
 		ClusterElement clusterElement=createClusterElements(jCases, null,null);
 //		UndirectedSparseGraph<String, String> graph=calcGraph(clusterElement);
 //		visualize(graph);

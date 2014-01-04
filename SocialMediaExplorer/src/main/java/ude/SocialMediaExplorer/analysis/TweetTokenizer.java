@@ -19,19 +19,29 @@ public class TweetTokenizer extends SegmenterBase {
 			throws AnalysisEngineProcessException {
 		
 		// Twokenize tweetTwokenize= new Twokenize();
-		List<String> resultingTokens = Twokenize.tokenizeRawTweetText(aJCas
+		List<String> resultingTokens = Twokenize.tokenize(aJCas
 				.getDocumentText());
 
 		int end=zoneBegin;
 		int begin= zoneBegin;
 		Annotation segment = createSentence(aJCas, 0, aJCas.getDocumentText().length());
+		System.out.println(segment);
+		
+		
 		
 		for(int i=0;i<resultingTokens.size();i++){
 			if(i == resultingTokens.size()-1){
-				end+=resultingTokens.get(i).length();
+				
+					end+=resultingTokens.get(i).length();
+				
 			}
 			else{
-				end+=resultingTokens.get(i).length()+1;
+				if( aJCas.getDocumentText().toCharArray()[end+resultingTokens.get(i).length()]==' '){
+					end+=resultingTokens.get(i).length()+1;
+				}
+				else{
+					end+=resultingTokens.get(i).length();
+				}
 			}
 		
 			Annotation token = createToken(aJCas, begin, end);
