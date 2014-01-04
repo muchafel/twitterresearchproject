@@ -24,6 +24,7 @@ public class TwitterJSONFileReader implements IPostProviding{
 		
 		hashtag = hashtag.toLowerCase();
 		PostList result = new PostList();
+		int id= 0;
 		
 		File dir = new File(Config.get_location_tweets() + hashtag);
 		if ( dir.exists()  && dir.isDirectory() ){
@@ -33,7 +34,8 @@ public class TwitterJSONFileReader implements IPostProviding{
 					List<String> lines = TextFileReader.read(file.getAbsolutePath());
 					for(String line : lines){
 						Status s = DataObjectFactory.createStatus(line);
-						result.add( PostConverter.fromTwitter(s) );
+						result.add( PostConverter.fromTwitter(s,id) );
+						id++;
 					}
 				}
 			}
@@ -42,8 +44,11 @@ public class TwitterJSONFileReader implements IPostProviding{
 		return result;
 	}
 
+	///TODO:
+	// ID-handling/ Ablage der cases üderdenke, --> Gefahr von Verwechslung 
 	public PostList getPosts(String hashtag, TimeSpan timespan) throws Exception {
 		hashtag = hashtag.toLowerCase();
+		int id= 0;
 		
 		PostList result = new PostList();
 		//Folder
@@ -56,7 +61,8 @@ public class TwitterJSONFileReader implements IPostProviding{
 					List<String> lines = TextFileReader.read(file.getAbsolutePath());
 					for(String line : lines){
 						Status s = DataObjectFactory.createStatus(line);
-						result.add( PostConverter.fromTwitter(s) );
+						result.add( PostConverter.fromTwitter(s,id) );
+						id++;
 					}
 				}
 			}

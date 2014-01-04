@@ -15,11 +15,13 @@ public class PostConverter {
 	 * @param s4j the {@link twitter4j.Status}
 	 * @return {@link Post}
 	 */
-	public static Post fromTwitter(twitter4j.Status s4j){
+	public static Post fromTwitter(twitter4j.Status s4j, int id){
 		Post s = new Post();
+
 		s.setMessage(s4j.getText());
 		s.setUser(s4j.getUser().getName());
 		s.setShared((int) s4j.getRetweetCount());
+		s.setId(String.valueOf(id));
 		return s;
 	}
 }
