@@ -28,8 +28,10 @@ public class TwitterRESTReader implements IPostProviding {
 		
 		do {
 			result = t.search(query);
+			int id=0;
 			for (Status s : result.getTweets()){
-				sl.add(PostConverter.fromTwitter(s));
+				sl.add(PostConverter.fromTwitter(s,id));
+				id++;
 			}
 		} while ((query = result.nextQuery()) != null && sl.size() < Config.twitter_result_restriction);			
 	 
