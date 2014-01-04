@@ -60,7 +60,7 @@ static SentimentLexicon lexGerman= new SentimentLexicon("De");
 			// form clusters
 
 			for (JCas jcas : tweetCases){
-				casWriter.write(jcas,"Tatort");
+				casWriter.write(jcas,"halligalli");
 			}
 			
 		} catch (Exception e) {
@@ -71,9 +71,9 @@ static SentimentLexicon lexGerman= new SentimentLexicon("De");
 	private JCas analyzeTweet(Post p) throws AnalysisEngineProcessException, ResourceInitializationException, CASException {
 		
         AggregateBuilder builder = new AggregateBuilder();
-        builder.add(createEngineDescription(LanguageIdentifier.class));
-        builder.add(createEngineDescription(TweetTokenizer.class));
-//        builder.add(createEngineDescription(BreakIteratorSegmenter.class));
+        //builder.add(createEngineDescription(LanguageIdentifier.class));
+//        builder.add(createEngineDescription(TweetTokenizer.class));
+        builder.add(createEngineDescription(BreakIteratorSegmenter.class));
         builder.add(createEngineDescription(OpenNlpPosTagger.class));
         builder.add(createEngineDescription(SentimentAnnotator.class));
         builder.add(createEngineDescription(SenseAnnotator.class));
@@ -87,6 +87,8 @@ static SentimentLexicon lexGerman= new SentimentLexicon("De");
         DocumentMetaData.create(jcas);
         //TODO ID aus Tweet generieren
         DocumentMetaData.get(jcas).setDocumentId(p.getId());
+        System.out.println("ID: --------"+p.getId());
+        DocumentMetaData.get(jcas).setLanguage("de");
         
         engine.process(jcas);
         
