@@ -1,5 +1,6 @@
 package ude.SocialMediaExplorer.analysis;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -8,13 +9,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.JFrame;
+
 
 import org.apache.commons.collections15.Transformer;
 import org.apache.uima.cas.FSIndex;
 import org.apache.uima.jcas.JCas;
 
+import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+import edu.uci.ics.jung.algorithms.layout.FRLayout;
+import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.algorithms.scoring.BetweennessCentrality;
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
+import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
+import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 
 import ude.SocialMediaExplorer.analysis.type.SenseAnno;
 
@@ -29,6 +38,9 @@ public class OrthographyCluster {
 			// gets all SenseAnnos from all jcases
 			while (senseIterator.hasNext()) {
 				SenseAnno sense = (SenseAnno) senseIterator.next();
+//				if(rawSenses.contains(sense.getSenseValue())){
+//					System.out.println("doppelt: " +sense.getSenseValue());
+//				}
 				rawSenses.add(sense.getSenseValue());
 				}
 			}
@@ -49,9 +61,7 @@ public class OrthographyCluster {
 //				System.out.println("i: " + i + " : " + rawSenses.get(i) + " j: "
 //						+ j + " : " + rawSenses.get(j));
 				try {
-					// /TODO: normalize somehow on wordlength
-					/// TODO: <5 überdenken!
-					//if (calcWeight(nodeList.get(i), nodeList.get(j)) < 5) {
+
 					if(calcWeight(rawSenses.get(i),rawSenses.get(j))>0.75){
 						g.addEdge(
 								new MyLink(calcWeight(rawSenses.get(i),rawSenses.get(j)), 1.0, linkId),
@@ -69,6 +79,7 @@ public class OrthographyCluster {
 				}
 			}
 		}
+		visualize(g);
 		Map<String, Set<String>> result= doBetweennessClustering(g);
 		return result;
 	}
@@ -92,6 +103,7 @@ public class OrthographyCluster {
 			System.out.println("remove edge:"+edge.id+" score "+bc.getEdgeScore(edge)+" edge weight"+edge.weight);
 			g.removeEdge(edge);
 		}
+		
 		//iterate over all clusters and set the name of the most connected node as cluster name
 		Iterator<Set<String>> iter = clusters.iterator();
 		Map<String,Set<String>> clusterNames=new HashMap<String,Set<String>>();
@@ -109,15 +121,33 @@ public class OrthographyCluster {
 						temp0=inDegree;
 						//System.out.println("Genommen: "+tempName+" mit degree "+temp0);
 					}
-					
 				}
 				clusterNames.put(name,cluster);
-				
 		}
 		System.out.println(clusterNames);
 		//visualizeSpecial(g);
 		
 		return clusterNames;
+	}
+
+private void visualize(UndirectedSparseGraph<String, MyLink> g) {
+	Layout<String, String> layout = new CircleLayout(g);
+	 layout.setSize(new Dimension(300,300));
+	 VisualizationViewer<String,String> vv = new VisualizationViewer<String,String>(layout);
+	 vv.setPreferredSize(new Dimension(350,350));
+	 // Show vertex and edge labels
+	 vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
+	 vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
+	 // Create a graph mouse and add it to the visualization component
+	 DefaultModalGraphMouse gm = new DefaultModalGraphMouse();
+//	 gm.setMode(ModalGraphMouse.Mode.TRANSFORMING);
+	 vv.setGraphMouse(gm); 
+	 JFrame frame = new JFrame("Interactive Graph View 1");
+	 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	 frame.getContentPane().add(vv);
+	 frame.pack();
+	 frame.setVisible(true);
+		
 	}
 
 private double getInDegreeg(Collection<MyLink> inEdges) {
