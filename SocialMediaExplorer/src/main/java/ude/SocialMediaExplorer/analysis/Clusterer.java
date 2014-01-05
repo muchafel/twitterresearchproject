@@ -10,14 +10,19 @@ import java.util.Set;
 
 import javax.swing.JFrame;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.*;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIndex;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -28,6 +33,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 
+import ude.SocialMediaExplorer.analysis.type.CleanedSenseAnno;
 import ude.SocialMediaExplorer.analysis.type.SenseAnno;
 import ude.SocialMediaExplorer.data.utils.io.CASReader;
 import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
@@ -35,6 +41,8 @@ import ude.SocialMediaExplorer.shared.exchangeFormat.Sentiment;
 
 public class Clusterer {
 
+	public static FrequencyDistribution<String> fq;
+	public static Map<String,Set<String>> orthographyClusters;
 	//TODO: replace main with run()
 	/**
 	 * @param args
@@ -49,23 +57,59 @@ public class Clusterer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//find gazeteer for orthographic lexicon on senses
+		
 		OrthographyCluster oCluster= new OrthographyCluster();
-		Map<String,Set<String>> orthographyClusters= oCluster.cluster(jCases);
+		//find gazeteer for orthographic lexicon on senses
+		orthographyClusters= oCluster.cluster(jCases);
 		System.out.println("gefundene Orthographiecluster: "+orthographyClusters);
-		//find frequenzy distribution of orthography-clusters
-		FrequencyDistribution<String> fq= new FrequencyFinder(jCases).getFrequency(orthographyClusters);
+		//find frequency distribution of clusters (uses orthography lexicon)
+		fq= new FrequencyFinder(jCases).getFrequency(orthographyClusters);
 		System.out.println("Most 40 frequent senses (orthographically cleaned): "+fq.getMostFrequentSamples(40));
-		//annotate orthography and frequnezy to cases
+		//annotate orthography and frequency to cases
+		jCases= annotateSenseFrequency(jCases);
 		
 		
-		ClusterElement clusterElement=createClusterElements(jCases, null,null);
+		//damit kann gearbeitet werden
+		ClusterElement clusterElement=createClusterElementsDumb(jCases);
+		
+		
+		//ClusterElement clusterElement=createClusterElementsNaive(jCases, null,null);
 //		UndirectedSparseGraph<String, String> graph=calcGraph(clusterElement);
 //		visualize(graph);
-		//printCluster(clusterElement);
+	   // printCluster(clusterElement);
 	}
 
-	// for  prepare a jung graph for visualization
+	private static ClusterElement createClusterElementsDumb(List<JCas> jCases) {
+		ClusterElement c = new ClusterElement("TopCluster", new Sentiment(), null);
+		List<ClusterElement> elements=new ArrayList<ClusterElement>();
+		for(String name : fq.getMostFrequentSamples(15)){
+			elements.add(new ClusterElement(name,new Sentiment(),null));
+		}
+		c.setSubcluster(elements);
+		return c;
+	}
+
+	private static List<JCas> annotateSenseFrequency(List<JCas> jCases) {
+		List<JCas> resultingJCases= new ArrayList<JCas>();
+		
+		for(JCas jcas : jCases){
+			
+			try {
+				AggregateBuilder builder = new AggregateBuilder();
+				builder.add(createEngineDescription(CleanedSenseAnnotator.class));
+				AnalysisEngine engine = builder.createAggregate();
+				engine.process(jcas);
+				
+			} catch (ResourceInitializationException e) {
+				e.printStackTrace();
+			} catch (AnalysisEngineProcessException e) {
+				e.printStackTrace();
+			}
+		}
+		return resultingJCases;
+	}
+
+	//  prepare a jung graph for visualization
 	private static UndirectedSparseGraph<String, String> calcGraph(ClusterElement clusterElement) {
 		UndirectedSparseGraph<String, String> g = new UndirectedSparseGraph<String, String>();
 		
@@ -122,9 +166,11 @@ public class Clusterer {
 			}
 		}
 	}
-///TODO add Sentiment
-	private static ClusterElement createClusterElements(List<JCas> jCases,String cluster,List<String> headers) {
+
+	private static ClusterElement createClusterElementsNaive(List<JCas> jCases,String cluster,List<String> headers) {
+		
 		ClusterElement c;
+		
 		List<ClusterElement> subClusters = new ArrayList<ClusterElement>();
 		if (cluster == null) {
 			c = new ClusterElement("TopCluster", new Sentiment(), null);
@@ -132,21 +178,35 @@ public class Clusterer {
 		} else {
 			c = new ClusterElement(cluster, new Sentiment(), null);
 		}
-		for (JCas jcas : jCases) {
-			// System.out.println("Original text: "+jcas.getDocumentText()+" ----------------------");
-			FSIndex senseIndex = jcas.getAnnotationIndex(SenseAnno.type);
+		System.out.println(c.getName());
+		for(int i=3; i<9;i++){
+			String name=getClusterName(i);
+			List<JCas> subset=getSubset(jCases,name);
+			System.out.println(subset.size());
+			subClusters.add(createClusterElementsNaive(subset,
+					name, headers));
+		}
+		return c;
+	}
+
+	private static List<JCas> getSubset(List<JCas> jCases,String name) {
+		List<JCas> subset= new ArrayList<JCas>();
+		for(JCas jcas : jCases){
+			FSIndex senseIndex = jcas.getAnnotationIndex(CleanedSenseAnno.type);
 			Iterator senseIterator = senseIndex.iterator();
+			// gets all CleanedSenseAnnos from jcas
 			while (senseIterator.hasNext()) {
-				SenseAnno sense = (SenseAnno) senseIterator.next();
-				if (!headers.contains(sense.getSenseValue())) {
-					// System.out.println("Sense:"+sense.getSenseValue());
-					headers.add(sense.getSenseValue());
-					subClusters.add(createClusterElements(jCases,
-							sense.getSenseValue(), headers));
+				CleanedSenseAnno sense = (CleanedSenseAnno) senseIterator.next();
+				String senseValue=sense.getCleanedSense();
+				if(senseValue.equals(name)){
+					subset.add(jcas);
 				}
 			}
 		}
-		c.setSubcluster(subClusters);
-		return c;
+		return subset;
+	}
+
+	private static String getClusterName(int i) {
+		return fq.getMostFrequentSamples(i).get(i-1);
 	}
 }
