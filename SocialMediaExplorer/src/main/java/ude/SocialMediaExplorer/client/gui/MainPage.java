@@ -2,7 +2,9 @@ package ude.SocialMediaExplorer.client.gui;
 
 import java.util.ArrayList;
 
-import ude.SocialMediaExplorer.data.utils.io.ConfigReader;
+import ude.SocialMediaExplorer.client.DataHelper.DataHelper;
+import ude.SocialMediaExplorer.client.DataHelper.DataHelperCallback;
+import ude.SocialMediaExplorer.client.DataHelper.IDataHelperServiceAsync;
 import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
 
 import com.github.gwtbootstrap.client.ui.ListBox;
@@ -14,8 +16,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class MainPage extends Composite {
 
-	private static MainPageUiBinder uiBinder = GWT
-			.create(MainPageUiBinder.class);
+	private static MainPageUiBinder uiBinder = GWT.create(MainPageUiBinder.class);
+
 
 	interface MainPageUiBinder extends UiBinder<Widget, MainPage> {
 	}
@@ -29,9 +31,17 @@ public class MainPage extends Composite {
 		names.add("tvog");
 		names.add("sterntv");
 		names.add("berlintagundnacht");
+		
 
-		for (String name : names) {
-			listSeries.addItem(name);
+
+//		for (String name : names) {
+//			listSeries.addItem(name);
+//		}
+	}
+	
+	public void addSeries(String[] series) {
+		for (String s : series) {
+			listSeries.addItem(s);
 		}
 	}
 	
