@@ -7,8 +7,8 @@ public class Sentiment implements Serializable{
 	
 	/////////////////////////////////
 	
-	private double positive;
-	private double negative;
+	private double positive = 0;
+	private double negative = 0;
 	
 	/////////////////////////////////
 	
@@ -32,5 +32,9 @@ public class Sentiment implements Serializable{
 
 	public void setPositive(double positive) {
 		this.positive = positive;
+	}
+	
+	public double getNormalized(){
+		return  ( this.getPositive() + this.getNegative() ) / 2;
 	}
 }
