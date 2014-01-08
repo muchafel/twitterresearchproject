@@ -17,8 +17,8 @@
 		    <b:Navbar>
 			    <!-- b:Brand>Nav</b:Brand -->
 			    <b:Nav>
-			        <b:NavLink>Hauptseite</b:NavLink>
-			        <b:NavLink>Andere Seite</b:NavLink>
+			        <b:NavLink>Home</b:NavLink>
+			        <b:NavLink>Über</b:NavLink>
 			    </b:Nav>
 			</b:Navbar>
 	    </b:Row>
