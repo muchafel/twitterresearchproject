@@ -84,8 +84,8 @@ public class Clusterer {
 		List<ClusterElement> elements=new ArrayList<ClusterElement>();
 		for(String name : fq.getMostFrequentSamples(15)){
 			elements.add(new ClusterElement(name,new Sentiment(),null));
+			System.out.println("name erster Ordnung: "+name);
 		}
-		c.setSubcluster(elements);
 		return c;
 	}
 
