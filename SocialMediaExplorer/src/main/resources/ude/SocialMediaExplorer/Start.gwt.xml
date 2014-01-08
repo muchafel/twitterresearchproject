@@ -22,7 +22,9 @@
 	<!--  inherit the GWT-Bootstrap widget library -->
 	<inherits name="com.github.gwtbootstrap.Bootstrap"/>
 	<!--  end of inherit the GWT-Bootstrap widget library -->
-  
+	
+	<inherits name="com.google.gwt.json.JSON"/>
+	
   <!-- Specify the paths for translatable code                    -->
   <source path='client' />
   <source path='shared' />
