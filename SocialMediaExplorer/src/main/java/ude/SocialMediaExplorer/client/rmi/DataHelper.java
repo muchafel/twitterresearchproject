@@ -1,12 +1,13 @@
-package ude.SocialMediaExplorer.client.DataHelper;
+package ude.SocialMediaExplorer.client.rmi;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class DataHelper implements Serializable{
 
 	private String[] configHashtags;
 	
-	public void DataHelper() {}
+	public DataHelper() {}
 	
 	private void setConfighashtags(String[] hashtags) {
 		this.configHashtags = configHashtags;

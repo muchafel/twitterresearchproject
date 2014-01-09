@@ -1,4 +1,4 @@
-package ude.SocialMediaExplorer.client.DataHelper;
+package ude.SocialMediaExplorer.client.rmi;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
