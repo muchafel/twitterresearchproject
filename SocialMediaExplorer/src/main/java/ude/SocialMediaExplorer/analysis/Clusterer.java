@@ -2,6 +2,9 @@ package ude.SocialMediaExplorer.analysis;
 
 import java.awt.Dimension;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -44,7 +47,7 @@ public class Clusterer {
 	public static FrequencyDistribution<String> fq;
 	public static Map<String,Set<String>> orthographyClusters;
 	public static int nodeCounter;
-	//TODO: replace main with run()
+	//TODO: replace main with run() + parametrisieren
 	/**
 	 * @param args
 	 */
@@ -77,7 +80,39 @@ public class Clusterer {
 		//ClusterElement clusterElement=createClusterElementsNaive(jCases, null,null);
 		UndirectedSparseGraph<String, String> graph=calcGraph(clusterElement);
 		visualize(graph);
+		
+		serialize(clusterElement);
 //	    printCluster(clusterElement);
+	}
+
+	private static void serialize(ClusterElement clusterElement) {
+		FileOutputStream fs = null;
+		ObjectOutputStream os = null;
+		//versuchen die Streams zu initalisieren
+		// Objekt in den Stream schreiben
+		try {
+			fs = new FileOutputStream("files/serializedClusterElements/halligalli.ser");
+			os = new ObjectOutputStream(fs);
+			os.writeObject(clusterElement);
+		} catch (IOException e) {
+			e.printStackTrace();
+			//im finally block alle Streams schließen
+		} finally {
+			if (os != null) {
+				try {
+					os.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (fs != null) {
+				try {
+					fs.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	private static List<JCas> annotateSenseFrequency(List<JCas> jCases) {
