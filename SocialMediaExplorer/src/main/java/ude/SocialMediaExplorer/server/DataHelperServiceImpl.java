@@ -16,6 +16,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class DataHelperServiceImpl extends RemoteServiceServlet implements IDataHelperService {
 	private String[] configHashtags;
 	
+	//TODO Benny Clusterelemente aus files deserialisieren 
+	
 	public String[] getConfigHashtags() {
 		try {
 			File fXmlFile = new File("crawlerConfig.xml");
