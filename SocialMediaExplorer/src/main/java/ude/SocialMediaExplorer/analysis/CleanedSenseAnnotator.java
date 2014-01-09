@@ -51,6 +51,7 @@ public class CleanedSenseAnnotator extends SegmenterBase {
 			        	annotation.setOrderByFreqenzy(ordinal);
 			        	annotation.addToIndexes();
 //			        	System.out.println("Token: "+sense.getCoveredText()+" annotiert mit "+key+" Frequenz: "+fq.getCount(key)+" an Stelle "+ordinal);
+//			        	System.out.println("cleanedSense:"+annotation.getCleanedSense());
 			        }
 			    }
 			}

@@ -38,6 +38,7 @@ public class FrequencyFinder {
 			        if(orthographyClusters.get(key).contains(rawValue)){
 			        	// the key is included in the frequency distribution
 			        	fq.inc(key);
+//			        	System.out.println("key: "+key+" is inc'ed");
 			        }
 			    }
 			}
