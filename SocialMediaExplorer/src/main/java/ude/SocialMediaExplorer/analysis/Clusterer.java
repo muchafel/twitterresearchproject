@@ -91,7 +91,7 @@ public class Clusterer {
 		//versuchen die Streams zu initalisieren
 		// Objekt in den Stream schreiben
 		try {
-			fs = new FileOutputStream("files/serializedClusterElements/halligalli.ser");
+			fs = new FileOutputStream("files/serializedClusterElements/halligalli/halligalli.ser");
 			os = new ObjectOutputStream(fs);
 			os.writeObject(clusterElement);
 		} catch (IOException e) {

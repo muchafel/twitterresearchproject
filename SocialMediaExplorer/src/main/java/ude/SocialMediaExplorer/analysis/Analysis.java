@@ -19,6 +19,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetTagger;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
@@ -71,10 +72,13 @@ static SentimentLexicon lexGerman= new SentimentLexicon("De");
 	private JCas analyzeTweet(Post p) throws AnalysisEngineProcessException, ResourceInitializationException, CASException {
 		
         AggregateBuilder builder = new AggregateBuilder();
-        //builder.add(createEngineDescription(LanguageIdentifier.class));
-        builder.add(createEngineDescription(TweetTokenizer.class));
+//        builder.add(createEngineDescription(LanguageIdentifier.class));
+//        builder.add(createEngineDescription(TweetTokenizer.class));
         //builder.add(createEngineDescription(BreakIteratorSegmenter.class));
-        builder.add(createEngineDescription(OpenNlpPosTagger.class));
+//        builder.add(createEngineDescription(OpenNlpPosTagger.class));
+        builder.add(createEngineDescription(ArktweetTagger.class));
+        builder.add(createEngineDescription(ArktweetAnnotator.class));
+//        builder.add(createEngineDescription(OpenNlpPosTagger.class));
         builder.add(createEngineDescription(SentimentAnnotator.class));
         builder.add(createEngineDescription(SenseAnnotator.class));
         
@@ -88,7 +92,7 @@ static SentimentLexicon lexGerman= new SentimentLexicon("De");
         //TODO ID aus Tweet generieren
         DocumentMetaData.get(jcas).setDocumentId(p.getId());
         System.out.println("ID: --------"+p.getId());
-        DocumentMetaData.get(jcas).setLanguage("de");
+        DocumentMetaData.get(jcas).setLanguage("en");
         
         engine.process(jcas);
         
