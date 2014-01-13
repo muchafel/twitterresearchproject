@@ -76,9 +76,9 @@ static SentimentLexicon lexGerman= new SentimentLexicon("De");
 //        builder.add(createEngineDescription(TweetTokenizer.class));
         //builder.add(createEngineDescription(BreakIteratorSegmenter.class));
 //        builder.add(createEngineDescription(OpenNlpPosTagger.class));
-        builder.add(createEngineDescription(ArktweetTagger.class));
+        builder.add(createEngineDescription(ArktweetTagger.class,ArktweetTagger.PARAM_VARIANT, "default"));
         builder.add(createEngineDescription(ArktweetAnnotator.class));
-//        builder.add(createEngineDescription(OpenNlpPosTagger.class));
+        builder.add(createEngineDescription(OpenNlpPosTagger.class));
         builder.add(createEngineDescription(SentimentAnnotator.class));
         builder.add(createEngineDescription(SenseAnnotator.class));
         
