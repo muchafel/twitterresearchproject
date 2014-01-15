@@ -51,5 +51,17 @@
         </featureDescription>
       </features>
     </typeDescription>
+    <typeDescription>
+      <name>ArktweetAnno</name>
+      <description>links or #s </description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>linkOrHash</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
   </types>
 </typeSystemDescription>
