@@ -242,7 +242,7 @@ public class Clusterer {
 //		System.out.println("SSSize: "+jCases.size());
 		for(JCas jcas : jCases){
 			FSIndex senseIndex = jcas.getAnnotationIndex(CleanedSenseAnno.type);
-			System.out.println("Index:"+senseIndex.toString()+"  - "+senseIndex.size());
+			//System.out.println("Index:"+senseIndex.toString()+"  - "+senseIndex.size());
 			Iterator senseIterator = senseIndex.iterator();
 			// gets all CleanedSenseAnnos from jcas
 			while (senseIterator.hasNext()) {
