@@ -52,7 +52,7 @@
       </features>
     </typeDescription>
     <typeDescription>
-      <name>ArktweetAnno</name>
+      <name>ude.SocialMediaExplorer.analysis.type.ArktweetAnno</name>
       <description>links or #s </description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
