@@ -29,7 +29,8 @@ public class POSMerger extends JCasAnnotator_ImplBase {
 			List<Token> tokens = new ArrayList<Token>(select(aJCas, Token.class));
 			for (Token t : tokens){
 				if(t.getCoveredText().equals(anno.getCoveredText())){
-					t.getPos().setPosValue(anno.getLinkOrHash());
+					t.setPos(anno.getLinkOrEmoticon());
+					t.getPos().addToIndexes();
 				}
 			}
 			

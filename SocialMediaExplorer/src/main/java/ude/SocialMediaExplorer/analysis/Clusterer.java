@@ -46,18 +46,20 @@ public class Clusterer {
 
 	public static FrequencyDistribution<String> fq;
 	public static Map<String,Set<String>> orthographyClusters;
-	public static int nodeCounter;
+	public int nodeCounter;
+	private String hashtagToCluster="halligalli";
 	//TODO: replace main with run() + parametrisieren
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public void cluster(String hashtagToCluser) {
 		
+		this.hashtagToCluster=hashtagToCluser;
 		String directory= "files/serializedCases/"+"halligalli";
 		CASReader reader= new CASReader();
 		List<JCas> jCases= new ArrayList<JCas>();
 		try {
-			jCases=reader.read(directory);
+			jCases=reader.read("files/serializedCases/"+hashtagToCluster);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -75,7 +77,6 @@ public class Clusterer {
 		//damit kann gearbeitet werden
 		ClusterElement clusterElement=createClusterElementsNaive(jCases, null, null);
 		
-		//TODO Micha Clusterelement nach files serialisieren
 		
 		//ClusterElement clusterElement=createClusterElementsNaive(jCases, null,null);
 		UndirectedSparseGraph<String, String> graph=calcGraph(clusterElement);
@@ -85,13 +86,13 @@ public class Clusterer {
 //	    printCluster(clusterElement);
 	}
 
-	private static void serialize(ClusterElement clusterElement) {
+	private void serialize(ClusterElement clusterElement) {
 		FileOutputStream fs = null;
 		ObjectOutputStream os = null;
 		//versuchen die Streams zu initalisieren
 		// Objekt in den Stream schreiben
 		try {
-			fs = new FileOutputStream("files/serializedClusterElements/halligalli/halligalli.ser");
+			fs = new FileOutputStream("files/serializedClusterElements/"+hashtagToCluster+"/"+hashtagToCluster+".ser");
 			os = new ObjectOutputStream(fs);
 			os.writeObject(clusterElement);
 		} catch (IOException e) {
@@ -122,6 +123,7 @@ public class Clusterer {
 			try {
 				AggregateBuilder builder = new AggregateBuilder();
 				builder.add(createEngineDescription(CleanedSenseAnnotator.class));
+				builder.add(createEngineDescription(SenseAnnotator.class));
 				AnalysisEngine engine = builder.createAggregate();
 				engine.process(jcas);
 				
@@ -184,7 +186,7 @@ public class Clusterer {
 		 frame.setVisible(true);
 	}
 // print all found clusters
-	private static void printCluster(ClusterElement clusterElement) {
+	private void printCluster(ClusterElement clusterElement) {
 		System.out.println("Cluster:"+clusterElement.getName());
 		if (!clusterElement.getSubcluster().isEmpty()) {
 			for (ClusterElement c : clusterElement.getSubcluster()) {
@@ -193,7 +195,7 @@ public class Clusterer {
 		}
 	}
 
-	private static ClusterElement createClusterElementsNaive(List<JCas> jCases,String clusterName,List<String> headers) {
+	private ClusterElement createClusterElementsNaive(List<JCas> jCases,String clusterName,List<String> headers) {
 		
 		ClusterElement c;
 		FrequencyDistribution<String> frequencydistribution;
@@ -209,7 +211,7 @@ public class Clusterer {
 			frequencydistribution=creatfd(jCases,clusterName,headers);
 			//System.out.println(clusterName+" Max Frq:"+frequencydistribution.getSampleWithMaxFreq());
 		}
-		for (String subClusterName: frequencydistribution.getMostFrequentSamples(8)){
+		for (String subClusterName: frequencydistribution.getMostFrequentSamples(18)){
 			headers.add(subClusterName);
 			ClusterElement subCluster=createClusterElementsNaive(getSubset(jCases,subClusterName),subClusterName,headers);
 			subClusters.add(subCluster);
@@ -219,16 +221,16 @@ public class Clusterer {
 		return c;
 	}
 
-	private static FrequencyDistribution<String> creatfd(List<JCas> jCases,
+	private FrequencyDistribution<String> creatfd(List<JCas> jCases,
 			String clusterName, List<String> headers) {
 		FrequencyDistribution<String> frequencydistribution= new FrequencyDistribution<String>();
 		for(JCas jcas : jCases){
-			FSIndex senseIndex = jcas.getAnnotationIndex(CleanedSenseAnno.type);
+			FSIndex senseIndex = jcas.getAnnotationIndex(SenseAnno.type);
 			Iterator senseIterator = senseIndex.iterator();
 			// gets all CleanedSenseAnnos from jcas
 			while (senseIterator.hasNext()) {
-				CleanedSenseAnno sense = (CleanedSenseAnno) senseIterator.next();
-				String senseValue=sense.getCleanedSense();
+				SenseAnno sense = (SenseAnno) senseIterator.next();
+				String senseValue=sense.getSenseValue();
 				if(!headers.contains(senseValue)){
 					frequencydistribution.inc(senseValue);
 				}
@@ -237,20 +239,20 @@ public class Clusterer {
 		return frequencydistribution;
 	}
 
-	private static List<JCas> getSubset(List<JCas> jCases,String name) {
+	private List<JCas> getSubset(List<JCas> jCases,String name) {
 		List<JCas> subset= new ArrayList<JCas>();
 //		System.out.println("SSSize: "+jCases.size());
 		for(JCas jcas : jCases){
-			FSIndex senseIndex = jcas.getAnnotationIndex(CleanedSenseAnno.type);
+			FSIndex senseIndex = jcas.getAnnotationIndex(SenseAnno.type);
 			//System.out.println("Index:"+senseIndex.toString()+"  - "+senseIndex.size());
 			Iterator senseIterator = senseIndex.iterator();
 			// gets all CleanedSenseAnnos from jcas
 			while (senseIterator.hasNext()) {
-				CleanedSenseAnno sense = (CleanedSenseAnno) senseIterator.next();
-				String senseValue=sense.getCleanedSense();
-//				System.out.println("SenseValue: "+senseValue);
+				SenseAnno sense = (SenseAnno) senseIterator.next();
+				String senseValue=sense.getSenseValue();
+				//System.out.println("SenseValue: "+senseValue);
 				if(senseValue.equals(name)){
-					System.out.println("added to subset: jacas mit: "+name);
+//					System.out.println(jcas.getDocumentText()+" added to subset: jacas mit: "+name);
 					subset.add(jcas);
 				}
 			}

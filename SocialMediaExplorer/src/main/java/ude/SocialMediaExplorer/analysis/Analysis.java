@@ -17,6 +17,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetTagger;
@@ -47,7 +48,7 @@ static SentimentLexicon lexGerman= new SentimentLexicon("De");
 		tweetCases= new ArrayList<JCas>();
 	}
 	
-	public void run() {
+	public void run(String hashtagToAnalyze) {
 		casWriter= new CASWriter();
 	
 //		System.out.println(lexEnglish.getSentiment("abnormal", "En"));
@@ -61,7 +62,7 @@ static SentimentLexicon lexGerman= new SentimentLexicon("De");
 			// form clusters
 
 			for (JCas jcas : tweetCases){
-				casWriter.write(jcas,"halligalli");
+				casWriter.write(jcas,hashtagToAnalyze);
 			}
 			
 		} catch (Exception e) {
@@ -74,14 +75,14 @@ static SentimentLexicon lexGerman= new SentimentLexicon("De");
         AggregateBuilder builder = new AggregateBuilder();
 //        builder.add(createEngineDescription(LanguageIdentifier.class));
 //        builder.add(createEngineDescription(TweetTokenizer.class));
-        //builder.add(createEngineDescription(BreakIteratorSegmenter.class));
+//       // builder.add(createEngineDescription(BreakIteratorSegmenter.class));
 //        builder.add(createEngineDescription(OpenNlpPosTagger.class));
         builder.add(createEngineDescription(ArktweetTagger.class,ArktweetTagger.PARAM_VARIANT, "default"));
         builder.add(createEngineDescription(ArktweetAnnotator.class));
         builder.add(createEngineDescription(OpenNlpPosTagger.class));
         builder.add(createEngineDescription(POSMerger.class));
         builder.add(createEngineDescription(SentimentAnnotator.class));
-        builder.add(createEngineDescription(SenseAnnotator.class));
+        builder.add(createEngineDescription(SimpleSenseAnnotator.class));
         
         AnalysisEngine engine = builder.createAggregate();
 
@@ -104,6 +105,10 @@ static SentimentLexicon lexGerman= new SentimentLexicon("De");
                 System.out.println("[" + annotation.getCoveredText() + "]");
                 System.out.println(annotation.toString());
         }
+        List<AnnotationFS> pos = new ArrayList<AnnotationFS>(select(jcas, POS.class));
+		for(AnnotationFS p2 : pos){
+			System.out.println("!POS:    "+p2);
+		}
 //        System.out.println("Sentiments : "+jcas.getView("Sentiment").getDocumentText());
 //        System.out.println("Senses: "+jcas.getView("Sense").getDocumentText());
         

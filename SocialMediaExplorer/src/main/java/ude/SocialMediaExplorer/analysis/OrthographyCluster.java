@@ -26,6 +26,7 @@ import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 
 import ude.SocialMediaExplorer.analysis.type.SenseAnno;
+import ude.SocialMediaExplorer.analysis.type.SimpleSenseAnno;
 
 public class OrthographyCluster {
 
@@ -33,15 +34,16 @@ public class OrthographyCluster {
 		List<String> rawSenses= new ArrayList<String>();
 		for (JCas jcas : jCases) {
 			// System.out.println("Original text: "+jcas.getDocumentText()+" ----------------------");
-			FSIndex senseIndex = jcas.getAnnotationIndex(SenseAnno.type);
+			FSIndex senseIndex = jcas.getAnnotationIndex(SimpleSenseAnno.type);
 			Iterator senseIterator = senseIndex.iterator();
 			// gets all SenseAnnos from all jcases
 			while (senseIterator.hasNext()) {
-				SenseAnno sense = (SenseAnno) senseIterator.next();
+				SimpleSenseAnno sense = (SimpleSenseAnno) senseIterator.next();
 //				if(rawSenses.contains(sense.getSenseValue())){
 //					System.out.println("doppelt: " +sense.getSenseValue());
 //				}
-				rawSenses.add(sense.getSenseValue());
+				rawSenses.add(sense.getSimpleSense());
+//				System.out.println("sense" +sense.getSimpleSense());
 				}
 			}
 		//do clustering over all jcases
@@ -62,7 +64,7 @@ public class OrthographyCluster {
 //						+ j + " : " + rawSenses.get(j));
 				try {
 
-					if(calcWeight(rawSenses.get(i),rawSenses.get(j))>0.75){
+					if(calcWeight(rawSenses.get(i),rawSenses.get(j))>0.7){
 						g.addEdge(
 								new MyLink(calcWeight(rawSenses.get(i),rawSenses.get(j)), 1.0, linkId),
 								rawSenses.get(i), rawSenses.get(j));
