@@ -10,7 +10,13 @@ public class SimpleErrorHandling {
 		Window.alert(e.getMessage());
 		
 		System.out.println(e.getMessage() + ":\n ");
-		e.printStackTrace();		
+	}
+	
+	public SimpleErrorHandling(String e){
+		
+		Window.alert(e);
+		
+		System.out.println(e);
 	}
 	
 }

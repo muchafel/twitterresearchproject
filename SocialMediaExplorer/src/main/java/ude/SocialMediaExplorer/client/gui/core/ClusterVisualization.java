@@ -40,7 +40,7 @@ public class ClusterVisualization extends Composite{
 		infos.setText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.");
 		
 		//TODO: replace test data with ce
-		json = DataConverter.toJSON_GoogleTable(ClusterElement.testCE());
+		json = DataConverter.toJSON_GoogleTable(ce);
 		
 	}
 

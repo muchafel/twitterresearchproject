@@ -12,11 +12,11 @@ import org.w3c.dom.NodeList;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class DataHelperServiceImpl extends RemoteServiceServlet implements ude.SocialMediaExplorer.client.rmi.IDataHelperService {
-	private String[] configHashtags;
+	private ArrayList<String> configHashtags;
 	
 	//TODO Benny Clusterelemente aus files deserialisieren 
 	
-	public String[] getConfigHashtags() {
+	public ArrayList<String> getConfigHashtags() {
 		try {
 			File fXmlFile = new File("crawlerConfig.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -26,12 +26,13 @@ public class DataHelperServiceImpl extends RemoteServiceServlet implements ude.S
 			NodeList nList = doc.getElementsByTagName("hashtag");
 			
 			int listLength = nList.getLength();
-			configHashtags = new String[listLength];
+			
+			configHashtags = new ArrayList<String>();
 			
 			for (int temp = 0; temp < listLength; temp++) {
 				// System.out.println(nList.item(temp).getTextContent());
 				String hashtag = nList.item(temp).getTextContent();
-				configHashtags[temp] = hashtag;
+				configHashtags.add(hashtag);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
