@@ -3,6 +3,7 @@ package ude.SocialMediaExplorer.client.gui.core;
 import java.util.ArrayList;
 
 import ude.SocialMediaExplorer.client.gui.errorhandling.SimpleErrorHandling;
+import ude.SocialMediaExplorer.client.rmi.IDataHelperService;
 import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
 
 import com.github.gwtbootstrap.client.ui.Button;
@@ -32,6 +33,8 @@ public class MainPage extends Composite {
 	ArrayList<String> names;
 	public boolean loading = false;
 	
+	private IDataHelperService dh = null;
+	
 	//////////////////////////
 	
 	public MainPage() {
@@ -44,19 +47,24 @@ public class MainPage extends Composite {
 		
 		initButton();
 		
+		try{
+			dh = GWT.create(IDataHelperService.class);
+		} catch (Exception e){
+			new SimpleErrorHandling(e);
+		}
+		
 	}
 	
 	//////////////////////////
 	
 	private ArrayList<String> getNames(){
-		//TODO: Replayce with RMI: something like PROXY.GET_POSSIBLE_HASHTAGS: ArrayList<String>
-		ArrayList<String> names = new ArrayList<String>();
-		names.add("tatort");
-		names.add("halligalli");
-		names.add("tvog");
-		names.add("sterntv");
-		names.add("berlintagundnacht");
-		return names;
+		
+		if (dh != null){
+			return dh.getConfigHashtags();
+		}
+		
+		return null;
+		
 	}
 	
 	private void initButton(){
