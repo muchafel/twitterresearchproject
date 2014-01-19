@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Fri Nov 29 09:50:45 CET 2013
+ * Updated by JCasGen Fri Jan 17 12:10:54 CET 2014
  * @generated */
 public class SentimentAnno_Type extends Annotation_Type {
   /** @generated */
@@ -42,7 +42,7 @@ public class SentimentAnno_Type extends Annotation_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("ude.SocialMediaExplorer.type.SentimentAnno");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("ude.SocialMediaExplorer.analysis.type.SentimentAnno");
  
   /** @generated */
   final Feature casFeat_sentimentValue;
@@ -51,13 +51,13 @@ public class SentimentAnno_Type extends Annotation_Type {
   /** @generated */ 
   public String getSentimentValue(int addr) {
         if (featOkTst && casFeat_sentimentValue == null)
-      jcas.throwFeatMissing("sentimentValue", "ude.SocialMediaExplorer.type.SentimentAnno");
+      jcas.throwFeatMissing("sentimentValue", "ude.SocialMediaExplorer.analysis.type.SentimentAnno");
     return ll_cas.ll_getStringValue(addr, casFeatCode_sentimentValue);
   }
   /** @generated */    
   public void setSentimentValue(int addr, String v) {
         if (featOkTst && casFeat_sentimentValue == null)
-      jcas.throwFeatMissing("sentimentValue", "ude.SocialMediaExplorer.type.SentimentAnno");
+      jcas.throwFeatMissing("sentimentValue", "ude.SocialMediaExplorer.analysis.type.SentimentAnno");
     ll_cas.ll_setStringValue(addr, casFeatCode_sentimentValue, v);}
     
   

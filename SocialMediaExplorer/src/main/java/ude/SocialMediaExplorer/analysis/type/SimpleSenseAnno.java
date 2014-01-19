@@ -1,7 +1,7 @@
 package ude.SocialMediaExplorer.analysis.type;
 
 
-/* First created by JCasGen Mon Dec 02 18:09:31 CET 2013 */
+/* First created by JCasGen Fri Jan 17 12:09:45 CET 2014 */
 
 import org.apache.uima.jcas.JCas; 
 import org.apache.uima.jcas.JCasRegistry;
@@ -11,15 +11,15 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Fri Jan 17 12:10:54 CET 2014
+ * Updated by JCasGen Fri Jan 17 12:09:45 CET 2014
  * XML source: C:/Users/Michael/workspace/SocialMediaExplorer/src/main/resources/desc/type/TwitterTypes.xml
  * @generated */
-public class SenseAnno extends Annotation {
+public class SimpleSenseAnno extends Annotation {
   /** @generated
    * @ordered 
    */
   @SuppressWarnings ("hiding")
-  public final static int typeIndexID = JCasRegistry.register(SenseAnno.class);
+  public final static int typeIndexID = JCasRegistry.register(SimpleSenseAnno.class);
   /** @generated
    * @ordered 
    */
@@ -31,23 +31,23 @@ public class SenseAnno extends Annotation {
  
   /** Never called.  Disable default constructor
    * @generated */
-  protected SenseAnno() {/* intentionally empty block */}
+  protected SimpleSenseAnno() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
    * @generated */
-  public SenseAnno(int addr, TOP_Type type) {
+  public SimpleSenseAnno(int addr, TOP_Type type) {
     super(addr, type);
     readObject();
   }
   
   /** @generated */
-  public SenseAnno(JCas jcas) {
+  public SimpleSenseAnno(JCas jcas) {
     super(jcas);
     readObject();   
   } 
 
   /** @generated */  
-  public SenseAnno(JCas jcas, int begin, int end) {
+  public SimpleSenseAnno(JCas jcas, int begin, int end) {
     super(jcas);
     setBegin(begin);
     setEnd(end);
@@ -60,23 +60,24 @@ public class SenseAnno extends Annotation {
   @generated modifiable */
   private void readObject() {/*default - does nothing empty block */}
      
-  
-  //*--------------*
-  //* Feature: senseValue
-
-  /** getter for senseValue - gets 
-   * @generated */
-  public String getSenseValue() {
-    if (SenseAnno_Type.featOkTst && ((SenseAnno_Type)jcasType).casFeat_senseValue == null)
-      jcasType.jcas.throwFeatMissing("senseValue", "ude.SocialMediaExplorer.analysis.type.SenseAnno");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((SenseAnno_Type)jcasType).casFeatCode_senseValue);}
+ 
     
-  /** setter for senseValue - sets  
+  //*--------------*
+  //* Feature: simpleSense
+
+  /** getter for simpleSense - gets 
    * @generated */
-  public void setSenseValue(String v) {
-    if (SenseAnno_Type.featOkTst && ((SenseAnno_Type)jcasType).casFeat_senseValue == null)
-      jcasType.jcas.throwFeatMissing("senseValue", "ude.SocialMediaExplorer.analysis.type.SenseAnno");
-    jcasType.ll_cas.ll_setStringValue(addr, ((SenseAnno_Type)jcasType).casFeatCode_senseValue, v);}    
+  public String getSimpleSense() {
+    if (SimpleSenseAnno_Type.featOkTst && ((SimpleSenseAnno_Type)jcasType).casFeat_simpleSense == null)
+      jcasType.jcas.throwFeatMissing("simpleSense", "SimpleSenseAnno");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((SimpleSenseAnno_Type)jcasType).casFeatCode_simpleSense);}
+    
+  /** setter for simpleSense - sets  
+   * @generated */
+  public void setSimpleSense(String v) {
+    if (SimpleSenseAnno_Type.featOkTst && ((SimpleSenseAnno_Type)jcasType).casFeat_simpleSense == null)
+      jcasType.jcas.throwFeatMissing("simpleSense", "SimpleSenseAnno");
+    jcasType.ll_cas.ll_setStringValue(addr, ((SimpleSenseAnno_Type)jcasType).casFeatCode_simpleSense, v);}    
   }
 
     
