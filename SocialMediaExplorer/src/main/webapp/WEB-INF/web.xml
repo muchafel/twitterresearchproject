@@ -7,17 +7,15 @@
 
   <!-- Servlets -->
 
-  
   <servlet>
-    <servlet-name>analysisServlet</servlet-name>
-    <servlet-class>ude.SocialMediaExplorer.server.AnalyticServiceImpl</servlet-class>
+    <servlet-name>datahelper</servlet-name>
+    <servlet-class>ude.SocialMediaExplorer.server.DataHelperServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>analysisServlet</servlet-name>
-    <url-pattern>/Start/analysis</url-pattern>
+    <servlet-name>datahelper</servlet-name>
+    <url-pattern>/Start/datahelper</url-pattern>
   </servlet-mapping>
-  
 
   <!-- Default page to serve -->
   <welcome-file-list>
