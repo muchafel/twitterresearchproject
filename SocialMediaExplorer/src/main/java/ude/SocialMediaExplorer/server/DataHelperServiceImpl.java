@@ -9,11 +9,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import ude.SocialMediaExplorer.client.DataHelper.IDataHelperService;
-
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-public class DataHelperServiceImpl extends RemoteServiceServlet implements IDataHelperService {
+public class DataHelperServiceImpl extends RemoteServiceServlet implements ude.SocialMediaExplorer.client.rmi.IDataHelperService {
 	private String[] configHashtags;
 	
 	//TODO Benny Clusterelemente aus files deserialisieren 
