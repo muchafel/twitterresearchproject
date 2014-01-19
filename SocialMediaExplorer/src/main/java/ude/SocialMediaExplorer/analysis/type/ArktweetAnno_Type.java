@@ -13,8 +13,8 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
-/** links or #s 
- * Updated by JCasGen Wed Jan 15 11:33:29 CET 2014
+/** links or #s
+ * Updated by JCasGen Fri Jan 17 12:10:54 CET 2014
  * @generated */
 public class ArktweetAnno_Type extends Annotation_Type {
   /** @generated */
@@ -42,23 +42,23 @@ public class ArktweetAnno_Type extends Annotation_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("ArktweetAnno");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("ude.SocialMediaExplorer.analysis.type.ArktweetAnno");
  
   /** @generated */
-  final Feature casFeat_linkOrHash;
+  final Feature casFeat_linkOrEmoticon;
   /** @generated */
-  final int     casFeatCode_linkOrHash;
+  final int     casFeatCode_linkOrEmoticon;
   /** @generated */ 
-  public String getLinkOrHash(int addr) {
-        if (featOkTst && casFeat_linkOrHash == null)
-      jcas.throwFeatMissing("linkOrHash", "ArktweetAnno");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_linkOrHash);
+  public int getLinkOrEmoticon(int addr) {
+        if (featOkTst && casFeat_linkOrEmoticon == null)
+      jcas.throwFeatMissing("linkOrEmoticon", "ude.SocialMediaExplorer.analysis.type.ArktweetAnno");
+    return ll_cas.ll_getRefValue(addr, casFeatCode_linkOrEmoticon);
   }
   /** @generated */    
-  public void setLinkOrHash(int addr, String v) {
-        if (featOkTst && casFeat_linkOrHash == null)
-      jcas.throwFeatMissing("linkOrHash", "ArktweetAnno");
-    ll_cas.ll_setStringValue(addr, casFeatCode_linkOrHash, v);}
+  public void setLinkOrEmoticon(int addr, int v) {
+        if (featOkTst && casFeat_linkOrEmoticon == null)
+      jcas.throwFeatMissing("linkOrEmoticon", "ude.SocialMediaExplorer.analysis.type.ArktweetAnno");
+    ll_cas.ll_setRefValue(addr, casFeatCode_linkOrEmoticon, v);}
     
   
 
@@ -71,8 +71,8 @@ public class ArktweetAnno_Type extends Annotation_Type {
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_linkOrHash = jcas.getRequiredFeatureDE(casType, "linkOrHash", "uima.cas.String", featOkTst);
-    casFeatCode_linkOrHash  = (null == casFeat_linkOrHash) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_linkOrHash).getCode();
+    casFeat_linkOrEmoticon = jcas.getRequiredFeatureDE(casType, "linkOrEmoticon", "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS", featOkTst);
+    casFeatCode_linkOrEmoticon  = (null == casFeat_linkOrEmoticon) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_linkOrEmoticon).getCode();
 
   }
 }

@@ -12,8 +12,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** includes the orthographically cleaned senses and their frequenzy in the whole corpus
- * Updated by JCasGen Sun Jan 05 15:25:00 CET 2014
- * XML source: C:/Users/Michael/workspace/SocialMediaExplorer/src/main/java/ude/SocialMediaExplorer/analysis/type/typeSystemDescriptor.xml
+ * Updated by JCasGen Fri Jan 17 12:10:54 CET 2014
+ * XML source: C:/Users/Michael/workspace/SocialMediaExplorer/src/main/resources/desc/type/TwitterTypes.xml
  * @generated */
 public class CleanedSenseAnno extends Annotation {
   /** @generated
@@ -47,6 +47,14 @@ public class CleanedSenseAnno extends Annotation {
     readObject();   
   } 
 
+  /** @generated */  
+  public CleanedSenseAnno(JCas jcas, int begin, int end) {
+    super(jcas);
+    setBegin(begin);
+    setEnd(end);
+    readObject();
+  }   
+
   /** <!-- begin-user-doc -->
     * Write your own initialization here
     * <!-- end-user-doc -->
@@ -62,14 +70,14 @@ public class CleanedSenseAnno extends Annotation {
    * @generated */
   public String getCleanedSense() {
     if (CleanedSenseAnno_Type.featOkTst && ((CleanedSenseAnno_Type)jcasType).casFeat_cleanedSense == null)
-      jcasType.jcas.throwFeatMissing("cleanedSense", "cleanedSense");
+      jcasType.jcas.throwFeatMissing("cleanedSense", "ude.SocialMediaExplorer.analysis.type.CleanedSenseAnno");
     return jcasType.ll_cas.ll_getStringValue(addr, ((CleanedSenseAnno_Type)jcasType).casFeatCode_cleanedSense);}
     
   /** setter for cleanedSense - sets  
    * @generated */
   public void setCleanedSense(String v) {
     if (CleanedSenseAnno_Type.featOkTst && ((CleanedSenseAnno_Type)jcasType).casFeat_cleanedSense == null)
-      jcasType.jcas.throwFeatMissing("cleanedSense", "cleanedSense");
+      jcasType.jcas.throwFeatMissing("cleanedSense", "ude.SocialMediaExplorer.analysis.type.CleanedSenseAnno");
     jcasType.ll_cas.ll_setStringValue(addr, ((CleanedSenseAnno_Type)jcasType).casFeatCode_cleanedSense, v);}    
    
     
@@ -80,14 +88,14 @@ public class CleanedSenseAnno extends Annotation {
    * @generated */
   public int getOrderByFreqenzy() {
     if (CleanedSenseAnno_Type.featOkTst && ((CleanedSenseAnno_Type)jcasType).casFeat_orderByFreqenzy == null)
-      jcasType.jcas.throwFeatMissing("orderByFreqenzy", "cleanedSense");
+      jcasType.jcas.throwFeatMissing("orderByFreqenzy", "ude.SocialMediaExplorer.analysis.type.CleanedSenseAnno");
     return jcasType.ll_cas.ll_getIntValue(addr, ((CleanedSenseAnno_Type)jcasType).casFeatCode_orderByFreqenzy);}
     
   /** setter for orderByFreqenzy - sets  
    * @generated */
   public void setOrderByFreqenzy(int v) {
     if (CleanedSenseAnno_Type.featOkTst && ((CleanedSenseAnno_Type)jcasType).casFeat_orderByFreqenzy == null)
-      jcasType.jcas.throwFeatMissing("orderByFreqenzy", "cleanedSense");
+      jcasType.jcas.throwFeatMissing("orderByFreqenzy", "ude.SocialMediaExplorer.analysis.type.CleanedSenseAnno");
     jcasType.ll_cas.ll_setIntValue(addr, ((CleanedSenseAnno_Type)jcasType).casFeatCode_orderByFreqenzy, v);}    
    
     
@@ -98,14 +106,14 @@ public class CleanedSenseAnno extends Annotation {
    * @generated */
   public int getTotalFrequenzy() {
     if (CleanedSenseAnno_Type.featOkTst && ((CleanedSenseAnno_Type)jcasType).casFeat_totalFrequenzy == null)
-      jcasType.jcas.throwFeatMissing("totalFrequenzy", "cleanedSense");
+      jcasType.jcas.throwFeatMissing("totalFrequenzy", "ude.SocialMediaExplorer.analysis.type.CleanedSenseAnno");
     return jcasType.ll_cas.ll_getIntValue(addr, ((CleanedSenseAnno_Type)jcasType).casFeatCode_totalFrequenzy);}
     
   /** setter for totalFrequenzy - sets  
    * @generated */
   public void setTotalFrequenzy(int v) {
     if (CleanedSenseAnno_Type.featOkTst && ((CleanedSenseAnno_Type)jcasType).casFeat_totalFrequenzy == null)
-      jcasType.jcas.throwFeatMissing("totalFrequenzy", "cleanedSense");
+      jcasType.jcas.throwFeatMissing("totalFrequenzy", "ude.SocialMediaExplorer.analysis.type.CleanedSenseAnno");
     jcasType.ll_cas.ll_setIntValue(addr, ((CleanedSenseAnno_Type)jcasType).casFeatCode_totalFrequenzy, v);}    
   }
 

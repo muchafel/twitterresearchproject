@@ -10,9 +10,12 @@ import org.apache.uima.jcas.cas.TOP_Type;
 import org.apache.uima.jcas.tcas.Annotation;
 
 
-/** links or #s 
- * Updated by JCasGen Wed Jan 15 11:33:29 CET 2014
- * XML source: C:/Users/Michael/workspace/SocialMediaExplorer/src/main/java/ude/SocialMediaExplorer/analysis/type/typeSystemDescriptor2.xml
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+
+
+/** links or #s
+ * Updated by JCasGen Fri Jan 17 12:10:54 CET 2014
+ * XML source: C:/Users/Michael/workspace/SocialMediaExplorer/src/main/resources/desc/type/TwitterTypes.xml
  * @generated */
 public class ArktweetAnno extends Annotation {
   /** @generated
@@ -63,21 +66,21 @@ public class ArktweetAnno extends Annotation {
  
     
   //*--------------*
-  //* Feature: linkOrHash
+  //* Feature: linkOrEmoticon
 
-  /** getter for linkOrHash - gets 
+  /** getter for linkOrEmoticon - gets 
    * @generated */
-  public String getLinkOrHash() {
-    if (ArktweetAnno_Type.featOkTst && ((ArktweetAnno_Type)jcasType).casFeat_linkOrHash == null)
-      jcasType.jcas.throwFeatMissing("linkOrHash", "ArktweetAnno");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((ArktweetAnno_Type)jcasType).casFeatCode_linkOrHash);}
+  public POS getLinkOrEmoticon() {
+    if (ArktweetAnno_Type.featOkTst && ((ArktweetAnno_Type)jcasType).casFeat_linkOrEmoticon == null)
+      jcasType.jcas.throwFeatMissing("linkOrEmoticon", "ude.SocialMediaExplorer.analysis.type.ArktweetAnno");
+    return (POS)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((ArktweetAnno_Type)jcasType).casFeatCode_linkOrEmoticon)));}
     
-  /** setter for linkOrHash - sets  
+  /** setter for linkOrEmoticon - sets  
    * @generated */
-  public void setLinkOrHash(String v) {
-    if (ArktweetAnno_Type.featOkTst && ((ArktweetAnno_Type)jcasType).casFeat_linkOrHash == null)
-      jcasType.jcas.throwFeatMissing("linkOrHash", "ArktweetAnno");
-    jcasType.ll_cas.ll_setStringValue(addr, ((ArktweetAnno_Type)jcasType).casFeatCode_linkOrHash, v);}    
+  public void setLinkOrEmoticon(POS v) {
+    if (ArktweetAnno_Type.featOkTst && ((ArktweetAnno_Type)jcasType).casFeat_linkOrEmoticon == null)
+      jcasType.jcas.throwFeatMissing("linkOrEmoticon", "ude.SocialMediaExplorer.analysis.type.ArktweetAnno");
+    jcasType.ll_cas.ll_setRefValue(addr, ((ArktweetAnno_Type)jcasType).casFeatCode_linkOrEmoticon, jcasType.ll_cas.ll_getFSRef(v));}    
   }
 
     

@@ -14,7 +14,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Mon Dec 02 18:09:31 CET 2013
+ * Updated by JCasGen Fri Jan 17 12:10:54 CET 2014
  * @generated */
 public class SenseAnno_Type extends Annotation_Type {
   /** @generated */
@@ -42,35 +42,39 @@ public class SenseAnno_Type extends Annotation_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("SenseAnno");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("ude.SocialMediaExplorer.analysis.type.SenseAnno");
 
   /** @generated */
   final Feature casFeat_senseValue;
   /** @generated */
   final int     casFeatCode_senseValue;
   /** @generated */ 
-  public String getSentimentValue(int addr) {
+  public String getSenseValue(int addr) {
         if (featOkTst && casFeat_senseValue == null)
-      jcas.throwFeatMissing("sentimentValue", "ude.SocialMediaExplorer.type.SentimentAnno");
+      jcas.throwFeatMissing("senseValue", "ude.SocialMediaExplorer.analysis.type.SenseAnno");
     return ll_cas.ll_getStringValue(addr, casFeatCode_senseValue);
   }
   /** @generated */    
-  public void setSentimentValue(int addr, String v) {
+  public void setSenseValue(int addr, String v) {
         if (featOkTst && casFeat_senseValue == null)
-      jcas.throwFeatMissing("sentimentValue", "ude.SocialMediaExplorer.type.SentimentAnno");
+      jcas.throwFeatMissing("senseValue", "ude.SocialMediaExplorer.analysis.type.SenseAnno");
     ll_cas.ll_setStringValue(addr, casFeatCode_senseValue, v);}
+    
+  
+
+
 
   /** initialize variables to correspond with Cas Type and Features
 	* @generated */
   public SenseAnno_Type(JCas jcas, Type casType) {
-	    super(jcas, casType);
-	    casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
+    super(jcas, casType);
+    casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
-	 
-	    casFeat_senseValue = jcas.getRequiredFeatureDE(casType, "sentimentValue", "uima.cas.String", featOkTst);
-	    casFeatCode_senseValue  = (null == casFeat_senseValue) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_senseValue).getCode();
+ 
+    casFeat_senseValue = jcas.getRequiredFeatureDE(casType, "senseValue", "uima.cas.String", featOkTst);
+    casFeatCode_senseValue  = (null == casFeat_senseValue) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_senseValue).getCode();
 
-	  }
+  }
 }
 
 
