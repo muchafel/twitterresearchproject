@@ -34,7 +34,7 @@ public class SenseSlidingWindow {
         	}
         	slides.add(wordSet);
         }
-        System.out.println(slides);
+       // System.out.println(slides);
         //calculate the graph
         UndirectedSparseGraph<String, Integer> coOccurenceGraph= doCoOccurenceGraph(slides);
 //        Hashtable<String, Integer> ht = new Hashtable<String, Integer>();
@@ -46,7 +46,7 @@ public class SenseSlidingWindow {
         	}
         }
 //        System.out.println(ht);
-        System.out.println(fq.getMostFrequentSamples(5));
+        //System.out.println(fq.getMostFrequentSamples(5));
         List<String> keywords=fq.getMostFrequentSamples(5);
         List<String> keyPhrases=new ArrayList<String>();
         
@@ -62,31 +62,46 @@ public class SenseSlidingWindow {
         			if(i<words.size()-1){
 	        			String post=words.get(i+1);
 	        			// then we check if the following word has a ranking >2 and is a noun or a adjective
-	        			if(fq.getCount(post)>3 && isNounOrAdjective(i+1)){
+	        			if(fq.getCount(post)>1 && isNounOrAdjective(i+1)){
 	        				//then we concate the words
 	        				tempWord=word+" "+post;
+	        			}
+	        			if(i<words.size()-2){
+		        			String postpost=words.get(i+2);
+		        			if(fq.getCount(post)>1 && isNounOrAdjective(i+1)){
+		        				//then we concate the words
+		        				tempWord=tempWord+" "+postpost;
+		        			}
 	        			}
         			}
         			//we check if it isn't the first word
         			if(i>1){
         				String pre=words.get(i-1);
         				// then we check if the previous word has a ranking >2 and is a noun or a adjective
-        				if(fq.getCount(pre)>2 && isNounOrAdjective(i-1)){
+        				if(fq.getCount(pre)>1 && isNounOrAdjective(i-1)){
         					//then we concate the words
-	        				tempWord=pre+" "+word;
+	        				tempWord=pre+" "+tempWord;
 	        			}
+        				if(i>2){
+            				String prepre=words.get(i-2);
+            				// then we check if the previous word has a ranking >2 and is a noun or a adjective
+            				if(fq.getCount(pre)>2 && isNounOrAdjective(i-2)){
+            					//then we concate the words
+    	        				tempWord=prepre+" "+tempWord;
+    	        			}
+            			}
         			}
         		}
         	}
         	keyPhrases.add(tempWord);
         }
-        System.out.println(keyPhrases);
+//        System.out.println(keyPhrases);
         //uncomment to visualize the graph
        // visualize(coOccurenceGraph);
 		return keyPhrases;
 	}
 	private boolean isNounOrAdjective(int i) {
-		if(pos.get(i).equals("NN")||pos.get(i).equals("NE")||pos.get(i).equals("ADJ"))return true;
+		if(pos.get(i).equals("NN")||pos.get(i).equals("NE")||pos.get(i).equals("ADJA"))return true;
 		return false;
 	}
 

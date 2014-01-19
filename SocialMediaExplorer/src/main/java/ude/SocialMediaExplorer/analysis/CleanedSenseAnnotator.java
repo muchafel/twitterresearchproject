@@ -15,6 +15,7 @@ import org.apache.uima.jcas.JCas;
 import ude.SocialMediaExplorer.analysis.type.CleanedSenseAnno;
 import ude.SocialMediaExplorer.analysis.type.SenseAnno;
 import ude.SocialMediaExplorer.analysis.type.SentimentAnno;
+import ude.SocialMediaExplorer.analysis.type.SimpleSenseAnno;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -29,12 +30,12 @@ public class CleanedSenseAnnotator extends SegmenterBase {
 //		for (Token t : tokens) {
 			
 			
-			FSIndex senseIndex = aJCas.getAnnotationIndex(SenseAnno.type);
+			FSIndex senseIndex = aJCas.getAnnotationIndex(SimpleSenseAnno.type);
 			Iterator senseIterator = senseIndex.iterator();
 			// gets all SenseAnnos from jcas
 			while (senseIterator.hasNext()) {
-				SenseAnno sense = (SenseAnno) senseIterator.next();
-				String rawValue=sense.getSenseValue();
+				SimpleSenseAnno sense = (SimpleSenseAnno) senseIterator.next();
+				String rawValue=sense.getSimpleSense();
 				//iterate over all keys
 				for (String key : orthographyClusters.keySet()) {
 					//if the correponding set contains the rawValue
@@ -50,7 +51,7 @@ public class CleanedSenseAnnotator extends SegmenterBase {
 			        	int ordinal=getOrder(key);
 			        	annotation.setOrderByFreqenzy(ordinal);
 			        	annotation.addToIndexes();
-//			        	System.out.println("Token: "+sense.getCoveredText()+" annotiert mit "+key+" Frequenz: "+fq.getCount(key)+" an Stelle "+ordinal);
+			        	//System.out.println("Token: "+sense.getCoveredText()+" annotiert mit "+key+" Frequenz: "+fq.getCount(key)+" an Stelle "+ordinal);
 //			        	System.out.println("cleanedSense:"+annotation.getCleanedSense());
 			        }
 			    }
