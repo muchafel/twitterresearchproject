@@ -4,6 +4,9 @@
   <description/>
   <version>1.0</version>
   <vendor/>
+  <imports>
+  <import name="desc.type.POS"/>
+  </imports>
   <types>
     <typeDescription>
       <name>ude.SocialMediaExplorer.analysis.type.SentimentAnno</name>
@@ -23,7 +26,7 @@
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
-          <name>sentimentValue</name>
+          <name>senseValue</name>
           <description/>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
@@ -53,11 +56,23 @@
     </typeDescription>
     <typeDescription>
       <name>ude.SocialMediaExplorer.analysis.type.ArktweetAnno</name>
-      <description>links or #s </description>
+      <description>links or #s</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
-          <name>linkOrHash</name>
+          <name>linkOrEmoticon</name>
+          <description/>
+          <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  <typeDescription>
+      <name>ude.SocialMediaExplorer.analysis.type.SimpleSenseAnno</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>simpleSense</name>
           <description/>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
