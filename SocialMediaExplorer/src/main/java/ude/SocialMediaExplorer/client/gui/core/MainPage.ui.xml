@@ -1,41 +1,39 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui"
-	xmlns:b="urn:import:com.github.gwtbootstrap.client.ui"
-	>
-	
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+
 	<ui:style>
 		.important {
-			font-weight: bold;
+		font-weight: bold;
 		}
 	</ui:style>
-	
+
 	<g:HTMLPanel>
-		
-	    <b:Row>
-	        
-		  <b:Column size="6" offset="3">
-		 	   <b:WellForm type="HORIZONTAL">
-				  <b:Fieldset>
-				    <b:ControlGroup>
-				      <b:ControlLabel for="listSeries">TV Sendung</b:ControlLabel>
-				      <b:Controls>
-				        <!-- If you add id attribute to element,You should use b:id attribute. -->
-				        <b:ListBox ui:field="listSeries" b:id="listSeries"></b:ListBox>
-				        <b:HelpBlock>Wähle einen Hashtag zu einer TV-Sendung</b:HelpBlock>
-				        <b:Button ui:field="btnGo">Los!</b:Button>
-				      </b:Controls>
-				    </b:ControlGroup>
-				  </b:Fieldset>
+
+		<b:Row>
+
+			<b:Column size="6" offset="3">
+				<b:WellForm type="HORIZONTAL">
+					<b:Fieldset>
+						<b:ControlGroup>
+							<b:ControlLabel for="listSeries">TV Sendung</b:ControlLabel>
+							<b:Controls>
+								<!-- If you add id attribute to element,You should use b:id attribute. -->
+								<b:ListBox ui:field="listSeries" b:id="listSeries"></b:ListBox>
+								<b:HelpBlock>Wähle einen Hashtag zu einer TV-Sendung</b:HelpBlock>
+								<b:Button ui:field="btnGo">Los!</b:Button>
+							</b:Controls>
+						</b:ControlGroup>
+					</b:Fieldset>
 				</b:WellForm>
-		  </b:Column>
-		
-	        
-	    </b:Row>
-	    
-	    <b:Row ui:field="visualizationEl"></b:Row>
-	    
+			</b:Column>
+
+
+		</b:Row>
+
+		<b:Row ui:field="visualizationEl"></b:Row>
+
 	</g:HTMLPanel>
-	
+
 </ui:UiBinder> 

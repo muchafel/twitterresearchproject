@@ -7,13 +7,12 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class Menu extends Composite {
 
-	private static MenuUiBinder uiBinder = GWT.create(MenuUiBinder.class);
+	private static MenuUiBinder	uiBinder	= GWT.create( MenuUiBinder.class );
 
-	interface MenuUiBinder extends UiBinder<Widget, Menu> {
-	}
+	interface MenuUiBinder extends UiBinder<Widget, Menu> {}
 
 	public Menu() {
-		initWidget(uiBinder.createAndBindUi(this));
+		initWidget( uiBinder.createAndBindUi( this ) );
 	}
 
 }

@@ -1,9 +1,13 @@
 package ude.SocialMediaExplorer.client.rmi;
 
-import java.util.ArrayList;
+import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface IDataHelperServiceAsync {
-	void getConfigHashtags(AsyncCallback<ArrayList<String>> callback);
+
+	void getConfigHashtags( AsyncCallback<String[]> callback );
+	
+	void getClusters( String hashtag, AsyncCallback<ClusterElement> callback );
+	
 }
