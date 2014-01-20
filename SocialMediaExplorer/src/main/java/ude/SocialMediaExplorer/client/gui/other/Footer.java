@@ -5,15 +5,14 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-public class Footer extends Composite{
+public class Footer extends Composite {
 
-	private static FooterUiBinder uiBinder = GWT.create(FooterUiBinder.class);
+	private static FooterUiBinder	uiBinder	= GWT.create( FooterUiBinder.class );
 
-	interface FooterUiBinder extends UiBinder<Widget, Footer> {
-	}
+	interface FooterUiBinder extends UiBinder<Widget, Footer> {}
 
 	public Footer() {
-		initWidget(uiBinder.createAndBindUi(this));
+		initWidget( uiBinder.createAndBindUi( this ) );
 	}
 
 }

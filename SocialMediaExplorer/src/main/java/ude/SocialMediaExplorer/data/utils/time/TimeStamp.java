@@ -6,67 +6,83 @@ import com.ibm.icu.text.SimpleDateFormat;
 
 /**
  * helper for creation of timestamps
+ * 
  * @author henrikdetjen
- *
+ * 
  */
 public class TimeStamp {
+
 	/**
 	 * get a Timestamp in format yyyyMMdd
+	 * 
 	 * @return {@link String}
 	 */
-	public static String getShort(){
+	public static String getShort() {
 		SimpleDateFormat format = new SimpleDateFormat();
-		format.applyLocalizedPattern("yyyyMMdd");
-		return format.format(new Date());
+		format.applyLocalizedPattern( "yyyyMMdd" );
+		return format.format( new Date() );
 	}
+
 	/**
 	 * creates a Timestamp in format yyyyMMdd
-	 * @param d {@link Date}
+	 * 
+	 * @param d
+	 *            {@link Date}
 	 * @return {@link String}
 	 */
-	public static String createShort(Date d){
+	public static String createShort( Date d ) {
 		SimpleDateFormat format = new SimpleDateFormat();
-		format.applyLocalizedPattern("yyyyMMdd");
-		return format.format(d);
+		format.applyLocalizedPattern( "yyyyMMdd" );
+		return format.format( d );
 	}
+
 	/**
 	 * from ts to date
-	 * @param s {@link String}
+	 * 
+	 * @param s
+	 *            {@link String}
 	 * @return {@link Date}
 	 */
-	public static Date reverseShort(String s) throws Exception{
+	public static Date reverseShort( String s ) throws Exception {
 		SimpleDateFormat format = new SimpleDateFormat();
-		format.applyLocalizedPattern("yyyyMMdd");
-		return format.parse(s);
+		format.applyLocalizedPattern( "yyyyMMdd" );
+		return format.parse( s );
 	}
+
 	/**
 	 * get a Timestamp in format yyyyMMddHHmmss
+	 * 
 	 * @return {@link String}
 	 */
-	public static String getLong(){
+	public static String getLong() {
 		SimpleDateFormat format = new SimpleDateFormat();
-		format.applyLocalizedPattern("yyyyMMddHHmmss");
-		return format.format(new Date());
+		format.applyLocalizedPattern( "yyyyMMddHHmmss" );
+		return format.format( new Date() );
 	}
+
 	/**
-	 * creates a Timestamp in format yyyyMMddHHmmss 
-	 * @param d {@link Date}
+	 * creates a Timestamp in format yyyyMMddHHmmss
+	 * 
+	 * @param d
+	 *            {@link Date}
 	 * @return {@link String}
 	 */
-	public static String createLong(Date d){
+	public static String createLong( Date d ) {
 		SimpleDateFormat format = new SimpleDateFormat();
-		format.applyLocalizedPattern("yyyyMMddHHmmss");
-		return format.format(d);
+		format.applyLocalizedPattern( "yyyyMMddHHmmss" );
+		return format.format( d );
 	}
+
 	/**
 	 * from ts to date
-	 * @param s {@link String}
+	 * 
+	 * @param s
+	 *            {@link String}
 	 * @return {@link Date}
 	 */
-	public static Date reverseLong(String s) throws Exception{
+	public static Date reverseLong( String s ) throws Exception {
 		SimpleDateFormat format = new SimpleDateFormat();
-		format.applyLocalizedPattern("yyyyMMddHHmmss");
-		return format.parse(s);
+		format.applyLocalizedPattern( "yyyyMMddHHmmss" );
+		return format.parse( s );
 	}
 }
-

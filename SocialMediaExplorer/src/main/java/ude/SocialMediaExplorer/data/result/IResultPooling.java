@@ -1,6 +1,5 @@
 package ude.SocialMediaExplorer.data.result;
 
-import ude.SocialMediaExplorer.data.post.PostList;
 import ude.SocialMediaExplorer.data.utils.time.TimeSpan;
 import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
 

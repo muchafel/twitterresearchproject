@@ -33,7 +33,7 @@ public class TwitterRESTReader implements IPostProviding {
 				sl.add(PostConverter.fromTwitter(s,id));
 				id++;
 			}
-		} while ((query = result.nextQuery()) != null && sl.size() < Config.twitter_result_restriction);			
+		} while ((query = result.nextQuery()) != null && sl.size() < Config.get_twitter_result_restriction());			
 	 
 		 return sl;
 	}

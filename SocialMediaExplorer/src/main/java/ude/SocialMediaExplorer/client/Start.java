@@ -10,19 +10,17 @@ import com.google.gwt.user.client.ui.RootPanel;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class Start implements EntryPoint {
- 
-	//TODO Henrik clusterelement aufrufen --> anbindung an den service
 	
-	  /**
-	   * This is the entry point method.
-	   */
-	  public void onModuleLoad() {
-		
-		RootPanel.get("menu").add(new Menu());
-		  
-		RootPanel.get("content").add(new MainPage());
-		
-		RootPanel.get("footer").add(new Footer());
-		
-	  }
+	/**
+	 * This is the entry point method.
+	 */
+	public void onModuleLoad() {
+
+		RootPanel.get( "menu" ).add( new Menu() );
+
+		RootPanel.get( "content" ).add( new MainPage() );
+
+		RootPanel.get( "footer" ).add( new Footer() );
+
+	}
 }

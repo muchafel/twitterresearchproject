@@ -17,7 +17,7 @@ public class StartAnalysis {
 		TimeSpan ts = new TimeSpan(new Date());
 		IPostProviding dp = new TwitterJSONFileReader(); //TODO: init via Config and reflection
 		
-		for (String hashtag : Config.crawler_hashtags){
+		for (String hashtag : Config.get_crawler_hashtags()){
 			try {
 				new Analysis(dp.getPosts( hashtag )).run();
 			} catch (Exception e) {
