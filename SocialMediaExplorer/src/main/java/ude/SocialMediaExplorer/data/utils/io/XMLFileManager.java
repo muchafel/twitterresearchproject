@@ -2,6 +2,7 @@ package ude.SocialMediaExplorer.data.utils.io;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -41,7 +42,7 @@ public class XMLFileManager {
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			doc = dBuilder.parse( fXmlFile );
 			doc.getDocumentElement().normalize();
-			
+
 		}
 		catch ( Exception e ) {
 			e.printStackTrace();
@@ -59,16 +60,16 @@ public class XMLFileManager {
 	 *            {@link String}
 	 * @return - the found values as {@link String}
 	 */
-	public static ArrayList <String> getNodeValuesByTag( String filepath, String tagname ) {
-		
-		
-		ArrayList <String> result = new ArrayList <String>();
+	public static ArrayList<String> getNodeValuesByTag( String filepath, String tagname ) {
+
+
+		ArrayList<String> result = new ArrayList<String>();
 
 		Document doc = getDoc( filepath );
 
 		NodeList nodeList = doc.getElementsByTagName( tagname );
 
-		
+
 		for ( int i = 0; i < nodeList.getLength(); i++ ) {
 			result.add( nodeList.item( i ).getTextContent() );
 		}
@@ -175,21 +176,27 @@ public class XMLFileManager {
 			Document doc = getDoc( filepath );
 			NodeList list = doc.getElementsByTagName( tagname );
 
+			// node to delete, its parent
+			Vector<Node> toDelete = new Vector<Node>();
+			
 			if ( value != null ) {
 				for ( int i = 0; i < list.getLength(); i++ ) {
 					if ( list.item( i ).getTextContent() == value ) {
-						Node parent = list.item( i ).getParentNode();
-						parent.removeChild( list.item( i ) );
+						toDelete.add( list.item( i ) );
 					}
 				}
 			}
 			else {
 				for ( int i = 0; i < list.getLength(); i++ ) {
-					Node parent = list.item( i ).getParentNode();
-					parent.removeChild( list.item( i ) );
+					toDelete.add( list.item( i ) );
 				}
 			}
 
+			for (Node node_to_delete : toDelete ) {
+				Node parent = node_to_delete.getParentNode();
+				parent.removeChild( node_to_delete );
+			}
+			
 			writeDoc( filepath, doc );
 
 		}
@@ -213,7 +220,7 @@ public class XMLFileManager {
 
 			DOMSource domSource = new DOMSource( doc );
 			File fileOutput = new File( filepath );
-			StreamResult streamResult = new StreamResult( fileOutput ); 
+			StreamResult streamResult = new StreamResult( fileOutput );
 			TransformerFactory tf = TransformerFactory.newInstance();
 
 			Transformer serializer = tf.newTransformer();

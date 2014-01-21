@@ -21,52 +21,52 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class MainPage extends Composite {
 
-	private static MainPageUiBinder	uiBinder	= GWT.create( MainPageUiBinder.class );
+	private static MainPageUiBinder uiBinder = GWT.create( MainPageUiBinder.class );
 
-	interface MainPageUiBinder extends UiBinder <Widget, MainPage> {}
+	interface MainPageUiBinder extends UiBinder<Widget, MainPage> {}
 
 	//////////////////////////
 
 	@UiField
-	ListBox						listSeries;
+	ListBox listSeries;
 	@UiField
-	Button						btnGo;
+	Button btnGo;
 	@UiField
-	Row							visualizationEl;
-	ArrayList <String>			names;
-	public boolean				loading	= false;
+	Row visualizationEl;
+	ArrayList<String> names;
+	public boolean loading = false;
 
-	private IDataHelperServiceAsync	dh		= null;
+	private IDataHelperServiceAsync dh = null;
 
 	//////////////////////////
 
 	public MainPage() {
-		
+
 		initWidget( uiBinder.createAndBindUi( this ) );
 
 		try {
 			dh = GWT.create( IDataHelperService.class );
-			dh.getConfigHashtags(new AsyncCallback<String[]>() {
-				
+			dh.getConfigHashtags( new AsyncCallback<String[]>() {
+
 				public void onSuccess( String[] result ) {
-					
+
 					names = new ArrayList<String>();
-					
+
 					for ( int i = 0; i < result.length; i++ ) {
 						names.add( result[i] );
 						listSeries.addItem( result[i] );
 					}
-					
+
 					initButton();
-					
+
 				}
-				
+
 				public void onFailure( Throwable caught ) {
 					new SimpleErrorHandling( caught.getMessage() );
 				}
-				
-			});
-			
+
+			} );
+
 		}
 		catch ( Exception e ) {
 			new SimpleErrorHandling( e );
@@ -94,26 +94,28 @@ public class MainPage extends Composite {
 			}
 
 		} );
+
 	}
 
 	private void createVisualization( final String hashtag ) {
+
 		dh.getClusters( hashtag, new AsyncCallback<ClusterElement>() {
-			
+
 			public void onSuccess( ClusterElement result ) {
 				ClusterElement ce = result; //ClusterElement.testCE();
 				ClusterVisualization cv = new ClusterVisualization( hashtag, ce );
 				visualizationEl.clear();
 				visualizationEl.add( cv );
 				cv.draw(); //called here because JSNI needs to access the DOM - isnt possible before creating the widget
-				
+
 			}
-			
+
 			public void onFailure( Throwable caught ) {
-				// TODO Auto-generated method stub
-				
+				new SimpleErrorHandling( caught.getMessage() );
 			}
+
 		} );
-		
+
 	}
 
 }

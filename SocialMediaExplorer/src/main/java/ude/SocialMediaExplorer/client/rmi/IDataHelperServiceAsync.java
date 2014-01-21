@@ -10,4 +10,8 @@ public interface IDataHelperServiceAsync {
 	
 	void getClusters( String hashtag, AsyncCallback<ClusterElement> callback );
 	
+	void addHashtag( String hashtag, AsyncCallback<Boolean> callback );
+	
+	void removeHashtags (String[] hashtags, AsyncCallback<Boolean> callback );
+	
 }

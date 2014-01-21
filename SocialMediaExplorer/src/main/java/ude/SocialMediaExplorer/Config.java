@@ -58,8 +58,27 @@ public class Config {
 	}
 
 	public static void add_crawler_hashtag( String hashtag ) {
+		System.out.println("new mission: " + hashtag);
 		crawler_hashtags.add( hashtag );
 		writeValueToXMLFile( "search", "hashtag", hashtag );
+	}
+	
+	public static void remove_crawler_hashtags (String[] hashtags) {
+		
+		for (int i = 0; i < hashtags.length; i++) {
+			crawler_hashtags.remove( hashtags[i] );			
+		}
+	
+		updateHashtags();
+	}
+	
+	private static void updateHashtags() {
+		if(crawler_hashtags!=null) {
+			deleteValueFromXMLFile( "hashtag", null );
+			for (String s : crawler_hashtags) {
+				writeValueToXMLFile( "search", "hashtag", s );
+			}
+		}
 	}
 
 	/**

@@ -14,9 +14,13 @@
 	     -->
 	     
 	    <hr />
-		<div align="center">
-			Impressum		    
-		</div>
+	    <g:HTMLPanel >
+		    <p align="center" >
+		        <b:Button  type="LINK" ui:field="link_impressum">
+		        Impressum
+		        </b:Button>
+		    </p>
+	    </g:HTMLPanel>
 		
 	</g:HTMLPanel>
 </ui:UiBinder> 
