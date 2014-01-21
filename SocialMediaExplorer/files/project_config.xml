@@ -1,0 +1,38 @@
+<config>
+    
+    <analysis>
+        <!-- TODO -->
+    </analysis>
+    
+    <crawlers>
+        
+        <search>
+            <hashtag>1</hashtag>
+            <hashtag>2</hashtag>
+        </search>
+        
+        <!-- in ms -->
+        <crawler_newFileInterval>12000000</crawler_newFileInterval>
+        
+        <twitter_crawler>
+            
+            <!-- twitter api auth -->
+        	<twitter_ConsumerKey>key</twitter_ConsumerKey>
+        	<twitter_ConsumerSecret>secret</twitter_ConsumerSecret>
+        	<twitter_AccessToken>token</twitter_AccessToken>
+        	<twitter_AccessTokenSecret>secret</twitter_AccessTokenSecret>
+        	
+        	<!-- if rest api is used, limit for result (15/get) -->
+        	<twitter_result_restriction>45</twitter_result_restriction>
+        	
+        </twitter_crawler>
+        
+    </crawlers>
+
+    <io>
+        <location_tweets>files/rawdata/tweets/</location_tweets>
+        <location_results>files/results/</location_results>
+        <location_CAS>files/serializedCases/</location_CAS>
+    </io>
+    
+</config>
