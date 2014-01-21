@@ -7,8 +7,15 @@
     <crawlers>
         
         <search>
-            <hashtag>1</hashtag>
-            <hashtag>2</hashtag>
+            <hashtag>tatort</hashtag>
+            <hashtag>halligalli</hashtag>
+			<hashtag>tvog</hashtag>
+			<hashtag>fashionhero</hashtag>
+			<hashtag>annewill</hashtag>
+			<hashtag>guentherjauch</hashtag>
+			<hashtag>terrax</hashtag>
+			<hashtag>sterntv</hashtag>
+			<hashtag>spiegeltv</hashtag>
         </search>
         
         <!-- in ms -->
