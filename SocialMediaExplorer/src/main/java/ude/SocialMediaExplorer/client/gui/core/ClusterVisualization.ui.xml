@@ -8,8 +8,6 @@
 	</ui:style>
 	<g:HTMLPanel>
 
-		<b:Row>
-
 			<b:Column size="3" offset="1">
 				<b:Row>
 					<b:Hero>
@@ -28,9 +26,6 @@
 					</g:HTMLPanel>
 				</b:Hero>
 			</b:Column>
-
-		</b:Row>
-
 
 	</g:HTMLPanel>
 </ui:UiBinder> 

@@ -12,4 +12,8 @@ public interface IDataHelperService extends RemoteService {
 	
 	ClusterElement getClusters(String hashtag);
 	
+	boolean addHashtag(String hashtag);
+	
+	boolean removeHashtags(String[] hashtags);
+	
 }

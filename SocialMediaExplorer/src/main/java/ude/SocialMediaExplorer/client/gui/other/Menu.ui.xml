@@ -17,8 +17,9 @@
 		    <b:Navbar>
 			    <!-- b:Brand>Nav</b:Brand -->
 			    <b:Nav>
-			        <b:NavLink>Home</b:NavLink>
-			        <b:NavLink>Über</b:NavLink>
+			        <b:NavLink ui:field="home">Home</b:NavLink>
+			        <b:NavLink ui:field="admin">Admin</b:NavLink>
+			        <b:NavLink ui:field="wait">wait..</b:NavLink>
 			    </b:Nav>
 			</b:Navbar>
 	    </b:Row>

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import ude.SocialMediaExplorer.Config;
 import ude.SocialMediaExplorer.client.rmi.IDataHelperService;
-import ude.SocialMediaExplorer.data.result.IResultPooling;
 import ude.SocialMediaExplorer.data.result.ResultPoolingImpl;
 import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
 
@@ -20,7 +19,7 @@ public class DataHelperServiceImpl extends RemoteServiceServlet implements IData
 		return hashtags.toArray( new String[hashtags.size()] );
 	}
 
-	public ClusterElement getClusters(String hashtag) {
+	public ClusterElement getClusters( String hashtag ) {
 		ClusterElement results = null;
 		try {
 			results = new ResultPoolingImpl().getClusters( hashtag );
@@ -30,5 +29,26 @@ public class DataHelperServiceImpl extends RemoteServiceServlet implements IData
 		}
 		return results;
 	}
+
+	public boolean addHashtag( String hashtag ) {
+		try {
+			Config.add_crawler_hashtag( hashtag );
+		}
+		catch ( Exception e ) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean removeHashtags( String[] hashtags ) {
+		try {
+			Config.remove_crawler_hashtags( hashtags );
+		}
+		catch ( Exception e ) {
+			return false;
+		}
+		return true;
+	}
+
 
 }

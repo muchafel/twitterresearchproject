@@ -18,12 +18,12 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class ClusterVisualization extends Composite {
 
-	private ClusterElement						ce;
-	private ClusterElement						activeCE;
-	private String								hashtag;
-	private String								json;
+	private ClusterElement ce;
+	private ClusterElement activeCE;
+	private String hashtag;
+	private String json;
 
-	private static ClusterVisualizationUiBinder	uiBinder	= GWT.create( ClusterVisualizationUiBinder.class );
+	private static ClusterVisualizationUiBinder uiBinder = GWT.create( ClusterVisualizationUiBinder.class );
 
 	interface ClusterVisualizationUiBinder extends UiBinder<Widget, ClusterVisualization> {}
 
@@ -42,9 +42,9 @@ public class ClusterVisualization extends Composite {
 	}
 
 	@UiField
-	Heading		title;
+	Heading title;
 	@UiField
-	Paragraph	infos;
+	Paragraph infos;
 
 	/**
 	 * Uses the google apijs lib to draw the results in the clients browser
