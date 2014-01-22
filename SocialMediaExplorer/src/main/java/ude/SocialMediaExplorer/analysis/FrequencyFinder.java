@@ -22,7 +22,7 @@ public class FrequencyFinder {
 		this.jCases=jCases;
 		
 	}
-///This method creates a frequenzy distribution over all senses in all cases. In addition the orthography clusters are used 
+///This method creates a frequenzy distribution over all senses in all cases. In addition the orthography cluster is used 
 ///to detect mispelling and include this consideration in the frequenzy distribution
 	public FrequencyDistribution<String> getFrequency(Map<String, Set<String>> orthographyClusters) {
 		FrequencyDistribution<String> fq= new FrequencyDistribution<String>();
