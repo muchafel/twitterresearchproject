@@ -18,6 +18,7 @@ import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 public class SenseSlidingWindow {
 	
 	private List<String> pos;
+	private int phraseCutOff=2;
 	public List<String> getKeyPhrases (List<String> words,List<String> pos){
 		
 		int w = 4; // width of sliding window
@@ -62,13 +63,14 @@ public class SenseSlidingWindow {
         			if(i<words.size()-1){
 	        			String post=words.get(i+1);
 	        			// then we check if the following word has a ranking >2 and is a noun or a adjective
-	        			if(fq.getCount(post)>1 && isNounOrAdjective(i+1)){
+	        			if(fq.getCount(post)>phraseCutOff && isNounOrAdjective(i+1)){
 	        				//then we concate the words
 	        				tempWord=word+" "+post;
 	        			}
 	        			if(i<words.size()-2){
 		        			String postpost=words.get(i+2);
-		        			if(fq.getCount(post)>1 && isNounOrAdjective(i+1)){
+		        			// then we check if the following-following word has a ranking >2 and is a noun or a adjective
+		        			if(fq.getCount(postpost)>phraseCutOff && isNounOrAdjective(i+1)){
 		        				//then we concate the words
 		        				tempWord=tempWord+" "+postpost;
 		        			}
@@ -78,14 +80,14 @@ public class SenseSlidingWindow {
         			if(i>1){
         				String pre=words.get(i-1);
         				// then we check if the previous word has a ranking >2 and is a noun or a adjective
-        				if(fq.getCount(pre)>1 && isNounOrAdjective(i-1)){
+        				if(fq.getCount(pre)>phraseCutOff && isNounOrAdjective(i-1)){
         					//then we concate the words
 	        				tempWord=pre+" "+tempWord;
 	        			}
         				if(i>2){
             				String prepre=words.get(i-2);
-            				// then we check if the previous word has a ranking >2 and is a noun or a adjective
-            				if(fq.getCount(pre)>2 && isNounOrAdjective(i-2)){
+            				// then we check if the previous-previous word has a ranking >2 and is a noun or a adjective
+            				if(fq.getCount(prepre)>phraseCutOff && isNounOrAdjective(i-2)){
             					//then we concate the words
     	        				tempWord=prepre+" "+tempWord;
     	        			}
@@ -99,6 +101,14 @@ public class SenseSlidingWindow {
         //uncomment to visualize the graph
        // visualize(coOccurenceGraph);
 		return keyPhrases;
+	}
+	private int getOrder(FrequencyDistribution<String> fq, String post) {
+		for(int i=0; i<6;i++){
+			if(fq.getMostFrequentSamples(i).contains(post)){
+				return i;
+			}
+		}
+		return 6;
 	}
 	private boolean isNounOrAdjective(int i) {
 		if(pos.get(i).equals("NN")||pos.get(i).equals("NE")||pos.get(i).equals("ADJA"))return true;

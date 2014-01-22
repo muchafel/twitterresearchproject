@@ -30,6 +30,7 @@ import ude.SocialMediaExplorer.analysis.type.SimpleSenseAnno;
 
 public class OrthographyCluster {
 
+	private double similarityCutOff=0.7;
 	public Map<String, Set<String>> cluster(List<JCas> jCases) {
 		List<String> rawSenses= new ArrayList<String>();
 		for (JCas jcas : jCases) {
@@ -64,7 +65,8 @@ public class OrthographyCluster {
 //						+ j + " : " + rawSenses.get(j));
 				try {
 
-					if(calcWeight(rawSenses.get(i),rawSenses.get(j))>0.7){
+					//Nodes are just included if they have a similarity > similarityCutOff
+					if(calcWeight(rawSenses.get(i),rawSenses.get(j))>similarityCutOff){
 						g.addEdge(
 								new MyLink(calcWeight(rawSenses.get(i),rawSenses.get(j)), 1.0, linkId),
 								rawSenses.get(i), rawSenses.get(j));
