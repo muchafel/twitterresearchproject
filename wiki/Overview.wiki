@@ -5,7 +5,7 @@
 Short Intro here (Michael)
 
 
-= Table of Content=
+= Table of Contents=
 
   * purpose of the project
   * Data (Benny)
