@@ -1,15 +1,19 @@
-#This is our project wiki
+#This is the Wiki of the ....
 
 = Introduction =
 
-Add some tezguino.
+Short Intro here (Michael)
 
 
-= Details =
+= Table of Content=
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+  * purpose of the project
+  * Data (Benny)
+  * general process (Michael)
+  * Crawaler (benny)
+  * Analysis (Michael)
+  * Visualization (Hendrick)
+  * Limitations (Michael)
+  * Outlook 
 
 [http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/Comment.jpg]
