@@ -9,6 +9,7 @@ Short Intro here (Michael)
 
   * purpose of the project
   * Data (Benny)
+  * architecture
   * general process (Michael)
   * Crawaler (benny)
   * Analysis (Michael)
