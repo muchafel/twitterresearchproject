@@ -12,4 +12,4 @@ Add your content here.  Format your content with:
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages
 
-[https://code.google.com/p/twitterresearchproject/source/browse/SocialMediaExplorer/img/Comment.jpg]
+[https://docs.google.com/file/d/0B0IJZ0wwnhHDMWFTaElpSkl3XzA/edit]
