@@ -13,7 +13,7 @@ Short Intro here (Michael)
   * general process (Michael)
   * Crawaler (benny)
   * Analysis (Michael)
-  * Visualization (Hendrick)
+  * Visualization (Henrik)
   * Limitations (Michael)
   * Outlook 
 
