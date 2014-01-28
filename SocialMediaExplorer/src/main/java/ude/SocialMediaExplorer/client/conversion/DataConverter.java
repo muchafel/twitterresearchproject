@@ -21,7 +21,7 @@ public class DataConverter {
 
 	/////////////////////////////
 
-	private static ArrayList <ArrayList <String>>	rows;
+	private static ArrayList<ArrayList<String>> rows;
 
 	/////////////////////////////
 
@@ -34,15 +34,16 @@ public class DataConverter {
 	 */
 	public static String toJSON_GoogleTable( ClusterElement ce ) {
 
-		rows = new ArrayList <ArrayList <String>>();
-		ArrayList <String> header = new ArrayList <String>();
+		rows = new ArrayList<ArrayList<String>>();
+		ArrayList<String> header = new ArrayList<String>();
 		header.add( "Name" );
 		header.add( "Parent" );
 		header.add( "Sentiment" );
 		header.add( "Size" );
-		rows.add( 0, header );
-
+		rows.add( header );
+		
 		// go through all els add parents name and make list with all nodes
+		renameCE( ce );
 		addCE( ce );
 
 		JSONArray wrapper = new JSONArray();
@@ -50,36 +51,37 @@ public class DataConverter {
 		for ( int i = 0; i < rows.size(); i++ ) {
 
 			JSONArray rowJSON = new JSONArray();
-			ArrayList <String> row = rows.get( i );
+			ArrayList<String> row = rows.get( i );
 
+			System.out.println(row.toString());
+			
 			for ( int j = 0; j < row.size(); j++ ) {
 
 				String date = row.get( j );
 
-				System.out.println( date );
 				try {
-					if ( j < 2 ) {
-						rowJSON.set( j, new JSONString( date ) );
-					}
-					else {
-						try {
-							rowJSON.set( j, new JSONNumber( Double.parseDouble( date ) ) );
-						}
-						catch ( Exception e ) {
+					if ( date == null) {
+						rowJSON.set( j, JSONNull.getInstance() );					
+					}else {
+						if ( j < 2 ) {
 							rowJSON.set( j, new JSONString( date ) );
 						}
+						else {
+							
+							rowJSON.set( j, new JSONNumber( Double.parseDouble( date ) ) );
+						}
 					}
+				}catch(Exception e) {
+					rowJSON.set( j, new JSONString( date ) );
 				}
-				catch ( Exception e ) {
-					rowJSON.set( j, JSONNull.getInstance() );
-				}
+				
 
 			}
 
 			wrapper.set( i, rowJSON );
 
 		}
-
+		
 		return wrapper.toString();
 	}
 
@@ -92,30 +94,44 @@ public class DataConverter {
 	 *            = ROOTNODE
 	 */
 	private static void addCE( ClusterElement c ) {
-
-		System.out.println( c.getName() );
-
-		ArrayList <String> row = new ArrayList <String>();
-		row.add( c.getName() );
-		if ( c.getParent() != null ) {
+		if ( c != null ) {
+			ArrayList<String> row = new ArrayList<String>();
+			row.add( c.getName() );
 			row.add( c.getParent() );
-		}
-		else {
-			row.add( null );
-		}
-		row.add( String.valueOf( c.getSentiment().getNormalized() ) );
-		row.add( String.valueOf( c.getSize() ) );
-		rows.add( row );
+			//row.add( String.valueOf( c.getSentiment().getNormalized() ) );
+			//row.add( String.valueOf( c.getSize() ) );
+			Double d = Math.random();	
+			row.add( d.toString() );
+			Double d2 = Math.random();
+			row.add( d2.toString() );
+			rows.add( row );
 
-		// recursion for all els
-		List <ClusterElement> childs = c.getSubcluster();
-		if ( childs != null ) {
-			for ( ClusterElement child : childs ) {
-				child.setParent( c.getName() );
-				addCE( child );
+			// recursion for all els
+			List<ClusterElement> childs = c.getSubcluster();
+			if ( childs != null ) {
+				for ( ClusterElement child : childs ) {
+					child.setParent( c.getName() );
+					//				System.out.println("child:" + child.getName() + " / parent:" + child.getParent());
+					addCE( child );
+				}
 			}
 		}
 
+	}
+
+
+	static int i = 0;
+	private static void renameCE( ClusterElement ce ) {
+		if ( ce != null ) {
+			ce.setName( ce.getName() + "   (" + i++ + ")");
+			//		System.out.println("ce  =  " + ce.getName());
+			List<ClusterElement> childs = ce.getSubcluster();
+			if ( childs != null ) {
+				for ( ClusterElement child : childs ) {
+					renameCE( child );
+				}
+			}
+		}
 	}
 
 }

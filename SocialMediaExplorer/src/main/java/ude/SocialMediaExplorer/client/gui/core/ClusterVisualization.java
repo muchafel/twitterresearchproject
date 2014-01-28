@@ -36,7 +36,6 @@ public class ClusterVisualization extends Composite {
 		title.setText( hashtag );
 		infos.setText( "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua." );
 
-		//TODO: replace test data with ce
 		json = DataConverter.toJSON_GoogleTable( ce );
 
 	}
@@ -63,6 +62,9 @@ public class ClusterVisualization extends Composite {
 			var data = $wnd.google.visualization.arrayToDataTable($wnd.JSON
 					.parse(j));
 
+			var el = $doc.getElementById('googleChart');
+			el.style.height = (($wnd.innerHeight / 3) * 2) + "px";
+
 			// Create and draw the visualization.
 			var tree = new $wnd.google.visualization.TreeMap($doc
 					.getElementById('googleChart'));
@@ -70,9 +72,19 @@ public class ClusterVisualization extends Composite {
 				minColor : '#2f00',
 				midColor : '#ddd',
 				maxColor : '#0d0',
-				headerHeight : 15,
-				fontColor : 'black',
+				headerHeight : 50,
+				textStyle: {  color: 'black',
+							  fontSize: '16',
+							  bold: false,
+							  italic: false 
+				},
+				titleTextStyle: {  color: 'white',
+								  fontSize: '20',
+								  bold: false,
+								  italic: false 
+				},
 				showScale : true,
+				hintOpacity: 1,
 				generateTooltip : showFullTooltip
 			});
 
@@ -86,17 +98,7 @@ public class ClusterVisualization extends Composite {
 						+ data.getValue(row, 2)
 						+ ', '
 						+ data.getValue(row, 3)
-						+ '</span><br>'
-						+ 'row: '
-						+ row
-						+ '<br>'
-						+ data.getColumnLabel(2)
-						+ ' (total value of this cell and its children): '
-						+ size
-						+ '<br>'
-						+ data.getColumnLabel(3)
-						+ ': '
-						+ value
+						+ '</span>'
 						+ ' </div>';
 			}
 

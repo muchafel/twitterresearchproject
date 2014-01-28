@@ -99,6 +99,13 @@ public class MainPage extends Composite {
 
 	private void createVisualization( final String hashtag ) {
 
+//		ClusterElement ce = ClusterElement.testCE();
+//		ClusterVisualization cv = new ClusterVisualization( hashtag, ce );
+//		visualizationEl.clear();
+//		visualizationEl.add( cv );
+//		cv.draw(); //called here because JSNI needs to access the DOM - isnt possible before creating the widget
+
+		
 		dh.getClusters( hashtag, new AsyncCallback<ClusterElement>() {
 
 			public void onSuccess( ClusterElement result ) {
