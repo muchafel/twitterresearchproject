@@ -13,7 +13,7 @@ For further readings and a technical documentation look at the contents below:
 
   * [purpose of the project]
   * [Data] (Benny)
-  * [Architecture]
+  * [Architecture](Henrik)
   * [General Process] (Michael)
   * [Crawler] (benny)
   * [Analysis] (Michael)
