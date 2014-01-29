@@ -85,30 +85,27 @@ public class Clusterer {
 		//annotate orthography and frequency to cases
 		jCases= annotateSenseFrequency(jCases);
 		
-		//damit kann gearbeitet werden
 		ClusterElement clusterElement=createClusterElementsNaive(jCases, null, null);
 		
 		
-		//ClusterElement clusterElement=createClusterElementsNaive(jCases, null,null);
 		UndirectedSparseGraph<String, String> graph=calcGraph(clusterElement);
 		visualize(graph);
 		
 		serialize(clusterElement);
+		System.out.println("Serialization finished");
 //	    printCluster(clusterElement);
 	}
 
+	// binary serialization Java6-style
 	private void serialize(ClusterElement clusterElement) {
 		FileOutputStream fs = null;
 		ObjectOutputStream os = null;
-		//versuchen die Streams zu initalisieren
-		// Objekt in den Stream schreiben
 		try {
 			fs = new FileOutputStream("files/serializedClusterElements/"+hashtagToCluster+"/"+hashtagToCluster+".ser");
 			os = new ObjectOutputStream(fs);
 			os.writeObject(clusterElement);
 		} catch (IOException e) {
 			e.printStackTrace();
-			//im finally block alle Streams schließen
 		} finally {
 			if (os != null) {
 				try {
@@ -126,7 +123,7 @@ public class Clusterer {
 			}
 		}
 	}
-
+//in this step the co-occurence graph is performed and these "cleaned senses" are merged with the orthography-cleaning
 	private static List<JCas> annotateSenseFrequency(List<JCas> jCases) {
 		
 		for(JCas jcas : jCases){
@@ -135,22 +132,20 @@ public class Clusterer {
 				AggregateBuilder builder = new AggregateBuilder();
 				builder.add(createEngineDescription(CleanedSenseAnnotator.class));
 				builder.add(createEngineDescription(SenseAnnotator.class));
-				builder.add(createEngineDescription(StanfordParser.class,StanfordParser.PARAM_MODEL_LOCATION,
-                        "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/parser-de-factored.ser.gz"));
+//				builder.add(createEngineDescription(StanfordParser.class,StanfordParser.PARAM_MODEL_LOCATION,
+//                        "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/parser-de-factored.ser.gz"));
 				AnalysisEngine engine = builder.createAggregate();
 				engine.process(jcas);
 				
 
 				//for testing
-				System.out.println("Tweet: "+jcas.getDocumentText());
-				for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
-				for (NP nounphrase : JCasUtil.selectCovered(jcas, NP.class,sentence)) {
-					System.out.println("found namephrase: "+nounphrase.getCoveredText());
-					
-					}
-				}
-				
-				
+//				System.out.println("Tweet: "+jcas.getDocumentText());
+//				for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
+//				for (NP nounphrase : JCasUtil.selectCovered(jcas, NP.class,sentence)) {
+//					System.out.println("found namephrase: "+nounphrase.getCoveredText());
+//					
+//					}
+//				}
 //				System.out.println("Original text: "+jcas.getDocumentText());
 //		        FSIterator<AnnotationFS> annotationIterator = jcas.getCas().getAnnotationIndex().iterator();
 //		        while (annotationIterator.hasNext()) {
