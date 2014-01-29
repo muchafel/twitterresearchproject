@@ -123,7 +123,7 @@ public class Clusterer {
 			}
 		}
 	}
-//in this step the co-occurence graph is performed and these "cleaned senses" are merged with the orthography-cleaning
+//in this step the orthography-clustering and the co-occurence graph is performed and merged together 
 	private static List<JCas> annotateSenseFrequency(List<JCas> jCases) {
 		
 		for(JCas jcas : jCases){
@@ -269,7 +269,7 @@ public class Clusterer {
 					positive++;
 				}
 				if(anno.getSentimentValue().equals("false")){
-					negative++;
+					negative--;
 				}
 			}
 			int lenght=select(jcas,Token.class).size();
