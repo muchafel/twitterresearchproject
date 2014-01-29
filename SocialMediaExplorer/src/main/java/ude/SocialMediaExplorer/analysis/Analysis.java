@@ -105,10 +105,10 @@ static SentimentLexicon lexGerman= new SentimentLexicon("De");
                 System.out.println("[" + annotation.getCoveredText() + "]");
                 System.out.println(annotation.toString());
         }
-        List<AnnotationFS> pos = new ArrayList<AnnotationFS>(select(jcas, POS.class));
-		for(AnnotationFS p2 : pos){
-			System.out.println("!POS:    "+p2);
-		}
+//        List<AnnotationFS> pos = new ArrayList<AnnotationFS>(select(jcas, POS.class));
+//		for(AnnotationFS p2 : pos){
+//			System.out.println("!POS:    "+p2);
+//		}
 //        System.out.println("Sentiments : "+jcas.getView("Sentiment").getDocumentText());
 //        System.out.println("Senses: "+jcas.getView("Sense").getDocumentText());
         
