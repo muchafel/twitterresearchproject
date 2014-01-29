@@ -17,18 +17,28 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.*;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+import org.annolab.tt4j.TreeTaggerModel;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIndex;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.factory.AggregateBuilder;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP;
+import de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetTagger;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
+import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerChunkerTT4J;
+import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
+import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerTT4JBase;
 import edu.uci.ics.jung.algorithms.layout.FRLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
@@ -124,8 +134,30 @@ public class Clusterer {
 				AggregateBuilder builder = new AggregateBuilder();
 				builder.add(createEngineDescription(CleanedSenseAnnotator.class));
 				builder.add(createEngineDescription(SenseAnnotator.class));
+				builder.add(createEngineDescription(StanfordParser.class,StanfordParser.PARAM_MODEL_LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/parser-de-factored.ser.gz"));
 				AnalysisEngine engine = builder.createAggregate();
 				engine.process(jcas);
+				
+
+				//for testing
+				System.out.println("Tweet: "+jcas.getDocumentText());
+				for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
+				for (NP nounphrase : JCasUtil.selectCovered(jcas, NP.class,sentence)) {
+					System.out.println("found namephrase: "+nounphrase.getCoveredText());
+					
+					}
+				}
+				
+				
+//				System.out.println("Original text: "+jcas.getDocumentText());
+//		        FSIterator<AnnotationFS> annotationIterator = jcas.getCas().getAnnotationIndex().iterator();
+//		        while (annotationIterator.hasNext()) {
+//		                AnnotationFS annotation = annotationIterator.next();
+//		                System.out.println("[" + annotation.getCoveredText() + "]");
+//		                System.out.println(annotation.toString());
+//		        }
+				
 				
 			} catch (ResourceInitializationException e) {
 				e.printStackTrace();
@@ -133,11 +165,12 @@ public class Clusterer {
 				e.printStackTrace();
 			}
 		}
+		
 		return jCases;
 	}
 
 	//  prepare a jung graph for visualization
-	private static UndirectedSparseGraph<String, String> calcGraph(ClusterElement clusterElement) {
+	private UndirectedSparseGraph<String, String> calcGraph(ClusterElement clusterElement) {
 		UndirectedSparseGraph<String, String> g = new UndirectedSparseGraph<String, String>();
 		
 		g=addNodes(clusterElement,g);
@@ -195,6 +228,7 @@ public class Clusterer {
 		}
 	}
 
+	//TODO Sentiment richtig einbauen!
 	private ClusterElement createClusterElementsNaive(List<JCas> jCases,String clusterName,List<String> headers) {
 		
 		ClusterElement c;
@@ -203,7 +237,7 @@ public class Clusterer {
 		List<ClusterElement> subClusters = new ArrayList<ClusterElement>();
 		
 		if (clusterName == null) {
-			c = new ClusterElement("TopCluster", new Sentiment(), null);
+			c = new ClusterElement("TopCluster", new Sentiment(1.0,0), null);
 			frequencydistribution=fq;
 			headers = new ArrayList<String>();
 		} else {

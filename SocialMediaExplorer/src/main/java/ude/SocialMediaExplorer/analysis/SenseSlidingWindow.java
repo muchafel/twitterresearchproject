@@ -51,7 +51,6 @@ public class SenseSlidingWindow {
         List<String> keywords=fq.getMostFrequentSamples(5);
         List<String> keyPhrases=new ArrayList<String>();
         
-        //TODO das jetzige Verfahren erkennt nur Bigramme --> sollte zumindest auf Trigramme erweitert werden
         //to find the adjacent candidates we iterate over all found keywords
         for (String word : keywords){
         	String tempWord=word;
@@ -95,7 +94,10 @@ public class SenseSlidingWindow {
         			}
         		}
         	}
-        	keyPhrases.add(tempWord);
+        	if(!keyPhrases.contains(tempWord)){
+        		keyPhrases.add(tempWord);
+        	}
+        	
         }
 //        System.out.println(keyPhrases);
         //uncomment to visualize the graph
