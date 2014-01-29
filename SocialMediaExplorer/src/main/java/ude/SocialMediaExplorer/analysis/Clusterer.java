@@ -48,6 +48,7 @@ import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 
 import ude.SocialMediaExplorer.analysis.type.CleanedSenseAnno;
 import ude.SocialMediaExplorer.analysis.type.SenseAnno;
+import ude.SocialMediaExplorer.analysis.type.SentimentAnno;
 import ude.SocialMediaExplorer.data.utils.io.CASReader;
 import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
 import ude.SocialMediaExplorer.shared.exchangeFormat.Sentiment;
@@ -237,14 +238,16 @@ public class Clusterer {
 		List<ClusterElement> subClusters = new ArrayList<ClusterElement>();
 		
 		if (clusterName == null) {
-			c = new ClusterElement("TopCluster", new Sentiment(1.0,0), null);
+			c = new ClusterElement("TopCluster", new Sentiment(0,0), null);
 			frequencydistribution=fq;
 			headers = new ArrayList<String>();
 		} else {
-			c = new ClusterElement(clusterName, new Sentiment(), null);
+			c = new ClusterElement(clusterName, calcSentiment(jCases), null);
 			frequencydistribution=creatfd(jCases,clusterName,headers);
 			//System.out.println(clusterName+" Max Frq:"+frequencydistribution.getSampleWithMaxFreq());
 		}
+		//set the posts of the clusterelement
+		c.setPosts(getRawText(jCases));
 		for (String subClusterName: frequencydistribution.getMostFrequentSamples(18)){
 			headers.add(subClusterName);
 			ClusterElement subCluster=createClusterElementsNaive(getSubset(jCases,subClusterName),subClusterName,headers);
@@ -253,6 +256,45 @@ public class Clusterer {
 		c.setSubcluster(subClusters);
 		
 		return c;
+	}
+
+	private Sentiment calcSentiment(List<JCas> jCases) {
+		
+		double totalPositive = 0;
+		double totalNegative = 0;
+		
+		//iterate over all cases and find for each a sentiment (positiv/negative) 
+		for(JCas jcas: jCases){
+			List<SentimentAnno> annos = new ArrayList<SentimentAnno>(select(jcas,SentimentAnno.class));
+			double positive = 0;
+			double negative = 0;
+			//iterate over all Sentiment annos and sum positive and negative
+			for(SentimentAnno anno: annos){
+				if(anno.getSentimentValue().equals("true")){
+					positive++;
+				}
+				if(anno.getSentimentValue().equals("false")){
+					negative++;
+				}
+			}
+			int lenght=select(jcas,Token.class).size();
+			//normalize through length of all tokens
+			totalPositive+=positive/lenght;
+			totalNegative+=negative/lenght;
+		}
+		//normalize through size of all cases
+		totalPositive=totalPositive/jCases.size();
+		totalNegative=totalNegative/jCases.size();
+		
+		return new Sentiment(totalPositive,totalNegative);
+	}
+
+	private ArrayList<String> getRawText(List<JCas> jCases) {
+		ArrayList<String> posts= new ArrayList<String>();
+		for(JCas jcas: jCases){
+			posts.add(jcas.getDocumentText());
+		}
+		return posts;
 	}
 
 	private FrequencyDistribution<String> creatfd(List<JCas> jCases,
