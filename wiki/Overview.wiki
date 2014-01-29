@@ -11,7 +11,7 @@ For further readings and a technical documentation look at the contents below:
 
 = Table of Contents=
 
-  * [ purpose of the project] ()
+  * [purpose of the project] ()
   * [Data] (Benny)
   * [Architecture](Henrik)
   * [General Process] (Michael)
