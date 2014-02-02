@@ -33,17 +33,17 @@ public class ClusterVisualization extends Composite {
 		this.hashtag = hashtag;
 		this.ce = ce;
 
-		title.setText( hashtag );
-		infos.setText( "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua." );
+//		title.setText( hashtag );
+//		infos.setText( "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua." );
 
 		json = DataConverter.toJSON_GoogleTable( ce );
 
 	}
 
-	@UiField
-	Heading title;
-	@UiField
-	Paragraph infos;
+//	@UiField
+//	Heading title;
+//	@UiField
+//	Paragraph infos;
 
 	/**
 	 * Uses the google apijs lib to draw the results in the clients browser
@@ -63,7 +63,7 @@ public class ClusterVisualization extends Composite {
 					.parse(j));
 
 			var el = $doc.getElementById('googleChart');
-			el.style.height = (($wnd.innerHeight / 3) * 2) + "px";
+			el.style.height = (($wnd.innerHeight / 4) * 3) + "px";
 
 			// Create and draw the visualization.
 			var tree = new $wnd.google.visualization.TreeMap($doc

@@ -5,24 +5,27 @@
 	</ui:style>
 	<g:HTMLPanel>
 
-			<b:Column size="3" offset="1">
-				<b:Row>
-					<b:Hero>
-						<b:Heading size="2" ui:field='title'></b:Heading>
-						<b:Paragraph ui:field='infos'></b:Paragraph>
-						<!-- b:ListBox ui:field='ce_subcluster' b:id="ce_subcluster"></b:ListBox -->
-					</b:Hero>
-				</b:Row>
-			</b:Column>
-
-
-			<b:Column size="8">
+	    
+	    <b:Column size="12">
 				<b:Hero>
 					<g:HTMLPanel>
 						<div id="googleChart"></div>
 					</g:HTMLPanel>
 				</b:Hero>
-			</b:Column>
+		</b:Column>
+	    
+			<!-- b:Column size="3" offset="1">
+				<b:Row>
+					<b:Hero>
+						<b:Heading size="2" ui:field='title'></b:Heading>
+						<b:Paragraph ui:field='infos'></b:Paragraph>
+						<b:ListBox ui:field='ce_subcluster' b:id="ce_subcluster"></b:ListBox >
+					</b:Hero>
+				</b:Row>
+			</b:Column-->
+
+
+			
 
 	</g:HTMLPanel>
 </ui:UiBinder> 

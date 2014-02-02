@@ -110,7 +110,7 @@ public class DataConverter {
 			List<ClusterElement> childs = c.getSubcluster();
 			if ( childs != null ) {
 				for ( ClusterElement child : childs ) {
-					child.setParent( c.getName() );
+//					child.setParent( c.getName() );
 					//				System.out.println("child:" + child.getName() + " / parent:" + child.getParent());
 					addCE( child );
 				}
@@ -123,11 +123,16 @@ public class DataConverter {
 	static int i = 0;
 	private static void renameCE( ClusterElement ce ) {
 		if ( ce != null ) {
-			ce.setName( ce.getName() + "   (" + i++ + ")");
+			String bla = ce.getParent();
+			try {
+				bla = bla.split( "(" )[0];
+			}catch(Exception e) {}
+			ce.setName( ce.getName() + "   (" + bla + ")");
 			//		System.out.println("ce  =  " + ce.getName());
 			List<ClusterElement> childs = ce.getSubcluster();
 			if ( childs != null ) {
 				for ( ClusterElement child : childs ) {
+					child.setParent( ce.getName() );
 					renameCE( child );
 				}
 			}
