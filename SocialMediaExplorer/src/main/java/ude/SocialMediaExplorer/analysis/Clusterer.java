@@ -34,7 +34,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP;
 import de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetTagger;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerChunkerTT4J;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
@@ -233,7 +232,7 @@ public class Clusterer {
 		List<ClusterElement> subClusters = new ArrayList<ClusterElement>();
 		
 		if (clusterName == null) {
-			c = new ClusterElement("TopCluster", new Sentiment(0,0), null);
+			c = new ClusterElement("TopCluster", new Sentiment(0D,0D), null);
 			frequencydistribution=fq;
 			headers = new ArrayList<String>();
 		} else {
