@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** links or #s
- * Updated by JCasGen Fri Jan 17 12:10:54 CET 2014
+ * Updated by JCasGen Wed Feb 05 12:30:16 CET 2014
  * @generated */
 public class ArktweetAnno_Type extends Annotation_Type {
   /** @generated */

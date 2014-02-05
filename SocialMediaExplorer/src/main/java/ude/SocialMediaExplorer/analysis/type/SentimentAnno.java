@@ -10,7 +10,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Fri Jan 17 12:10:54 CET 2014
+ * Updated by JCasGen Wed Feb 05 12:30:16 CET 2014
  * XML source: C:/Users/Michael/workspace/SocialMediaExplorer/src/main/resources/desc/type/TwitterTypes.xml
  * @generated */
 public class SentimentAnno extends Annotation {
@@ -66,17 +66,17 @@ public class SentimentAnno extends Annotation {
 
   /** getter for sentimentValue - gets 
    * @generated */
-  public String getSentimentValue() {
+  public double getSentimentValue() {
     if (SentimentAnno_Type.featOkTst && ((SentimentAnno_Type)jcasType).casFeat_sentimentValue == null)
       jcasType.jcas.throwFeatMissing("sentimentValue", "ude.SocialMediaExplorer.analysis.type.SentimentAnno");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((SentimentAnno_Type)jcasType).casFeatCode_sentimentValue);}
+    return jcasType.ll_cas.ll_getDoubleValue(addr, ((SentimentAnno_Type)jcasType).casFeatCode_sentimentValue);}
     
   /** setter for sentimentValue - sets  
    * @generated */
-  public void setSentimentValue(String v) {
+  public void setSentimentValue(double v) {
     if (SentimentAnno_Type.featOkTst && ((SentimentAnno_Type)jcasType).casFeat_sentimentValue == null)
       jcasType.jcas.throwFeatMissing("sentimentValue", "ude.SocialMediaExplorer.analysis.type.SentimentAnno");
-    jcasType.ll_cas.ll_setStringValue(addr, ((SentimentAnno_Type)jcasType).casFeatCode_sentimentValue, v);}    
+    jcasType.ll_cas.ll_setDoubleValue(addr, ((SentimentAnno_Type)jcasType).casFeatCode_sentimentValue, v);}    
   }
 
     

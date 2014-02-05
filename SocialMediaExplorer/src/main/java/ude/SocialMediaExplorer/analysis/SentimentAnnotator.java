@@ -25,31 +25,20 @@ private ArrayList<Token> tokens;
         	annotation.setBegin(t.getBegin());
         	annotation.setEnd(t.getEnd());
         	
-        	annotation.setSentimentValue(Boolean.toString(isPositiv(t,language)));
+        	annotation.setSentimentValue(isPositiv(t,language));
         	
         	annotation.addToIndexes();
         }
 	}
-	private boolean isPositiv(Token t,String language) {
+	private double isPositiv(Token t,String language) {
 		if(language.equals("de")){
-			if(lexGerman.getSentiment(t.getCoveredText(), language)==1){
-				System.out.println("positive sentiment: "+t.getCoveredText());
-				return true;
-			}
-			else if(lexGerman.getSentiment(t.getCoveredText(), language)==-1){
-				System.out.println("negative sentiment: "+t.getCoveredText());
-				return false;
-			}
+			return lexGerman.getSentiment(t.getCoveredText(), language);
 		}
 		if(language.equals("en")){
-			if(lexEnglish.getSentiment(t.getCoveredText(), language)==1){
-				return true;
-			}
-			else if(lexEnglish.getSentiment(t.getCoveredText(), language)==-1){
-				return false;
-			}
+//			return lexEnglish.getSentiment(t.getCoveredText(), language);
+			return 0.0;
 		}
-		return false;
+		return 0.0;
 	}
 
 }

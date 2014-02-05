@@ -14,7 +14,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 
 /** links or #s
- * Updated by JCasGen Fri Jan 17 12:10:54 CET 2014
+ * Updated by JCasGen Wed Feb 05 12:30:16 CET 2014
  * XML source: C:/Users/Michael/workspace/SocialMediaExplorer/src/main/resources/desc/type/TwitterTypes.xml
  * @generated */
 public class ArktweetAnno extends Annotation {

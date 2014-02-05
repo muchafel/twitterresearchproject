@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Fri Jan 17 12:10:54 CET 2014
+ * Updated by JCasGen Wed Feb 05 12:30:16 CET 2014
  * XML source: C:/Users/Michael/workspace/SocialMediaExplorer/src/main/resources/desc/type/TwitterTypes.xml
  * @generated */
 public class SenseAnno extends Annotation {

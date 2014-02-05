@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Fri Jan 17 12:09:45 CET 2014
+ * Updated by JCasGen Wed Feb 05 12:30:16 CET 2014
  * @generated */
 public class SimpleSenseAnno_Type extends Annotation_Type {
   /** @generated */
@@ -42,7 +42,7 @@ public class SimpleSenseAnno_Type extends Annotation_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("SimpleSenseAnno");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("ude.SocialMediaExplorer.analysis.type.SimpleSenseAnno");
  
   /** @generated */
   final Feature casFeat_simpleSense;
@@ -51,13 +51,13 @@ public class SimpleSenseAnno_Type extends Annotation_Type {
   /** @generated */ 
   public String getSimpleSense(int addr) {
         if (featOkTst && casFeat_simpleSense == null)
-      jcas.throwFeatMissing("simpleSense", "SimpleSenseAnno");
+      jcas.throwFeatMissing("simpleSense", "ude.SocialMediaExplorer.analysis.type.SimpleSenseAnno");
     return ll_cas.ll_getStringValue(addr, casFeatCode_simpleSense);
   }
   /** @generated */    
   public void setSimpleSense(int addr, String v) {
         if (featOkTst && casFeat_simpleSense == null)
-      jcas.throwFeatMissing("simpleSense", "SimpleSenseAnno");
+      jcas.throwFeatMissing("simpleSense", "ude.SocialMediaExplorer.analysis.type.SimpleSenseAnno");
     ll_cas.ll_setStringValue(addr, casFeatCode_simpleSense, v);}
     
   
