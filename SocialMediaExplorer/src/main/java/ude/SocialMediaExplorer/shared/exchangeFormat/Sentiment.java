@@ -19,6 +19,11 @@ public class Sentiment implements Serializable {
 	public Sentiment() {
 
 	}
+	
+	public Sentiment(double positive, double negative) {
+		this.setPositive(positive);
+		this.setNegative(negative);
+	}
 
 	/////////////////////////////////
 
