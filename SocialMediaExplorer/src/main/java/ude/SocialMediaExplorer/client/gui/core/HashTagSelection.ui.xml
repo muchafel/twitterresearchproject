@@ -1,0 +1,56 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+	<ui:style>
+		.important {
+		font-weight: bold;
+		}
+	</ui:style>
+
+	<g:HTMLPanel>
+
+		<b:Row ui:field="hashtagSelection">
+			<b:Column size="6" offset="3">
+				<b:WellForm type="HORIZONTAL">
+					<b:Fieldset>
+						<b:ControlGroup>
+							<b:ControlLabel for="listSeries">Choose a hashtag...&nbsp;&nbsp;</b:ControlLabel>
+							<b:Controls>
+							    <b:Row>
+									<!-- If you add id attribute to element,You should use b:id attribute. -->
+									<b:ListBox ui:field="listSeries" b:id="listSeries"></b:ListBox>
+									<!-- HelpBlock></b:HelpBlock-->
+						    	</b:Row>
+						    	<g:HTMLPanel>
+						    	    <br />
+						    	</g:HTMLPanel>
+						    	<b:Row>
+									 <b:Button ui:field="btnOk">OK</b:Button>
+						    	</b:Row>
+							</b:Controls>
+						</b:ControlGroup>
+					</b:Fieldset>
+				</b:WellForm>
+			</b:Column>
+		</b:Row>
+
+		<b:Row ui:field="timeSelection">
+			<b:Column size="6" offset="3">
+				<b:WellForm type="HORIZONTAL">
+					<b:ButtonGroup ui:field="times" toggle="radio">
+					</b:ButtonGroup>
+				</b:WellForm>
+			</b:Column>
+		</b:Row>
+		
+		<b:Row ui:field="gogogo">
+			<b:Column size="6" offset="3">
+				<b:WellForm type="HORIZONTAL">
+				    <b:Button size="LARGE" block="true" type="INVERSE" ui:field="btnGo">GO!</b:Button>
+				</b:WellForm>
+			</b:Column>
+		</b:Row>
+
+	</g:HTMLPanel>
+
+</ui:UiBinder> 

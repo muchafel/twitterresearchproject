@@ -124,6 +124,7 @@ public class ClusterElement implements Serializable {
 
 	public void setPosts( ArrayList<String> posts ) {
 		this.posts = posts;
+		this.size = posts.size();
 	}
 
 	public int getId() {

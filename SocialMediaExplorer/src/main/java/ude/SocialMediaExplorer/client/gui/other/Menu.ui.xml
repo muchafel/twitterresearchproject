@@ -6,22 +6,53 @@
 		.important {
 			font-weight: bold;
 		}
+		#plus{
+			float: left;
+			cursor: pointer;
+			margin-bottom: 2em;
+		}
+		#gears{
+			float: right;	
+			cursor: pointer;
+			margin-bottom: 2em;	
+		}
+		.noborder{
+			border-style: none;
+		}
 	</ui:style>
 	<g:HTMLPanel>
 	    
 	    <b:Row>
-	    	<b:PageHeader subtext="Trendanalyse wöchentlicher TV Sendungen">Social Media Explorer</b:PageHeader>	        
+	        
+	        <b:Column size="10" offset="1">
+	    		<b:PageHeader subtext="Trendanalyse wöchentlicher TV Sendungen">Social Media Explorer</b:PageHeader>	        
+	        </b:Column>
+	        
 	    </b:Row>
 	    
 	    <b:Row>
-		    <b:Navbar>
-			    <!-- b:Brand>Nav</b:Brand -->
-			    <b:Nav>
-			        <b:NavLink ui:field="home">Home</b:NavLink>
-			        <b:NavLink ui:field="admin">Admin</b:NavLink>
-			        <b:NavLink ui:field="wait">wait..</b:NavLink>
-			    </b:Nav>
-			</b:Navbar>
+	        
+	        <b:Column size="6" offset="3">
+	            
+		        <g:HTMLPanel>
+			        <g:FocusPanel ui:field="home" styleName="{style.noborder}">
+			            <g:HTMLPanel>
+			            <div id="plus">
+					        <b:Icon type="PLUS" size="FOUR_TIMES"></b:Icon>
+			            </div>
+			            </g:HTMLPanel>
+			        </g:FocusPanel>
+					<g:FocusPanel ui:field="admin" styleName="{style.noborder}">
+					    <g:HTMLPanel>
+					    <div id="gears">
+					        <b:Icon type="GEARS" size="FOUR_TIMES"></b:Icon>
+					    </div>
+					    </g:HTMLPanel>
+					</g:FocusPanel>
+		        </g:HTMLPanel>
+		        
+	        </b:Column>
+	        
 	    </b:Row>
 	    
 	</g:HTMLPanel>

@@ -8,19 +8,26 @@
 		}
 	</ui:style>
 	<g:HTMLPanel>
-	    <!-- 
-		Hello,
-		<g:Button styleName="{style.important}" ui:field="button" />
-	     -->
-	     
-	    <hr />
-	    <g:HTMLPanel >
-		    <p align="center" >
-		        <b:Button  type="LINK" ui:field="link_impressum">
-		        Impressum
-		        </b:Button>
-		    </p>
-	    </g:HTMLPanel>
+	    
+	    <b:Row>
+		
+	     	<b:Column size="10" offset="1">
+				
+	     	    <g:HTMLPanel>
+	     	  		<hr />
+	     	  	</g:HTMLPanel>
+			    
+			    <g:HTMLPanel>
+				    <p align="center" >
+				        <b:Button  type="LINK" ui:field="link_impressum">
+				        Impressum
+				        </b:Button>
+				    </p>
+			    </g:HTMLPanel>
+	     	    
+	     	</b:Column>   
+	        
+	    </b:Row>
 		
 	</g:HTMLPanel>
 </ui:UiBinder> 
