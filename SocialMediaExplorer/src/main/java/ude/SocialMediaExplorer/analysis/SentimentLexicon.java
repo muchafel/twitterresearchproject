@@ -24,7 +24,7 @@ public class SentimentLexicon {
 	*/
 	private void genrateLexicon(String language) {
 		String path = "";
-		if (language.equals("En")) {
+		if (language.equals("en")) {
 			path = "files/SentimentLexicon_English.txt";
 			try {
 				FileReader fr = new FileReader(path);
@@ -42,7 +42,7 @@ public class SentimentLexicon {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (language.equals("De")) {
+		} else if (language.equals("de")) {
 			path = "files/SentimentLexicon_German.txt";
 			try {
 				FileReader fr = new FileReader(path);

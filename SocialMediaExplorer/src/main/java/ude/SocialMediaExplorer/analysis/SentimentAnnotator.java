@@ -31,7 +31,7 @@ private ArrayList<Token> tokens;
         }
 	}
 	private boolean isPositiv(Token t,String language) {
-		if(language.equals("De")){
+		if(language.equals("de")){
 			if(lexGerman.getSentiment(t.getCoveredText(), language)==1){
 				System.out.println("positive sentiment: "+t.getCoveredText());
 				return true;
@@ -41,7 +41,7 @@ private ArrayList<Token> tokens;
 				return false;
 			}
 		}
-		if(language.equals("En")){
+		if(language.equals("en")){
 			if(lexEnglish.getSentiment(t.getCoveredText(), language)==1){
 				return true;
 			}
