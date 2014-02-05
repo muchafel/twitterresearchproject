@@ -1,17 +1,12 @@
 package ude.SocialMediaExplorer.analysis;
 
 import java.awt.Dimension;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,33 +15,17 @@ import java.util.TreeSet;
 import javax.swing.JFrame;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.*;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
-import opennlp.tools.dictionary.serializer.Entry;
-
-import org.annolab.tt4j.TreeTaggerModel;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIndex;
-import org.apache.uima.cas.FSIterator;
-import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.factory.AggregateBuilder;
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP;
-import de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetTagger;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
-import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerChunkerTT4J;
-import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
-import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerTT4JBase;
 import edu.uci.ics.jung.algorithms.layout.FRLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
@@ -54,7 +33,6 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 
-import ude.SocialMediaExplorer.analysis.type.CleanedSenseAnno;
 import ude.SocialMediaExplorer.analysis.type.SenseAnno;
 import ude.SocialMediaExplorer.analysis.type.SentimentAnno;
 import ude.SocialMediaExplorer.data.utils.io.CASReader;
@@ -74,7 +52,6 @@ public class Clusterer {
 	public void cluster(String hashtagToCluser) {
 		
 		this.hashtagToCluster=hashtagToCluser;
-		String directory= "files/serializedCases/"+"halligalli";
 		CASReader reader= new CASReader();
 		List<JCas> jCases= new ArrayList<JCas>();
 		try {
