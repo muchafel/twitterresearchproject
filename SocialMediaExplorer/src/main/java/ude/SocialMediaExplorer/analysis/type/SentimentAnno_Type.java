@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Fri Jan 17 12:10:54 CET 2014
+ * Updated by JCasGen Wed Feb 05 12:30:16 CET 2014
  * @generated */
 public class SentimentAnno_Type extends Annotation_Type {
   /** @generated */
@@ -49,16 +49,16 @@ public class SentimentAnno_Type extends Annotation_Type {
   /** @generated */
   final int     casFeatCode_sentimentValue;
   /** @generated */ 
-  public String getSentimentValue(int addr) {
+  public double getSentimentValue(int addr) {
         if (featOkTst && casFeat_sentimentValue == null)
       jcas.throwFeatMissing("sentimentValue", "ude.SocialMediaExplorer.analysis.type.SentimentAnno");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_sentimentValue);
+    return ll_cas.ll_getDoubleValue(addr, casFeatCode_sentimentValue);
   }
   /** @generated */    
-  public void setSentimentValue(int addr, String v) {
+  public void setSentimentValue(int addr, double v) {
         if (featOkTst && casFeat_sentimentValue == null)
       jcas.throwFeatMissing("sentimentValue", "ude.SocialMediaExplorer.analysis.type.SentimentAnno");
-    ll_cas.ll_setStringValue(addr, casFeatCode_sentimentValue, v);}
+    ll_cas.ll_setDoubleValue(addr, casFeatCode_sentimentValue, v);}
     
   
 
@@ -71,7 +71,7 @@ public class SentimentAnno_Type extends Annotation_Type {
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_sentimentValue = jcas.getRequiredFeatureDE(casType, "sentimentValue", "uima.cas.String", featOkTst);
+    casFeat_sentimentValue = jcas.getRequiredFeatureDE(casType, "sentimentValue", "uima.cas.Double", featOkTst);
     casFeatCode_sentimentValue  = (null == casFeat_sentimentValue) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_sentimentValue).getCode();
 
   }

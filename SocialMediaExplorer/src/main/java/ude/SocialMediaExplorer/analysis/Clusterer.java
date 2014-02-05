@@ -6,16 +6,24 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.swing.JFrame;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.*;
 import static org.apache.uima.fit.util.JCasUtil.select;
+
+import opennlp.tools.dictionary.serializer.Entry;
 
 import org.annolab.tt4j.TreeTaggerModel;
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -34,6 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP;
 import de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetTagger;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerChunkerTT4J;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
@@ -223,7 +232,6 @@ public class Clusterer {
 		}
 	}
 
-	//TODO Sentiment richtig einbauen!
 	private ClusterElement createClusterElementsNaive(List<JCas> jCases,String clusterName,List<String> headers) {
 		
 		ClusterElement c;
@@ -232,7 +240,7 @@ public class Clusterer {
 		List<ClusterElement> subClusters = new ArrayList<ClusterElement>();
 		
 		if (clusterName == null) {
-			c = new ClusterElement("TopCluster", new Sentiment(0D,0D), null);
+			c = new ClusterElement("TopCluster", new Sentiment(0,0), null);
 			frequencydistribution=fq;
 			headers = new ArrayList<String>();
 		} else {
@@ -241,7 +249,7 @@ public class Clusterer {
 			//System.out.println(clusterName+" Max Frq:"+frequencydistribution.getSampleWithMaxFreq());
 		}
 		//set the posts of the clusterelement
-		c.setPosts(getRawText(jCases));
+		c.setPosts(getSortedSubTweets(jCases));
 		for (String subClusterName: frequencydistribution.getMostFrequentSamples(18)){
 			headers.add(subClusterName);
 			ClusterElement subCluster=createClusterElementsNaive(getSubset(jCases,subClusterName),subClusterName,headers);
@@ -252,6 +260,7 @@ public class Clusterer {
 		return c;
 	}
 
+	// calc the mean Sentiment over a list of cases
 	private Sentiment calcSentiment(List<JCas> jCases) {
 		
 		double totalPositive = 0;
@@ -264,11 +273,12 @@ public class Clusterer {
 			double negative = 0;
 			//iterate over all Sentiment annos and sum positive and negative
 			for(SentimentAnno anno: annos){
-				if(anno.getSentimentValue().equals("true")){
-					positive++;
+				double sentiment=anno.getSentimentValue();
+				if(sentiment>0){
+					positive+=sentiment;
 				}
-				if(anno.getSentimentValue().equals("false")){
-					negative--;
+				else{
+					negative+=sentiment;
 				}
 			}
 			int lenght=select(jcas,Token.class).size();
@@ -283,12 +293,42 @@ public class Clusterer {
 		return new Sentiment(totalPositive,totalNegative);
 	}
 
-	private ArrayList<String> getRawText(List<JCas> jCases) {
-		ArrayList<String> posts= new ArrayList<String>();
+	//gets the ordered List of sub-tweets
+	private ArrayList<String> getSortedSubTweets(List<JCas> jCases) {
+		ArrayList<String> orderedposts= new ArrayList<String>();
+		Map<String,Double> unOrderedPosts= new HashMap<String,Double>();
 		for(JCas jcas: jCases){
-			posts.add(jcas.getDocumentText());
+			unOrderedPosts.put(jcas.getDocumentText(), getCASSentiment(jcas));
 		}
-		return posts;
+		orderedposts=sortMap(unOrderedPosts);
+		return orderedposts;
+	}
+	
+	//orderes the map and gives the List back
+private ArrayList<String> sortMap(Map<String, Double> unOrderedPosts) {
+		ArrayList<String> orderedPosts = new ArrayList<String>();
+		List<String> keys = new ArrayList<String>(unOrderedPosts.keySet());
+		List<Double> values = new ArrayList<Double>(unOrderedPosts.values());
+		TreeSet<Double> sortedMap = new TreeSet<Double>(values);
+		Object[] sortedSet = sortedMap.toArray();
+		for (int i = 0; i < sortedSet.length; i++) {
+			orderedPosts.add( keys.get(values.indexOf(sortedSet[i])));
+		}
+		return orderedPosts;
+	}
+
+	//gets the mean sentiment of a single CAS
+	private Double getCASSentiment(JCas jcas) {
+		List<SentimentAnno> annos = new ArrayList<SentimentAnno>(select(jcas,SentimentAnno.class));
+		double sentiment = 0;
+		//iterate over all Sentiment annos and sum them up
+		for(SentimentAnno anno: annos){
+			sentiment+=anno.getSentimentValue();
+		}
+		int lenght=select(jcas,Token.class).size();
+		//normalize through length of all tokens
+		sentiment=sentiment/lenght;
+		return sentiment;
 	}
 
 	private FrequencyDistribution<String> creatfd(List<JCas> jCases,

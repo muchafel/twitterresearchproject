@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Fri Jan 17 12:09:45 CET 2014
+ * Updated by JCasGen Wed Feb 05 12:30:16 CET 2014
  * XML source: C:/Users/Michael/workspace/SocialMediaExplorer/src/main/resources/desc/type/TwitterTypes.xml
  * @generated */
 public class SimpleSenseAnno extends Annotation {
@@ -69,14 +69,14 @@ public class SimpleSenseAnno extends Annotation {
    * @generated */
   public String getSimpleSense() {
     if (SimpleSenseAnno_Type.featOkTst && ((SimpleSenseAnno_Type)jcasType).casFeat_simpleSense == null)
-      jcasType.jcas.throwFeatMissing("simpleSense", "SimpleSenseAnno");
+      jcasType.jcas.throwFeatMissing("simpleSense", "ude.SocialMediaExplorer.analysis.type.SimpleSenseAnno");
     return jcasType.ll_cas.ll_getStringValue(addr, ((SimpleSenseAnno_Type)jcasType).casFeatCode_simpleSense);}
     
   /** setter for simpleSense - sets  
    * @generated */
   public void setSimpleSense(String v) {
     if (SimpleSenseAnno_Type.featOkTst && ((SimpleSenseAnno_Type)jcasType).casFeat_simpleSense == null)
-      jcasType.jcas.throwFeatMissing("simpleSense", "SimpleSenseAnno");
+      jcasType.jcas.throwFeatMissing("simpleSense", "ude.SocialMediaExplorer.analysis.type.SimpleSenseAnno");
     jcasType.ll_cas.ll_setStringValue(addr, ((SimpleSenseAnno_Type)jcasType).casFeatCode_simpleSense, v);}    
   }
 
