@@ -4,42 +4,50 @@
 	<ui:style>
 	</ui:style>
 	<g:HTMLPanel>
+
 		<b:Row>
-		    <b:Column size="12">
-		    	<b:Form type="HORIZONTAL">
-         			<b:Fieldset>
-		         		<b:ControlGroup>
-		         	    <b:Row>
-		         	        <b:Column size="12">
-		         	        <b:ControlLabel for="multiSelect">Hashtags being crawled:</b:ControlLabel>
-	                       	<b:Controls>
-	                               <b:ListBox ui:field="list_hashtags" multipleSelect="true" b:id="multiSelect">
-	                               </b:ListBox>
-	                       	</b:Controls>
-	                       	</b:Column>
-		         	    </b:Row>
-		         	    <b:Row>
-		         	        <b:Column size="12">
-		         	        <b:Controls>
-			         	        <b:Button ui:field="btn_open_dialog_add_hashtag">Add</b:Button>
-		                        <b:Button ui:field="btn_remove_hashtags">Remove</b:Button>
-	                        </b:Controls>
-	                        </b:Column>
-		         	    </b:Row>
-	                    </b:ControlGroup>
-		         	</b:Fieldset>
-         		</b:Form>
-		    </b:Column>
+
+
+			<b:Column size="10" offset="1">
+
+			    <b:Hero>
+			        
+				<b:Form>
+					<b:Fieldset>
+						<b:ControlGroup>
+							<b:Row>
+								<b:ControlLabel for="multiSelect">Hashtags being crawled:</b:ControlLabel>
+								<b:Controls>
+									<b:ListBox ui:field="list_hashtags" multipleSelect="true"
+										b:id="multiSelect">
+									</b:ListBox>
+								</b:Controls>
+							</b:Row>
+							<b:Row>
+								<b:Controls>
+									<b:Button ui:field="btn_open_dialog_add_hashtag">Add</b:Button>
+									<b:Button ui:field="btn_remove_hashtags">Remove</b:Button>
+								</b:Controls>
+							</b:Row>
+						</b:ControlGroup>
+					</b:Fieldset>
+				</b:Form>
+			
+				</b:Hero>
+
+			</b:Column>
+
 		</b:Row>
-	    
-	    <!-- dialogs -->
-		<b:Modal ui:field="dialog_add_hashtag" title="Add new hashtag" backdrop="STATIC" keyboard="true" animation="true">
-		    <g:Label>new hashtag:</g:Label>
-			<b:TextBox ui:field="input_add_hashtag" placeholder="#"/>
-		    <b:ModalFooter>
-		        <b:Button ui:field="btn_add_hashtag" type="PRIMARY">add</b:Button>
-		    </b:ModalFooter>
+
+		<!-- dialogs -->
+		<b:Modal ui:field="dialog_add_hashtag" title="Add new hashtag"
+			backdrop="STATIC" keyboard="true" animation="true">
+			<g:Label>new hashtag:</g:Label>
+			<b:TextBox ui:field="input_add_hashtag" placeholder="#" />
+			<b:ModalFooter>
+				<b:Button ui:field="btn_add_hashtag" type="PRIMARY">add</b:Button>
+			</b:ModalFooter>
 		</b:Modal>
-		
+
 	</g:HTMLPanel>
 </ui:UiBinder> 

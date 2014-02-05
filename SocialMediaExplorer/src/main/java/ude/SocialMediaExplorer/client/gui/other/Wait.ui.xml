@@ -2,16 +2,21 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
 	<ui:style>
-		.important {
-			width: 100px;
+		.center {
 			margin-left: auto;
 			margin-right:auto;
 		}
 	</ui:style>
-	<g:HTMLPanel>
-	   <div styleName="{style.important}">
-	    	<p>Waiting...</p>
-	    	<b:Icon type="TWITTER" />	       
-	   </div>
-	</g:HTMLPanel>
+	<b:Row>
+	        
+	    <b:Column size="2" offset="5">
+			<g:HTMLPanel>
+			   <div align="center" styleName="{style.center}">
+			    	<b:Paragraph ui:field="wait_text">loading...</b:Paragraph>
+			    	<b:Icon type="ROTATE_RIGHT" size="FOUR_TIMES" spin="true" />	       
+			   </div>
+			</g:HTMLPanel>
+	    </b:Column>
+
+	</b:Row>
 </ui:UiBinder> 

@@ -2,30 +2,86 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
 	<ui:style>
+		#btn_up{
+		float:left;
+		cursor:pointer;
+		}
+		#btn_down{
+		float:left;
+		cursor:pointer;
+		}
+		#btns_nav{
+		margin: 0 auto;
+		}
+		#treemap_help{
+		cursor:pointer;
+		float:right;
+		}
 	</ui:style>
+
 	<g:HTMLPanel>
 
-	    
-	    <b:Column size="12">
+		<!-- ROW 1 breadcrumbs -->
+		<b:Row>
+			<b:Column size="10" offset="1">
+				<g:HTMLPanel>
+					<div id="breadcrumbs" class="breadcrumb"></div>
+				</g:HTMLPanel>
+			</b:Column>
+		</b:Row>
+
+		<!-- ROW 2 treemap -->
+		<b:Row>
+			<b:Column size="10" offset="1">
 				<b:Hero>
+
+					<b:Row>
+						<g:HTMLPanel>
+							<div id="btns_nav">
+								<div id="btn_up">
+									<b:Icon type="ARROW_UP" size="TWO_TIMES" />
+								</div>
+								<div id="btn_down">
+									<b:Icon type="ARROW_DOWN" size="LARGE" />
+								</div>
+							</div>
+							<div id="treemap_help">
+								<b:Tooltip text='another tooltip'>
+									<b:Icon type="QUESTION" size="LARGE" />
+								</b:Tooltip>
+							</div>
+						</g:HTMLPanel>
+					</b:Row>
+
+					<b:Row>
+						<g:HTMLPanel>
+							<div id="treemap"></div>
+						</g:HTMLPanel>
+					</b:Row>
+
+				</b:Hero>
+			</b:Column>
+		</b:Row>
+
+		<!-- ROW 3 posts -->
+		<b:Row>
+			<b:Column size="10" offset="1">
+				<b:Hero>
+					<b:Heading size="2" ui:field='title'></b:Heading>
 					<g:HTMLPanel>
-						<div id="googleChart"></div>
+						<div id="comments">
+							<b:Icon type="COMMENTS" size="FOUR_TIMES" light="true" />
+						</div>
+					</g:HTMLPanel>
+					<g:HTMLPanel>
+						<hr />
+						<div id="posts">...</div>
 					</g:HTMLPanel>
 				</b:Hero>
-		</b:Column>
-	    
-			<!-- b:Column size="3" offset="1">
-				<b:Row>
-					<b:Hero>
-						<b:Heading size="2" ui:field='title'></b:Heading>
-						<b:Paragraph ui:field='infos'></b:Paragraph>
-						<b:ListBox ui:field='ce_subcluster' b:id="ce_subcluster"></b:ListBox >
-					</b:Hero>
-				</b:Row>
-			</b:Column-->
+			</b:Column>
+		</b:Row>
 
-
-			
 
 	</g:HTMLPanel>
+
 </ui:UiBinder> 

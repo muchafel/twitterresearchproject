@@ -1,0 +1,32 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+	<ui:style>
+	</ui:style>
+	<g:HTMLPanel>
+
+		<b:Row>
+
+			<b:Column size="6" offset="3">
+
+					<g:HTMLPanel>
+						<b:WellForm>
+							<b:ControlLabel>Name</b:ControlLabel>
+							<b:TextBox ui:field="name" alternateSize="XLARGE"
+								placeholder="type in name..." />
+							<b:ControlLabel>Password</b:ControlLabel>
+							<b:PasswordTextBox ui:field="pass"
+								alternateSize="XLARGE" placeholder="type in password..." />
+							<g:HTMLPanel>
+								<hr />
+							</g:HTMLPanel>
+							<b:Button ui:field="button_login">Validate</b:Button>
+						</b:WellForm>
+					</g:HTMLPanel>
+				    
+			</b:Column>
+
+		</b:Row>
+
+	</g:HTMLPanel>
+</ui:UiBinder> 
