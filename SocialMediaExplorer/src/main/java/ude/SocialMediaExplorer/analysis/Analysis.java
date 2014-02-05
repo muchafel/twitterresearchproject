@@ -35,8 +35,8 @@ import ude.SocialMediaExplorer.data.utils.time.TimeSpan;
 
 public class Analysis extends Thread{
 
-static SentimentLexicon lexEnglish = new SentimentLexicon("En");
-static SentimentLexicon lexGerman= new SentimentLexicon("De");
+static SentimentLexicon lexEnglish = new SentimentLexicon("en");
+static SentimentLexicon lexGerman= new SentimentLexicon("de");
 	private PostList postList;
 	
 	private List<JCas> tweetCases;
@@ -99,18 +99,14 @@ static SentimentLexicon lexGerman= new SentimentLexicon("De");
         engine.process(jcas);
         
         System.out.println("Original text: "+jcas.getDocumentText());
-        FSIterator<AnnotationFS> annotationIterator = jcas.getCas().getAnnotationIndex().iterator();
-        while (annotationIterator.hasNext()) {
-                AnnotationFS annotation = annotationIterator.next();
-                System.out.println("[" + annotation.getCoveredText() + "]");
-                System.out.println(annotation.toString());
-        }
-//        List<AnnotationFS> pos = new ArrayList<AnnotationFS>(select(jcas, POS.class));
-//		for(AnnotationFS p2 : pos){
-//			System.out.println("!POS:    "+p2);
-//		}
-//        System.out.println("Sentiments : "+jcas.getView("Sentiment").getDocumentText());
-//        System.out.println("Senses: "+jcas.getView("Sense").getDocumentText());
+        
+        //SYSO
+//        FSIterator<AnnotationFS> annotationIterator = jcas.getCas().getAnnotationIndex().iterator();
+//        while (annotationIterator.hasNext()) {
+//                AnnotationFS annotation = annotationIterator.next();
+//                System.out.println("[" + annotation.getCoveredText() + "]");
+//                System.out.println(annotation.toString());
+//        }
         
         return jcas;
 	}

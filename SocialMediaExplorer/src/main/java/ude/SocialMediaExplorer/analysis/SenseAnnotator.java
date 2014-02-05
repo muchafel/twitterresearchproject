@@ -59,7 +59,7 @@ public class SenseAnnotator extends JCasAnnotator_ImplBase{
 			pos.add(t.getPos().getPosValue());
 		}
 		keyPhrases=senseSlidingWindow.getKeyPhrases(raw,pos);
-		System.out.println("keyphrases: "+keyPhrases);
+		System.out.println("Cooccurence keyphrases: "+keyPhrases);
 		for (Token t : tokens) {
 			
 			String sense= null;
