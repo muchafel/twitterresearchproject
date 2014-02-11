@@ -4,7 +4,7 @@ This page describes the NLP-steps that are done on the server on a weekly basis
 
 This application uses a analysis process to extract opionions from twitter-data. Because this analysis takes a long time to run (up to two seconds a tweet) we pre-calculate results on a weekly basis and provide these results to our web-interface. 
 The analysis itself uses NLP-techniques and can be divided into the two main steps "analysis on tweet-level" and "clustering". 
-In the "Analysis on Tweet-Level" each tweet is enriched with information that the "Clustering" that follows later. The two steps are further described below:
+In the *"Analysis on Tweet-Level"* each tweet is enriched with information that the *"Clustering"* that follows later. The two steps are further described below:
 
 
 = "Analysis on Tweet-Level"=
