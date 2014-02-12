@@ -1,59 +1,66 @@
 package ude.SocialMediaExplorer.server;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.File;
 import java.util.ArrayList;
 
 import ude.SocialMediaExplorer.Config;
 import ude.SocialMediaExplorer.client.rmi.IDataHelperService;
-import ude.SocialMediaExplorer.data.result.ResultPoolingImpl;
+import ude.SocialMediaExplorer.data.utils.io.ObjectReader;
 import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
-
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+/**
+ * the Implementation of the client-server interface
+ * 
+ * @author henrikdetjen
+ * 
+ */
 @SuppressWarnings( "serial" )
 public class DataHelperServiceImpl extends RemoteServiceServlet implements IDataHelperService {
 
-	// TODO Benny Clusterelemente aus files deserialisieren
 
+	/**
+	 * enduser
+	 */
+
+	//STEP 1: select a hashtag...
+	public String[] getPossibleHashtags() {
+		File dirs = new File( Config.get_location_results() );
+		return dirs.list();
+	}
+
+	//STEP 2: get the timeStamps for all result files belonging to the hashtag...
+	public String[] getPossibleFiles( String hashtag ) {
+		File dir = new File( Config.get_location_results() + hashtag );
+		return dir.list();
+	}
+
+	// STEP 3: take the chosen hashtag and the chosen file and load clusterelements for visualization...
+	public ClusterElement getClusters( String hashtag, String timeStamp ) {
+
+		File dir = new File( Config.get_location_results() + hashtag );
+		String[] filenames = dir.list();
+		for ( String f : filenames ) {
+			if ( f.contains( timeStamp ) ) { 
+				String path = Config.get_location_results() + hashtag + "/" + f;
+				path = path.replace( " ", "" );
+				System.out.println(path);
+				return (ClusterElement) ObjectReader.readObject( path ); }
+		}
+		return null;
+
+	}
+
+	/**
+	 * admin
+	 */
+		
+	// Functions to display and edit the project_config.xml
+	
 	public String[] getConfigHashtags() {
 		ArrayList<String> hashtags = Config.get_crawler_hashtags();
 		return hashtags.toArray( new String[hashtags.size()] );
-	}
-
-	public ClusterElement getClusters( String hashtag ) {
-		ClusterElement readObject = null;
-		FileInputStream fi = null;
-		ObjectInputStream is = null;
-		// Versuchen die Streams zu initialisieren
-		try {
-			fi = new FileInputStream("files/serializedClusterElements/tatort/tatort.ser");
-			is = new ObjectInputStream(fi);
-			readObject = (ClusterElement) is.readObject(); // Read Object
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			// im finally block alle Streams schließen
-		} finally {
-			if (is != null) {
-				try {
-					is.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if (fi != null) {
-				try {
-					fi.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return readObject;
 	}
 
 	public boolean addHashtag( String hashtag ) {
