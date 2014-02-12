@@ -2,6 +2,8 @@ package ude.SocialMediaExplorer;
 
 import java.util.ArrayList;
 
+import com.google.gwt.core.shared.GWT;
+
 import ude.SocialMediaExplorer.data.utils.io.XMLFileManager;
 
 /**
@@ -15,7 +17,18 @@ public class Config {
 	/**
 	 * Path to project_config.xml (relative)
 	 */
-	private static final String	xmlPath					= "files/project_config.xml";
+	private static final String productionPrefix = "";//TODO:DEPLOYMENT of files to WAR
+	
+	private static final String xmlPath = "files/project_config.xml";
+
+	public static String get_xmlPath() {
+		if ( GWT.isProdMode() ) {
+			return productionPrefix + xmlPath;
+		}
+		else {
+			return xmlPath;
+		}
+	}
 
 	/**
 	 * Crawler
@@ -25,7 +38,7 @@ public class Config {
 	 * run params
 	 */
 	// how often a stream is splitted in a new file
-	private static long			crawler_newFileInterval	= -1;							// ms
+	private static long crawler_newFileInterval = -1;// ms
 
 	public static long get_crawler_newFileInterval() {
 		if ( crawler_newFileInterval < 0 ) {
@@ -40,16 +53,22 @@ public class Config {
 	}
 
 	// which tags are crawled
-	private static ArrayList <String>	crawler_hashtags	= null;
+	private static ArrayList<String> crawler_hashtags = null;
 
-	public static ArrayList <String> get_crawler_hashtags() {
+	public static ArrayList<String> get_crawler_hashtags() {
 		if ( crawler_hashtags == null ) {
-			crawler_hashtags = readValuesFromXMLFile( "hashtag" );
+			try {
+				crawler_hashtags = readValuesFromXMLFile( "hashtag" );
+			}
+			catch ( Exception e ) {
+				System.out.println( "Couldn't read Hashtags" );
+				return new ArrayList<String>();
+			}
 		}
 		return crawler_hashtags;
 	}
 
-	public static void set_crawler_hashtags( ArrayList <String> hashtags ) {
+	public static void set_crawler_hashtags( ArrayList<String> hashtags ) {
 		crawler_hashtags = hashtags;
 		deleteValueFromXMLFile( "hashtag", null );
 		for ( String s : hashtags ) {
@@ -58,24 +77,22 @@ public class Config {
 	}
 
 	public static void add_crawler_hashtag( String hashtag ) {
-		System.out.println("new mission: " + hashtag);
+		System.out.println( "new mission: " + hashtag );
 		crawler_hashtags.add( hashtag );
 		writeValueToXMLFile( "search", "hashtag", hashtag );
 	}
-	
-	public static void remove_crawler_hashtags (String[] hashtags) {
-		
-		for (int i = 0; i < hashtags.length; i++) {
-			crawler_hashtags.remove( hashtags[i] );			
+
+	public static void remove_crawler_hashtags( String[] hashtags ) {
+		for ( int i = 0; i < hashtags.length; i++ ) {
+			crawler_hashtags.remove( hashtags[i] );
 		}
-	
 		updateHashtags();
 	}
-	
+
 	private static void updateHashtags() {
-		if(crawler_hashtags!=null) {
+		if ( crawler_hashtags != null ) {
 			deleteValueFromXMLFile( "hashtag", null );
-			for (String s : crawler_hashtags) {
+			for ( String s : crawler_hashtags ) {
 				writeValueToXMLFile( "search", "hashtag", s );
 			}
 		}
@@ -91,7 +108,7 @@ public class Config {
 
 	// credentials
 
-	private static String	twitter_ConsumerKey	= null;
+	private static String twitter_ConsumerKey = null;
 
 	public static String get_twitter_ConsumerKey() {
 		if ( twitter_ConsumerKey == null ) {
@@ -105,7 +122,7 @@ public class Config {
 		updateXMLValue( "twitter_ConsumerKey", key );
 	}
 
-	private static String	twitter_ConsumerSecret	= null;
+	private static String twitter_ConsumerSecret = null;
 
 	public static String get_twitter_ConsumerSecret() {
 		if ( twitter_ConsumerSecret == null ) {
@@ -119,7 +136,7 @@ public class Config {
 		updateXMLValue( "twitter_ConsumerSecret", secret );
 	}
 
-	private static String	twitter_AccessToken	= null;
+	private static String twitter_AccessToken = null;
 
 	public static String get_twitter_AccessToken() {
 		if ( twitter_AccessToken == null ) {
@@ -133,7 +150,7 @@ public class Config {
 		updateXMLValue( "twitter_AccessToken", token );
 	}
 
-	private static String	twitter_AccessTokenSecret	= "";
+	private static String twitter_AccessTokenSecret = "";
 
 	public static String get_twitter_AccessTokenSecret() {
 		if ( twitter_AccessTokenSecret == null ) {
@@ -149,7 +166,7 @@ public class Config {
 
 	// rest restriction
 
-	private static int	twitter_result_restriction	= -1;
+	private static int twitter_result_restriction = -1;
 
 	public static int get_twitter_result_restriction() {
 		if ( twitter_result_restriction < 0 ) {
@@ -166,13 +183,18 @@ public class Config {
 	/**
 	 * input / output
 	 */
-	private static String	location_tweets	= null;
+	private static String location_tweets = null;
 
 	public static String get_location_tweets() {
 		if ( location_tweets == null ) {
 			location_tweets = readValueFromXMLFile( "location_tweets" );
 		}
-		return location_tweets;
+		if ( GWT.isProdMode() ) {
+			return productionPrefix + location_tweets;
+		}
+		else {
+			return location_tweets;
+		}
 	}
 
 	public static void set_location_tweets( String location ) {
@@ -180,44 +202,54 @@ public class Config {
 		updateXMLValue( "location_tweets", location );
 	}
 
-	private static String	location_results	= null;
+	private static String location_results = null;
 
 	public static String get_location_results() {
 		if ( location_results == null ) {
 			location_results = readValueFromXMLFile( "location_results" );
 		}
-		return location_results;
+		if ( GWT.isProdMode() ) {
+			return productionPrefix + location_results;
+		}
+		else {
+			return location_results;
+		}
 	}
 
 	public static void set_location_results( String location ) {
 		location_results = location;
 		updateXMLValue( "location_results", location );
 	}
-	
+
 	private static String location_CAS = null;
-	
+
 	public static String get_location_CAS() {
 		if ( location_CAS == null ) {
 			location_CAS = readValueFromXMLFile( "location_CAS" );
 		}
-		return location_CAS;
+		if ( GWT.isProdMode() ) {
+			return productionPrefix + location_CAS;
+		}
+		else {
+			return location_CAS;
+		}
 	}
 
 	public static void set_location_CAS( String location ) {
 		location_CAS = location;
 		updateXMLValue( "location_CAS", location );
 	}
-	
+
 	/**
 	 * get properties from project_config.xml
 	 */
 
 	public static String readValueFromXMLFile( String tagname ) {
-		return XMLFileManager.getNodeValuesByTag( xmlPath, tagname ).get( 0 );
+		return XMLFileManager.getNodeValuesByTag( get_xmlPath(), tagname ).get( 0 );
 	}
 
-	public static ArrayList <String> readValuesFromXMLFile( String tagname ) {
-		return XMLFileManager.getNodeValuesByTag( xmlPath, tagname );
+	public static ArrayList<String> readValuesFromXMLFile( String tagname ) {
+		return XMLFileManager.getNodeValuesByTag( get_xmlPath(), tagname );
 	}
 
 	/**
@@ -230,7 +262,7 @@ public class Config {
 	 */
 	public static void writeValueToXMLFile( String parentNodesTagname, String tagname, String value ) {
 		try {
-			XMLFileManager.appendValue( xmlPath, tagname, parentNodesTagname, value );
+			XMLFileManager.appendValue( get_xmlPath(), tagname, parentNodesTagname, value );
 		}
 		catch ( Exception e ) {
 			e.printStackTrace();
@@ -247,7 +279,7 @@ public class Config {
 	 */
 	public static void deleteValueFromXMLFile( String tagname, String value ) {
 		try {
-			XMLFileManager.removeNode( xmlPath, tagname, value );
+			XMLFileManager.removeNode( get_xmlPath(), tagname, value );
 		}
 		catch ( Exception e ) {
 			e.printStackTrace();
@@ -256,7 +288,7 @@ public class Config {
 
 	public static void updateXMLValue( String tagname, String value ) {
 		try {
-			XMLFileManager.updateNodeValue( xmlPath, tagname, null, value );
+			XMLFileManager.updateNodeValue( get_xmlPath(), tagname, null, value );
 		}
 		catch ( Exception e ) {
 			e.printStackTrace();
@@ -265,7 +297,7 @@ public class Config {
 
 	public static void updateXMLValue( String tagname, String value, String oldValue ) {
 		try {
-			XMLFileManager.updateNodeValue( xmlPath, tagname, oldValue, value );
+			XMLFileManager.updateNodeValue( get_xmlPath(), tagname, oldValue, value );
 		}
 		catch ( Exception e ) {
 			e.printStackTrace();
