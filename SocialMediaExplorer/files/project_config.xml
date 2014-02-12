@@ -38,7 +38,7 @@
 
     <io>
         <location_tweets>files/rawdata/tweets/</location_tweets>
-        <location_results>files/results/</location_results>
+        <location_results>files/serializedClusterElements/</location_results>
         <location_CAS>files/serializedCases/</location_CAS>
     </io>
     
