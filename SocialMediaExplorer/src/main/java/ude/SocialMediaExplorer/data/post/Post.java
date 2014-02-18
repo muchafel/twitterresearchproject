@@ -1,5 +1,7 @@
 package ude.SocialMediaExplorer.data.post;
 
+import java.util.Date;
+
 /**
  * Represents the data base
  * @author henrikdetjen
@@ -22,7 +24,12 @@ public class Post {
 	/**
 	 * the id 
 	 */
-	private String id = "";	
+	private String id = "";
+	/**
+	 * the date when posted
+	 */
+	private Date date = null;
+
 
 	/*
 	 * Constructors
@@ -64,6 +71,11 @@ public class Post {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+	public Date getDate() {
+		return this.date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	
 }

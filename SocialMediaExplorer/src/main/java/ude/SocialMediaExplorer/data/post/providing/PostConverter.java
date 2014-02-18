@@ -22,6 +22,7 @@ public class PostConverter {
 		s.setUser(s4j.getUser().getName());
 		s.setShared((int) s4j.getRetweetCount());
 		s.setId(String.valueOf(id));
+		s.setDate(s4j.getCreatedAt());
 		return s;
 	}
 }
