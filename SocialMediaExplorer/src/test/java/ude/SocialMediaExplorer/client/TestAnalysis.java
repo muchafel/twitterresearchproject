@@ -2,6 +2,8 @@ package ude.SocialMediaExplorer.client;
 
 import java.io.File;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import twitter4j.Status;
 import twitter4j.TwitterException;
@@ -17,9 +19,12 @@ import ude.SocialMediaExplorer.data.utils.io.TextFileReader;
 
 public class TestAnalysis {
 	
+	private boolean running = true;
+	static String hashtagToAnalyze = "tatort";
+	static private PostList pl;
+	static Timer timer;
+	
 	public static void main(String[] args) {
-		
-		String hashtagToAnalyze="tatort";
 		
 		TwitterJSONFileReader bla =  new TwitterJSONFileReader();
 		PostList pl=null;
@@ -29,7 +34,8 @@ public class TestAnalysis {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//pl.print();
+		
+
 		
 		
 //		Post p1 = new Post();
@@ -55,6 +61,17 @@ public class TestAnalysis {
 		
 	}
 
-	
+	private void startAnalysisCycle(int everyXHour) {
+		timer = new Timer();
+		TimerTask hourlyTask = new TimerTask() {
+			@Override
+			public void run() {
+				new Analysis(pl).run(hashtagToAnalyze);
+				new Clusterer().cluster(hashtagToAnalyze);
+			}
+		};
+		
+		timer.schedule (hourlyTask, 0l, 1000*60*60*everyXHour);
+	}
 	
 }
