@@ -221,6 +221,20 @@ public class Config {
 		updateXMLValue( "location_results", location );
 	}
 
+	private static String	location_CE	= null;
+
+	public static String get_location_CE() {
+		if ( location_CE == null ) {
+			location_CE = readValueFromXMLFile( "location_CE" );
+		}
+		return location_CE;
+	}
+
+	public static void set_location_CE( String location ) {
+		location_CE = location;
+		updateXMLValue( "location_CE", location );
+	}
+	
 	private static String location_CAS = null;
 
 	public static String get_location_CAS() {
