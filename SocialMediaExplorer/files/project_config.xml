@@ -40,6 +40,9 @@
         <location_tweets>files/rawdata/tweets/</location_tweets>
         <location_results>files/serializedClusterElements/</location_results>
         <location_CAS>files/serializedCases/</location_CAS>
+        <location_CE>files/serializedClusterElements/</location_CE>
     </io>
+    
+    <lastAnalysis>20110217101010</lastAnalysis>
     
 </config>
