@@ -3,7 +3,10 @@ package ude.SocialMediaExplorer.analysis;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +29,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.textcat.LanguageIdentifier;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import ude.SocialMediaExplorer.Config;
 import ude.SocialMediaExplorer.data.post.Post;
 import ude.SocialMediaExplorer.data.post.PostList;
 import ude.SocialMediaExplorer.data.utils.io.CASWriter;
@@ -41,29 +45,44 @@ static SentimentLexicon lexGerman= new SentimentLexicon("de");
 	
 	private List<JCas> tweetCases;
 	private CASWriter casWriter;
+	private SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+	private String dateToday = "";
+	private Date dateOfLastAnalysis = null;
 
 
 	public Analysis(PostList postList) {
 		this.postList=postList;
-		tweetCases= new ArrayList<JCas>();
+		tweetCases= new ArrayList<JCas>(); // tweetCases nicht neu erzeugen, sondern serialisierte einlesen und dann nur die neuen Analysen hinzufügen
 	}
 	
 	public void run(String hashtagToAnalyze) {
 		casWriter= new CASWriter();
+		try {
+			dateOfLastAnalysis = format.parse(Config.readValueFromXMLFile("lastAnalysis"));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	
 //		System.out.println(lexEnglish.getSentiment("abnormal", "En"));
-		
 //		System.out.println(lexGerman.getSentiment("erzürnte", "De"));
 		try {
 			// adding information per tweet
 			for (Post p : postList){
-				tweetCases.add(analyzeTweet(p));
+				// nur Posts analysieren und als Cas hinzufügen, die neuer als letzte Analyse sind
+				if (p.getDate().after(dateOfLastAnalysis)) {
+					tweetCases.add(analyzeTweet(p));
+				}
 			}
 			// form clusters
 
 			for (JCas jcas : tweetCases){
 				casWriter.write(jcas,hashtagToAnalyze);
 			}
+			
+			// update date of last analysis
+			dateToday = format.format(new Date());
+			Config.updateXMLValue("lastAnalysis", dateToday);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
