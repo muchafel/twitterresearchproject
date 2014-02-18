@@ -33,9 +33,11 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 
+import ude.SocialMediaExplorer.Config;
 import ude.SocialMediaExplorer.analysis.type.SenseAnno;
 import ude.SocialMediaExplorer.analysis.type.SentimentAnno;
 import ude.SocialMediaExplorer.data.utils.io.CASReader;
+import ude.SocialMediaExplorer.data.utils.time.TimeStamp;
 import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
 import ude.SocialMediaExplorer.shared.exchangeFormat.Sentiment;
 
@@ -86,7 +88,7 @@ public class Clusterer {
 		FileOutputStream fs = null;
 		ObjectOutputStream os = null;
 		try {
-			fs = new FileOutputStream("files/serializedClusterElements/"+hashtagToCluster+"/"+hashtagToCluster+".ser");
+			fs = new FileOutputStream(Config.get_location_CE()+hashtagToCluster+"/"+TimeStamp.getLong()+"_"+hashtagToCluster+".ser");
 			os = new ObjectOutputStream(fs);
 			os.writeObject(clusterElement);
 		} catch (IOException e) {
