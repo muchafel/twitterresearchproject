@@ -226,12 +226,11 @@ public class HashTagSelection extends Composite {
 		RootPanel.get( "content" ).clear();
 		RootPanel.get( "content" ).add( new Wait( "loading..." ) );
 		System.out.println(date);
-		dh.getClusters( hashtag, date, new AsyncCallback<ClusterElement>() {
+		dh.getData( hashtag, date, new AsyncCallback<String>() {
 
-			public void onSuccess( ClusterElement result ) {
+			public void onSuccess( String result ) {
 				if ( result != null ) {
-					ClusterElement ce = result; //ClusterElement.testCE();
-					ClusterVisualization cv = new ClusterVisualization( hashtag, ce );
+					ClusterVisualization cv = new ClusterVisualization( hashtag, result );
 					RootPanel.get( "content" ).clear();
 					RootPanel.get( "content" ).add( cv );
 					cv.draw(); //called here because JSNI needs to access the DOM - isnt possible before creating the widget

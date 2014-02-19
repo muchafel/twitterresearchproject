@@ -14,6 +14,8 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath( "datahelper" )
 public interface IDataHelperService extends RemoteService {
 
+	//ADMIN
+	
 	/**
 	 * @return {@link String[]} - an array of hashtags being crawled (project_config.xml)
 	 */
@@ -23,11 +25,24 @@ public interface IDataHelperService extends RemoteService {
 	 * @return {@link String[]} - an array of hashtags being crawled next interval (project_config.xml)
 	 */
 	String[] getConfigHashtags_next();
+	
+	/**
+	 * adds a hashtag to the project_config.xml (next hashtags)
+	 * 
+	 * @param hashtag
+	 *            {@link String}
+	 * @return if successful
+	 */
+	boolean addHashtag( String hashtag );
 
 	/**
-	 * @return {@link String[]} - an array of hashtags, which have actually any analysis results (location_results/?)
+	 * removes all given hashtags from project_config.xml (next hashtags)
+	 * 
+	 * @param hashtags
+	 *            {@link String[]}
+	 * @return if successful
 	 */
-	String[] getPossibleHashtags();
+	boolean removeHashtags( String[] hashtags );
 
 	/**
 	 * 
@@ -39,6 +54,9 @@ public interface IDataHelperService extends RemoteService {
 	 * 
 	 */
 	boolean set_Interval(long d);
+	
+	
+	//ENDUSER
 	
 	/**
 	 * @param hashtag
@@ -55,26 +73,12 @@ public interface IDataHelperService extends RemoteService {
 	 *            {@link TimeStamp} a String in formatted in long Timestamp
 	 * @return {@link ClusterElement} - analysis result of given hashtag
 	 */
-	ClusterElement getClusters( String hashtag, String timeStamp );
+	String getData( String hashtag, String timeStamp );
 
 	/**
-	 * adds a hashtag to the project_config.xml
-	 * 
-	 * @param hashtag
-	 *            {@link String}
-	 * @return if successful
+	 * @return {@link String[]} - an array of hashtags, which have actually any analysis results (location_results/?)
 	 */
-	boolean addHashtag( String hashtag );
-
-	/**
-	 * removes all given hashtags from project_config.xml
-	 * 
-	 * @param hashtags
-	 *            {@link String[]}
-	 * @return if successful
-	 */
-	boolean removeHashtags( String[] hashtags );
-	
+	String[] getPossibleHashtags();
 	
 
 }

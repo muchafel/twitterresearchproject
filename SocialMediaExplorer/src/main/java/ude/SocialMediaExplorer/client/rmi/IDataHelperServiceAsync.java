@@ -1,7 +1,5 @@
 package ude.SocialMediaExplorer.client.rmi;
 
-import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
@@ -20,7 +18,7 @@ public interface IDataHelperServiceAsync {
 
 	void getConfigHashtags_actual( AsyncCallback<String[]> callback );
 	
-	void getClusters( String hashtag, String timeStamp, AsyncCallback<ClusterElement> callback );
+	void getData( String hashtag, String timeStamp, AsyncCallback<String> callback );
 
 	void addHashtag( String hashtag, AsyncCallback<Boolean> callback );
 

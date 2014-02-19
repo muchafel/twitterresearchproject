@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import ude.SocialMediaExplorer.Config;
 import ude.SocialMediaExplorer.client.rmi.IDataHelperService;
 import ude.SocialMediaExplorer.data.utils.io.ObjectReader;
+import ude.SocialMediaExplorer.server.conversion.DataConverter;
 import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -37,7 +38,7 @@ public class DataHelperServiceImpl extends RemoteServiceServlet implements IData
 	}
 
 	// STEP 3: take the chosen hashtag and the chosen file and load clusterelements for visualization...
-	public ClusterElement getClusters( String hashtag, String timeStamp ) {
+	public String getData( String hashtag, String timeStamp ) {
 
 		File dir = new File( Config.get_location_results() + hashtag );
 		String[] filenames = dir.list();
@@ -46,7 +47,8 @@ public class DataHelperServiceImpl extends RemoteServiceServlet implements IData
 				String path = Config.get_location_results() + hashtag + "/" + f;
 				path = path.replace( " ", "" );
 				System.out.println( path );
-				return (ClusterElement) ObjectReader.readObject( path );
+				ClusterElement ce = (ClusterElement) ObjectReader.readObject( path );
+				return DataConverter.toJSONFormat( ce );
 			}
 		}
 		return null;
