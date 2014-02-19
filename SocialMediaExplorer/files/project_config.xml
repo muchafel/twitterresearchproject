@@ -17,6 +17,18 @@
 			<hashtag>sterntv</hashtag>
 			<hashtag>spiegeltv</hashtag>
         </search>
+       
+        <next>
+       		<hashtag_next>neu_und_nicht_tatort</hashtag_next>
+            <hashtag_next>halligalli</hashtag_next>
+			<hashtag_next>tvog</hashtag_next>
+			<hashtag_next>fashionhero</hashtag_next>
+			<hashtag_next>annewill</hashtag_next>
+			<hashtag_next>guentherjauch</hashtag_next>
+			<hashtag_next>terrax</hashtag_next>
+			<hashtag_next>sterntv</hashtag_next>
+			<hashtag_next>spiegeltv</hashtag_next> 
+        </next>
         
         <!-- in ms -->
         <crawler_newFileInterval>12000000</crawler_newFileInterval>
