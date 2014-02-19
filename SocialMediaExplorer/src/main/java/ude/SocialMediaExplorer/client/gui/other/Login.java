@@ -44,8 +44,13 @@ public class Login extends Composite{
 
 	private void checkAuth() {
 		if (name.getValue().equals( "test" ) && pass.getValue().equals( "test" ) ) {
+			pass.setText( "" );
+			name.setText( "" );
 			RootPanel.get( "content" ).clear();
 			RootPanel.get( "content" ).add( new AdminPage() );
+		}else {
+			pass.setText( "" );
+			name.setText( "" );
 		}
 	}
 

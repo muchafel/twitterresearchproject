@@ -21,6 +21,9 @@
 				    <p align="center" >
 				        <b:Button  type="LINK" ui:field="link_impressum">
 				        Impressum
+				        </b:Button> 
+				        <b:Button  type="LINK" ui:field="link_about">
+				        About
 				        </b:Button>
 				    </p>
 			    </g:HTMLPanel>

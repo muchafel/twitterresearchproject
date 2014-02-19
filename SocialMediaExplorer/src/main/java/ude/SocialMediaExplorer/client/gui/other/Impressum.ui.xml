@@ -10,6 +10,7 @@
 	<g:HTMLPanel>
 		<b:Row>
 			<b:Column size="10" offset="1">
+			    <b:Hero>
 				<g:HTMLPanel>
 					<p>
 						<strong>Haftung für Inhalte</strong>
@@ -77,6 +78,7 @@
 						</i>
 					</p>
 				</g:HTMLPanel>
+				</b:Hero>
 			</b:Column>
 		</b:Row>
 	</g:HTMLPanel>

@@ -1,0 +1,33 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+	<ui:style>
+	</ui:style>
+	<g:HTMLPanel>
+
+		<b:Row>
+			<b:Column size="10" offset="1">
+				<b:Hero>
+					<b:Heading size="2">Dokumentation</b:Heading>
+					<g:HTMLPanel>
+						<a href="https://code.google.com/p/twitterresearchproject/"
+							target="_blank">
+							&rarr; Project Site </a>
+						<br></br>
+					</g:HTMLPanel>
+					<b:Heading size="2">Developement</b:Heading>
+					<b:Paragraph>Henrik Detjen</b:Paragraph>
+					<b:Paragraph>Benjamin Räthel</b:Paragraph>
+					<b:Paragraph>Michael Wojatzki</b:Paragraph>
+					<b:Heading size="2">Support and Supervision</b:Heading>
+					<b:Paragraph>Torsten Zesch</b:Paragraph>
+					<g:HTMLPanel>
+						<a href="https://www.uni-due.de" target="_blank"> &rarr; University
+							Duisburg-Essen</a>
+						<br></br>
+					</g:HTMLPanel>
+				</b:Hero>
+			</b:Column>
+		</b:Row>
+	</g:HTMLPanel>
+</ui:UiBinder> 
