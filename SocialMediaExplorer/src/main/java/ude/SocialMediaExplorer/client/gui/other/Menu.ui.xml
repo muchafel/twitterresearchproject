@@ -36,7 +36,7 @@
 		<b:Row>
 
 			<b:Column size="10" offset="1">
-				<b:PageHeader subtext="Trendanalyse wöchentlicher TV Sendungen">Social Media Explorer</b:PageHeader>
+				<b:PageHeader subtext="Analyse wöchentlicher TV Sendungen">Social Media Explorer</b:PageHeader>
 			</b:Column>
 
 		</b:Row>
