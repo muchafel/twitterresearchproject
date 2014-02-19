@@ -36,9 +36,9 @@
 
 		<b:Row ui:field="timeSelection">
 			<b:Column size="6" offset="3">
-				<b:WellForm type="HORIZONTAL">
-					<b:ButtonGroup ui:field="times" toggle="radio">
-					</b:ButtonGroup>
+				<b:WellForm ui:field="times" type="HORIZONTAL">
+					<!--b:ButtonGroup ui:field="times" toggle="radio">
+					</b:ButtonGroup-->
 				</b:WellForm>
 			</b:Column>
 		</b:Row>

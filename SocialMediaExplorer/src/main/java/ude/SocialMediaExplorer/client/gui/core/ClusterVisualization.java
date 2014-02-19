@@ -254,10 +254,10 @@ public class ClusterVisualization extends Composite {
 				tree.goUpAndDraw();
 			}
 			
-			var downButton = $doc.getElementById("btn_down");
-				downButton.onclick = function(){
-				tree.setSelection(last[(last.length-1)]);	
-			}
+//			var downButton = $doc.getElementById("btn_down");
+//				downButton.onclick = function(){
+//				tree.setSelection(last[(last.length-1)]);	
+//			}
 		
 
 		} catch (e) {

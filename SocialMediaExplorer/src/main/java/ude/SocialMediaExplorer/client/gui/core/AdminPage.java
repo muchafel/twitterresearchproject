@@ -76,11 +76,9 @@ public class AdminPage extends Composite {
 			new SimpleErrorHandling( e );
 		}
 
-		if ( dh != null ) {
-			updateHashtagsLists();
-			initButtons();
-			updateInterval();
-		}
+		updateHashtagsLists();
+		initButtons();
+		updateInterval();
 
 
 	}
@@ -99,21 +97,33 @@ public class AdminPage extends Composite {
 		btn_add_hashtag.addClickHandler( new ClickHandler() {
 
 			public void onClick( ClickEvent event ) {
-				String input = input_add_hashtag.getValue();
-				dh.addHashtag( input, new AsyncCallback<Boolean>() {
 
-					public void onSuccess( Boolean result ) {
-						updateHashtagsLists();
-						successfulCall();
+				if ( dh != null ) {
+
+					String input = input_add_hashtag.getValue();
+
+					if ( input != null && input.length() > 0 ) {
+						dh.addHashtag( input, new AsyncCallback<Boolean>() {
+
+							public void onSuccess( Boolean result ) {
+								if ( result == true ) {
+									updateHashtagsLists();
+									successfulCall();
+								}
+							}
+
+							public void onFailure( Throwable caught ) {
+								new SimpleErrorHandling( caught.getMessage() );
+							}
+
+						} );
 					}
 
-					public void onFailure( Throwable caught ) {
-						new SimpleErrorHandling( caught.getMessage() );
-					}
+					input_add_hashtag.setValue( "" );
+					dialog_add_hashtag.hide();
 
-				} );
-				input_add_hashtag.setValue( "" );
-				dialog_add_hashtag.hide();
+				}
+
 			}
 		} );
 
@@ -122,25 +132,32 @@ public class AdminPage extends Composite {
 
 			public void onClick( ClickEvent event ) {
 
-				ArrayList<String> choices = new ArrayList<String>();
+				if ( dh != null ) {
+					ArrayList<String> choices = new ArrayList<String>();
 
-				for ( int i = 0; i < list_hashtags.getItemCount(); i++ ) {
-					if ( list_hashtags.isItemSelected( i ) ) {
-						choices.add( list_hashtags.getItemText( i ) );
+					for ( int i = 0; i < list_hashtags.getItemCount(); i++ ) {
+						if ( list_hashtags.isItemSelected( i ) ) {
+							choices.add( list_hashtags.getItemText( i ) );
+						}
+					}
+
+					if ( choices.size() > 0 ) {
+						dh.removeHashtags( choices.toArray( new String[choices.size()] ), new AsyncCallback<Boolean>() {
+
+							public void onSuccess( Boolean result ) {
+								if ( result == true ) {
+									updateHashtagsLists();
+									successfulCall();
+								}
+							}
+
+							public void onFailure( Throwable caught ) {
+								new SimpleErrorHandling( caught.getMessage() );
+							}
+						} );
+
 					}
 				}
-
-				dh.removeHashtags( choices.toArray( new String[choices.size()] ), new AsyncCallback<Boolean>() {
-
-					public void onSuccess( Boolean result ) {
-						updateHashtagsLists();
-						successfulCall();
-					}
-
-					public void onFailure( Throwable caught ) {
-						new SimpleErrorHandling( caught.getMessage() );
-					}
-				} );
 
 			}
 		} );
@@ -152,6 +169,7 @@ public class AdminPage extends Composite {
 				set_interval();
 
 			}
+
 		} );
 
 		button_change_interval.addClickHandler( new ClickHandler() {
@@ -159,6 +177,7 @@ public class AdminPage extends Composite {
 			public void onClick( ClickEvent event ) {
 				dialog_set_interval.show();
 			}
+
 		} );
 
 	}
@@ -166,73 +185,98 @@ public class AdminPage extends Composite {
 
 	private void updateHashtagsLists() {
 
-		dh.getConfigHashtags_actual( new AsyncCallback<String[]>() {
+		if ( dh != null ) {
 
-			public void onSuccess( String[] result ) {
+			dh.getConfigHashtags_actual( new AsyncCallback<String[]>() {
 
-				list_hashtags_actual.clear();
-				list_hashtags_actual.setVisibleItemCount( result.length );
+				public void onSuccess( String[] result ) {
+					successfulCall();
+					
+					if ( result.length > 0 ) {
+						list_hashtags_actual.clear();
+						list_hashtags_actual.setVisibleItemCount( result.length );
 
-				for ( int i = 0; i < result.length; i++ ) {
-					list_hashtags_actual.addItem( result[i] );
+						for ( int i = 0; i < result.length; i++ ) {
+							list_hashtags_actual.addItem( result[i] );
+						}
+					}
+
 				}
 
-			}
-
-			public void onFailure( Throwable caught ) {
-				new SimpleErrorHandling( caught.getMessage() );
-			}
-
-		} );
-
-		dh.getConfigHashtags_next( new AsyncCallback<String[]>() {
-
-			public void onSuccess( String[] result ) {
-
-				list_hashtags.clear();
-				list_hashtags.setVisibleItemCount( result.length );
-
-				for ( int i = 0; i < result.length; i++ ) {
-					list_hashtags.addItem( result[i] );
+				public void onFailure( Throwable caught ) {
+					new SimpleErrorHandling( caught.getMessage() );
 				}
 
-			}
+			} );
 
-			public void onFailure( Throwable caught ) {
-				new SimpleErrorHandling( caught.getMessage() );
-			}
+			dh.getConfigHashtags_next( new AsyncCallback<String[]>() {
 
-		} );
+				public void onSuccess( String[] result ) {
+					successfulCall();
+					
+					if ( result.length > 0 ) {
+						list_hashtags.clear();
+						list_hashtags.setVisibleItemCount( result.length );
+
+						for ( int i = 0; i < result.length; i++ ) {
+							list_hashtags.addItem( result[i] );
+						}
+					}
+
+				}
+
+				public void onFailure( Throwable caught ) {
+					new SimpleErrorHandling( caught.getMessage() );
+				}
+
+			} );
+
+		}
 	}
 
 	private void updateInterval() {
-		dh.get_Interval( new AsyncCallback<Long>() {
 
-			public void onSuccess( Long result ) {
-				input_interval.setText( String.valueOf( result ) );
+		if ( dh != null ) {
+			dh.get_Interval( new AsyncCallback<Long>() {
 
-			}
+				public void onSuccess( Long result ) {
+					successfulCall();
+					
+					if ( result >= 0 ) {
+						input_interval.setText( String.valueOf( ( result / 1000 / 60 ) ) );
+					}
+				}
 
-			public void onFailure( Throwable caught ) {
-				new SimpleErrorHandling( caught.getMessage() );
-			}
-		} );
+				public void onFailure( Throwable caught ) {
+					new SimpleErrorHandling( caught.getMessage() );
+				}
+
+			} );
+		}
 	}
 
 	private void set_interval() {
 		dialog_set_interval.hide();
-		long value = Long.valueOf( input_set_interval.getText() );
-		dh.set_Interval( value, new AsyncCallback<Boolean>() {
-
-			public void onSuccess( Boolean result ) {
-				updateInterval();
-			}
-
-			public void onFailure( Throwable caught ) {
-				new SimpleErrorHandling( caught.getMessage() );
-			}
-		} );
-
+		if(dh != null) {
+			long value = Long.valueOf( input_set_interval.getText() );
+			value = value * 60 * 1000;//convert min to ms
+			if ( value > 0 ) {
+				dh.set_Interval( value, new AsyncCallback<Boolean>() {
+					
+					public void onSuccess( Boolean result ) {
+						successfulCall();
+						if ( result == true ) {
+							updateInterval();
+						}
+					}
+					
+					public void onFailure( Throwable caught ) {
+						new SimpleErrorHandling( caught.getMessage() );
+					}
+					
+				} );
+			}	
+		}
 	}
 
 	private void successfulCall() {

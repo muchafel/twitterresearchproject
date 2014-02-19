@@ -3,7 +3,7 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
 	<ui:style>
 		#btn_up{
-		float:left;
+		/*float:left;*/
 		cursor:pointer;
 		}
 		#btn_down{
@@ -37,19 +37,19 @@
 
 					<b:Row>
 						<g:HTMLPanel>
-							<div id="btns_nav">
+							<div id="btns_nav" align="center">
 								<div id="btn_up">
 									<b:Icon type="ARROW_UP" size="TWO_TIMES" />
 								</div>
-								<div id="btn_down">
+								<!-- div id="btn_down">
 									<b:Icon type="ARROW_DOWN" size="LARGE" />
-								</div>
+								</div-->
 							</div>
-							<div id="treemap_help">
+							<!-- div id="treemap_help">
 								<b:Tooltip text='another tooltip'>
 									<b:Icon type="QUESTION" size="LARGE" />
 								</b:Tooltip>
-							</div>
+							</div-->
 						</g:HTMLPanel>
 					</b:Row>
 
