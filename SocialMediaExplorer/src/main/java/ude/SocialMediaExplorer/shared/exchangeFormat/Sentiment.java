@@ -11,8 +11,8 @@ public class Sentiment implements Serializable {
 
 	/////////////////////////////////
 
-	private double positive = 0;
-	private double negative = 0;
+	private double positive = 0D;
+	private double negative = 0D;
 
 	/////////////////////////////////
 
@@ -53,7 +53,7 @@ public class Sentiment implements Serializable {
 
 	public double getNormalized() {
 		Double range = getRange();
-		if ( range > 0 ) {
+		if ( range > 0D ) {
 			return ( this.positive - ( range / 2D ) );
 		}
 		else {
