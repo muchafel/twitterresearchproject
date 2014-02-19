@@ -31,28 +31,29 @@ public class DataConverter {
 
 	/**
 	 * 
-	 * @param c {@link ClusterElement} a Cluster to transform
+	 * @param c
+	 *            {@link ClusterElement} a Cluster to transform
 	 * @return a JSON Array of Rows with single Clusters
-	 * 			firstrow = header
-	 * 				cols:	
-	 * 					0 = id of the cluster
-	 * 					1 = name of the cluster
-	 * 					2 = parent cluster (id)
-	 * 					3 = size 
-	 * 					4 = sentiments value
-	 * 					5 = sentiments range
-	 * 					6 = posts belonging to the cluster
-	 * 					
+	 *         firstrow = header
+	 *         cols:
+	 *         0 = id of the cluster
+	 *         1 = name of the cluster
+	 *         2 = parent cluster (id)
+	 *         3 = size
+	 *         4 = sentiments value
+	 *         5 = sentiments range
+	 *         6 = posts belonging to the cluster
+	 * 
 	 */
 	public static String toJSONFormat( ClusterElement c ) {
-		
+
 		try {
 			//make JSON
 			ceList = new ArrayList<JSONArray>();
 			addToCeList( c );
-			
+
 			JSONArray wrapper = new JSONArray();
-			
+
 			JSONArray header = new JSONArray();
 			header.put( 0, "Id" );
 			header.put( 1, "Name" );
@@ -62,15 +63,16 @@ public class DataConverter {
 			header.put( 5, "SentimentRange" );
 			header.put( 6, "Posts" );
 			wrapper.put( 0, header );
-			
+
 			int rowCount = ceList.size();
 			for ( int i = 0; i < rowCount; i++ ) {
-				wrapper.put( ( i+1 ), ceList.get( i ) );
+				wrapper.put( ( i + 1 ), ceList.get( i ) );
 			}
-			
+
 			ceList = null;
 			return wrapper.toString();
-		}catch(Exception e) {
+		}
+		catch ( Exception e ) {
 			e.printStackTrace();
 			return "";
 		}
@@ -80,8 +82,8 @@ public class DataConverter {
 	 * 
 	 * @param c
 	 */
-	private static void addToCeList( ClusterElement c ) throws Exception{
-		
+	private static void addToCeList( ClusterElement c ) throws Exception {
+
 		JSONArray row = new JSONArray();
 
 		String id = String.valueOf( c.getId() );
@@ -92,30 +94,31 @@ public class DataConverter {
 		row.put( 1, c.getName() );
 		//2 = Parent	/String
 		String parent = c.getParent();
-		if (parent == null) {
+		if ( parent == null ) {
 			row.put( 2, JSONObject.NULL );
-		}else {
-			row.put( 2, parent  );			
+		}
+		else {
+			row.put( 2, parent );
 		}
 		//3 = Size		/Double
-		row.put( 3, c.getSize()  );
+		row.put( 3, c.getPosts().size() );
 		//4 = SentimentValue	/Double
 		Sentiment s = c.getSentiment();
-		System.out.println("v:"+s.getNormalized());
-		row.put( 4, s.getNormalized() );
+		Double sentiment = s.getNormalized();
+			//map to 0-1
+		row.put( 4, ( ( Math.round( sentiment * 100D ) / 100D ) ) );
 		//5 = SentimentRange 	/Double
-		row.put( 5, s.getRange()  );
-		System.out.println("r:"+s.getRange());
+		row.put( 5, ( ( Math.round( s.getRange() * 100D ) / 100D ) ) );
 		//6 = Posts		/ArrayList<String>
 		ArrayList<String> posts = c.getPosts();
 		JSONArray postsJSON = new JSONArray();
 		int postSize = posts.size();
 		for ( int i = 0; i < postSize; i++ ) {
-			postsJSON.put( i, posts.get( i )  );
+			postsJSON.put( i, posts.get( i ) );
 		}
 		row.put( 6, postsJSON );
-		
-//		System.out.println(row);
+
+				System.out.println(row);
 		ceList.add( row );
 
 		// recursion for all els
