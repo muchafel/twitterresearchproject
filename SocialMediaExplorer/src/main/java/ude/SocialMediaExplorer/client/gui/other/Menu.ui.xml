@@ -1,59 +1,95 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui"
-	xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
 	<ui:style>
-		.important {
-			font-weight: bold;
-		}
-		#plus{
+		#homeDiv{
 			float: left;
+			border: none;
+			cursor:	pointer;
+			margin-bottom: 2em;
+		}
+
+		#helpDiv, #adminDiv{
+			display: inline-block;
+			float: right;
 			cursor: pointer;
 			margin-bottom: 2em;
 		}
-		#gears{
-			float: right;	
-			cursor: pointer;
-			margin-bottom: 2em;	
+
+		#homeDiv:hover,
+		#helpDiv:hover,
+		#adminDiv:hover{
+			color: #003366;
 		}
-		.noborder{
-			border-style: none;
+		#homeDiv:active, 
+		#adminDiv:active, 
+		#helpDiv:active{
+			color: #CCCCCC;
+		}
+		#help{
+			border-style:none;
+			border-width:0px;
 		}
 	</ui:style>
 	<g:HTMLPanel>
-	    
-	    <b:Row>
-	        
-	        <b:Column size="10" offset="1">
-	    		<b:PageHeader subtext="Trendanalyse wöchentlicher TV Sendungen">Social Media Explorer</b:PageHeader>	        
-	        </b:Column>
-	        
-	    </b:Row>
-	    
-	    <b:Row>
-	        
-	        <b:Column size="6" offset="3">
-	            
-		        <g:HTMLPanel>
-			        <g:FocusPanel ui:field="home" styleName="{style.noborder}">
-			            <g:HTMLPanel>
-			            <div id="plus">
-					        <b:Icon type="PLUS" size="FOUR_TIMES"></b:Icon>
-			            </div>
-			            </g:HTMLPanel>
-			        </g:FocusPanel>
-					<g:FocusPanel ui:field="admin" styleName="{style.noborder}">
-					    <g:HTMLPanel>
-					    <div id="gears">
-					        <b:Icon type="GEARS" size="FOUR_TIMES"></b:Icon>
-					    </div>
-					    </g:HTMLPanel>
-					</g:FocusPanel>
-		        </g:HTMLPanel>
-		        
-	        </b:Column>
-	        
-	    </b:Row>
-	    
+
+		<b:Row>
+
+			<b:Column size="10" offset="1">
+				<b:PageHeader subtext="Trendanalyse wöchentlicher TV Sendungen">Social Media Explorer</b:PageHeader>
+			</b:Column>
+
+		</b:Row>
+
+		<b:Row>
+
+			<b:Column size="6" offset="3">
+				<b:Row>
+
+					<b:Column size="2">
+						<g:HTMLPanel>
+							<div id="homeDiv" align="left">
+								<g:FocusPanel ui:field="home">
+									<g:HTMLPanel>
+									    <p>
+											Explore
+										</p>
+										<b:Icon type="PLUS" size="FOUR_TIMES"></b:Icon>
+									</g:HTMLPanel>
+								</g:FocusPanel>
+							</div>
+						</g:HTMLPanel>
+					</b:Column>
+
+					<b:Column size="1" offset="2">
+						<g:HTMLPanel>
+							<div id="helpDiv" align="right">
+								<g:FocusPanel ui:field="help">
+									<g:HTMLPanel>
+										<p>Help</p>
+										<b:Icon type="QUESTION" size="TWO_TIMES"></b:Icon>
+									</g:HTMLPanel>
+								</g:FocusPanel>
+							</div>
+						</g:HTMLPanel>
+					</b:Column>
+
+					<b:Column size="1" offset="0">
+						<g:HTMLPanel>
+							<div id="adminDiv" align="right">
+								<g:FocusPanel ui:field="admin">
+									<g:HTMLPanel>
+										<p>Options</p>
+										<b:Icon type="GEARS" size="THREE_TIMES"></b:Icon>
+									</g:HTMLPanel>
+								</g:FocusPanel>
+							</div>
+						</g:HTMLPanel>
+					</b:Column>
+
+				</b:Row>
+			</b:Column>
+		</b:Row>
+
 	</g:HTMLPanel>
 </ui:UiBinder> 

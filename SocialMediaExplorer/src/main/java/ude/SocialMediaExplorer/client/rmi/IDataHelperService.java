@@ -17,13 +17,29 @@ public interface IDataHelperService extends RemoteService {
 	/**
 	 * @return {@link String[]} - an array of hashtags being crawled (project_config.xml)
 	 */
-	String[] getConfigHashtags();
+	String[] getConfigHashtags_actual();
+	
+	/**
+	 * @return {@link String[]} - an array of hashtags being crawled next interval (project_config.xml)
+	 */
+	String[] getConfigHashtags_next();
 
 	/**
 	 * @return {@link String[]} - an array of hashtags, which have actually any analysis results (location_results/?)
 	 */
 	String[] getPossibleHashtags();
 
+	/**
+	 * 
+	 * @return the crawler interval
+	 */
+	long get_Interval();
+	
+	/**
+	 * 
+	 */
+	boolean set_Interval(long d);
+	
 	/**
 	 * @param hashtag
 	 *            {@link String} a hashtag
@@ -58,5 +74,7 @@ public interface IDataHelperService extends RemoteService {
 	 * @return if successful
 	 */
 	boolean removeHashtags( String[] hashtags );
+	
+	
 
 }

@@ -16,12 +16,18 @@ public interface IDataHelperServiceAsync {
 
 	void getPossibleFiles( String hashtag, AsyncCallback<String[]> callback );
 
-	void getConfigHashtags( AsyncCallback<String[]> callback );
+	void getConfigHashtags_next( AsyncCallback<String[]> callback );
 
+	void getConfigHashtags_actual( AsyncCallback<String[]> callback );
+	
 	void getClusters( String hashtag, String timeStamp, AsyncCallback<ClusterElement> callback );
 
 	void addHashtag( String hashtag, AsyncCallback<Boolean> callback );
 
 	void removeHashtags( String[] hashtags, AsyncCallback<Boolean> callback );
 
+	void get_Interval( AsyncCallback<Long> callack );
+	
+	void set_Interval( long d, AsyncCallback<Boolean> callack );
+	
 }

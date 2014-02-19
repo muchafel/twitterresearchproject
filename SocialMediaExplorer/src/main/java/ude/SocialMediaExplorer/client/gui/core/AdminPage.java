@@ -9,6 +9,7 @@ import ude.SocialMediaExplorer.client.rmi.IDataHelperServiceAsync;
 import com.github.gwtbootstrap.client.ui.Button;
 import com.github.gwtbootstrap.client.ui.ListBox;
 import com.github.gwtbootstrap.client.ui.Modal;
+import com.github.gwtbootstrap.client.ui.Paragraph;
 import com.github.gwtbootstrap.client.ui.TextBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -31,25 +32,41 @@ public class AdminPage extends Composite {
 
 	@UiField
 	ListBox list_hashtags;
-	
+
 	@UiField
 	Button btn_open_dialog_add_hashtag;
-	
+
 	@UiField
 	Button btn_add_hashtag;
-	
+
 	@UiField
 	TextBox input_add_hashtag;
-	
+
 	@UiField
 	Button btn_remove_hashtags;
-	
+
 	@UiField
 	Modal dialog_add_hashtag;
 
+	@UiField
+	ListBox list_hashtags_actual;
+
+	@UiField
+	Paragraph input_interval;
+
+	@UiField
+	Button button_change_interval;
+
+	@UiField
+	Modal dialog_set_interval;
+
+	@UiField
+	TextBox input_set_interval;
+	@UiField
+	Button btn_set_interval;
 
 	public AdminPage() {
-		
+
 		initWidget( uiBinder.createAndBindUi( this ) );
 
 		try {
@@ -60,82 +77,121 @@ public class AdminPage extends Composite {
 		}
 
 		if ( dh != null ) {
-			updateHashtagsList();
+			updateHashtagsLists();
 			initButtons();
+			updateInterval();
 		}
 
 
 	}
-	
+
 	private void initButtons() {
-		
+
 		//open dialog 
 		btn_open_dialog_add_hashtag.addClickHandler( new ClickHandler() {
+
 			public void onClick( ClickEvent event ) {
 				dialog_add_hashtag.show();
 			}
 		} );
-		
+
 		//add a new hashtag
 		btn_add_hashtag.addClickHandler( new ClickHandler() {
+
 			public void onClick( ClickEvent event ) {
 				String input = input_add_hashtag.getValue();
-				dh.addHashtag(input, new AsyncCallback<Boolean>() {
-					
+				dh.addHashtag( input, new AsyncCallback<Boolean>() {
+
 					public void onSuccess( Boolean result ) {
-						updateHashtagsList();
+						updateHashtagsLists();
 						successfulCall();
 					}
-					
+
 					public void onFailure( Throwable caught ) {
 						new SimpleErrorHandling( caught.getMessage() );
 					}
-					
-				});
+
+				} );
 				input_add_hashtag.setValue( "" );
 				dialog_add_hashtag.hide();
 			}
 		} );
-		
+
 		//remove a hashtag
 		btn_remove_hashtags.addClickHandler( new ClickHandler() {
+
 			public void onClick( ClickEvent event ) {
-				
+
 				ArrayList<String> choices = new ArrayList<String>();
-				
-				for (int i = 0; i < list_hashtags.getItemCount(); i++) {
-					if (list_hashtags.isItemSelected( i )) {
+
+				for ( int i = 0; i < list_hashtags.getItemCount(); i++ ) {
+					if ( list_hashtags.isItemSelected( i ) ) {
 						choices.add( list_hashtags.getItemText( i ) );
 					}
 				}
-				
+
 				dh.removeHashtags( choices.toArray( new String[choices.size()] ), new AsyncCallback<Boolean>() {
-					
+
 					public void onSuccess( Boolean result ) {
-						updateHashtagsList();
+						updateHashtagsLists();
 						successfulCall();
 					}
-					
+
 					public void onFailure( Throwable caught ) {
 						new SimpleErrorHandling( caught.getMessage() );
 					}
 				} );
-				
+
 			}
 		} );
-		
-	}
-	
 
-	private void updateHashtagsList() {
-		
-		dh.getConfigHashtags( new AsyncCallback<String[]>() {
+		btn_set_interval.addClickHandler( new ClickHandler() {
+
+			public void onClick( ClickEvent event ) {
+
+				set_interval();
+
+			}
+		} );
+
+		button_change_interval.addClickHandler( new ClickHandler() {
+
+			public void onClick( ClickEvent event ) {
+				dialog_set_interval.show();
+			}
+		} );
+
+	}
+
+
+	private void updateHashtagsLists() {
+
+		dh.getConfigHashtags_actual( new AsyncCallback<String[]>() {
+
+			public void onSuccess( String[] result ) {
+
+				list_hashtags_actual.clear();
+				list_hashtags_actual.setVisibleItemCount( result.length );
+
+				for ( int i = 0; i < result.length; i++ ) {
+					list_hashtags_actual.addItem( result[i] );
+				}
+
+			}
+
+			public void onFailure( Throwable caught ) {
+				new SimpleErrorHandling( caught.getMessage() );
+			}
+
+		} );
+
+		dh.getConfigHashtags_next( new AsyncCallback<String[]>() {
 
 			public void onSuccess( String[] result ) {
 
 				list_hashtags.clear();
 				list_hashtags.setVisibleItemCount( result.length );
-				
+
 				for ( int i = 0; i < result.length; i++ ) {
 					list_hashtags.addItem( result[i] );
 				}
@@ -147,12 +203,39 @@ public class AdminPage extends Composite {
 			}
 
 		} );
-		
 	}
-	
+
+	private void updateInterval() {
+		dh.get_Interval( new AsyncCallback<Long>() {
+
+			public void onSuccess( Long result ) {
+				input_interval.setText( String.valueOf( result ) );
+
+			}
+
+			public void onFailure( Throwable caught ) {
+				new SimpleErrorHandling( caught.getMessage() );
+			}
+		} );
+	}
+
+	private void set_interval() {
+		dialog_set_interval.hide();
+		long value = Long.valueOf( input_set_interval.getText() );
+		dh.set_Interval( value, new AsyncCallback<Boolean>() {
+
+			public void onSuccess( Boolean result ) {
+				updateInterval();
+			}
+
+			public void onFailure( Throwable caught ) {
+				new SimpleErrorHandling( caught.getMessage() );
+			}
+		} );
+
+	}
+
 	private void successfulCall() {
 		//do something on success
 	}
-
-
 }

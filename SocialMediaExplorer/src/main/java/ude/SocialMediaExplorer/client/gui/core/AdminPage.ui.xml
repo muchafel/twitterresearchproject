@@ -7,21 +7,31 @@
 
 		<b:Row>
 
-
 			<b:Column size="10" offset="1">
 
-			    <b:Hero>
-			        
-				<b:Form>
-					<b:Fieldset>
-						<b:ControlGroup>
+				<b:Hero>
+
+					<b:Row>
+
+						<b:Column size="3">
+							<b:ControlLabel for="multiSelect">Hashtags being crawled NOW:</b:ControlLabel>
+							<b:Controls>
+								<b:ListBox ui:field="list_hashtags_actual"
+									multipleSelect="true" b:id="multiSelect">
+								</b:ListBox>
+							</b:Controls>
+						</b:Column>
+						
+						<b:Column size="3">
 							<b:Row>
-								<b:ControlLabel for="multiSelect">Hashtags being crawled:</b:ControlLabel>
+								<b:ControlLabel for="multiSelect">Hashtags being crawled in
+									NEXT interval:</b:ControlLabel>
 								<b:Controls>
 									<b:ListBox ui:field="list_hashtags" multipleSelect="true"
 										b:id="multiSelect">
 									</b:ListBox>
 								</b:Controls>
+
 							</b:Row>
 							<b:Row>
 								<b:Controls>
@@ -29,10 +39,18 @@
 									<b:Button ui:field="btn_remove_hashtags">Remove</b:Button>
 								</b:Controls>
 							</b:Row>
-						</b:ControlGroup>
-					</b:Fieldset>
-				</b:Form>
-			
+						</b:Column>
+
+						<b:Column size="2">
+							<b:Row>
+								<b:Paragraph>Crawler interval</b:Paragraph>
+								<b:Paragraph ui:field="input_interval">test</b:Paragraph>
+								<b:Button ui:field="button_change_interval">change</b:Button>
+							</b:Row>
+						</b:Column>
+					</b:Row>
+
+
 				</b:Hero>
 
 			</b:Column>
@@ -46,6 +64,15 @@
 			<b:TextBox ui:field="input_add_hashtag" placeholder="#" />
 			<b:ModalFooter>
 				<b:Button ui:field="btn_add_hashtag" type="PRIMARY">add</b:Button>
+			</b:ModalFooter>
+		</b:Modal>
+
+		<b:Modal ui:field="dialog_set_interval" title="Set Crawler Interval"
+			backdrop="STATIC" keyboard="true" animation="true">
+			<g:Label>type in a new interval in MINUTES:</g:Label>
+			<b:TextBox ui:field="input_set_interval" placeholder="i.e. 120" />
+			<b:ModalFooter>
+				<b:Button ui:field="btn_set_interval" type="PRIMARY">ok</b:Button>
 			</b:ModalFooter>
 		</b:Modal>
 
