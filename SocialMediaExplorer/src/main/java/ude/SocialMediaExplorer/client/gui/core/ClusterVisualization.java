@@ -1,6 +1,6 @@
 package ude.SocialMediaExplorer.client.gui.core;
 
-import ude.SocialMediaExplorer.client.conversion.DataConverter;
+import ude.SocialMediaExplorer.server.conversion.DataConverter;
 import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
 
 import com.google.gwt.core.client.GWT;
@@ -15,8 +15,6 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class ClusterVisualization extends Composite {
 
-	private ClusterElement ce;
-	private ClusterElement activeCE;
 	private String hashtag;
 	private String jsonData;
 
@@ -24,16 +22,15 @@ public class ClusterVisualization extends Composite {
 
 	interface ClusterVisualizationUiBinder extends UiBinder<Widget, ClusterVisualization> {}
 
-	public ClusterVisualization( String hashtag, ClusterElement ce ) {
+	public ClusterVisualization( String hashtag, String data ) {
 		initWidget( uiBinder.createAndBindUi( this ) );
 
 		this.hashtag = hashtag;
-		this.ce = ce;
+		jsonData = data;
 		
 		//		title.setText( hashtag );
 		//		infos.setText( "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua." );
 
-		jsonData = DataConverter.toJSONFormat( ce );
 	}
 
 	/**

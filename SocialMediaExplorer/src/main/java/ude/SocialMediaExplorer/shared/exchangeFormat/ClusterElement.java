@@ -45,8 +45,7 @@ public class ClusterElement implements Serializable {
 		}
 		else
 			this.name = name;
-		
-		
+				
 		this.setId( IdGenerator.getId() );
 
 	}

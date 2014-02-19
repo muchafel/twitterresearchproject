@@ -19,10 +19,10 @@ public class Sentiment implements Serializable {
 	public Sentiment() {
 
 	}
-	
-	public Sentiment(double positive, double negative) {
-		this.setPositive(positive);
-		this.setNegative(negative);
+
+	public Sentiment( double positive, double negative ) {
+		this.setPositive( positive );
+		this.setNegative( negative );
 	}
 
 	/////////////////////////////////
@@ -32,7 +32,11 @@ public class Sentiment implements Serializable {
 	}
 
 	public void setNegative( double negative ) {
-		this.negative = negative;
+		if(Double.isNaN( negative ) || Double.isInfinite( negative )) {
+			this.negative = 0D;
+		}else {
+			this.negative = negative;			
+		}
 	}
 
 	public double getPositive() {
@@ -40,20 +44,24 @@ public class Sentiment implements Serializable {
 	}
 
 	public void setPositive( double positive ) {
-		this.positive = positive;
+		if(Double.isNaN( positive ) || Double.isInfinite( positive )) {
+			this.positive = 0D;
+		}else {
+			this.positive = positive;			
+		}
 	}
 
 	public double getNormalized() {
-		return ( this.positive - ( getRange() / 2 ) );
-				
+		Double range = getRange();
+		if ( range > 0 ) {
+			return ( this.positive - ( range / 2D ) );
+		}
+		else {
+			return this.positive;
+		}
 	}
 
 	public double getRange() {
-		if (this.negative >= 0) {
-			return (this.positive - this.negative);			
-		}else {
-			return (this.positive + this.negative);			
-		}
-			
+		return Math.abs( ( this.positive - Math.abs( this.negative ) ) );
 	}
 }
