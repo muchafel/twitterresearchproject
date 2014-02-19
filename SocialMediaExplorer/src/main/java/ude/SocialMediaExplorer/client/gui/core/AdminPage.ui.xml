@@ -9,8 +9,9 @@
 
 			<b:Column size="10" offset="1">
 
-				<b:Hero>
-
+				<b:Well>
+					    
+					    <b:Heading size="2">Options</b:Heading>
 					<b:Row>
 
 						<b:Column size="3">
@@ -21,8 +22,8 @@
 								</b:ListBox>
 							</b:Controls>
 						</b:Column>
-						
-						<b:Column size="3">
+
+						<b:Column size="3" offset="1">
 							<b:Row>
 								<b:ControlLabel for="multiSelect">Hashtags being crawled in
 									NEXT interval:</b:ControlLabel>
@@ -42,16 +43,16 @@
 						</b:Column>
 
 						<b:Column size="2">
-							<b:Row>
-								<b:Paragraph>Crawler interval</b:Paragraph>
-								<b:Paragraph ui:field="input_interval">test</b:Paragraph>
-								<b:Button ui:field="button_change_interval">change</b:Button>
-							</b:Row>
+							<b:Paragraph>Crawler Interval (in min):</b:Paragraph>
+							<b:Paragraph ui:field="input_interval">test</b:Paragraph>
+							<b:Button ui:field="button_change_interval">change</b:Button>
 						</b:Column>
+
+
 					</b:Row>
 
 
-				</b:Hero>
+				</b:Well>
 
 			</b:Column>
 

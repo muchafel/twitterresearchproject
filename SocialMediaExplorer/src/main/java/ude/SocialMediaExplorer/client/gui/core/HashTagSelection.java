@@ -9,9 +9,9 @@ import ude.SocialMediaExplorer.client.rmi.IDataHelperServiceAsync;
 import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
 
 import com.github.gwtbootstrap.client.ui.Button;
-import com.github.gwtbootstrap.client.ui.ButtonGroup;
 import com.github.gwtbootstrap.client.ui.ListBox;
 import com.github.gwtbootstrap.client.ui.Row;
+import com.github.gwtbootstrap.client.ui.WellForm;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -60,7 +60,7 @@ public class HashTagSelection extends Composite {
 	 * the buttons for a selection of a file
 	 */
 	@UiField
-	ButtonGroup times; //files timestamps
+	WellForm times; //files timestamps
 
 	ArrayList<Button> possibleFiles; //holds actual selection buttons in 
 
@@ -145,6 +145,9 @@ public class HashTagSelection extends Composite {
 	// STEP 2 (takes selected hashtag and loads the file/date selection)
 	@UiHandler( "btnOk" )
 	void time( ClickEvent event ) {
+		
+		wait = new Wait( "loading..." );
+		RootPanel.get( "content" ).add( wait );
 		wait.setVisible( true );
 
 		try {
@@ -153,14 +156,20 @@ public class HashTagSelection extends Composite {
 				public void onSuccess( String[] result ) {
 					times.clear();
 					possibleFiles = new ArrayList<Button>();
-					for ( final String date : result ) {
-
-						Button b = new Button();
+					for ( String date : result ) {
+						final Button b = new Button();
 						possibleFiles.add( b );
-						b.setText( date );
+						String btn_text = date;
+						btn_text = makeDateString( btn_text );
+						b.setText( btn_text );
+						b.setName( date );
 						b.addClickHandler( new ClickHandler() {
 
 							public void onClick( ClickEvent event ) {
+								for ( Button btn : possibleFiles ) {
+									btn.setActive( false );
+								}
+								b.setActive( true );
 								gogogo.setVisible( true );
 							}
 						} );
@@ -206,8 +215,7 @@ public class HashTagSelection extends Composite {
 	private String getSelectedDate() {
 		for ( Button b : possibleFiles ) {
 			if ( b.isActive() ) {
-				System.out.println( b.getText().replace( " ", "" ) );
-				return b.getText().replace( " ", "" );
+				return b.getName().replace( " ", "" );
 			}
 		}
 		return "";
@@ -217,6 +225,7 @@ public class HashTagSelection extends Composite {
 
 		RootPanel.get( "content" ).clear();
 		RootPanel.get( "content" ).add( new Wait( "loading..." ) );
+		System.out.println(date);
 		dh.getClusters( hashtag, date, new AsyncCallback<ClusterElement>() {
 
 			public void onSuccess( ClusterElement result ) {
@@ -229,7 +238,7 @@ public class HashTagSelection extends Composite {
 				}
 				else {
 					RootPanel.get( "content" ).clear();
-					new SimpleErrorHandling( "Could not create visualization." );
+					new SimpleErrorHandling( "Could not create visualization: Clusters are null." );
 				}
 			}
 
@@ -239,6 +248,14 @@ public class HashTagSelection extends Composite {
 			}
 		} );
 
+	}
+
+	private String makeDateString( String in ) {
+		String date = in.split( "_" )[0];
+		String year = date.substring( 0, 4 );
+		String month = date.substring( 4, 6 );
+		String day = date.substring( 6, 8 );
+		return day + "." + month + "." + year;
 	}
 
 }
