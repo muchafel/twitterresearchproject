@@ -42,11 +42,12 @@ public class DataHelperServiceImpl extends RemoteServiceServlet implements IData
 		File dir = new File( Config.get_location_results() + hashtag );
 		String[] filenames = dir.list();
 		for ( String f : filenames ) {
-			if ( f.contains( timeStamp ) ) { 
+			if ( f.contains( timeStamp ) ) {
 				String path = Config.get_location_results() + hashtag + "/" + f;
 				path = path.replace( " ", "" );
-				System.out.println(path);
-				return (ClusterElement) ObjectReader.readObject( path ); }
+				System.out.println( path );
+				return (ClusterElement) ObjectReader.readObject( path );
+			}
 		}
 		return null;
 
@@ -55,13 +56,8 @@ public class DataHelperServiceImpl extends RemoteServiceServlet implements IData
 	/**
 	 * admin
 	 */
-		
+
 	// Functions to display and edit the project_config.xml
-	
-	public String[] getConfigHashtags() {
-		ArrayList<String> hashtags = Config.get_crawler_hashtags();
-		return hashtags.toArray( new String[hashtags.size()] );
-	}
 
 	public boolean addHashtag( String hashtag ) {
 		try {
@@ -81,6 +77,25 @@ public class DataHelperServiceImpl extends RemoteServiceServlet implements IData
 			return false;
 		}
 		return true;
+	}
+
+	public long get_Interval() {
+		return  Config.get_crawler_newFileInterval();
+	}
+
+	public boolean set_Interval( long d ) {
+		Config.set_crawler_newFileInterval( d );
+		return true;
+	}
+
+	public String[] getConfigHashtags_actual() {
+		ArrayList<String> hashtags = Config.get_crawler_hashtags_actual();
+		return hashtags.toArray( new String[hashtags.size()] );
+	}
+
+	public String[] getConfigHashtags_next() {
+		ArrayList<String> hashtags = Config.get_crawler_hashtags();
+		return hashtags.toArray( new String[hashtags.size()] );
 	}
 
 

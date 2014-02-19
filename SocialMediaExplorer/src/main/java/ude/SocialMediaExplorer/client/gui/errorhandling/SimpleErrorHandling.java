@@ -1,7 +1,5 @@
 package ude.SocialMediaExplorer.client.gui.errorhandling;
 
-import com.google.gwt.user.client.Window;
-
 public class SimpleErrorHandling {
 
 
@@ -11,7 +9,7 @@ public class SimpleErrorHandling {
 
 		new Error( e.getLocalizedMessage() );
 
-		System.out.println( e.getMessage() + ":\n " );
+		System.out.println( e.getClass() + ":\n " + e.getLocalizedMessage() );
 	}
 
 	public SimpleErrorHandling( String e ) {

@@ -51,14 +51,38 @@ public class Config {
 		updateXMLValue( "crawler_newFileInterval", String.valueOf( interval ) );
 		crawler_newFileInterval = interval;
 	}
+	
+	// which tags are crawled NOW
+	private static ArrayList<String> crawler_hashtags_actual = null;
 
-	// which tags are crawled
+	public static ArrayList<String> get_crawler_hashtags_actual() {
+		if ( crawler_hashtags_actual == null ) {
+			try {
+				crawler_hashtags_actual = readValuesFromXMLFile( "hashtag" );
+			}
+		catch ( Exception e ) {
+				System.out.println( "Couldn't read Hashtags" );
+				return new ArrayList<String>();
+			}
+		}
+		return crawler_hashtags_actual;
+	}
+
+	public static void set_crawler_hashtags_actual( ArrayList<String> hashtags ) {
+		crawler_hashtags_actual = hashtags;
+		deleteValueFromXMLFile( "hashtag", null );
+		for ( String s : hashtags ) {
+			add_crawler_hashtag( s );
+		}
+	}
+
+	// which tags are crawled NEXT interval
 	private static ArrayList<String> crawler_hashtags = null;
 
 	public static ArrayList<String> get_crawler_hashtags() {
 		if ( crawler_hashtags == null ) {
 			try {
-				crawler_hashtags = readValuesFromXMLFile( "hashtag" );
+				crawler_hashtags = readValuesFromXMLFile( "hashtag_next" );
 			}
 			catch ( Exception e ) {
 				System.out.println( "Couldn't read Hashtags" );
@@ -70,7 +94,7 @@ public class Config {
 
 	public static void set_crawler_hashtags( ArrayList<String> hashtags ) {
 		crawler_hashtags = hashtags;
-		deleteValueFromXMLFile( "hashtag", null );
+		deleteValueFromXMLFile( "hashtag_next", null );
 		for ( String s : hashtags ) {
 			add_crawler_hashtag( s );
 		}
@@ -79,7 +103,7 @@ public class Config {
 	public static void add_crawler_hashtag( String hashtag ) {
 		System.out.println( "new mission: " + hashtag );
 		crawler_hashtags.add( hashtag );
-		writeValueToXMLFile( "search", "hashtag", hashtag );
+		writeValueToXMLFile( "next", "hashtag_next", hashtag );
 	}
 
 	public static void remove_crawler_hashtags( String[] hashtags ) {
@@ -91,9 +115,9 @@ public class Config {
 
 	private static void updateHashtags() {
 		if ( crawler_hashtags != null ) {
-			deleteValueFromXMLFile( "hashtag", null );
+			deleteValueFromXMLFile( "hashtag_next", null );
 			for ( String s : crawler_hashtags ) {
-				writeValueToXMLFile( "search", "hashtag", s );
+				writeValueToXMLFile( "next", "hashtag_next", s );
 			}
 		}
 	}

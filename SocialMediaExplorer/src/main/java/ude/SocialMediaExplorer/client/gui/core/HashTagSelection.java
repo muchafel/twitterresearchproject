@@ -205,7 +205,10 @@ public class HashTagSelection extends Composite {
 
 	private String getSelectedDate() {
 		for ( Button b : possibleFiles ) {
-			if ( b.isActive() ) { System.out.println(b.getText().replace( " ", "" ));return b.getText().replace( " ", "" ); }
+			if ( b.isActive() ) {
+				System.out.println( b.getText().replace( " ", "" ) );
+				return b.getText().replace( " ", "" );
+			}
 		}
 		return "";
 	}
@@ -217,13 +220,14 @@ public class HashTagSelection extends Composite {
 		dh.getClusters( hashtag, date, new AsyncCallback<ClusterElement>() {
 
 			public void onSuccess( ClusterElement result ) {
-				if (result != null) {
+				if ( result != null ) {
 					ClusterElement ce = result; //ClusterElement.testCE();
 					ClusterVisualization cv = new ClusterVisualization( hashtag, ce );
 					RootPanel.get( "content" ).clear();
 					RootPanel.get( "content" ).add( cv );
 					cv.draw(); //called here because JSNI needs to access the DOM - isnt possible before creating the widget
-				}else {
+				}
+				else {
 					RootPanel.get( "content" ).clear();
 					new SimpleErrorHandling( "Could not create visualization." );
 				}

@@ -9,21 +9,21 @@
 
 			<b:Column size="6" offset="3">
 
-					<g:HTMLPanel>
-						<b:WellForm>
-							<b:ControlLabel>Name</b:ControlLabel>
-							<b:TextBox ui:field="name" alternateSize="XLARGE"
-								placeholder="type in name..." />
-							<b:ControlLabel>Password</b:ControlLabel>
-							<b:PasswordTextBox ui:field="pass"
-								alternateSize="XLARGE" placeholder="type in password..." />
-							<g:HTMLPanel>
-								<hr />
-							</g:HTMLPanel>
-							<b:Button ui:field="button_login">Validate</b:Button>
-						</b:WellForm>
-					</g:HTMLPanel>
-				    
+				<g:HTMLPanel>
+					<b:WellForm>
+						<b:ControlLabel>Name</b:ControlLabel>
+						<b:TextBox ui:field="name" alternateSize="XLARGE"
+							placeholder="type in name..." />
+						<b:ControlLabel>Password</b:ControlLabel>
+						<b:PasswordTextBox ui:field="pass"
+							alternateSize="XLARGE" placeholder="type in password..." />
+						<g:HTMLPanel>
+							<hr />
+						</g:HTMLPanel>
+						<b:Button ui:field="button_login">Validate</b:Button>
+					</b:WellForm>
+				</g:HTMLPanel>
+
 			</b:Column>
 
 		</b:Row>

@@ -34,6 +34,14 @@ public class Menu extends Composite {
 		RootPanel.get( "content" ).clear();
 		RootPanel.get( "content" ).add( new Login() );
 	}
+	
+	@UiField
+	FocusPanel help;
+	@UiHandler("help")
+	void openTutorial(ClickEvent e) {
+		RootPanel.get( "content" ).clear();
+		RootPanel.get( "content" ).add( new Help() );
+	}
 
 	public Menu() {
 		
