@@ -29,3 +29,5 @@ This step uses the enriched twets and forms clusters on the basis of orthographi
   * cluster forming: Finally we can extract a hirarchical structure from the sum of tweets. We do this by recursivly adding the *18 (?)* most-frequent orthographically-cleaned keywords as child-nodes to our result-set
 
 The generated Cluster-Structure is shown in the figure below:
+
+[http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/ClusterElement.png]
