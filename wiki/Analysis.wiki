@@ -15,7 +15,7 @@ As already mentionned this step is performed for each tweet that was collected b
   * POS-tagging with the OpenNLPPOSTagger (Quelle): This POS-Tager is also capable of German
   * POS-merging: The results of the ArktweetTagger are replaced with the results from OpenNLPPOSTagger except the emoticons, links and twitter-specific phenomenons
   * [[SentimentTagging]]: that enriches tokens with a sentiment value
-  * simple Sense-Annotation that markes NNs, NEs and ADJs to speed up the following clustering process
+  * simple Sense-Annotation that marks NNs, NEs and ADJs to speed up the following clustering process
 
 The figure below illustrates the "Analysis on Tweet-Level"
 
