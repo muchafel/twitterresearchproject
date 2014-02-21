@@ -7,4 +7,4 @@ In order to compress the tweets further we try to extract words and phrases that
 Then the most connected nodes are selected as keywords. Because there could be also keyprahses each keyword is checked for adjacent nodes that have a high rank, too.
 If we found such a compound of two adjacent words that are both highly-connected we choose the compound as keyphrase.
 
-In the example sentence the keyphrases [Utah Anti-Spam Regelungen, Bahn, Telekommunikationsanbietern, Anti-Spam Gesetze] would be chosen.
+In the example sentence the keyphrases "Utah Anti-Spam Regelungen, Bahn, Telekommunikationsanbietern, Anti-Spam Gesetze" would be chosen.
