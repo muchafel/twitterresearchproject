@@ -27,3 +27,5 @@ This step uses the enriched twets and forms clusters on the basis of orthographi
   *[[OrthographicCleaning]] : On similarity that is calculated using the levensthein-distance we aggregate words that are written similar and assign the the one thats found most often
   *[[KeyphraseExtraction]]: Throught the use of a Co-Occurence-graph on each- tweet we extract keyphrases
   * cluster forming: Finally we can extract a hirarchical structure from the sum of tweets. We do this by recursivly adding the *18 (?)* most-frequent orthographically-cleaned keywords as child-nodes to our result-set
+
+The generated Cluster-Structure is shown in the figure below:
