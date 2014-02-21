@@ -17,6 +17,10 @@ As already mentionned this step is performed for each tweet that was collected b
   * [[SentimentTagging]]: that enriches tokens with a sentiment value
   * simple Sense-Annotation that markes NNs, NEs and ADJs to speed up the following clustering process
 
+The figure below illustrates the "Analysis on Tweet-Level"
+
+[http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/Analyse.png]
+
 = "Clustering"=
 This step uses the enriched twets and forms clusters on the basis of orthographic similarity, extractable keyphrases and frequenzy of them. Therefore it performs the following steps:
 
