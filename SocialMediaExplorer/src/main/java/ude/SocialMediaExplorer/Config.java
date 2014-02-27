@@ -18,11 +18,11 @@ public class Config {
 	 * Path to project_config.xml (relative)
 	 */
 	private static final String productionPrefix = "/Users/henrikdetjen/Desktop/Serverprogramme/apache-tomcat-7.0.47/webapps/test/";//TODO:DEPLOYMENT of files to WAR
-	
+	private static final boolean productionMode = true;
 	private static final String xmlPath = "files/project_config.xml";
 
 	public static String get_xmlPath() {
-		if ( GWT.isProdMode() ) {
+		if ( productionMode ) {
 			return productionPrefix + xmlPath;
 		}
 		else {
@@ -213,7 +213,7 @@ public class Config {
 		if ( location_tweets == null ) {
 			location_tweets = readValueFromXMLFile( "location_tweets" );
 		}
-		if ( GWT.isProdMode() ) {
+		if ( productionMode ) {
 			return productionPrefix + location_tweets;
 		}
 		else {
@@ -232,7 +232,7 @@ public class Config {
 		if ( location_results == null ) {
 			location_results = readValueFromXMLFile( "location_results" );
 		}
-		if ( GWT.isProdMode() ) {
+		if ( productionMode ) {
 			return productionPrefix + location_results;
 		}
 		else {
@@ -265,7 +265,7 @@ public class Config {
 		if ( location_CAS == null ) {
 			location_CAS = readValueFromXMLFile( "location_CAS" );
 		}
-		if ( GWT.isProdMode() ) {
+		if ( productionMode ) {
 			return productionPrefix + location_CAS;
 		}
 		else {
