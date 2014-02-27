@@ -1,8 +1,5 @@
 package ude.SocialMediaExplorer.client.gui.core;
 
-import ude.SocialMediaExplorer.server.conversion.DataConverter;
-import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
@@ -67,7 +64,7 @@ public class ClusterVisualization extends Composite {
 			//		5 = sentiments range
 			//		6 = posts belonging to the cluster
 			function getRowById(id){
-				for (var i = 0; i < dataSize; i++){
+				for (var i = 1; i < dataSize; i++){
 					if (id == data[i][0]){
 						return data[i];
 					}
@@ -100,6 +97,8 @@ public class ClusterVisualization extends Composite {
 //			orgChartData = new $wnd.google.visualization.arrayToDataTable( orgChartData );
 //			console.log("...done");
 			
+			/////////////////////////////////////////////////////
+			
 			// Create and draw the postList
 			function drawPosts(id){
 				
@@ -107,38 +106,52 @@ public class ClusterVisualization extends Composite {
 				console.log(row);
 				var posts = row[6];
 				
-				function makeHTMLfromPosts(postArray){
-					var ul = $doc.createElement('ul');
-					for (var i = 0; i < postArray.length; i++){
-						var li = $doc.createElement('li');
-						li.innerHTML = postArray[i];
-						ul.appendChild(li);
-					} 
-					var postsDiv = $doc.getElementById("posts");
-					while (postsDiv.firstChild) {
-	  					postsDiv.removeChild(postsDiv.firstChild);
-					}
-					postsDiv.appendChild(ul);
+				console.log("building postList data...");
+				var postListData = new $wnd.google.visualization.DataTable();
+				postListData.addColumn('string', 'Post');
+				postListData.addColumn('number', 'Sentiment');
+				postListData.addRows(posts.length);
+				for (var i = 0; i < posts.length; i++){
+					var post = posts[i];
+					postListData.setCell(i, 0, post);
+					postListData.setCell(i, 1, Math.random());
 				}
 				
-				makeHTMLfromPosts(posts);
+				console.log("...done");
 				
+				console.log("drawing List...");
+				var table = new $wnd.google.visualization.Table($doc.getElementById('posts'));
 				
-//				posts.unshift("Posts");
-//				
-//				console.log("building postList data...");
-//				
-//				var postListData = new $wnd.google.visualization.arrayToDataTable( posts );
-//				console.log("...done");
-//				
-//				console.log("drawing List...");
-//				var table = new $wnd.google.visualization.Table($doc.getElementById('posts'));
-//	        	table.draw(postListData, {showRowNumber: true});
-//				console.log("...done");
+				var formatter = new $wnd.google.visualization.ColorFormat();
+				formatter.addGradientRange(0,0.5, 'black', '#f00', '#ddd');
+				formatter.addGradientRange(0.5,1, 'black', '#ddd', '#0d0');
+  				formatter.format(postListData, 1); // Apply formatter to second column
+				
+	        	table.draw( postListData, 
+	        	{
+	        		allowHtml: true, 
+	        		showRowNumber: true,
+	        		height: (($wnd.innerHeight / 2) * 1) + "px"
+//	        		page: 'enable',
+//	        		pageSize: 10,
+//	        		pagingSymbols: {
+//				        prev: ' <- ',
+//				        next: ' -> '
+//				    },
+//				    pagingButtonsConfiguration: 'auto'
+	        	});
+	        	
+	        	$doc.getElementById('posts').style.overflowX = "hidden";
+	        	$doc.getElementsByClassName('google-visualization-table-table')[0].style.overflowX = "hidden";
+	        	
+	        	
+				console.log("...done");
 				
 			}
 			drawPosts(data[1][0]);//build list for topCluster
-			
+	
+			/////////////////////////////////////////////////////
+	
 			// Update Breadcrumb
 			function addBreadcrumb(id){
 				var row = getRowById(id);
@@ -177,17 +190,18 @@ public class ClusterVisualization extends Composite {
 				}
 			}
 			
+			/////////////////////////////////////////////////////
 
 			// Create and draw the treemap
 			console.log("drawing treemap...");
 			var treemapEl = $doc.getElementById('treemap');
-			treemapEl.style.height = (($wnd.innerHeight / 2) * 1) + "px";
+			treemapEl.style.height = (($wnd.innerHeight / 3) * 2) + "px";
 
 			var tree = new $wnd.google.visualization.TreeMap( treemapEl );
 			tree.draw( 
 				treemapData, 
 				{
-					minColor : '#2f00',
+					minColor : '#f00',
 					midColor : '#ddd',
 					maxColor : '#0d0',
 					headerHeight : 50,
@@ -220,11 +234,10 @@ public class ClusterVisualization extends Composite {
 
 			//react on click..
 			//show corresponding posts
-			var last = [];//navigation history
+			//var last = [];//TODO:navigation history
 			function selectHandler() {
 				var selection = tree.getSelection();
-				last.push(selection);
-				if(selection[0].row){
+				if(selection[0].row != null){
 					var id = treemapData.getValue( selection[0].row, 0 );
 					drawPosts( id );
 					addBreadcrumb( id );
@@ -232,14 +245,12 @@ public class ClusterVisualization extends Composite {
 			}
 			function rollupHandler() {
 				var selection = tree.getSelection();
-				last.pop();
-				if(selection[0].row){
+				console.log("rollup - "+selection[0].row);
+				if(selection[0].row != null){
 					//getParent, because rollup returns "from" not "to"
-					var idFrom = treemapData.getValue( selection[0].row, 0 );
-					var row = getRowById( idFrom );
-					var idTo = row[2];
-					drawPosts( idTo );
-					removeBreadcrumb( idFrom );
+					var idTarget = treemapData.getValue( selection[0].row, 0 );
+					drawPosts( idTarget );
+					removeBreadcrumb( idTarget );					
 				}
 			}
 			
@@ -250,11 +261,6 @@ public class ClusterVisualization extends Composite {
 			upButton.onclick = function(){
 				tree.goUpAndDraw();
 			}
-			
-//			var downButton = $doc.getElementById("btn_down");
-//				downButton.onclick = function(){
-//				tree.setSelection(last[(last.length-1)]);	
-//			}
 		
 
 		} catch (e) {

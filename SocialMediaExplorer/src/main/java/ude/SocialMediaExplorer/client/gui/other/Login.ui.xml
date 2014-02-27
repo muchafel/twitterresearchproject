@@ -9,8 +9,19 @@
 
 			<b:Column size="6" offset="3">
 
-				<g:HTMLPanel>
+				    <b:Heading size="3">Options</b:Heading>
 					<b:WellForm>
+						<b:Row>
+						    <b:Column size="1">
+								<b:Icon type="HAND_RIGHT" size="TWO_TIMES"></b:Icon>
+						    </b:Column>
+						    <b:Column size="3">
+								<b:Paragraph>You must be logged in to change settings...</b:Paragraph>
+						    </b:Column>
+						</b:Row>
+					   	<g:HTMLPanel>
+							<hr />
+						</g:HTMLPanel>
 						<b:ControlLabel>Name</b:ControlLabel>
 						<b:TextBox ui:field="name" alternateSize="XLARGE"
 							placeholder="type in name..." />
@@ -22,7 +33,6 @@
 						</g:HTMLPanel>
 						<b:Button ui:field="button_login">Validate</b:Button>
 					</b:WellForm>
-				</g:HTMLPanel>
 
 			</b:Column>
 

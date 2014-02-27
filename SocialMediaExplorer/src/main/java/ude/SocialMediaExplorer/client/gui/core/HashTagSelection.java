@@ -6,8 +6,6 @@ import ude.SocialMediaExplorer.client.gui.errorhandling.SimpleErrorHandling;
 import ude.SocialMediaExplorer.client.gui.other.Wait;
 import ude.SocialMediaExplorer.client.rmi.IDataHelperService;
 import ude.SocialMediaExplorer.client.rmi.IDataHelperServiceAsync;
-import ude.SocialMediaExplorer.shared.exchangeFormat.ClusterElement;
-
 import com.github.gwtbootstrap.client.ui.Button;
 import com.github.gwtbootstrap.client.ui.ListBox;
 import com.github.gwtbootstrap.client.ui.Row;

@@ -39,23 +39,25 @@
 						<g:HTMLPanel>
 							<div id="btns_nav" align="center">
 								<div id="btn_up">
-									<b:Icon type="ARROW_UP" size="TWO_TIMES" />
+									<b:Tooltip text='you can also click the right mouse button to navigate one level up'>
+										<b:Icon type="LEVEL_UP" size="TWO_TIMES" />
+									</b:Tooltip>
 								</div>
 								<!-- div id="btn_down">
 									<b:Icon type="ARROW_DOWN" size="LARGE" />
 								</div-->
 							</div>
-							<!-- div id="treemap_help">
-								<b:Tooltip text='another tooltip'>
+							<!--  div id="treemap_help">
+								<b:Tooltip text='you can also click the right mouse button to navigate one level up'>
 									<b:Icon type="QUESTION" size="LARGE" />
 								</b:Tooltip>
-							</div-->
+							</div -->
 						</g:HTMLPanel>
 					</b:Row>
 
 					<b:Row>
 						<g:HTMLPanel>
-							<div id="treemap"></div>
+							<div align="center"  id="treemap"></div>
 						</g:HTMLPanel>
 					</b:Row>
 
@@ -69,12 +71,12 @@
 				<b:Hero>
 					<b:Heading size="2" ui:field='title'></b:Heading>
 					<g:HTMLPanel>
-						<div id="comments">
-							<b:Icon type="COMMENTS" size="FOUR_TIMES" light="true" />
+						<div id="comments" align="center" >
+							<b:Icon type="COMMENTS_ALT" size="FOUR_TIMES" light="false" />
 						</div>
 					</g:HTMLPanel>
 					<g:HTMLPanel>
-						<hr />
+						<br />
 						<div id="posts">...</div>
 					</g:HTMLPanel>
 				</b:Hero>
