@@ -21,6 +21,7 @@
 
 	<!--  inherit the GWT-Bootstrap widget library -->
 	<inherits name="com.github.gwtbootstrap.Bootstrap"/>
+	<set-property name="bootstrap.responsiveDesign" value="true"/>
 	<!--  end of inherit the GWT-Bootstrap widget library -->
 	
 	<inherits name="com.google.gwt.json.JSON"/>
