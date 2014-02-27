@@ -8,10 +8,28 @@
 		<b:Row>
 
 			<b:Column size="10" offset="1">
-
+			    
+				<b:Heading size="3">Options</b:Heading>
+				
 				<b:Well>
 					    
-					    <b:Heading size="2">Options</b:Heading>
+				    <b:Row>
+				        <b:Column size="2">
+							<b:Paragraph>Crawler Interval (in min):</b:Paragraph>
+							<b:Paragraph ui:field="input_interval">test</b:Paragraph>
+							<b:Button ui:field="button_change_interval">change</b:Button>
+						</b:Column>
+				    </b:Row>
+
+				    
+				    <b:Row>
+				        <b:Column size="10">
+					        <g:HTMLPanel>
+					            <hr />
+					        </g:HTMLPanel>
+				        </b:Column>
+				    </b:Row>				    
+				    
 					<b:Row>
 
 						<b:Column size="3">
@@ -41,13 +59,6 @@
 								</b:Controls>
 							</b:Row>
 						</b:Column>
-
-						<b:Column size="2">
-							<b:Paragraph>Crawler Interval (in min):</b:Paragraph>
-							<b:Paragraph ui:field="input_interval">test</b:Paragraph>
-							<b:Button ui:field="button_change_interval">change</b:Button>
-						</b:Column>
-
 
 					</b:Row>
 
