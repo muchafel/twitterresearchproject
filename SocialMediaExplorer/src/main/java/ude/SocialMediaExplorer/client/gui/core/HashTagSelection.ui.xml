@@ -5,6 +5,10 @@
 		.important {
 		font-weight: bold;
 		}
+		div, input {
+		max-width:100%;
+		max-height:100%;
+		}
 	</ui:style>
 
 	<g:HTMLPanel>

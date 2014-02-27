@@ -257,10 +257,10 @@ public class AdminPage extends Composite {
 
 	private void set_interval() {
 		dialog_set_interval.hide();
-		if(dh != null) {
+		if(dh != null && input_set_interval.getText().length() > 0) {
 			long value = Long.valueOf( input_set_interval.getText() );
-			value = value * 60 * 1000;//convert min to ms
 			if ( value > 0 ) {
+				value = value * 60 * 1000;//convert min to ms
 				dh.set_Interval( value, new AsyncCallback<Boolean>() {
 					
 					public void onSuccess( Boolean result ) {

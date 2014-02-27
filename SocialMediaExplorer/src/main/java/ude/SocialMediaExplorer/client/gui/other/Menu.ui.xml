@@ -4,9 +4,9 @@
 	<ui:style>
 		#homeDiv{
 			float: left;
-			border: none;
 			cursor:	pointer;
 			margin-bottom: 2em;
+			display: inline-block;		
 		}
 
 		#helpDiv, #adminDiv{
@@ -14,6 +14,10 @@
 			float: right;
 			cursor: pointer;
 			margin-bottom: 2em;
+		}
+
+		#helpDiv{
+			margin-right:1em;
 		}
 
 		#homeDiv:hover,
@@ -26,17 +30,13 @@
 		#helpDiv:active{
 			color: #CCCCCC;
 		}
-		#help{
-			border-style:none;
-			border-width:0px;
-		}
 	</ui:style>
 	<g:HTMLPanel>
 
 		<b:Row>
 
 			<b:Column size="10" offset="1">
-				<b:PageHeader subtext="Analyse wöchentlicher TV Sendungen">Social Media Explorer</b:PageHeader>
+				<b:PageHeader subtext="Analysis of weekly TV programs">Social Media Explorer</b:PageHeader>
 			</b:Column>
 
 		</b:Row>
@@ -44,9 +44,7 @@
 		<b:Row>
 
 			<b:Column size="6" offset="3">
-				<b:Row>
 
-					<b:Column size="2">
 						<g:HTMLPanel>
 							<div id="homeDiv" align="left">
 								<g:FocusPanel ui:field="home">
@@ -54,28 +52,11 @@
 									    <p>
 											Explore
 										</p>
-										<b:Icon type="PLUS" size="FOUR_TIMES"></b:Icon>
+										<b:Icon type="EYE_OPEN" size="FOUR_TIMES"></b:Icon>
 									</g:HTMLPanel>
 								</g:FocusPanel>
 							</div>
-						</g:HTMLPanel>
-					</b:Column>
 
-					<b:Column size="1" offset="2">
-						<g:HTMLPanel>
-							<div id="helpDiv" align="right">
-								<g:FocusPanel ui:field="help">
-									<g:HTMLPanel>
-										<p>Help</p>
-										<b:Icon type="QUESTION" size="TWO_TIMES"></b:Icon>
-									</g:HTMLPanel>
-								</g:FocusPanel>
-							</div>
-						</g:HTMLPanel>
-					</b:Column>
-
-					<b:Column size="1" offset="0">
-						<g:HTMLPanel>
 							<div id="adminDiv" align="right">
 								<g:FocusPanel ui:field="admin">
 									<g:HTMLPanel>
@@ -84,10 +65,18 @@
 									</g:HTMLPanel>
 								</g:FocusPanel>
 							</div>
-						</g:HTMLPanel>
-					</b:Column>
 
-				</b:Row>
+							<div id="helpDiv" align="right">
+								<g:FocusPanel ui:field="help">
+									<g:HTMLPanel>
+										<p>Help</p>
+										<b:Icon type="QUESTION" size="TWO_TIMES"></b:Icon>
+									</g:HTMLPanel>
+								</g:FocusPanel>
+							</div>
+
+						</g:HTMLPanel>
+
 			</b:Column>
 		</b:Row>
 
