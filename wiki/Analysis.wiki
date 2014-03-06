@@ -28,7 +28,7 @@ This step uses the enriched twets and forms clusters on the basis of orthographi
   *[[KeyphraseExtraction]]: Throught the use of a Co-Occurence-graph on each- tweet we extract keyphrases
   * cluster forming: Finally we can extract a hirarchical structure from the sum of tweets. We do this by recursivly adding the 18 most-frequent orthographically-cleaned keywords as child-nodes to our result-set
 
-The generated Cluster-Structure is shown in the figure below:
+The generated ClusterElements is shown in the figure below:
 Each Sub-Cluster represents one of the most frequent discussed senses in the set of tweets of his Top-Cluster.
 
 [http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/ClusterElement.png]
