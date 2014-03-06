@@ -20,6 +20,7 @@ import ude.SocialMediaExplorer.Config;
 import ude.SocialMediaExplorer.data.post.Post;
 import ude.SocialMediaExplorer.data.post.PostList;
 import ude.SocialMediaExplorer.data.utils.io.CASWriter;
+import ude.SocialMediaExplorer.data.utils.time.TimeStamp;
 
 
 public class Analysis extends Thread {
@@ -60,7 +61,6 @@ public class Analysis extends Thread {
 					tweetCases.add( analyzePost( p ) );
 				}
 			}
-			// form clusters
 
 			for ( JCas jcas : tweetCases ) {
 				casWriter.write( jcas, hashtagToAnalyze );
@@ -96,7 +96,7 @@ public class Analysis extends Thread {
 		jcas.setDocumentText( p.getMessage() );
 
 		DocumentMetaData.create( jcas );
-		DocumentMetaData.get( jcas ).setDocumentId( p.getId() );
+		DocumentMetaData.get( jcas ).setDocumentId(TimeStamp.createLong(p.getDate()) + "_" + p.getId());
 		DocumentMetaData.get( jcas ).setLanguage( "en" );
 
 		engine.process( jcas );
