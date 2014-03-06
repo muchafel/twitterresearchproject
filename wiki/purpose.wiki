@@ -1,13 +1,6 @@
-#summary One-sentence summary of this page.
+= Purpose =
 
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Nowadays, it becomes harder and harder to deal with the large amount of information that is offered through all kind of media. Especially since there is social media in is nearly impossible to cope with all the possible available information.
+On the other hands the highly individualized messages, tweets, post etc. in social media allow us to get a picture of what are people thinking without having a filtering through copy reader, editor or journalist.
+To overcome the big amounts of data this project aims on gaining computer-aided insights to opinions  that were expressed on twitter. Because we wanted to examine the opportunities of coputer-processing of tweets we neeeded a domain whith at least a certain frequency.
+Therefore we chose the context of social tv where we had series (and refering tweets) that came in a weekly cyclus. Off course our system would be adaptable for any kind of hashtag.
