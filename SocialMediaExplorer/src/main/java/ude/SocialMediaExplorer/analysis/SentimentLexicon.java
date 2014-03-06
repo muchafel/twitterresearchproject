@@ -26,7 +26,7 @@ public class SentimentLexicon {
 		String path = "";
 		if (language.equals("en")) {
 			//TODO add EnglishLexicon
-			path = "files/semantic_oriented_SentimentLexicon_German.txt";
+			path = "files/semantic_oriented_SentimentLexicon_remusWords_4.txt";
 			try {
 				FileReader fr = new FileReader(path);
 				BufferedReader br = new BufferedReader(fr);
