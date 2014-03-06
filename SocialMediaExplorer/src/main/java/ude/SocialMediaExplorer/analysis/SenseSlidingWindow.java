@@ -131,7 +131,7 @@ public class SenseSlidingWindow {
 		 DefaultModalGraphMouse gm = new DefaultModalGraphMouse();
 //		 gm.setMode(ModalGraphMouse.Mode.TRANSFORMING);
 		 vv.setGraphMouse(gm); 
-		 JFrame frame = new JFrame("Interactive Graph View 1");
+		 JFrame frame = new JFrame("Co-Occurrence");
 		 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 frame.getContentPane().add(vv);
 		 frame.pack();
