@@ -20,7 +20,7 @@ private List<Token> tokens;
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
 		tokens = new ArrayList<Token>(select(aJCas, Token.class));
 		for (Token t : tokens){
-			if(t.getPos().getPosValue().equals("NN")||t.getPos().getPosValue().equals("NE")||t.getPos().getPosValue().equals("ADJ")){
+			if(t.getPos().getPosValue().equals("NN")||t.getPos().getPosValue().equals("NE")||t.getPos().getPosValue().equals("ADJA")){
 				SimpleSenseAnno annotation = new SimpleSenseAnno(aJCas);
 	        	annotation.setBegin(t.getBegin());
 	        	annotation.setEnd(t.getEnd());
