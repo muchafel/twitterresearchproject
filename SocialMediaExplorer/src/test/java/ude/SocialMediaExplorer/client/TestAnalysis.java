@@ -34,28 +34,28 @@ public class TestAnalysis {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+//		
 
 		
 		
 //		Post p1 = new Post();
-//		p1.setMessage("RT @Michael walks to the nice river Rhein :) <3 <3 <3.");
+//		p1.setMessage("In einer Anti-Spam Klage wird behauptet, dass Utah Anti-Spam Regelungen verletzt. Das Vorgehen von Utah bezüglich der Anti-Spam Gesetze könnte die Bahn für neue Regelungen mit Telekommunikationsanbietern ebnen.");
 //		p1.setId("1");
 //		Post p2 = new Post();
-//		p2.setMessage(" I am! legend Fleisch wtf");
+//		p2.setMessage("In einer Anti-Späm Klage wird behaupptet, dass Utah Anti-Spam Regelungen verletzt. Das Vohrgehen von Utah bezüglich der Anti-Spam Gesetze könnte die Bahn für neue Rehgelungen mit Telekomunikationsanbietern ebnen.");
 //		p2.setId("2");
 //		Post p3 = new Post();
-//		p3.setMessage("RT Ameisen sind keine schlechten Attribute #ftw ");
+//		p3.setMessage("In einer AntiSpam Klage wird behäuptet, dass Utah Anti-Spam regelungen verletzt. Das Vorgehn von Utah bezüglich der Anti-Spam Gesetze könte die Bahn für neue Regellungen mit Telekommunikatinsanbietern ebnen.");
 //		p3.setId("3");
 //		Post p4 = new Post();
-//		p4.setMessage("RT @Kommisaro #ftw https://www.facebook.com/mi.woja");
+//		p4.setMessage("In einer Anti-Spam Klage wird behauptet, dass Utah Anti-Spam Regelungen verletzt. Das Vorgehen von Utah bezüglich der Anti-Spam Gesetze könnte die Bahn für neue Regelungen mit Telekommunikationsanbietern ebnen.");
 //		p4.setId("4");
 //		PostList pl = new PostList();
 //		pl.add(p1);
 //		pl.add(p2);
 //		pl.add(p3);
 //		pl.add(p4);
-//		
+		
 		new Analysis(pl).run(hashtagToAnalyze);
 		new Clusterer().cluster(hashtagToAnalyze);
 		
