@@ -135,7 +135,7 @@ public class OrthographyCluster {
 	}
 
 private void visualize(UndirectedSparseGraph<String, MyLink> g) {
-	Layout<String, String> layout = new CircleLayout(g);
+	Layout<String, String> layout = new FRLayout(g);
 	 layout.setSize(new Dimension(300,300));
 	 VisualizationViewer<String,String> vv = new VisualizationViewer<String,String>(layout);
 	 vv.setPreferredSize(new Dimension(350,350));
