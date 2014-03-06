@@ -7,6 +7,9 @@ The result can be viewed [here].
 
 Instructions can be found in our [User Guidlines].
 
+= Process =
+
+The social media explorer uses a cuple of steps to extract and visualize dicussed topics with thier sentiments. At first the crawler that can be configured through a configuration file collects tweets and stores them as JSON-files. The second step is the [Analysis] that performs NLP-steps to create our data-format ClusterElements. Finally these ClusterElements are visualized through a web-interface. The process is illustrated in the figure below: 
 [http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/OverviewSocialMediaExplorer.png]
 
 For further readings and a technical documentation look at the contents below:
