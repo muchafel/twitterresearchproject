@@ -1,13 +1,15 @@
+#summary describes the main process of our application
+
 = Introduction =
 
-This project deals with the analysis of opinions in social media.In particular, it considers Twitter data and the statements regarding the most popular social TV shows in Germany. These statements are analyzed using state of the art natural-language-processing-methods and made available via a web interface.
+This project deals with the analysis of opinions in social media. In particular, it considers Twitter data and the statements regarding the most popular social TV shows in Germany. These statements are analyzed using state of the art natural-language-processing-methods and made available via a web interface.
 The result can be viewed [here].
 
-Instructions can be found in our [User Guidlines].
+Instructions can be found in our [UserGuidelines].
 
 = Process =
 
-The social media explorer uses a cuple of steps to extract and visualize dicussed topics with thier sentiments. At first the crawler that can be configured through a configuration file collects tweets and stores them as JSON-files. The second step is the [Analysis] that performs NLP-steps to create our data-format ClusterElements. Finally these ClusterElements are visualized through a web-interface. The process is illustrated in the figure below: 
+The social media explorer uses a couple of steps to extract and visualize discussed topics with their sentiments. At first the [Crawler] collects Tweets and stores them as JSON-files. The second step is the [Analysis] that performs NLP-steps to create our data-format ClusterElements. Finally these ClusterElements are visualized through a web-interface. The process is illustrated in the figure below: 
 [http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/OverviewSocialMediaExplorer.png]
 
 For further readings and a technical documentation look at the contents below:
