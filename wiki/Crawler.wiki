@@ -1,13 +1,3 @@
 #summary One-sentence summary of this page.
 
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+To collect some sample Tweets we have written a Crawler using the [http://twitter4j.org/en/index.html Twitter4J] library. The Crawler is a simple server-side application which listens to the Twitter stream and saves the incoming Tweets on certain Hashtags as a JSON file. Because our main goal is to analyze tweets regarding shows that go on TV in a weekly turn the Crawler groups the crawled Tweets by week which means at the end there is one JSON file per Hashtag per week, which goes into the [Analysis]. The Crawler can be configured manually by the user which means the user can add or delete Hashtags on which the Crawler listens (s. User Guidelines for more).
