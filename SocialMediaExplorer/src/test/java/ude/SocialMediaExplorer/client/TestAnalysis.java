@@ -1,6 +1,7 @@
 package ude.SocialMediaExplorer.client;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,7 +21,7 @@ import ude.SocialMediaExplorer.data.utils.io.TextFileReader;
 public class TestAnalysis {
 	
 	private boolean running = true;
-	static String hashtagToAnalyze = "tatort";
+	static String hashtagToAnalyze = "fashionhero";
 	static private PostList pl;
 	static Timer timer;
 	
@@ -57,7 +58,17 @@ public class TestAnalysis {
 //		pl.add(p4);
 		
 		new Analysis(pl).run(hashtagToAnalyze);
-		new Clusterer().cluster(hashtagToAnalyze);
+		File root = new File("files/serializedCases/" + hashtagToAnalyze);
+		String[] directories = root.list(new FilenameFilter() {
+			public boolean accept(File dir, String name) {
+				return new File(dir, name).isDirectory();
+			}
+		});
+		
+		for (String s : directories) {
+			System.out.println("Ordner: "+s);
+			new Clusterer().cluster(hashtagToAnalyze + "/" + s);
+		}
 		
 	}
 
@@ -67,7 +78,22 @@ public class TestAnalysis {
 			@Override
 			public void run() {
 				new Analysis(pl).run(hashtagToAnalyze);
-				new Clusterer().cluster(hashtagToAnalyze);
+
+				File root = new File("files/serializedCases/" + hashtagToAnalyze);
+				String[] directories = root.list(new FilenameFilter() {
+					public boolean accept(File dir, String name) {
+						return new File(dir, name).isDirectory();
+					}
+				});
+				
+				for (String s : directories) {
+					System.out.println("Ordner: "+s);
+					new Clusterer().cluster(hashtagToAnalyze + "/" + s);
+				}
+				
+				
+				
+				
 			}
 		};
 		
