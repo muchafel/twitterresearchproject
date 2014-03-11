@@ -228,6 +228,7 @@ public class Clusterer {
 		}
 		//set the posts of the clusterelement
 		c.setPosts(getSortedSubTweets(jCases));
+		
 		for (String subClusterName: frequencydistribution.getMostFrequentSamples(18)){
 			headers.add(subClusterName);
 			ClusterElement subCluster=createClusterElementsNaive(getSubset(jCases,subClusterName),subClusterName,headers);
@@ -272,8 +273,8 @@ public class Clusterer {
 	}
 
 	//gets the ordered List of sub-tweets
-	private ArrayList<String> getSortedSubTweets(List<JCas> jCases) {
-		ArrayList<String> orderedposts= new ArrayList<String>();
+	private HashMap<String, Double> getSortedSubTweets(List<JCas> jCases) {
+		HashMap<String, Double> orderedposts= new HashMap<String, Double>();
 		Map<String,Double> unOrderedPosts= new HashMap<String,Double>();
 		for(JCas jcas: jCases){
 			unOrderedPosts.put(jcas.getDocumentText(), getCASSentiment(jcas));
@@ -283,14 +284,17 @@ public class Clusterer {
 	}
 	
 	//orderes the map and gives the List back
-private ArrayList<String> sortMap(Map<String, Double> unOrderedPosts) {
-		ArrayList<String> orderedPosts = new ArrayList<String>();
+private HashMap<String, Double> sortMap(Map<String, Double> unOrderedPosts) {
+		HashMap<String, Double> orderedPosts = new HashMap<String, Double>();
 		List<String> keys = new ArrayList<String>(unOrderedPosts.keySet());
 		List<Double> values = new ArrayList<Double>(unOrderedPosts.values());
 		TreeSet<Double> sortedMap = new TreeSet<Double>(values);
 		Object[] sortedSet = sortedMap.toArray();
 		for (int i = 0; i < sortedSet.length; i++) {
-			orderedPosts.add( keys.get(values.indexOf(sortedSet[i])));
+			String candidate=keys.get(values.indexOf(sortedSet[i]));
+			if(!orderedPosts.containsKey(candidate)){
+				orderedPosts.put(candidate,unOrderedPosts.get(candidate));
+			}
 		}
 		return orderedPosts;
 	}
