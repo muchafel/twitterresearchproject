@@ -2,6 +2,7 @@ package ude.SocialMediaExplorer.shared.exchangeFormat;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ude.SocialMediaExplorer.shared.IdGenerator;
@@ -20,7 +21,8 @@ public class ClusterElement implements Serializable {
 	private String name;
 	private Sentiment sentiment;
 
-	private ArrayList<String> posts;
+//	private ArrayList<String> posts;
+	private HashMap<String, Double> posts;
 
 	private List<ClusterElement> subcluster;
 	private boolean isRoot;
@@ -117,11 +119,11 @@ public class ClusterElement implements Serializable {
 		this.size = size;
 	}
 
-	public ArrayList<String> getPosts() {
+	public HashMap<String, Double> getPosts() {
 		return posts;
 	}
 
-	public void setPosts( ArrayList<String> posts ) {
+	public void setPosts( HashMap<String, Double> posts ) {
 		this.posts = posts;
 		this.size = posts.size();
 	}
