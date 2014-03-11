@@ -24,7 +24,7 @@ The figure below illustrates the "Analysis on Tweet-Level"
 = "Clustering"=
 This step uses the enriched Tweets and forms clusters on the basis of orthographic similarity, extractable keyphrases and frequency of them. Therefore it performs the following steps:
 
-  * [OrthographicCleaning]: On similarity that is calculated using the Levenshtein distance we aggregate words that are written similarly and assign the the one that's found most often
+  * [OrthographicCleaning]: We aggregate words that are written similarly (measured by calculating the Levenshtein distance) and assign the most frequent one.
   * [KeyphraseExtraction]: Through the use of a cooccurence graph on each tweet we extract keyphrases
   * cluster forming: Finally we can extract a hierarchical structure from the sum of tweets. We do this by recursivly adding the 18 most-frequent orthographically cleaned keywords as child nodes to our result set.
 
