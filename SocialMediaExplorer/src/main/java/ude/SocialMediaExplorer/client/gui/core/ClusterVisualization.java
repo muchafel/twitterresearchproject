@@ -113,8 +113,8 @@ public class ClusterVisualization extends Composite {
 				postListData.addRows(posts.length);
 				for (var i = 0; i < posts.length; i++){
 					var post = posts[i];
-					postListData.setCell(i, 0, post);
-					postListData.setCell(i, 1, Math.random());
+					postListData.setCell(i, 0, post.post);
+					postListData.setCell(i, 1, post.sentiment);
 				}
 				
 				console.log("...done");
