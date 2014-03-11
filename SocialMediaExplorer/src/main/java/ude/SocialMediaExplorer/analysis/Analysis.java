@@ -40,19 +40,20 @@ public class Analysis extends Thread {
 		this.postList = postList;
 		tweetCases = new ArrayList<JCas>(); // tweetCases nicht neu erzeugen, sondern serialisierte einlesen und dann nur die neuen Analysen hinzufügen
 	}
-
+	/**
+	 * this method calls the analysis steps:
+	 * 1. just calculate new tweets (checking the date of the last analysis)
+	 * 2. perform analyzePost() foreach post
+	 * 3. safe results
+	 */
 	public void run( String hashtagToAnalyze ) {
 		casWriter = new CASWriter();
 		try {
 			dateOfLastAnalysis = format.parse( Config.readValueFromXMLFile( "lastAnalysis" ) );
 		}
 		catch ( ParseException e1 ) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
-		//		System.out.println(lexEnglish.getSentiment("abnormal", "En"));
-		//		System.out.println(lexGerman.getSentiment("erzürnte", "De"));
 		try {
 			// adding information per tweet
 			for ( Post p : postList ) {
@@ -61,23 +62,26 @@ public class Analysis extends Thread {
 					tweetCases.add( analyzePost( p ) );
 				}
 			}
-
+			// safes the calculated CASes using a CASWriter
 			for ( JCas jcas : tweetCases ) {
 				casWriter.write( jcas, hashtagToAnalyze );
 			}
-
 			// update date of last analysis
 			dateToday = format.format( new Date() );
 			Config.updateXMLValue( "lastAnalysis", dateToday );
-
 		}
 		catch ( Exception e ) {
 			e.printStackTrace();
 		}
 	}
-
-	
-	
+	/**
+	 * this method enriches the posts with additional information:
+	 * 1. Segmentation and twitter-specific POS-tagging with the ArktweetTagger
+	 * 2. POS-tagging with the OpenNLPPOSTagger 
+	 * 3. POS-merging
+	 * 4. SentimentTagging
+	 * 5. simple Sense-Annotation that marks NNs, NEs and ADJs to speed up the following clustering process 
+	 */
 	private JCas analyzePost( Post p ) throws AnalysisEngineProcessException, ResourceInitializationException,
 			CASException {
 
@@ -96,7 +100,11 @@ public class Analysis extends Thread {
 		jcas.setDocumentText( p.getMessage() );
 
 		DocumentMetaData.create( jcas );
+		//setting the document ID through the date and the id integer of the post
 		DocumentMetaData.get( jcas ).setDocumentId(TimeStamp.createLong(p.getDate()) + "_" + p.getId());
+		
+		//at first the language is set to english (because o the arktweet-tagger). The ArktweetAnnotator sets the Language to german
+		// in order to get a useful result from the OpenNLP-POS-tagger
 		DocumentMetaData.get( jcas ).setLanguage( "en" );
 
 		engine.process( jcas );
