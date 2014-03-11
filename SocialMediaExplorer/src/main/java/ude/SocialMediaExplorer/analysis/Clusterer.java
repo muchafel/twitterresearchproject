@@ -46,9 +46,15 @@ public class Clusterer {
 	public static Map<String,Set<String>> orthographyClusters;
 	public int nodeCounter;
 	private String hashtagToCluster="halligalli";
-	//TODO: replace main with run() + parametrisieren
 	/**
-	 * @param args
+	 * this method calls the clustering steps:
+	 * 1.orthography cleaning
+	 * 2.keyphrase extraction with a co-occurence graph approach
+	 * 3.adapting to the ClusterElement.class (includes some cleaning of posts etc...)
+	 * 4.finally these elements are binary serialized
+	 * 
+	 * Uncomment the marked parts for additional visualization via JUNG or syso
+	 * 
 	 */
 	public void cluster(String hashtagToCluser) {
 		
@@ -57,6 +63,7 @@ public class Clusterer {
 		List<JCas> jCases= new ArrayList<JCas>();
 		try {
 			jCases=reader.read("files/serializedCases/"+hashtagToCluster);
+			System.out.println(hashtagToCluster);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -70,24 +77,30 @@ public class Clusterer {
 		System.out.println("Most 40 frequent senses (orthographically cleaned): "+fq.getMostFrequentSamples(40));
 		//annotate orthography and frequency to cases
 		jCases= annotateSenseFrequency(jCases);
-		
+		//form ClusterElements.class
 		ClusterElement clusterElement=createClusterElementsNaive(jCases, null, null);
 		
-		
-		UndirectedSparseGraph<String, String> graph=calcGraph(clusterElement);
-		visualize(graph);
+		/**
+		 * uncomment for testing
+		*
+		* UndirectedSparseGraph<String, String> graph=calcGraph(clusterElement);
+		* visualize(graph);
+		*/
 		
 		serialize(clusterElement);
 		System.out.println("Serialization finished");
 //	    printCluster(clusterElement);
 	}
 
-	// binary serialization Java6-style
+	/**
+	 * binary serialization Java6-style
+	 */
 	private void serialize(ClusterElement clusterElement) {
 		FileOutputStream fs = null;
 		ObjectOutputStream os = null;
 		try {
-			fs = new FileOutputStream(Config.get_location_CE()+hashtagToCluster+"/"+TimeStamp.getLong()+"_"+hashtagToCluster+".ser");
+			
+			fs = new FileOutputStream(Config.get_location_CE()+"/"+hashtagToCluster+".ser");
 			os = new ObjectOutputStream(fs);
 			os.writeObject(clusterElement);
 		} catch (IOException e) {
@@ -109,7 +122,9 @@ public class Clusterer {
 			}
 		}
 	}
-//in this step the orthography-clustering and the co-occurence graph is performed and merged together 
+	/**
+	 * in this step the orthography-clustering and the co-occurence graph is performed and merged together
+	 */
 	private static List<JCas> annotateSenseFrequency(List<JCas> jCases) {
 		
 		for(JCas jcas : jCases){
@@ -118,13 +133,11 @@ public class Clusterer {
 				AggregateBuilder builder = new AggregateBuilder();
 				builder.add(createEngineDescription(CleanedSenseAnnotator.class));
 				builder.add(createEngineDescription(SenseAnnotator.class));
-//				builder.add(createEngineDescription(StanfordParser.class,StanfordParser.PARAM_MODEL_LOCATION,
-//                        "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/parser-de-factored.ser.gz"));
 				AnalysisEngine engine = builder.createAggregate();
 				engine.process(jcas);
-				
-
-				//for testing
+				/**
+				 * un-comment for additional sysos
+				 
 //				System.out.println("Tweet: "+jcas.getDocumentText());
 //				for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
 //				for (NP nounphrase : JCasUtil.selectCovered(jcas, NP.class,sentence)) {
@@ -139,7 +152,7 @@ public class Clusterer {
 //		                System.out.println("[" + annotation.getCoveredText() + "]");
 //		                System.out.println(annotation.toString());
 //		        }
-				
+				*/
 				
 			} catch (ResourceInitializationException e) {
 				e.printStackTrace();
@@ -210,14 +223,17 @@ public class Clusterer {
 		}
 	}
 
+	/**
+	 * this method recursively creates our ClusterElement.class-format
+	 * it adds associated posts with getSortedSubTweets()
+	 * and by recursion the sub-clusters 
+	 */
 	private ClusterElement createClusterElementsNaive(List<JCas> jCases,String clusterName,List<String> headers) {
-		
 		ClusterElement c;
 		FrequencyDistribution<String> frequencydistribution;
-		
 		List<ClusterElement> subClusters = new ArrayList<ClusterElement>();
-		
 		if (clusterName == null) {
+			//first Cluster gets the name "TopCluster"
 			c = new ClusterElement("TopCluster", new Sentiment(0,0), null);
 			frequencydistribution=fq;
 			headers = new ArrayList<String>();
@@ -234,12 +250,15 @@ public class Clusterer {
 			ClusterElement subCluster=createClusterElementsNaive(getSubset(jCases,subClusterName),subClusterName,headers);
 			subClusters.add(subCluster);
 		}
+		//adds the subclusters to the parent-element
 		c.setSubcluster(subClusters);
 		
 		return c;
 	}
 
-	// calc the mean Sentiment over a list of cases
+	/**
+	 * calc the mean Sentiment over a list of cases. 
+	 */
 	private Sentiment calcSentiment(List<JCas> jCases) {
 		
 		double totalPositive = 0;
@@ -271,8 +290,9 @@ public class Clusterer {
 		
 		return new Sentiment(totalPositive,totalNegative);
 	}
-
-	//gets the ordered List of sub-tweets
+	/**
+	 * gets the ordered List of sub-tweets 
+	 */
 	private HashMap<String, Double> getSortedSubTweets(List<JCas> jCases) {
 		HashMap<String, Double> orderedposts= new HashMap<String, Double>();
 		Map<String,Double> unOrderedPosts= new HashMap<String,Double>();
@@ -282,8 +302,9 @@ public class Clusterer {
 		orderedposts=sortMap(unOrderedPosts);
 		return orderedposts;
 	}
-	
-	//orderes the map and gives the List back
+	/**
+	 * orderes the map and gives the List back
+	 */
 private HashMap<String, Double> sortMap(Map<String, Double> unOrderedPosts) {
 		HashMap<String, Double> orderedPosts = new HashMap<String, Double>();
 		List<String> keys = new ArrayList<String>(unOrderedPosts.keySet());
@@ -298,8 +319,9 @@ private HashMap<String, Double> sortMap(Map<String, Double> unOrderedPosts) {
 		}
 		return orderedPosts;
 	}
-
-	//gets the mean sentiment of a single CAS
+/**
+ * gets the mean sentiment of a single CAS
+ */
 	private Double getCASSentiment(JCas jcas) {
 		List<SentimentAnno> annos = new ArrayList<SentimentAnno>(select(jcas,SentimentAnno.class));
 		double sentiment = 0;
@@ -312,7 +334,11 @@ private HashMap<String, Double> sortMap(Map<String, Double> unOrderedPosts) {
 		sentiment=sentiment/lenght;
 		return sentiment;
 	}
-
+	/**
+	 * creates a frequenzy-distribution by the frequenzy of the keyphrases contained in the cases.
+	 * This method is used for sub-clusters instead the original freuqncy-distribution 
+	 * (because it only uses a part of all CASes)
+	 */
 	private FrequencyDistribution<String> creatfd(List<JCas> jCases,
 			String clusterName, List<String> headers) {
 		FrequencyDistribution<String> frequencydistribution= new FrequencyDistribution<String>();
@@ -330,21 +356,19 @@ private HashMap<String, Double> sortMap(Map<String, Double> unOrderedPosts) {
 		}
 		return frequencydistribution;
 	}
-
+	/**
+	 * returns the subset of CASes that belong to a specific header.
+	 */
 	private List<JCas> getSubset(List<JCas> jCases,String name) {
 		List<JCas> subset= new ArrayList<JCas>();
-//		System.out.println("SSSize: "+jCases.size());
 		for(JCas jcas : jCases){
 			FSIndex senseIndex = jcas.getAnnotationIndex(SenseAnno.type);
-			//System.out.println("Index:"+senseIndex.toString()+"  - "+senseIndex.size());
 			Iterator senseIterator = senseIndex.iterator();
 			// gets all CleanedSenseAnnos from jcas
 			while (senseIterator.hasNext()) {
 				SenseAnno sense = (SenseAnno) senseIterator.next();
 				String senseValue=sense.getSenseValue();
-				//System.out.println("SenseValue: "+senseValue);
 				if(senseValue.equals(name)){
-//					System.out.println(jcas.getDocumentText()+" added to subset: jacas mit: "+name);
 					subset.add(jcas);
 				}
 			}

@@ -35,7 +35,6 @@ public class SenseSlidingWindow {
         	}
         	slides.add(wordSet);
         }
-       // System.out.println(slides);
         //calculate the graph
         UndirectedSparseGraph<String, Integer> coOccurenceGraph= doCoOccurenceGraph(slides);
 //        Hashtable<String, Integer> ht = new Hashtable<String, Integer>();
@@ -46,8 +45,6 @@ public class SenseSlidingWindow {
         		fq.inc(node);
         	}
         }
-//        System.out.println(ht);
-        //System.out.println(fq.getMostFrequentSamples(5));
         List<String> keywords=fq.getMostFrequentSamples(5);
         List<String> keyPhrases=new ArrayList<String>();
         
@@ -99,7 +96,6 @@ public class SenseSlidingWindow {
         	}
         	
         }
-//        System.out.println(keyPhrases);
         //uncomment to visualize the graph
        // visualize(coOccurenceGraph);
 		return keyPhrases;
@@ -129,7 +125,6 @@ public class SenseSlidingWindow {
 		 vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
 		 // Create a graph mouse and add it to the visualization component
 		 DefaultModalGraphMouse gm = new DefaultModalGraphMouse();
-//		 gm.setMode(ModalGraphMouse.Mode.TRANSFORMING);
 		 vv.setGraphMouse(gm); 
 		 JFrame frame = new JFrame("Co-Occurrence");
 		 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
