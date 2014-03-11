@@ -1,34 +1,34 @@
-This page describes the NLP-steps that are done on the server on a weekly basis
+#summary describes the NLP-steps that are done on the server-side on a weekly basis
 
 = Analysis=
 
-This application uses a analysis process to extract opionions from twitter-data. Because this analysis takes a long time to run (up to two seconds a tweet) we pre-calculate results on a weekly basis and provide these results to our web-interface. 
+This application uses an analysis process to extract opionions from twitter-data. Because this analysis takes a long time to run (up to two seconds a tweet) we pre-calculate results on a weekly basis and provide these results to our web-interface. 
 The analysis itself uses NLP-techniques and can be divided into the two main steps "analysis on tweet-level" and "clustering". 
-In the *"Analysis on Tweet-Level"* each tweet is enriched with information that the *"Clustering"* that follows later. The two steps are further described below:
+In the *"Analysis on Tweet-Level"* each tweet is enriched with information that are used for *"Clustering"* that follows later. The two steps are further described below:
 
 
 = "Analysis on Tweet-Level"=
 
-As already mentionned this step is performed for each tweet that was collected by the [Crawler]. "Analysis on Tweet-Level" consists itself of the five steps:
+As already mentioned this step is performed for each tweet that was collected by the [Crawler]. "Analysis on Tweet-Level" consists of five steps:
 
-  * Segmentation and twitter-specific POS-tagging with the ArktweetTagger (Quelle): Because the ArktweetTagger is just trained on english texts and our use case refers to mostly german tweets the results of this step isn't statisfying. We use this step to detect emoticons, links and twitter-specific phenomenons like the use of '@' and '#'
+  * Segmentation and twitter-specific POS-tagging with the ArktweetTagger (Quelle): Because the ArktweetTagger is just trained on english texts and our use case refers to mostly german Tweets the results of this step aren't statisfying. We use this step to detect emoticons, links and Twitter-specific phenomenons like the use of '@' and '#'
   * POS-tagging with the OpenNLPPOSTagger (Quelle): This POS-Tager is also capable of German
   * POS-merging: The results of the ArktweetTagger are replaced with the results from OpenNLPPOSTagger except the emoticons, links and twitter-specific phenomenons
-  * [[SentimentTagging]]: that enriches tokens with a sentiment value
-  * simple Sense-Annotation that marks NNs, NEs and ADJs to speed up the following clustering process
+  * [[SentimentTagging]]: enriches tokens with a sentiment value
+  * simple Sense-Annotation: marks NNs, NEs and ADJs to speed up the following clustering process
 
 The figure below illustrates the "Analysis on Tweet-Level"
 
 [http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/Analyse.png]
 
 = "Clustering"=
-This step uses the enriched twets and forms clusters on the basis of orthographic similarity, extractable keyphrases and frequenzy of them. Therefore it performs the following steps:
+This step uses the enriched Tweets and forms clusters on the basis of orthographic similarity, extractable keyphrases and frequency of them. Therefore it performs the following steps:
 
-  *[[OrthographicCleaning]] : On similarity that is calculated using the levensthein-distance we aggregate words that are written similar and assign the the one thats found most often
-  *[[KeyphraseExtraction]]: Throught the use of a Co-Occurence-graph on each- tweet we extract keyphrases
-  * cluster forming: Finally we can extract a hirarchical structure from the sum of tweets. We do this by recursivly adding the 18 most-frequent orthographically-cleaned keywords as child-nodes to our result-set
+  *[[OrthographicCleaning]]: On similarity that is calculated using the Levenshtein distance we aggregate words that are written similarly and assign the the one that's found most often
+  *[[KeyphraseExtraction]]: Through the use of a cooccurence graph on each tweet we extract keyphrases
+  * cluster forming: Finally we can extract a hierarchical structure from the sum of tweets. We do this by recursivly adding the 18 most-frequent orthographically cleaned keywords as child nodes to our result set.
 
-The generated ClusterElements is shown in the figure below:
-Each Sub-Cluster represents one of the most frequent discussed senses in the set of tweets of his Top-Cluster.
+The generated ClusterElements are shown in the figure below:
+Each sub cluster represents one of the most frequent discussed senses in the set of Tweets of its top cluster.
 
 [http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/ClusterElement.png]
