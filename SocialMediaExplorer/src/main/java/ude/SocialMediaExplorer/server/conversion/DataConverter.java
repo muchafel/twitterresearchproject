@@ -1,7 +1,9 @@
 package ude.SocialMediaExplorer.server.conversion;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.json.*;
 
@@ -110,13 +112,20 @@ public class DataConverter {
 		//5 = SentimentRange 	/Double
 		row.put( 5, ( ( Math.round( s.getRange() * 100D ) / 100D ) ) );
 		//6 = Posts		/ArrayList<String>
-		ArrayList<String> posts = c.getPosts();
+		HashMap<String, Double> posts = c.getPosts();
+		Set<String> keys = posts.keySet();
 		JSONArray postsJSON = new JSONArray();
-		int postSize = posts.size();
-		for ( int i = 0; i < postSize; i++ ) {
-			postsJSON.put( i, posts.get( i ) );
+		for(String key : keys) {
+			JSONObject post = new JSONObject();
+			post.optString( "post", key );
+			post.put( "sentiment", posts.get( key ) );
 		}
 		row.put( 6, postsJSON );
+		
+//		int postSize = posts.size();
+//		for ( int i = 0; i < postSize; i++ ) {
+//			postsJSON.put( i, posts.get( i ) );
+//		}
 
 				System.out.println(row);
 		ceList.add( row );
