@@ -1,4 +1,4 @@
-<config>
+<?xml version="1.0" encoding="UTF-8"?><config>
     
     <analysis>
         <!-- TODO -->
@@ -55,6 +55,6 @@
         <location_CE>files/serializedClusterElements/</location_CE>
     </io>
     
-    <lastAnalysis>20110217101010</lastAnalysis>
+    <lastAnalysis>20140311162046</lastAnalysis>
     
 </config>
