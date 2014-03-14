@@ -42,9 +42,6 @@ public class SenseAnnotator extends JCasAnnotator_ImplBase{
 		for (CleanedSenseAnno sense : cleanedSenses){
 			cleanedSensesMap.put(sense.getCoveredText(), sense.getCleanedSense());
 		}
-			
-		
-		
 		tokens = new ArrayList<Token>(select(aJCas, Token.class));
 		for (Token t : tokens){
 //			System.out.println("-----------------------------------------"+t.getCoveredText());
