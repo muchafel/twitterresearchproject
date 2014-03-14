@@ -21,7 +21,7 @@ import ude.SocialMediaExplorer.data.utils.io.TextFileReader;
 public class TestAnalysis {
 	
 	private boolean running = true;
-	static String hashtagToAnalyze = "fashionhero";
+	static String hashtagToAnalyze = "halligalli";
 	static private PostList pl;
 	static Timer timer;
 	
@@ -32,13 +32,8 @@ public class TestAnalysis {
 		try {
 			pl = bla.getPosts(hashtagToAnalyze);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		
-
-		
-		
 //		Post p1 = new Post();
 //		p1.setMessage("In einer Anti-Spam Klage wird behauptet, dass Utah Anti-Spam Regelungen verletzt. Das Vorgehen von Utah bezüglich der Anti-Spam Gesetze könnte die Bahn für neue Regelungen mit Telekommunikationsanbietern ebnen.");
 //		p1.setId("1");
@@ -64,12 +59,10 @@ public class TestAnalysis {
 				return new File(dir, name).isDirectory();
 			}
 		});
-		
 		for (String s : directories) {
 			System.out.println("Ordner: "+s);
 			new Clusterer().cluster(hashtagToAnalyze + "/" + s);
 		}
-		
 	}
 
 	private void startAnalysisCycle(int everyXHour) {
@@ -85,19 +78,12 @@ public class TestAnalysis {
 						return new File(dir, name).isDirectory();
 					}
 				});
-				
 				for (String s : directories) {
 					System.out.println("Ordner: "+s);
 					new Clusterer().cluster(hashtagToAnalyze + "/" + s);
 				}
-				
-				
-				
-				
 			}
 		};
-		
 		timer.schedule (hourlyTask, 0l, 1000*60*60*everyXHour);
 	}
-	
 }
