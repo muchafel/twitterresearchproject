@@ -12,6 +12,10 @@ import ude.SocialMediaExplorer.analysis.type.SentimentAnno;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import static ude.SocialMediaExplorer.analysis.Analysis.lexGerman;;
 
+/**
+ * this class annotates the tokens with a sentiment that's retrieved from a sentiment lexicon
+ *
+ */
 public class SentimentAnnotator extends JCasAnnotator_ImplBase{
 private ArrayList<Token> tokens;
 	@Override
@@ -26,10 +30,18 @@ private ArrayList<Token> tokens;
         	annotation.addToIndexes();
         }
 	}
+	/**
+	 * lookup method from the sentiment lexicon
+	 * @param token (Token)
+	 * @param language (String)
+	 * @return sentiment (double)
+	 */
 	private double isPositiv(Token t,String language) {
 		if(language.equals("de")){
+			//gets the specific sentiment of word from the sentiment lexicon
 			return lexGerman.getSentiment(t.getCoveredText(), language);
 		}
+		// TODO add a sentimentlexicon for english
 		if(language.equals("en")){
 			return 0.0;
 		}
