@@ -2,22 +2,20 @@ package ude.SocialMediaExplorer.analysis;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-
+/*
+ * class that connects a sentiment lexicon to the code 
+ * (for examples of lexiocn see the attached sentimentlexicon.txt)
+ */
 public class SentimentLexicon {
-
 	private String language;
-	
-
 	private HashMap<String, Double> lexicon ;
+	
 	public SentimentLexicon(String language){
 		this.language=language;
 		lexicon = new HashMap<String, Double>();
 		genrateLexicon(language);
-		//System.out.println(lexicon);
 	}
 	/*
 	* generates the lexicon in the specfied language
@@ -58,7 +56,6 @@ public class SentimentLexicon {
 		} else
 			return;
 	}
-
 	/*
 	 * returns 0 if there is no entry in the lexicon or the entry is positiv and
 	 * negativ (souldn't happen) else returns 1 for positive and -1 for negative
