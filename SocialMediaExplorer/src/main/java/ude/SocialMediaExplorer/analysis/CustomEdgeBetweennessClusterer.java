@@ -15,25 +15,8 @@ import edu.uci.ics.jung.graph.util.Pair;
 
 
 /**
- * An algorithm for computing clusters (community structure) in graphs based on edge betweenness.
- * The betweenness of an edge is defined as the extent to which that edge lies along 
- * shortest paths between all pairs of nodes.
- *
- * This algorithm works by iteratively following the 2 step process:
- * <ul>
- * <li> Compute edge betweenness for all edges in current graph
- * <li> Remove edge with highest betweenness
- * </ul>
- * <p>
- * Running time is: O(kmn) where k is the number of edges to remove, m is the total number of edges, and
- * n is the total number of vertices. For very sparse graphs the running time is closer to O(kn^2) and for
- * graphs with strong community structure, the complexity is even lower.
- * <p>
- * This algorithm is a slight modification of the algorithm discussed below in that the number of edges
- * to be removed is parameterized.
- * @author Scott White
- * @author Tom Nelson (converted to jung2)
- * @see "Community structure in social and biological networks by Michelle Girvan and Mark Newman"
+ * This is a simple adaption of the EdgeBetweennessClusterer.class of the JUNG 2.0 library. It's adapted to be capable
+ * to handle a customized Graph<V,E> that uses the classes MyLink.class and MyNode.class. 
  */
 public class CustomEdgeBetweennessClusterer<V,E> implements Transformer<Graph<V,E>,Set<Set<V>>> {
     private int mNumEdgesToRemove;

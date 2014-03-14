@@ -1,5 +1,10 @@
 package ude.SocialMediaExplorer.analysis;
 
+/**
+ * 
+ * A custom link class thta is used in the graph-operations
+ * 
+ */
 public class MyLink {
 
 	double capacity; 
@@ -12,7 +17,7 @@ public class MyLink {
 	 this.capacity = capacity;
 	 } 
 	 public String toString() { 
-	 return "E"+id;
+	 return "E "+id;
 	 }
 
 

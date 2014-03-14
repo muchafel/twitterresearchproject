@@ -1,5 +1,9 @@
 package ude.SocialMediaExplorer.analysis;
 
+/**
+ * a custom node class that is used in the graph-operations
+ *
+ */
 public class MyNode {
 
 	String id; 
@@ -7,7 +11,7 @@ public class MyNode {
 	 this.id = name;
 	 }
 	 public String toString() { 
-	 return "V"+id; 
+	 return "V "+id; 
 	 } 
 
 }
