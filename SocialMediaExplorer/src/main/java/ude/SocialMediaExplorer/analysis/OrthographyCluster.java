@@ -66,7 +66,7 @@ public class OrthographyCluster {
 				}
 			}
 		}
-		visualize(g);
+		//visualize(g);
 		Map<String, Set<String>> result= doBetweennessClustering(g);
 		return result;
 	}
