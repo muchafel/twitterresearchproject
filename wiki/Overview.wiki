@@ -20,7 +20,6 @@ For further readings and a technical documentation look at the contents below:
   * [Data] (Benny)
   * [Architecture](Henrik)
   * [Crawler] (benny)
-  * [Analysis] (Michael)
+  * [Analysis] 
   * [Visualization] (Henrik)
-  * [Limitations] (Michael)
-  * [Outlook] 
+  * [LimitationsOutlook]
