@@ -84,7 +84,7 @@ public class ClusterVisualization extends Composite {
 			}
 			treemapData = new $wnd.google.visualization.arrayToDataTable( treemapData );
 			console.log("...done");
-			
+						
 //			console.log("building orgChart data...");
 //			var orgChartData = [];
 //			for (var i = 0; i < dataSize; i++){
