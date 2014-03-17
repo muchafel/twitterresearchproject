@@ -117,8 +117,9 @@ public class DataConverter {
 		JSONArray postsJSON = new JSONArray();
 		for(String key : keys) {
 			JSONObject post = new JSONObject();
-			post.optString( "post", key );
+			post.put( "post", key );
 			post.put( "sentiment", posts.get( key ) );
+			postsJSON.put( post );
 		}
 		row.put( 6, postsJSON );
 		
