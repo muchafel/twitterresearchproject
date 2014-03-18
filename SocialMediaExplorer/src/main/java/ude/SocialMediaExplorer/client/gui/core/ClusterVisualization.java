@@ -123,8 +123,8 @@ public class ClusterVisualization extends Composite {
 				var table = new $wnd.google.visualization.Table($doc.getElementById('posts'));
 				
 				var formatter = new $wnd.google.visualization.ColorFormat();
-				formatter.addGradientRange(0,0.5, 'black', '#f00', '#ddd');
-				formatter.addGradientRange(0.5,1, 'black', '#ddd', '#0d0');
+				formatter.addGradientRange(-1,0, 'black', '#f00', '#ddd');
+				formatter.addGradientRange(0,1, 'black', '#ddd', '#0d0');
   				formatter.format(postListData, 1); // Apply formatter to second column
 				
 	        	table.draw( postListData, 
