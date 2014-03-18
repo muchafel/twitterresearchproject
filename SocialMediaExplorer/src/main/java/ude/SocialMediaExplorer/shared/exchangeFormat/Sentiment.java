@@ -52,13 +52,14 @@ public class Sentiment implements Serializable {
 	}
 
 	public double getNormalized() {
-		Double range = getRange();
-		if ( range > 0D ) {
-			return ( this.positive - ( range / 2D ) );
-		}
-		else {
-			return this.positive;
-		}
+		return (this.positive - this.negative);
+//		Double range = getRange();
+//		if ( range > 0D ) {
+//			return ( this.positive - ( range / 2D ) );
+//		}
+//		else {
+//			return this.positive;
+//		}
 	}
 
 	public double getRange() {
