@@ -17,9 +17,9 @@ public class Config {
 	/**
 	 * Path to project_config.xml (relative)
 	 */
-	private static final String productionPrefix = "/usr/local/tomcat/apache-tomcat-6.0.37/webapps/ROOT/deploy14";//TODO:DEPLOYMENT of files to WAR
+	private static final String productionPrefix = "/usr/local/tomcat/apache-tomcat-6.0.37/webapps/ROOT/";//TODO:DEPLOYMENT of files to WAR
 //	private static final String productionPrefix = "/Users/henrikdetjen/Desktop/Serverprogramme/apache-tomcat-7.0.47/webapps/test/";//TODO:DEPLOYMENT of files to WAR
-	private static final boolean productionMode = false;
+	private static final boolean productionMode = true;
 	private static final String xmlPath = "files/project_config.xml";
 
 	public static String get_xmlPath() {
