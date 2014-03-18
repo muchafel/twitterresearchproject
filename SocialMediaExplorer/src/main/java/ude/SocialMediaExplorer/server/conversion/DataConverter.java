@@ -120,7 +120,9 @@ public class DataConverter {
 			JSONObject post = new JSONObject();
 			post.put( "post", key );
 			DecimalFormat df = new DecimalFormat("#.##");
-			post.put( "sentiment", df.format( posts.get( key ) ));
+			String formattednumber = df.format( posts.get( key ) );
+			formattednumber = formattednumber.replaceAll( ",", "." );
+			post.put( "sentiment",  Double.parseDouble( formattednumber ));
 			postsJSON.put( post );
 		}
 		row.put( 6, postsJSON );
