@@ -110,9 +110,9 @@ public class HashTagSelection extends Composite {
 					names = new ArrayList<String>();
 
 					for ( int i = 0; i < result.length; i++ ) {
-						if (!result[i].contains( ".svn" )&&result[i].contains( ".mvn" )) { 
+						if ( !result[i].contains( ".svn" ) && !result[i].contains( ".mvn" ) ) {
 							names.add( result[i] );
-							listSeries.addItem( result[i] );							
+							listSeries.addItem( result[i] );
 						}
 					}
 
@@ -145,7 +145,7 @@ public class HashTagSelection extends Composite {
 	// STEP 2 (takes selected hashtag and loads the file/date selection)
 	@UiHandler( "btnOk" )
 	void time( ClickEvent event ) {
-		
+
 		wait = new Wait( "loading..." );
 		RootPanel.get( "content" ).add( wait );
 		wait.setVisible( true );
@@ -214,9 +214,7 @@ public class HashTagSelection extends Composite {
 
 	private String getSelectedDate() {
 		for ( Button b : possibleFiles ) {
-			if ( b.isActive() ) {
-				return b.getName().replace( " ", "" );
-			}
+			if ( b.isActive() ) { return b.getName().replace( " ", "" ); }
 		}
 		return "";
 	}
@@ -225,7 +223,7 @@ public class HashTagSelection extends Composite {
 
 		RootPanel.get( "content" ).clear();
 		RootPanel.get( "content" ).add( new Wait( "loading..." ) );
-		System.out.println(date);
+		System.out.println( date );
 		dh.getData( hashtag, date, new AsyncCallback<String>() {
 
 			public void onSuccess( String result ) {
