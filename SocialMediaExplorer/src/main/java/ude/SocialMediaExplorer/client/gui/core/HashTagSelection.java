@@ -110,8 +110,10 @@ public class HashTagSelection extends Composite {
 					names = new ArrayList<String>();
 
 					for ( int i = 0; i < result.length; i++ ) {
-						names.add( result[i] );
-						listSeries.addItem( result[i] );
+						if (!result[i].contains( ".svn" )&&result[i].contains( ".mvn" )) { 
+							names.add( result[i] );
+							listSeries.addItem( result[i] );							
+						}
 					}
 
 					wait.setVisible( false );
