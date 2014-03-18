@@ -1,5 +1,6 @@
 package ude.SocialMediaExplorer.server.conversion;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -118,7 +119,8 @@ public class DataConverter {
 		for(String key : keys) {
 			JSONObject post = new JSONObject();
 			post.put( "post", key );
-			post.put( "sentiment", posts.get( key ) );
+			DecimalFormat df = new DecimalFormat("#.##");
+			post.put( "sentiment", df.format( posts.get( key ) ));
 			postsJSON.put( post );
 		}
 		row.put( 6, postsJSON );
