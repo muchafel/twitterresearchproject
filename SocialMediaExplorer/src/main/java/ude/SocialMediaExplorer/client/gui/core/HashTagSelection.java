@@ -157,24 +157,29 @@ public class HashTagSelection extends Composite {
 					times.clear();
 					possibleFiles = new ArrayList<Button>();
 					for ( String date : result ) {
-						final Button b = new Button();
-						possibleFiles.add( b );
-						String btn_text = date;
-						btn_text = makeDateString( btn_text );
-						b.setText( btn_text );
-						b.setName( date );
-						b.addClickHandler( new ClickHandler() {
 
-							public void onClick( ClickEvent event ) {
-								for ( Button btn : possibleFiles ) {
-									btn.setActive( false );
+						if ( !date.contains( ".svn" ) && !date.contains( ".mvn" ) ) {
+
+							final Button b = new Button();
+							possibleFiles.add( b );
+							String btn_text = date;
+							btn_text = makeDateString( btn_text );
+							b.setText( btn_text );
+							b.setName( date );
+							b.addClickHandler( new ClickHandler() {
+
+								public void onClick( ClickEvent event ) {
+									for ( Button btn : possibleFiles ) {
+										btn.setActive( false );
+									}
+									b.setActive( true );
+									gogogo.setVisible( true );
 								}
-								b.setActive( true );
-								gogogo.setVisible( true );
-							}
-						} );
+							} );
 
-						times.add( b );
+							times.add( b );
+
+						}
 					}
 
 					wait.setVisible( false );
