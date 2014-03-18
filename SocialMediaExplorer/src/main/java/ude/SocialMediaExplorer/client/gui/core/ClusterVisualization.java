@@ -79,7 +79,8 @@ public class ClusterVisualization extends Composite {
 				row.push({v:data[i][0],f:data[i][1]});//value/formatted
 				row.push(data[i][2]);//parent
 				row.push(data[i][3]);//size
-				row.push(data[i][4]);//sentiment
+				var senti = 1 + data[i][4]; //somehow negative values arent treated correct in treemap, thus mapping from 0-2
+				row.push(senti);//sentiment
 				treemapData.push(row);
 			}
 			treemapData = new $wnd.google.visualization.arrayToDataTable( treemapData );
@@ -204,6 +205,8 @@ public class ClusterVisualization extends Composite {
 					minColor : '#f00',
 					midColor : '#ddd',
 					maxColor : '#0d0',
+					minColorValue: 0,
+					maxColorValue: 2,
 					headerHeight : 50,
 					textStyle : {
 						color : 'black',
