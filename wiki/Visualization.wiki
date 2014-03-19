@@ -1,14 +1,76 @@
 #describes how the clusters are displayed in the browser
 
-= Overview =
+= Introduction =
 
+The Visualizations' goal is to show [https://code.google.com/p/twitterresearchproject/wiki/ClusterElements Cluster Elements] from the [https://code.google.com/p/twitterresearchproject/wiki/Analysis Analysis] to the user in an intuitive way. <br />
+To display them, a combination of different client-side java script-based technologies is used. They will be discussed in the following last chapter. The following chapter shows the User-Interface itself. (See also [https://code.google.com/p/twitterresearchproject/wiki/UserGuidelines User Guidelines]).
 
-The Visualization is based on the [https://code.google.com/p/twitterresearchproject/wiki/ClusterElements Cluster Elements]. These are outcomes of the a combination of different client-side technologies based on javascript. 
+= Concept =
 
+The User-Interface is mainly divided into two components:
+ # The *options area*: A simple interface for changing the project_config.xml, which defines parameters for the [https://code.google.com/p/twitterresearchproject/wiki/Crawler Crawler]. This could be extended in the future.
+ # A *visualization area*: Here the user can choose a analysis result via a list of possible hashtags and display it. To display a [https://code.google.com/p/twitterresearchproject/wiki/ClusterElements Cluster Element], the Interface has to provide this informations:
+ * The clusters and subclusters
+ * Their Size
+ * Their Sentiment
+ * The corresponding posts (tweets)
+As the ClusterElements are organized in a hierarchical structure, a *[http://en.wikipedia.org/wiki/Treemapping TreeMap]* can handle all informations but the post at once. So there is a TreeMap for the Clusters and a separate list of posts, which is display and loaded with each Cluster. The size (number of posts) of a Cluster is the space the TreeMap-element takes, the Sentiment is the color ( in a scale from red [=negative] over gray [=neutral] to green [=positive] ) of the element and clicking on a Cluster shows its Subclusters, if existing. For better understanding a *breadcrumb-list* shows the actual route to the root-Cluster. The *PostList* shows all the posts belonging to the actually chosen Cluster and the sentiment for each post. One can sort by Sentiment's order - ascending or descending.
 
-= Details =
+= Implementation Aspects =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+== GUI Creation ==
+
+The GUI is created at different location and in different part of the Project. Let's begin with the general creation of a GUI in GWT. <br />
+GWT is completely in *Java-based* and everything you describe in Java, will be compiled via the GWT-compiler into the browser readable HTML and Javascript. You can use widgets, where some functionality (like  a List or a Button) is bundled into one component. You have access to the DOM of the Browser via 
+<code>
+RootPanel.get(someId).doSomething() 
+RootPanel.get('content').add(someWidget)
+</code>
+In this way you can add Element to your Website. A *Widget* can be defined by creating a Class which extends i.e. Composite. But all Functionality, like adding an option to list, has to be added to a widget via EventHandlers. Classes with the definition a of the view plus its behavior get confusing very fast. Therefore the *UIBinder* was added in the newest version of GWT. <br />
+The UIBinder separates the the basic (static) layout, of your website from the dynamic content and functionality. Ao you don't have to add and set Widets and i.e. text in Java, you do it in XML. You can use Widgets and CSS-style directly and as a bonus you can set *fields* into a widget to interact with it in your Java code - assign a variable and add functionality through annotations. This Example shows how this works:<br />
+UIBinder:
+<code>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" >
+
+       <ui:style>
+		/*select widgets via their class and style them*/
+	
+        </ui:style>
+
+        <!-- this widget is described in the "g:"-context -->
+ 	<g:FocusPanel>
+            <g:HTMLPanel>
+                <div>
+                    Hello, <span ui:field='dynamicContent'>.
+                </div>
+            </g:HTMLPanel>
+        </g:FocusPanel>
+
+        ...
+</code>
+Java:
+<code>
+public class Example extends Composite {
+
+	interface MenuUiBinder extends UiBinder<Widget, Example> {}
+
+	private static MenuUiBinder uiBinder = GWT.create( MenuUiBinder.class );
+
+        @UiField("dynamicContent")
+	SpanElement span;
+	@UiHandler("help")
+	void hereCouldBeAClickHandler(ClickEvent e) {
+		//react on click
+	}
+
+	public Example() {
+		initWidget( uiBinder.createAndBindUi( this ) );
+
+	}
+
+        ...
+</code>
+
+==  GUI Functionality ==
