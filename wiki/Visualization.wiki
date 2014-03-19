@@ -16,7 +16,7 @@ The User-Interface is mainly divided into two components:
  * The corresponding posts (tweets)
 As the ClusterElements are organized in a hierarchical structure, a *[http://en.wikipedia.org/wiki/Treemapping TreeMap]* can handle all informations but the post at once. So there is a TreeMap for the Clusters and a separate list of posts, which is display and loaded with each Cluster. The size (number of posts) of a Cluster is the space the TreeMap-element takes, the Sentiment is the color ( in a scale from red [=negative] over gray [=neutral] to green [=positive] ) of the element and clicking on a Cluster shows its Subclusters, if existing. For better understanding a *breadcrumb-list* shows the actual route to the root-Cluster. The *PostList* shows all the posts belonging to the actually chosen Cluster and the sentiment for each post. One can sort by Sentiment's order - ascending or descending.
 
-= Implementation Aspects =
+= Implementation =
 
 == GUI Creation ==
 
