@@ -122,14 +122,14 @@ The TreeMap and the PostList couldn't be realized as widgets easily, so we used 
     <script type="text/javascript" src="Start/Start.nocache.js"></script>
     ...
 }}}
-The loaded lib can be accessed in a JSNI - [http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html JavaScriptNativeInterface]. A GWT-way to wrap some JavaScript in a JavaFunction. From here the browser-functions can be used directly, this means you can access your lib via the window object ($wnd). You can wrap any thinkable JavaScript code in such an interface (indicated through "native") and call it from your Java code. This is also possible vice versa, but with some limitations (you can call Java methods, Doubles, Strings and Integers). 
-Complex objects as the ClusterElement aren't passable to the JSNI (the GWT-Compiler hasn't all libraries translated into JavaScript - the ClusterElement uses ArrayList and HashMap...). Thus the ClusterElements are mapped recursively into a JSON-Array on server-side via the Java org.JSON-library. Now the Clusters can be used on client-side. The following example shows the JSNI 
+The loaded lib can be accessed in a *JSNI* - [http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html JavaScriptNativeInterface]. A GWT-way to wrap some JavaScript in a JavaFunction. From here the browser-functions can be used directly, this means you can access your lib via the window object ($wnd). You can wrap any thinkable JavaScript code in such an interface (indicated through "native") and call it from your Java code. This is also possible vice versa, but with some limitations (you can call Java methods, Doubles, Strings and Integers). 
+Complex objects as the ClusterElement aren't passable to the JSNI (the GWT-Compiler hasn't all libraries translated into JavaScript - the ClusterElement uses ArrayList and HashMap...). Thus the ClusterElements are mapped recursively into a JSON-Array on server-side via the Java org.JSON-library. Now the Clusters can be used on client-side. The following example shows how to work with the JSNI 
 
 {{{
 ...
 String j = "[['Topcluster', 1, null, 50, 0.5, 0.1, [{post:'i am a tweet',sentiment: 0.5},{...}]],[...]]";
 
-public *native* void draw() /*-{
+public native void draw() /*-{
 
 	if (!$wnd.google && !wnd.google.visualisation) {
 		$wnd.alert("Something went wrong: no google js lib found... ");
@@ -157,3 +157,37 @@ public *native* void draw() /*-{
                 ...
 }}}
 So the file a user selects is first deserialized into ClusterElements, then mapped to JSON, passed into a Java-String, read via JSNI and finally parsed back to JavaScript objects. 
+
+== Google Visualization API - Treemap and Postlist ==
+From the "data" variable, which represents the ClusterElements, in the JSNI a data mapping to the *TreeMap* API is needed. Just passing the Cluster-names causes display problems (i.e. a name appears in two Clusters). We need to pass a formatted value (the displayed) and a value (internal usage: unique id). You can react on a rollup/rolldown event and induce a a rollup - this is done by the "go up"-button over the map (by adding a ClickHandler). The rollup event is used for creating the PostList. Both events are used for updating the Breadcrumbs. The general approach to generate the map:
+{{{
+var treemapData = [];
+for (var i = 0; i < dataSize; i++){
+	var row = new Array();
+	row.push({v:data[i][0],f:data[i][1]});//value/formatted
+	row.push(data[i][2]);//parent
+	row.push(data[i][3]);//size
+	row.push(data[i][4]);//sentiment
+	treemapData.push(row);
+}
+
+treemapData = new $wnd.google.visualization.arrayToDataTable( treemapData );
+
+var tree = new $wnd.google.visualization.TreeMap(document.getElementById('chart_div'));
+tree.draw(data, {
+          minColor: '#f00',
+          midColor: '#ddd',
+          maxColor: '#0d0',
+          headerHeight: 15,
+          fontColor: 'black',
+          showScale: true
+});
+ ...
+}}}
+The *PostList* is created similar with each rollup event by reading the events target. A mentionable detail is that the PostList's second column is formatted to the sentiments color by a color formatter: 
+{{{
+var formatter = new $wnd.google.visualization.ColorFormat();
+formatter.addGradientRange(0,0.5, 'black', '#f00', '#ddd');
+formatter.addGradientRange(0.5,1, 'black', '#ddd', '#0d0');
+formatter.format(postListData, 1); // Apply formatter to second column				
+}}}
