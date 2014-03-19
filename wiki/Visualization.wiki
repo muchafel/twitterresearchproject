@@ -3,7 +3,7 @@
 = Overview =
 
 
-The Visualization is based on the Cluster Elements [https://code.google.com/p/twitterresearchproject/wiki/ClusterElements]. These are outcomes of the a combination of different client-side technologies based on javascript. 
+The Visualization is based on the [https://code.google.com/p/twitterresearchproject/wiki/ClusterElements Cluster Elements]. These are outcomes of the a combination of different client-side technologies based on javascript. 
 
 
 = Details =
