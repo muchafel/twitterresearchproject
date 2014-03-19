@@ -1,0 +1,14 @@
+#describes how the clusters are displayed in the browser
+
+= Overview =
+
+
+The Visualization is based on the Cluster Elements [https://code.google.com/p/twitterresearchproject/wiki/ClusterElements]. These are outcomes of the a combination of different client-side technologies based on javascript. 
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
