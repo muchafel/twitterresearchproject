@@ -25,12 +25,6 @@
 									<b:ListBox ui:field="listSeries" b:id="listSeries"></b:ListBox>
 									<!-- HelpBlock></b:HelpBlock-->
 						    	</b:Row>
-						    	<g:HTMLPanel>
-						    	    <br />
-						    	</g:HTMLPanel>
-						    	<b:Row>
-									 <b:Button ui:field="btnOk">OK</b:Button>
-						    	</b:Row>
 							</b:Controls>
 						</b:ControlGroup>
 					</b:Fieldset>
@@ -47,13 +41,16 @@
 			</b:Column>
 		</b:Row>
 		
-		<b:Row ui:field="gogogo">
+		<!-- b:Row ui:field="gogogo">
 			<b:Column size="6" offset="3">
 				<b:WellForm type="HORIZONTAL">
 				    <b:Button size="LARGE" block="true" type="INVERSE" ui:field="btnGo">GO!</b:Button>
 				</b:WellForm>
 			</b:Column>
-		</b:Row>
+		</b:Row-->
+		
+		<b:Row ui:field="waitRow"></b:Row>
+		<b:Row ui:field="clusterVisualization"></b:Row>
 
 	</g:HTMLPanel>
 
