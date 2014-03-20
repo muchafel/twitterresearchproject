@@ -1,5 +1,5 @@
 = ClusterElements =
 
-A Cluster Element is our data-format that holds the result of a [Analysis] on a specific cycle. To deal with the hierarchical structure of our results it contains (sub)-ClusterElements. A ClusterElement consits of the name, the sentiment, a list of (sub)-ClusterElements and a list of tweets that refer to it.
+A cluster element is our data-format that holds the result of an [Analysis] on a specific cycle. To deal with the hierarchical structure of our results it contains further cluster elements. A cluster element consists of the name, the sentiment, a list of further subcluster elements, and a list of tweets that refer to it.
 
 [http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/ClusterElementUML.png]
