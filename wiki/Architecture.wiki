@@ -1,4 +1,4 @@
-#summary deployment, user guide, step by step
+#summary deployment guide, step by step
 
 = Introduction =
 Blub.
