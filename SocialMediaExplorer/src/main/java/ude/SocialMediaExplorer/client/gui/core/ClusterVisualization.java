@@ -1,7 +1,5 @@
 package ude.SocialMediaExplorer.client.gui.core;
 
-import ude.SocialMediaExplorer.Config;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
