@@ -1,9 +1,11 @@
-= OrthographicCleaning=
+#summary detection of misspelled words, cleaning
 
-In order to detect mispelled words that describe the same concept we used this processing step. It uses the levensthein-distance to calculate similarity between the words and assigns the most spelled form to words with a similarity >0.7. 
+= OrthographicCleaning =
+
+In order to detect mispelled words that describe the same concept we used this processing step. It uses the Levenshtein distance to calculate similarity between the words and assigns the most frequent spelled form to words with a similarity > .7. 
 It operates just on tokens that are annotated with a "simple Sense"(described in [Analysis]).
 
-The figure below shows words with a similarity >0.7 in a graph:
+The figure below shows words with a similarity > .7 in a graph:
 In the shown example all the words would be assigned with "Regelungen"(German for regulations)
 
 [http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/OrthographyCluster.png]
