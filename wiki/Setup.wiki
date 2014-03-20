@@ -1,4 +1,4 @@
-#summary technical setup, backend, frontend, GWT, Bootstrap
+#summary install and deploy the project, step by step
 
 = Introduction =
 
