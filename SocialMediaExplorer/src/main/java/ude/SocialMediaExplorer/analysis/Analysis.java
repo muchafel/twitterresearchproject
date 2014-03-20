@@ -38,7 +38,7 @@ public class Analysis extends Thread {
 
 	public Analysis( PostList postList ) {
 		this.postList = postList;
-		tweetCases = new ArrayList<JCas>(); // tweetCases nicht neu erzeugen, sondern serialisierte einlesen und dann nur die neuen Analysen hinzufügen
+		tweetCases = new ArrayList<JCas>();
 	}
 	/**
 	 * this method calls the analysis steps:
@@ -57,8 +57,7 @@ public class Analysis extends Thread {
 		try {
 			// adding information per tweet
 			for ( Post p : postList ) {
-				// nur Posts analysieren und als Cas hinzufügen, die neuer als letzte Analyse sind
-				if ( p.getDate().after( dateOfLastAnalysis ) ) {
+				if ( p.getDate().after( dateOfLastAnalysis ) ) { // only analyze posts that are newer than the date of last analysis
 					tweetCases.add( analyzePost( p ) );
 				}
 			}
