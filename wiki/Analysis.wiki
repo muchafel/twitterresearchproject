@@ -14,7 +14,7 @@ As already mentioned this step is performed for each tweet that was collected by
   * Segmentation and twitter-specific POS-tagging with the ArktweetTagger (Quelle): Because the ArktweetTagger is just trained on english texts and our use case refers to mostly german Tweets the results of this step aren't statisfying. We use this step to detect emoticons, links and Twitter-specific phenomenons like the use of '@' and '#'
   * POS-tagging with the OpenNLPPOSTagger (Quelle): This POS-Tager is also capable of German
   * POS-merging: The results of the ArktweetTagger are replaced with the results from OpenNLPPOSTagger except the emoticons, links and twitter-specific phenomenons
-  * [[SentimentTagging]]: enriches tokens with a sentiment value
+  * [SentimentTagging]: enriches tokens with a sentiment value
   * simple Sense-Annotation: marks NNs, NEs and ADJs to speed up the following clustering process
 
 The figure below illustrates the "Analysis on Tweet-Level"
