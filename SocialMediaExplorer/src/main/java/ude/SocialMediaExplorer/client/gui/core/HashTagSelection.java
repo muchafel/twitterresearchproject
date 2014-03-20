@@ -13,6 +13,7 @@ import com.github.gwtbootstrap.client.ui.ListBox;
 import com.github.gwtbootstrap.client.ui.Row;
 import com.github.gwtbootstrap.client.ui.WellForm;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -20,7 +21,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -48,7 +48,7 @@ public class HashTagSelection extends Composite {
 
 	//if one clicks in hashtaglist -> hide other menus 
 	@UiHandler( "listSeries" )
-	void onClick( ClickEvent e ) {
+	void onChange( ChangeEvent e ) {
 		if (loading == false) {
 			timeSelection.setVisible( false );
 			showTimeSelection();
