@@ -16,10 +16,10 @@ For further readings and a technical documentation look at the contents below:
 
 = Table of Contents=
 
-  * [purpose purpose of the project] ()
-  * [Data] (Benny)
-  * [Architecture](Henrik)
-  * [Crawler] (benny)
+  * [purpose purpose of the project]
+  * [Data]
+  * [Architecture]
+  * [Crawler]
   * [Analysis] 
-  * [Visualization] (Henrik)
+  * [Visualization]
   * [LimitationsOutlook]
