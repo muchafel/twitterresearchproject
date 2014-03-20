@@ -1,3 +1,5 @@
+#summary core funtionality of our sentiment tagging (list-lookup-approach)
+
 =SentimentTagging=
 
 Our approach to sentiment detection and classification is list-lookup-based. We use all tokens that are classified as nouns, verbs or adjectives, compare them to our sentiment-lexicon and assign the found value to the tokens. The sentiment-lexicon was computed by using a list of German words (originally from a large list of words that were annotated with a sentiment http://www.ulliwaltinger.de/sentiment/) and association with strongly negative or positive words in the WebT1-Corpus. The set of negative and positive words came from a recommendation of remus et al. (http://asv.informatik.uni-leipzig.de/publication/file/155/490_Paper.pdf). The association was computing by using pointwise mutual information. In addition the pointwise mutual information was also computed for all gebeugte forms of the positive and negative words. Because pointwise mutual information is originally defined as the association of two words it was computed for every word pair (target word + sentiment word), then summed and finally normalized by the count of all pairs.
