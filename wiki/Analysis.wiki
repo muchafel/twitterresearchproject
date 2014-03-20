@@ -1,4 +1,4 @@
-#summary describes the NLP-steps that are done on the server-side on a weekly basis
+#summary NLP steps, server side, regular basis
 
 = Analysis=
 
