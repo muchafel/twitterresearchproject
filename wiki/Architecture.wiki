@@ -1,4 +1,3 @@
-#summary deployment guide, step by step
+#summary used technologies - an overview when you want to extend the project
 
 = Introduction =
-Blub.
