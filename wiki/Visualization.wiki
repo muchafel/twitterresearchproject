@@ -1,4 +1,4 @@
-#summary describes how the clusters are displayed in the browser
+#summary cluster visualization, TreeMap
 
 = Introduction =
 
