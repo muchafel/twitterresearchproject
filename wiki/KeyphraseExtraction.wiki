@@ -1,10 +1,12 @@
+#summary sliding window, co-occurence-graph
+
 = KeyphraseExtraction=
 
-In order to compress the tweets further we try to extract words and phrases that describe the sense of each tweet. For this reason we use a co-occurence-graph-based approach to detect and select keyphrases. First we create a co-occurence graph by using a sliding window approach with a size of 4. We start with a graph with a node for every word and adding an edge between two edges that co-occur inside the moving window. The effect of this procedure on the german example sentence "In einer Anti-Spam Klage wird behauptet, dass Utah Anti-Spam Regelungen verletzt. Das Vorgehen von Utah bezüglich der Anti-Spam Gesetze könnte die Bahn für neue Regelungen mit Telekommunikationsanbietern ebnen." is shown below:
+In order to compress the Tweets further we extract words and phrases that describe the sense of each Tweet. For this reason we use a co-occurence-graph based approach to detect and select keyphrases. First we create a co-occurence graph by using a sliding window approach (size 4). Our initial graph contains one node for every word, then we add an edge between two words that co-occur inside the sliding window. The effect of this procedure on the german example sentence "In einer Anti-Spam Klage wird behauptet, dass Utah Anti-Spam Regelungen verletzt. Das Vorgehen von Utah bezüglich der Anti-Spam Gesetze könnte die Bahn für neue Regelungen mit Telekommunikationsanbietern ebnen." is shown below:
 
 [http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/CoOcc.png]
 
-Then the most connected nodes are selected as keywords. Because there could be also keyprahses each keyword is checked for adjacent nodes that have a high rank, too.
-If we found such a compound of two adjacent words that are both highly-connected we choose the compound as keyphrase.
+Then the most connected nodes are selected as keywords. Because there could be also keyphrases consisting of more than one word, each keyword is checked for adjacent nodes that have a high rank, too.
+If such a compound of two adjacent words that are both highly connected is found, the compound is chosen as a keyphrase.
 
-In the example sentence the keyphrases "Utah Anti-Spam Regelungen, Bahn, Telekommunikationsanbietern, Anti-Spam Gesetze" would be chosen.
+In the example sentence the keyphrases "Utah Anti-Spam Regelungen, Bahn, Telekommunikationsanbietern, Anti-Spam Gesetze" are chosen.
