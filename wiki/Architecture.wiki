@@ -1,4 +1,4 @@
-#this describes the projects archtiecture
+#summary deployment, user guide, step by step
 
 = Introduction =
 Blub.
