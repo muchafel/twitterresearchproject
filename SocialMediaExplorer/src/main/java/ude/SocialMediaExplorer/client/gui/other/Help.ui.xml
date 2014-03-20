@@ -10,12 +10,15 @@
 	<g:HTMLPanel>
 		<b:Row>
 			<b:Column size="10" offset="1">
-				<g:HTMLPanel>
-					<p>
-						Hello,<br></br>
-						i am a Tutorial.
-					</p>
-				</g:HTMLPanel>
+			    <b:Hero>
+					<b:Heading size="2">Help is near</b:Heading>
+					<g:HTMLPanel>
+						<a href="https://code.google.com/p/twitterresearchproject/wiki/UserGuidelines"
+							target="_blank">
+							&rarr; click here</a>
+						<br></br>
+					</g:HTMLPanel>
+				</b:Hero>
 			</b:Column>
 		</b:Row>
 	</g:HTMLPanel>
