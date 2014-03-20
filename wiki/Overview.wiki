@@ -1,4 +1,4 @@
-#summary describes the main process of our application
+#summary the main process of our application, toc
 
 = Introduction =
 
