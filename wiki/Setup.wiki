@@ -1,4 +1,4 @@
-#summary describes how the project pieces work together
+#summary technical setup, backend, frontend, GWT, Bootstrap
 
 = Introduction =
 
