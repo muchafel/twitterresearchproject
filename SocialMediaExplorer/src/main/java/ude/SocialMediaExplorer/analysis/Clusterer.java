@@ -1,6 +1,7 @@
 package ude.SocialMediaExplorer.analysis;
 
 import java.awt.Dimension;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -61,6 +62,13 @@ public class Clusterer {
 		this.hashtagToCluster=hashtagToCluser;
 		CASReader reader= new CASReader();
 		List<JCas> jCases= new ArrayList<JCas>();
+		
+		// do not cluster if the target ClusterElement is already there
+		String cePath = Config.get_location_CE()+"/"+hashtagToCluster+".ser";
+		if (new File(cePath).exists()) {
+			return;
+		}
+
 		try {
 			jCases=reader.read("files/serializedCases/"+hashtagToCluster);
 			System.out.println(hashtagToCluster);
