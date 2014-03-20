@@ -11,6 +11,8 @@ import java.util.Date;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
+
+import ude.SocialMediaExplorer.Config;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter;
@@ -23,14 +25,15 @@ public class CASWriter {
 	public void write(JCas jcas,String hashtag) throws Exception {
 		AggregateBuilder builder = new AggregateBuilder();
 		
-		String directory="files/serializedCases/"+hashtag+"/";
+//		String directory="files/serializedCases/"+hashtag+"/";
+		String directory = Config.get_location_CAS() + hashtag + "/";
 	
-		String tempFileName =  DocumentMetaData.get(jcas).getDocumentId();
-		System.out.println("doc_id (tempfileName): " + tempFileName);
+		String tempFileName = DocumentMetaData.get(jcas).getDocumentId();
+//		System.out.println("doc_id (tempfileName): " + tempFileName);
 		//tempFileName = tempFileName.substring(0, tempFileName.length());
 		String[] nameAndDate2 = tempFileName.split("_");
 		
-		System.out.println("NameAndDate: "+nameAndDate2[0]);
+//		System.out.println("NameAndDate: "+nameAndDate2[0]);
 		Date tempDate = getDateFromString(nameAndDate2[0]);
 		
 		File root = new File(directory);
@@ -44,10 +47,10 @@ public class CASWriter {
 		Date targetDate = new Date();
 		if (directories != null) {
 			targetDate = getDateFromStringShort(directories[directories.length-1]);
-			System.out.println("Datum aus Ordner gelesen:" + targetDate);
+			System.out.println("got date from folder:" + targetDate);
 		} else { 
 			targetDate = format.parse("20121221");
-			System.out.println("kein ordner, Datum manuell:" + targetDate);
+			System.out.println("no folder, date manually set:" + targetDate);
 		}
 		
 		long dateDiff = tempDate.getTime() - targetDate.getTime();
@@ -55,7 +58,7 @@ public class CASWriter {
 		
 		if (dayDiff < 7) { // schreibe jCas in aktuellsten Ordner
 			String abc = directory + format.format(targetDate);
-			System.out.println("daydiff kleiner 7. Order, in den geschrieben wird:" + abc);
+			System.out.println("daydiff < 7. Folder to write in:" + abc);
 			builder.add(createEngineDescription(BinaryCasWriter.class, BinaryCasWriter.PARAM_FORMAT, "4",
 					BinaryCasWriter.PARAM_TARGET_LOCATION, abc));
 			
@@ -67,9 +70,9 @@ public class CASWriter {
 				if (result) System.out.println("DIR created");
 			}
 			String abc = directory+tempDir;
-			System.out.println("daydiff min. 7. Order, in den geschrieben wird:" + abc);
+			System.out.println("daydiff min. 7. Folder to write in:" + abc);
 			builder.add(createEngineDescription(BinaryCasWriter.class, BinaryCasWriter.PARAM_FORMAT, "4",
-					BinaryCasWriter.PARAM_TARGET_LOCATION, abc));	
+					BinaryCasWriter.PARAM_TARGET_LOCATION, abc));
 			targetDate = tempDate;
 		}
 
