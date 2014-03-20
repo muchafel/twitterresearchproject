@@ -1,4 +1,4 @@
-#summary sentiment, keyphrase extraction, spelling, scope, and semantic information
+#summary sentiment, keyphrase extraction, spelling, scope, semantic information
 
 =Limitations & Outlook=
 
