@@ -1,4 +1,4 @@
-#summary core funtionality of our sentiment tagging (list-lookup-approach)
+#summary sentiment lexicon and sentiment tagging (list-lookup-approach)
 
 =SentimentTagging=
 
