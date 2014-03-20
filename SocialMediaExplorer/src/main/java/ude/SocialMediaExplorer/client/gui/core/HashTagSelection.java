@@ -1,11 +1,13 @@
 package ude.SocialMediaExplorer.client.gui.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import ude.SocialMediaExplorer.client.gui.errorhandling.SimpleErrorHandling;
 import ude.SocialMediaExplorer.client.gui.other.Wait;
 import ude.SocialMediaExplorer.client.rmi.IDataHelperService;
 import ude.SocialMediaExplorer.client.rmi.IDataHelperServiceAsync;
+
 import com.github.gwtbootstrap.client.ui.Button;
 import com.github.gwtbootstrap.client.ui.ListBox;
 import com.github.gwtbootstrap.client.ui.Row;
@@ -47,12 +49,11 @@ public class HashTagSelection extends Composite {
 	//if one clicks in hashtaglist -> hide other menus 
 	@UiHandler( "listSeries" )
 	void onClick( ClickEvent e ) {
-		timeSelection.setVisible( false );
-		gogogo.setVisible( false );
+		if (loading == false) {
+			timeSelection.setVisible( false );
+			showTimeSelection();
+		}
 	}
-
-	@UiField
-	Button btnOk;
 
 	/**
 	 * the buttons for a selection of a file
@@ -61,21 +62,16 @@ public class HashTagSelection extends Composite {
 	WellForm times; //files timestamps
 
 	ArrayList<Button> possibleFiles; //holds actual selection buttons in 
+	String placeholder = "-- select hashtag --";
 
-	@UiField
-	Button btnGo;
-
-	/**
-	 * the 3 main panels (representing the 3 selection steps)
-	 */
-
-	@UiField
-	Row gogogo;
 	@UiField
 	Row timeSelection;
 	@UiField
 	Row hashtagSelection;
 
+	@UiField
+	Row clusterVisualization;
+	
 	/**
 	 * rest
 	 */
@@ -83,8 +79,19 @@ public class HashTagSelection extends Composite {
 
 	private IDataHelperServiceAsync dh = null;
 
-	Wait wait;
-
+	@UiField
+	Row waitRow;
+	private void waiting(String msg) {
+		stopWaiting();
+		waitRow.add(  new Wait(msg) );
+		waitRow.setVisible( true );
+	}
+	private void stopWaiting() {
+		waitRow.setVisible( false );
+		waitRow.clear();
+	}
+	
+	
 	//////////////////////////
 
 	public HashTagSelection() {
@@ -93,22 +100,23 @@ public class HashTagSelection extends Composite {
 
 		hashtagSelection.setVisible( false );
 		timeSelection.setVisible( false );
-		gogogo.setVisible( false );
-
-		wait = new Wait( "preparing..." );
+		
+		waiting( "preparing..." );
 
 		// STEP 1 load all possible hashtags with results (by reultsfolders names)
 		try {
 			dh = GWT.create( IDataHelperService.class );
-
-			RootPanel.get( "content" ).add( wait );
 
 			dh.getPossibleHashtags( new AsyncCallback<String[]>() {
 
 				public void onSuccess( String[] result ) {
 
 					names = new ArrayList<String>();
-
+					Arrays.sort( result );
+					
+					names.add( placeholder );
+					listSeries.addItem( placeholder );
+					
 					for ( int i = 0; i < result.length; i++ ) {
 						if ( !result[i].contains( ".svn" ) && !result[i].contains( ".mvn" ) ) {
 							names.add( result[i] );
@@ -116,7 +124,7 @@ public class HashTagSelection extends Composite {
 						}
 					}
 
-					wait.setVisible( false );
+					stopWaiting();
 					hashtagSelection.setVisible( true );
 
 				}
@@ -143,62 +151,74 @@ public class HashTagSelection extends Composite {
 	//////////////////////////
 
 	// STEP 2 (takes selected hashtag and loads the file/date selection)
-	@UiHandler( "btnOk" )
-	void time( ClickEvent event ) {
+	void showTimeSelection() {
 
-		wait = new Wait( "loading..." );
-		RootPanel.get( "content" ).add( wait );
-		wait.setVisible( true );
 
 		try {
-			dh.getPossibleFiles( getSelectedHashtag(), new AsyncCallback<String[]>() {
+			if (getSelectedHashtag() != placeholder) {
 
-				public void onSuccess( String[] result ) {
-					times.clear();
-					possibleFiles = new ArrayList<Button>();
-					for ( String date : result ) {
-
-						if ( !date.contains( ".svn" ) && !date.contains( ".mvn" ) ) {
-
-							final Button b = new Button();
-							possibleFiles.add( b );
-							String btn_text = date;
-							btn_text = makeDateString( btn_text );
-							b.setText( btn_text );
-							b.setName( date );
-							b.addClickHandler( new ClickHandler() {
-
-								public void onClick( ClickEvent event ) {
-									for ( Button btn : possibleFiles ) {
-										btn.setActive( false );
+				waiting( "loading..." );
+				loading = true;
+				
+				dh.getPossibleFiles( getSelectedHashtag(), new AsyncCallback<String[]>() {
+					
+					public void onSuccess( String[] result ) {
+						
+						Arrays.sort( result );
+						times.clear();
+						possibleFiles = new ArrayList<Button>();
+						for ( String date : result ) {
+							
+							if ( !date.contains( ".svn" ) && !date.contains( ".mvn" ) ) {
+								
+								final Button b = new Button();
+								possibleFiles.add( b );
+								String btn_text = date;
+								btn_text = makeDateString( btn_text );
+								b.setText( btn_text );
+								b.setName( date );
+								b.addClickHandler( new ClickHandler() {
+									
+									public void onClick( ClickEvent event ) {
+										if (loading == false) {
+											for ( Button btn : possibleFiles ) {
+												btn.setActive( false );
+											}
+											b.setActive( true );
+											draw();										
+										}
 									}
-									b.setActive( true );
-									gogogo.setVisible( true );
-								}
-							} );
-
-							times.add( b );
-
+								} );
+								
+								times.add( b );
+								
+							}
 						}
+						
+						stopWaiting();
+						loading = false;
+						timeSelection.setVisible( true );
+						
 					}
-
-					wait.setVisible( false );
-					timeSelection.setVisible( true );
-				}
-
-				public void onFailure( Throwable caught ) {
-
-					wait.setVisible( false );
-					hashtagSelection.setVisible( true );
-					new SimpleErrorHandling( caught.getLocalizedMessage() );
-
-				}
-			} );
-
+					
+					public void onFailure( Throwable caught ) {
+						
+						stopWaiting();
+						loading = false;
+						hashtagSelection.setVisible( true );
+						new SimpleErrorHandling( caught.getLocalizedMessage() );
+						
+					}
+				} );
+				
+			}else {
+				timeSelection.setVisible( false );
+			}
 		}
 		catch ( Exception e ) {
 			new SimpleErrorHandling( e );
 		}
+			
 
 
 	}
@@ -207,8 +227,8 @@ public class HashTagSelection extends Composite {
 
 
 	//STEP 3 load the selected file and create visualization 
-	@UiHandler( "btnGo" )
-	void draw( ClickEvent event ) {
+//	@UiHandler( "btnGo" )
+	void draw() {
 		try {
 			createVisualization( getSelectedHashtag(), getSelectedDate() );
 		}
@@ -226,26 +246,29 @@ public class HashTagSelection extends Composite {
 
 	private void createVisualization( final String hashtag, final String date ) {
 
-		RootPanel.get( "content" ).clear();
-		RootPanel.get( "content" ).add( new Wait( "loading..." ) );
-		System.out.println( date );
+		clusterVisualization.clear();
+		waiting("loading...");
+		loading = true;
+		
+//		System.out.println( date );
 		dh.getData( hashtag, date, new AsyncCallback<String>() {
 
 			public void onSuccess( String result ) {
+				stopWaiting();
+				loading = false;
 				if ( result != null ) {
 					ClusterVisualization cv = new ClusterVisualization( hashtag, result );
-					RootPanel.get( "content" ).clear();
-					RootPanel.get( "content" ).add( cv );
+					clusterVisualization.add( cv );
 					cv.draw(); //called here because JSNI needs to access the DOM - isnt possible before creating the widget
 				}
 				else {
-					RootPanel.get( "content" ).clear();
 					new SimpleErrorHandling( "Could not create visualization: Clusters are null." );
 				}
 			}
 
 			public void onFailure( Throwable caught ) {
-				RootPanel.get( "content" ).clear();
+				stopWaiting();
+				loading = false;
 				new SimpleErrorHandling( caught.getMessage() );
 			}
 		} );
@@ -259,5 +282,5 @@ public class HashTagSelection extends Composite {
 		String day = date.substring( 6, 8 );
 		return day + "." + month + "." + year;
 	}
-
+	
 }
