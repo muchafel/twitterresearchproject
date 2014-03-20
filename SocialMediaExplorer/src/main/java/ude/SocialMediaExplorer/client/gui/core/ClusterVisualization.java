@@ -1,5 +1,7 @@
 package ude.SocialMediaExplorer.client.gui.core;
 
+import ude.SocialMediaExplorer.Config;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
@@ -105,6 +107,12 @@ public class ClusterVisualization extends Composite {
 				
 				var row = getRowById(id);
 				console.log(row);
+				var sentiment = row[4];
+				var sortAscending = false;
+				if (sentiment < 0){
+					sortAscending = true;
+				}
+				
 				var posts = row[6];
 				
 				console.log("building postList data...");
@@ -131,8 +139,10 @@ public class ClusterVisualization extends Composite {
 	        	table.draw( postListData, 
 	        	{
 	        		allowHtml: true, 
-	        		showRowNumber: true,
-	        		height: (($wnd.innerHeight / 2) * 1) + "px"
+	        		showRowNumber: false,
+	        		height: (($wnd.innerHeight / 2) * 1) + "px",
+	        		sortAscending: sortAscending,
+	        		sortColumn: 1
 //	        		page: 'enable',
 //	        		pageSize: 10,
 //	        		pagingSymbols: {
@@ -142,6 +152,7 @@ public class ClusterVisualization extends Composite {
 //				    pagingButtonsConfiguration: 'auto'
 	        	});
 	        	
+	        	//hide vertical scrollbars...
 	        	$doc.getElementById('posts').style.overflowX = "hidden";
 	        	$doc.getElementsByClassName('google-visualization-table-table')[0].style.overflowX = "hidden";
 	        	
