@@ -84,7 +84,7 @@ Now you can use relative paths like in normal java program.
 === Hosted Mode (Deployment) ===
 To host the app you have to run a *maven install* on the project. Then copy the WAR or exploded webarchive on your server, but you have to check a few things *first*:
  * The GWT unit cache in /target must be empty (You can delete all folders but the /generated-sources folder)
- * Delete the Async interfaces for dev mode ( /target/generated-sources/* )
+ * Delete the Async interfaces for dev mode ( /target/generated-sources/... )
  * Set the path for the project_config.xml in Config.java and set the productionmode variable on true so the full path will be used (see example)
  ** This is the absolute path of your webapp on the server 
  * Copy the files to the specified path 
