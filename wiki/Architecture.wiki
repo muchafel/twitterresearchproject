@@ -8,7 +8,7 @@ This UML diagram shows the classes, but not all references (zoom in or download 
 
 = JavaDocs =
 
-can be found in svn (check out) or  [http://www-stud.uni-due.de/~sfhedetj/sme/sme_docs/ here] 
+can be found in svn (check out) or  [http://www-stud.uni-due.de/~sfhedetj/sme/sme_docs/] 
 
 = Program Main Flow =
 
