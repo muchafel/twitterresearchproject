@@ -2,7 +2,7 @@
 
 = UML =
 
-This UML diagram shows the classes, but not all references:
+This UML diagram shows the classes, but not all references (zoom in or download [http://www-stud.uni-due.de/~sfhedetj/sme/pics/SocialMediaExplorer.png here]):
 
 [http://www-stud.uni-due.de/~sfhedetj/sme/pics/SocialMediaExplorer.png]
 
