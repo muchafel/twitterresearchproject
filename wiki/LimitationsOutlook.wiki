@@ -14,6 +14,11 @@ Our approach is co-occurrence-graph based. Main advantage of this kind of approa
 
 =Spelling Correction=
 
+Wrong Spelling Correction --> Es fehlt an Wissen/Algorithmik über richtige Schreibweisen, Typos, Disambiguierung 
+
 =Scope=
 
+only twitter data
+
 =Semantic Information=
+Clusterung von z.B. Kommissar/Ermittler 
