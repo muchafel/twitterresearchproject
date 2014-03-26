@@ -13,8 +13,7 @@ In addition our simple lookup-approach uses only a sentiment lexicon that was tr
 Our approach is co-occurrence-graph based. Main advantage of this kind of approach is that they can take big context into account. Because Tweets consists of maximal 140 characters, the small context prevents the context advantage from generating real value. So it often brings nearly the same results as a simple noun selection would bring. An alternative that would work for small contexts would be a noun phrase selection by using a chunker. Unfortunately we didn’t find a chunker that is capable of German, under a free license and easy to integrate into our set-up. In the future this should be tackled. 
 
 =Spelling Correction=
-
-Wrong Spelling Correction --> Es fehlt an Wissen/Algorithmik über richtige Schreibweisen, Typos, Disambiguierung 
+Our approach finds similar words based on Levenshtein-distance and replaces them with the most common form. Since in the context of Twitter there are often new and unusual words, the approach has the advantage that it does not recognize such words as incorrect. On the other hand it has the disadvantage that no knowledge is contained on spelling. This means that when a word is less often spelt then correct (according to conventions that may change), the wrong form will be assigned. Furthermore the approach can't distinguish between different words that are spelled very similar (E.g. water and walter (name). So in the future the approach could be evolved by using knowledge about spelling and common typos (e.g. by using noisy channel).
 
 =Scope=
 
