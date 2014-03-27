@@ -6,7 +6,7 @@ This UML diagram shows the classes, but not all references (zoom in or download 
 
 [http://www-stud.uni-due.de/~sfhedetj/sme/pics/SocialMediaExplorer.png]
 
-= JavaDocs =
+= !JavaDocs =
 
 can be found in svn (check out) or  [http://www-stud.uni-due.de/~sfhedetj/sme/sme_docs/ here] 
 
@@ -16,8 +16,8 @@ An extension to [https://code.google.com/p/twitterresearchproject/wiki/Overview 
 
 The flow from a tweet to its visualization:
 
- # The PostCollector (TwitterCrawler via [http://twitter4j.org/en/index.html Twitter4J]) grabs tweets in *JSON* format in the rawdata folder with a timestamp via TimeStamp class (you can change that with the project_config.xml): *files/rawdata/tweets/hashtag/yyyyMMddHHmmss_hashtag.json*
- # The JSON is read out by a FileReader and a PostConverter converts it into the demanded *Post* format to reduce overhead and ensure independence from api specific formats
+ # The !PostCollector (!TwitterCrawler via [http://twitter4j.org/en/index.html !Twitter4J]) grabs tweets in *JSON* format in the rawdata folder with a timestamp via !TimeStamp class (you can change that with the project_config.xml): *files/rawdata/tweets/hashtag/yyyyMMddHHmmss_hashtag.json*
+ # The JSON is read out by a !FileReader and a !PostConverter converts it into the demanded *Post* format to reduce overhead and ensure independence from api specific formats
  # The *PostProvider* hands the Post over to the Analysis and its result is saved in the CAS (you can change that by project_config.xml -> serializedCases): *files/hashtag/yyyyMMddHHmmss/yyyyMMddHHmmss_i.ser*
  # The serialized results become clustered into *ClusterElements* with a Sentiment and these are saved in: *files/serializedClusterElements/hashtag/yyyyMMdd.ser*
  # The ClusterElements are called via the RMI interface but they have to be merged into a *JSON format* ([ https://code.google.com/p/twitterresearchproject/wiki/Visualization details]), which turned out to be very much faster on server-side with the org.JSON lib instead of the gwt.client.json lib
