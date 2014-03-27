@@ -8,3 +8,15 @@ E.g. :
 {{{Sentiment(Hunger)= (PMI(Hunger, schön)+PMI (Hunger, gut)+…)/40 -(PMI(Hunger, schlecht)+PMI (Hunger, dumm)+…)/40}}}
 
 The sentiment of a tweet is finally computed as the mean sentiment of the words the sentence/sentences contain.
+<br />
+<br />
+== read more ==
+
+  * [Purpose Purpose of the project]
+  * [Data]
+  * [Architecture]
+  * [Setup]
+  * [Crawler]
+  * [Analysis] 
+  * [Visualization]
+  * [LimitationsOutlook]
