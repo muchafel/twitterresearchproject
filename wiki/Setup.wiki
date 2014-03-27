@@ -73,9 +73,9 @@ Because the path for reading and writing files is different in test and hosted m
 In Development mode you can test your application. To view you app you have to install a GWT browser plugin. This plugin loads the pages with the generated !JavaScript. For Firefox you can get it i.e. here: [https://code.google.com/p/google-web-toolkit/downloads/detail?name=gwt-dev-plugin-1-24-rc.xpi].
 Good to know:
  * To add additional folders in the Dev mode do the following
- ** Go to Project Preferences
- ** Deployment Assembly
- ** add your path (i.e. files and /files)
+ # Go to Project Preferences
+ # Deployment Assembly
+ # add your path (i.e. files and /files)
 Now you can use relative paths like in normal java program. 
  * If you start the Dev mode for the first time you will be asked for the war-directory 
  ** This is not the webapp folder but the target/SNAPSHOT folder (mojo plugin!)
