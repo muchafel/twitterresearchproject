@@ -32,3 +32,16 @@ The generated ClusterElements are shown in the figure below:
 Each sub cluster represents one of the most frequent discussed senses in the set of Tweets of its top cluster.
 
 [http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/ClusterElement.png]
+
+<br />
+<br />
+== read more ==
+
+  * [Purpose Purpose of the project]
+  * [Data]
+  * [Architecture]
+  * [Setup]
+  * [Crawler]
+  * [Analysis] 
+  * [Visualization]
+  * [LimitationsOutlook]
