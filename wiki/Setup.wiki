@@ -103,8 +103,9 @@ public static String get_xmlPath() {
 }
 ...
 }}}
-
-= Table of Contents=
+<br />
+<br />
+== read more ==
 
   * [Purpose Purpose of the project]
   * [Data]
