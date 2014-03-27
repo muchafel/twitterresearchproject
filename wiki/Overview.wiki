@@ -3,7 +3,7 @@
 = Introduction =
 
 This project deals with the analysis of opinions in social media. In particular, it considers Twitter data and the statements regarding the most popular social TV shows in Germany. These statements are analyzed using state of the art natural-language-processing-methods and made available via a web interface.
-The result can be viewed [here http://lolcat.is.inf.uni-due.de:8080/].
+The result can be viewed [http://lolcat.is.inf.uni-due.de:8080/ here].
 
 Instructions can be found in our [UserGuidelines].
 
