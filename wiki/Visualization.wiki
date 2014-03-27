@@ -158,8 +158,8 @@ public native void draw() /*-{
 }}}
 So the file a user selects is first deserialized into !ClusterElements, then mapped to JSON, passed into a Java-String, read via JSNI and finally parsed back to !JavaScript objects. 
 
-== Google Visualization API - Treemap and !Postlist ==
-From the "data" variable, which represents the !ClusterElements, in the JSNI a data mapping to the *TreeMap* API is needed. Just passing the Cluster-names causes display problems (i.e. a name appears in two Clusters). We need to pass a formatted value (the displayed) and a value (internal usage: unique id). You can react on a rollup/rolldown event and induce a a rollup - this is done by the "go up"-button over the map (by adding a !ClickHandler). The rollup event is used for creating the PostList. Both events are used for updating the Breadcrumbs. The general approach to generate the map:
+== Google Visualization API - Treemap and Postlist ==
+From the "data" variable, which represents the !ClusterElements, in the JSNI a data mapping to the *!TreeMap* API is needed. Just passing the Cluster-names causes display problems (i.e. a name appears in two Clusters). We need to pass a formatted value (the displayed) and a value (internal usage: unique id). You can react on a rollup/rolldown event and induce a a rollup - this is done by the "go up"-button over the map (by adding a !ClickHandler). The rollup event is used for creating the !PostList. Both events are used for updating the Breadcrumbs. The general approach to generate the map:
 {{{
 var treemapData = [];
 for (var i = 0; i < dataSize; i++){
@@ -184,7 +184,7 @@ tree.draw(data, {
 });
  ...
 }}}
-The *PostList* is created similar with each rollup event by reading the events target. A mentionable detail is that the PostList's second column is formatted to the sentiments color by a color formatter: 
+The *!PostList* is created similar with each rollup event by reading the events target. A mentionable detail is that the !PostList's second column is formatted to the sentiments color by a color formatter: 
 {{{
 var formatter = new $wnd.google.visualization.ColorFormat();
 formatter.addGradientRange(0,0.5, 'black', '#f00', '#ddd');
