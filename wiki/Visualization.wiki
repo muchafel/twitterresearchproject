@@ -202,7 +202,6 @@ formatter.format(postListData, 1); // Apply formatter to second column
 }}}
 <br />
 <br />
-<br />
 == read more ==
 
   * [Purpose Purpose of the project]
