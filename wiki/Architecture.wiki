@@ -22,3 +22,15 @@ The flow from a tweet to its visualization:
  # The serialized results become clustered into *ClusterElements* with a Sentiment and these are saved in: *files/serializedClusterElements/hashtag/yyyyMMdd.ser*
  # The ClusterElements are called via the RMI interface but they have to be merged into a *JSON format* ([ https://code.google.com/p/twitterresearchproject/wiki/Visualization details]), which turned out to be very much faster on server-side with the org.JSON lib instead of the gwt.client.json lib
  # The JSON string is passed to the Visualization and parsed into !JavaScript objects so the outer js libs (Google Visualization API) can work with them
+<br />
+<br />
+== read more ==
+
+  * [Purpose Purpose of the project]
+  * [Data]
+  * [Architecture]
+  * [Setup]
+  * [Crawler]
+  * [Analysis] 
+  * [Visualization]
+  * [LimitationsOutlook]
