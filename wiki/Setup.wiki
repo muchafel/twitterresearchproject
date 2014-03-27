@@ -73,12 +73,12 @@ Because the path for reading and writing files is different in test and hosted m
 In Development mode you can test your application. To view you app you have to install a GWT browser plugin. This plugin loads the pages with the generated !JavaScript. For Firefox you can get it i.e. here: [https://code.google.com/p/google-web-toolkit/downloads/detail?name=gwt-dev-plugin-1-24-rc.xpi].
 Good to know:
  * To add additional folders in the Dev mode do the following
- # Go to Project Preferences
- # Deployment Assembly
- # add your path (i.e. files and /files)
+    # Go to Project Preferences
+    # Deployment Assembly
+    # add your path (i.e. files and /files)
 Now you can use relative paths like in normal java program. 
  * If you start the Dev mode for the first time you will be asked for the war-directory 
- ** This is not the webapp folder but the target/SNAPSHOT folder (mojo plugin!)
+    ** This is not the webapp folder but the target/SNAPSHOT folder (mojo plugin!)
  * You can change code on server side without recompiling (restart), but you have to restart for every client side change
 
 === Hosted Mode (Deployment) ===
@@ -86,7 +86,7 @@ To host the app you have to run a *maven install* on the project. Then copy the 
  * The GWT unit cache in /target must be empty (You can delete all folders but the /generated-sources folder)
  * Delete the Async interfaces for dev mode ( /target/generated-sources/... )
  * Set the path for the project_config.xml in Config.java and set the productionmode variable on true so the full path will be used (see example)
- ** This is the absolute path of your webapp on the server 
+    ** This is the absolute path of your webapp on the server 
  * Copy the files to the specified path 
 {{{
 private static final String productionPrefix = "/usr/local/tomcat/apache-tomcat-6.0.37/webapps/ROOT/";
