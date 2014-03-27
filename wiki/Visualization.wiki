@@ -200,10 +200,10 @@ formatter.addGradientRange(0,0.5, 'black', '#f00', '#ddd');
 formatter.addGradientRange(0.5,1, 'black', '#ddd', '#0d0');
 formatter.format(postListData, 1); // Apply formatter to second column				
 }}}
-
-
-
-=== read more ===
+<br />
+<br />
+<br />
+== read more ==
 
   * [Purpose Purpose of the project]
   * [Data]
