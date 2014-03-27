@@ -201,7 +201,9 @@ formatter.addGradientRange(0.5,1, 'black', '#ddd', '#0d0');
 formatter.format(postListData, 1); // Apply formatter to second column				
 }}}
 
-= Table of Contents=
+
+
+=== read more ===
 
   * [Purpose Purpose of the project]
   * [Data]
