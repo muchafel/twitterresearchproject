@@ -26,7 +26,7 @@ GWT is completely in *Java-based* and everything you describe in Java, will be c
 RootPanel.get(someId).doSomething() 
 RootPanel.get('content').add(someWidget)
 }}}
-In this way you can add Element to your Website. A *Widget* can be defined by creating a Class which extends i.e. Composite. But all Functionality, like adding an option to list, has to be added to a widget via EventHandlers. Classes with the definition a of the view plus its behavior get confusing very fast. Therefore the *UIBinder* was added in the newest version of GWT. <br />
+In this way you can add Element to your Website. A *Widget* can be defined by creating a Class which extends i.e. Composite. But all Functionality, like adding an option to list, has to be added to a widget via !EventHandlers. Classes with the definition a of the view plus its behavior get confusing very fast. Therefore the *UIBinder* was added in the newest version of GWT. <br />
 The UIBinder separates the the basic (static) layout, of your website from the dynamic content and functionality. Ao you don't have to add and set Widets and i.e. text in Java, you do it in XML. You can use Widgets and CSS-style directly and as a bonus you can set *fields* into a widget to interact with it in your Java code - assign a variable and add functionality through annotations. This Example shows how this works:<br />
 UIBinder:
 {{{
