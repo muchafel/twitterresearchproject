@@ -10,3 +10,15 @@ Then the most connected nodes are selected as keywords. Because there could be a
 If such a compound of two adjacent words that are both highly connected is found, the compound is chosen as a keyphrase.
 
 In the example sentence the keyphrases "Utah Anti-Spam Regelungen, Bahn, Telekommunikationsanbietern, Anti-Spam Gesetze" are chosen.
+<br />
+<br />
+== read more ==
+
+  * [Purpose Purpose of the project]
+  * [Data]
+  * [Architecture]
+  * [Setup]
+  * [Crawler]
+  * [Analysis] 
+  * [Visualization]
+  * [LimitationsOutlook]
