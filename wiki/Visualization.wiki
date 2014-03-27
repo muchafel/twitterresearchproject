@@ -122,8 +122,8 @@ The TreeMap and the PostList couldn't be realized as widgets easily, so we used 
     <script type="text/javascript" src="Start/Start.nocache.js"></script>
     ...
 }}}
-The loaded lib can be accessed in a *JSNI* - [http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html JavaScriptNativeInterface]. A GWT-way to wrap some JavaScript in a JavaFunction. From here the browser-functions can be used directly, this means you can access your lib via the window object ($wnd). You can wrap any thinkable JavaScript code in such an interface (indicated through "native") and call it from your Java code. This is also possible vice versa, but with some limitations (you can call Java methods, Doubles, Strings and Integers). 
-Complex objects as the ClusterElement aren't passable to the JSNI (the GWT-Compiler hasn't all libraries translated into JavaScript - the ClusterElement uses ArrayList and HashMap...). Thus the ClusterElements are mapped recursively into a JSON-Array on server-side via the Java org.JSON-library. Now the Clusters can be used on client-side. The following example shows how to work with the JSNI 
+The loaded lib can be accessed in a *JSNI* - [http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html JavaScriptNativeInterface]. A GWT-way to wrap some !JavaScript in a Java function. From here the browser-functions can be used directly, this means you can access your lib via the window object ($wnd). You can wrap any thinkable !JavaScript code in such an interface (indicated through "native") and call it from your Java code. This is also possible vice versa, but with some limitations (you can call Java methods, Doubles, Strings and Integers). 
+Complex objects as the !ClusterElement aren't passable to the JSNI (the GWT-Compiler hasn't all libraries translated into !JavaScript - the !ClusterElement uses !ArrayList and !HashMap...). Thus the !ClusterElements are mapped recursively into a JSON-Array on server-side via the Java org.JSON-library. Now the Clusters can be used on client-side. The following example shows how to work with the JSNI 
 
 {{{
 ...
@@ -156,10 +156,10 @@ public native void draw() /*-{
                 var theSentimentValueOfFirstClusterEl = data[1][6].sentiment; 
                 ...
 }}}
-So the file a user selects is first deserialized into ClusterElements, then mapped to JSON, passed into a Java-String, read via JSNI and finally parsed back to JavaScript objects. 
+So the file a user selects is first deserialized into !ClusterElements, then mapped to JSON, passed into a Java-String, read via JSNI and finally parsed back to !JavaScript objects. 
 
-== Google Visualization API - Treemap and Postlist ==
-From the "data" variable, which represents the ClusterElements, in the JSNI a data mapping to the *TreeMap* API is needed. Just passing the Cluster-names causes display problems (i.e. a name appears in two Clusters). We need to pass a formatted value (the displayed) and a value (internal usage: unique id). You can react on a rollup/rolldown event and induce a a rollup - this is done by the "go up"-button over the map (by adding a ClickHandler). The rollup event is used for creating the PostList. Both events are used for updating the Breadcrumbs. The general approach to generate the map:
+== Google Visualization API - Treemap and !Postlist ==
+From the "data" variable, which represents the !ClusterElements, in the JSNI a data mapping to the *TreeMap* API is needed. Just passing the Cluster-names causes display problems (i.e. a name appears in two Clusters). We need to pass a formatted value (the displayed) and a value (internal usage: unique id). You can react on a rollup/rolldown event and induce a a rollup - this is done by the "go up"-button over the map (by adding a !ClickHandler). The rollup event is used for creating the PostList. Both events are used for updating the Breadcrumbs. The general approach to generate the map:
 {{{
 var treemapData = [];
 for (var i = 0; i < dataSize; i++){
