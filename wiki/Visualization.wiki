@@ -105,7 +105,7 @@ Through adding the Bootstrap lib to our GWT Module, we can make use of a Cross-b
 
 == JSNI & JSON == 
 
-The TreeMap and the PostList couldn't be realized as widgets easily, so we used native JavaScript libraries. In detail the [https://developers.google.com/chart/interactive/docs/index Google-Chart library]. To bind in a JavaScript lib many ways are provided in GWT (i.e. ScriptInjector, Extra resource, ...), but the most simple one is to add the library in the Module.html page (before the nocache.js - otherwise the Page hasn't access to the lib):
+The !TreeMap and the !PostList couldn't be realized as widgets easily, so we used native !JavaScript libraries. In detail the [https://developers.google.com/chart/interactive/docs/index Google-Chart library]. To bind in a JavaScript! lib many ways are provided in GWT (i.e. ScriptInjector!, Extra resource, ...), but the most simple one is to add the library in the Module.html page (before the nocache.js - otherwise the Page hasn't access to the lib):
 {{{
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript"> 
