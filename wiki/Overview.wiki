@@ -16,7 +16,7 @@ For further readings and a technical documentation look at the contents below:
 
 = Table of Contents=
 
-  * [Purpose purpose of the project]
+  * [Purpose Purpose of the project]
   * [Data]
   * [Architecture]
   * [Setup]
