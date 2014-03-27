@@ -9,3 +9,15 @@ The figure below shows words with a similarity > .7 in a graph:
 In the shown example all the words would be assigned with "Regelungen" (German for "regulations")
 
 [http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/OrthographyCluster.png]
+<br />
+<br />
+== read more ==
+
+  * [Purpose Purpose of the project]
+  * [Data]
+  * [Architecture]
+  * [Setup]
+  * [Crawler]
+  * [Analysis] 
+  * [Visualization]
+  * [LimitationsOutlook]
