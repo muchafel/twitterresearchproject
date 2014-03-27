@@ -46,7 +46,7 @@ Now the GWT project is Eclipse and Maven ready. To see how to use GWT have a loo
 
 == RMI ==
 
-For the [http://www.gwtproject.org/doc/latest/DevGuideServerCommunication.html client-server communication] we have used the DataHelper class. Here are all required server actions bundled. We had some problems with reading data in the start period of the project so here are some important facts:
+For the [http://www.gwtproject.org/doc/latest/DevGuideServerCommunication.html client-server communication] we have used the !DataHelper class. Here are all required server actions bundled. We had some problems with reading data in the start period of the project so here are some important facts:
 Ensure that every class you want to use is defined in your web.xml as a servlet:
 {{{
   <servlet>
@@ -70,7 +70,7 @@ Because the path for reading and writing files is different in test and hosted m
 
 === Development Mode ===
 
-In Development mode you can test your application. To view you app you have to install a GWT browser plugin. This plugin loads the pages with the generated JavaScript. For Firefox you can get it i.e. here: [https://code.google.com/p/google-web-toolkit/downloads/detail?name=gwt-dev-plugin-1-24-rc.xpi].
+In Development mode you can test your application. To view you app you have to install a GWT browser plugin. This plugin loads the pages with the generated !JavaScript. For Firefox you can get it i.e. here: [https://code.google.com/p/google-web-toolkit/downloads/detail?name=gwt-dev-plugin-1-24-rc.xpi].
 Good to know:
  * To add additional folders in the Dev mode do the following
  ** Go to Project Preferences
