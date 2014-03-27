@@ -2,19 +2,25 @@
 
 = Introduction =
 
-The Visualizations' goal is to show [https://code.google.com/p/twitterresearchproject/wiki/ClusterElements Cluster Elements] from the [https://code.google.com/p/twitterresearchproject/wiki/Analysis Analysis] to the user in an intuitive way. <br />
-To display them, a combination of different client-side java script-based technologies is used. They will be discussed in the following last chapter. The following chapter shows the User-Interface itself. (See also [https://code.google.com/p/twitterresearchproject/wiki/UserGuidelines User Guidelines]).
+The Visualizations' goal is to show [https://code.google.com/p/twitterresearchproject/wiki/ClusterElements Cluster Elements] from the [https://code.google.com/p/twitterresearchproject/wiki/Analysis Analysis] to the user in an intuitive way. 
+
+To display them, a combination of different client-side java script-based technologies is used. 
+
+They will be discussed in the following last chapter. The following chapter shows the User-Interface itself. (See also [https://code.google.com/p/twitterresearchproject/wiki/UserGuidelines User Guidelines]).
 
 = Concept =
 
 The User-Interface is mainly divided into two components:
  # The *options area*: A simple interface for changing the project_config.xml, which defines parameters for the [https://code.google.com/p/twitterresearchproject/wiki/Crawler Crawler]. This could be extended in the future.
  # A *visualization area*: Here the user can choose a analysis result via a list of possible hashtags and display it. To display a [https://code.google.com/p/twitterresearchproject/wiki/ClusterElements Cluster Element], the Interface has to provide this informations:
- * The clusters and subclusters
- * Their Size
- * Their Sentiment
- * The corresponding posts (tweets)
-As the ClusterElements are organized in a hierarchical structure, a *[http://en.wikipedia.org/wiki/Treemapping TreeMap]* can handle all informations but the post at once. So there is a !TreeMap for the Clusters and a separate list of posts, which is display and loaded with each Cluster. The size (number of posts) of a Cluster is the space the !TreeMap-element takes, the Sentiment is the color ( in a scale from red [=negative] over gray [=neutral] to green [=positive] ) of the element and clicking on a Cluster shows its Subclusters, if existing. For a better understanding a *breadcrumb-list* shows the actual route to the root-Cluster. The *!PostList* shows all the posts belonging to the actually chosen Cluster and the sentiment for each post. One can sort by Sentiment's order - ascending or descending.
+    * The clusters and subclusters
+    * Their Size
+    * Their Sentiment
+    * The corresponding posts (tweets)
+
+As the ClusterElements are organized in a hierarchical structure, a *[http://en.wikipedia.org/wiki/Treemapping TreeMap]* can handle all informations but the post at once. So there is a !TreeMap for the Clusters and a separate list of posts, which is display and loaded with each Cluster. The size (number of posts) of a Cluster is the space the !TreeMap-element takes, the Sentiment is the color ( in a scale from red [=negative] over gray [=neutral] to green [=positive] ) of the element and clicking on a Cluster shows its Subclusters, if existing. 
+
+For a better understanding a *breadcrumb-list* shows the actual route to the root-Cluster. The *!PostList* shows all the posts belonging to the actually chosen Cluster and the sentiment for each post. One can sort by Sentiment's order - ascending or descending.
 
 = Implementation =
 
@@ -77,7 +83,9 @@ The functionality of a field can simply be added with the UIHandler-annotation.
 
 == Extending The Base Module ==
 
-As you can see in the example above, the UIBinder makes use of *namespaces* which can make references to certain Components in Modules you have declared in your Module.gwt.xml. Many ready to use widget-libraries exist - in our case the GWT-Widgets are used (standard) and additionally the [http://gwtbootstrap.github.io/ GWT-Bootstrap] (a Twitter-Bootstrap translation for GWT) is bound in. All Module-extensions will be compiled into Javascript-library equivalents in your final website and every Module-extension has to be declared as mentioned in your Module-base file:
+As you can see in the example above, the UIBinder makes use of *namespaces* which can make references to certain Components in Modules you have declared in your Module.gwt.xml. Many ready to use widget-libraries exist - in our case the GWT-Widgets are used (standard) and additionally the [http://gwtbootstrap.github.io/ GWT-Bootstrap] (a Twitter-Bootstrap translation for GWT) is bound in. 
+
+All Module-extensions will be compiled into Javascript-library equivalents in your final website and every Module-extension has to be declared as mentioned in your Module-base file:
 {{{
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to='YourModule'>
@@ -123,6 +131,7 @@ The !TreeMap and the !PostList couldn't be realized as widgets easily, so we use
     ...
 }}}
 The loaded lib can be accessed in a *JSNI* - [http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html JavaScriptNativeInterface]. A GWT-way to wrap some !JavaScript in a Java function. From here the browser-functions can be used directly, this means you can access your lib via the window object ($wnd). You can wrap any thinkable !JavaScript code in such an interface (indicated through "native") and call it from your Java code. This is also possible vice versa, but with some limitations (you can call Java methods, Doubles, Strings and Integers). 
+
 Complex objects as the !ClusterElement aren't passable to the JSNI (the GWT-Compiler hasn't all libraries translated into !JavaScript - the !ClusterElement uses !ArrayList and !HashMap...). Thus the !ClusterElements are mapped recursively into a JSON-Array on server-side via the Java org.JSON-library. Now the Clusters can be used on client-side. The following example shows how to work with the JSNI 
 
 {{{
