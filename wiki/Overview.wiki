@@ -19,6 +19,7 @@ For further readings and a technical documentation look at the contents below:
   * [Purpose purpose of the project]
   * [Data]
   * [Architecture]
+  * [Setup]
   * [Crawler]
   * [Analysis] 
   * [Visualization]
