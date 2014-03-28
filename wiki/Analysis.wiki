@@ -11,7 +11,7 @@ In the *"Analysis on Tweet-Level"* each Tweet is enriched with information that 
 
 As already mentioned this step is performed for each Tweet that was collected by the [Crawler]. "Analysis on Tweet-Level" consists of five steps:
 
-  * Segmentation and twitter-specific POS-tagging with the [http://code.google.com/p/dkpro-core-gpl/ ArktweetTagger]): Because the !ArktweetTagger is just trained on english texts and our use case refers to mostly german Tweets the results of this step aren't statisfying. We use this step to detect emoticons, links and Twitter-specific phenomenons like the use of '@' and '#'
+  * Segmentation and twitter-specific POS-tagging with the [http://code.google.com/p/dkpro-core-gpl/ ArktweetTagger]: Because the !ArktweetTagger is just trained on english texts and our use case refers to mostly german Tweets the results of this step aren't statisfying. We use this step to detect emoticons, links and Twitter-specific phenomenons like the use of '@' and '#'
   * POS-tagging with the [http://code.google.com/p/dkpro-core-gpl/ OpenNLPPOSTagger]: This POS-Tager is also capable of German
   * POS-merging: The results of the !ArktweetTagger are replaced with the results from OpenNLPPOSTagger except the emoticons, links and twitter-specific phenomenons
   * [SentimentTagging]: enriches tokens with a sentiment value
