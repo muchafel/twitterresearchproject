@@ -17,7 +17,7 @@ Our approach finds similar words based on Levenshtein-distance and replaces them
 
 =Scope=
 
-At the moment we focus only on Tweets. To gain deeper insights in public, in the web expressed meanings it would be useful to examine other knowledge sources (e.g. blogs, facebook), too. Our approach is designed in a way that it can be enhanced for other sources (just look on our data interface !_PostList_). Though it needs further concepts on how to crawl, preprocess and weight them in the analysis. In the cluster-process at the end of the analysis every post is weighted the same. If you try to include whole blogs you may think about adjust these weights.
+At the moment we focus only on Tweets. To gain deeper insights in public, in the web expressed meanings it would be useful to examine other knowledge sources (e.g. blogs, facebook), too. Our approach is designed in a way that it can be enhanced for other sources (just have a look at our data interface _!PostList_). Though it needs further concepts on how to crawl, preprocess and weight them in the analysis. In the cluster-process at the end of the analysis every post is weighted the same. If you try to include whole blogs you may think about adjust these weights.
 
 =Semantic Information=
 Useful would be two applications of knowledge. For a disambiguation of words with the same surface forms (E.g. bank (money) versus bank (sitting)). Such a disambiguation could be useful to differentiate the analysis further. On the other hand for recognizing actually same concepts with different surface forms. For example, refer the words X and Y on a similar concept. This is not recognized by our approach, but would be very helpful for a good analysis.
