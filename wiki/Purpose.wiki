@@ -4,8 +4,8 @@
 
 Nowadays, it becomes harder and harder to deal with the large amount of information that is offered through all kind of media. Especially since there is social media in is nearly impossible to cope with all the possible available information. <br>
 On the other hands the highly individualized messages, tweets, post etc. in social media allow us to get a picture of what people are thinking without having a filtering via copy reader, editor or journalist. <br>
-To overcome the big amounts of data this project aims on gaining computer-aided insights to opinions that were expressed on Twitter. Because we wanted to examine the opportunities of computer-processing of tweets we neeeded a domain whith at least a certain frequency.
-Therefore we chose the context of social TV where we had series (and referring tweets) that came on a weekly basis. Of course our system is adaptable for any kind of hashtag.
+To overcome the big amounts of data this project aims on gaining computer-aided insights to opinions that were expressed via Twitter. Because we want to examine the opportunities of computer-processing of Tweets we need a domain whith a certain frequency.
+Therefore we chose the context of social TV where we have series (and referring Tweets) that came on a weekly basis. Of course our system is adaptable for any kind of hashtag.
 <br />
 <br />
 == read more ==
