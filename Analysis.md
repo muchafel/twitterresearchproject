@@ -1,0 +1,45 @@
+# Analysis #
+
+This application uses an analysis process to extract opionions from twitter-data. Because this analysis takes a long time to run (up to two seconds a Tweet) we pre-calculate results on a weekly basis and provide these results to our web-interface.
+The analysis itself uses NLP-techniques and can be divided into the two main steps "analysis on Tweet-level" and "clustering".
+In the **"Analysis on Tweet-Level"** each Tweet is enriched with information that are used for **"Clustering"** that follows later. The two steps are further described below:
+
+
+# "Analysis on Tweet-Level" #
+
+As already mentioned this step is performed for each Tweet that was collected by the [Crawler](Crawler.md). "Analysis on Tweet-Level" consists of five steps:
+
+  * Segmentation and twitter-specific POS-tagging with the [ArktweetTagger](http://code.google.com/p/dkpro-core-gpl/): Because the ArktweetTagger is just trained on english texts and our use case refers to mostly german Tweets the results of this step aren't statisfying. We use this step to detect emoticons, links and Twitter-specific phenomenons like the use of '@' and '#'
+  * POS-tagging with the [OpenNLPPOSTagger](http://code.google.com/p/dkpro-core-gpl/): This POS-Tager is also capable of German
+  * POS-merging: The results of the ArktweetTagger are replaced with the results from OpenNLPPOSTagger except the emoticons, links and twitter-specific phenomenons
+  * [SentimentTagging](SentimentTagging.md): enriches tokens with a sentiment value
+  * simple Sense-Annotation: marks NNs, NEs and ADJs to speed up the following clustering process
+
+The figure below illustrates the "Analysis on Tweet-Level"
+
+![http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/Analyse.png](http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/Analyse.png)
+
+# "Clustering" #
+This step uses the enriched Tweets and forms clusters on the basis of orthographic similarity, extractable keyphrases and frequency of them. Therefore it performs the following steps:
+
+  * [OrthographicCleaning](OrthographicCleaning.md): We aggregate words that are written similarly (measured by calculating the Levenshtein distance) and assign the most frequent one.
+  * [KeyphraseExtraction](KeyphraseExtraction.md): Through the use of a cooccurence graph on each Tweet we extract keyphrases
+  * cluster forming: Finally we can extract a hierarchical structure from the sum of Tweets. We do this by recursivly adding the 18 most-frequent orthographically cleaned keywords as child nodes to our result set.
+
+The generated ClusterElements are shown in the figure below:
+Each sub cluster represents one of the most frequent discussed senses in the set of Tweets of its top cluster.
+
+![http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/ClusterElement.png](http://www-stud.uni-due.de/~sfmiwoja/BilderFoPro/ClusterElement.png)
+
+<br />
+<br />
+## read more ##
+
+  * [Purpose of the project](Purpose.md)
+  * [Data](Data.md)
+  * [Architecture](Architecture.md)
+  * [Setup](Setup.md)
+  * [Crawler](Crawler.md)
+  * [Analysis](Analysis.md)
+  * [Visualization](Visualization.md)
+  * [LimitationsOutlook](LimitationsOutlook.md)

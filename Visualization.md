@@ -1,0 +1,212 @@
+# Introduction #
+
+The Visualizations' goal is to show [Cluster Elements](https://code.google.com/p/twitterresearchproject/wiki/ClusterElements) from the [Analysis](https://code.google.com/p/twitterresearchproject/wiki/Analysis) to the user in an intuitive way.
+
+To display them, a combination of different client-side java script-based technologies is used.
+
+They will be discussed in the following last chapter. The following chapter shows the User-Interface itself. (See also [User Guidelines](https://code.google.com/p/twitterresearchproject/wiki/UserGuidelines)).
+
+# Concept #
+
+The User-Interface is mainly divided into two components:
+  1. The **options area**: A simple interface for changing the project\_config.xml, which defines parameters for the [Crawler](https://code.google.com/p/twitterresearchproject/wiki/Crawler). This could be extended in the future.
+  1. A **visualization area**: Here the user can choose a analysis result via a list of possible hashtags and display it. To display a [Cluster Element](https://code.google.com/p/twitterresearchproject/wiki/ClusterElements), the Interface has to provide this informations:
+    * The clusters and subclusters
+    * Their Size
+    * Their Sentiment
+    * The corresponding posts (tweets)
+
+As the ClusterElements are organized in a hierarchical structure, a **[TreeMap](http://en.wikipedia.org/wiki/Treemapping)** can handle all informations but the post at once. So there is a TreeMap for the Clusters and a separate list of posts, which is display and loaded with each Cluster. The size (number of posts) of a Cluster is the space the TreeMap-element takes, the Sentiment is the color ( in a scale from red [=negative] over gray [=neutral] to green [=positive] ) of the element and clicking on a Cluster shows its Subclusters, if existing.
+
+For a better understanding a **breadcrumb-list** shows the actual route to the root-Cluster. The **PostList** shows all the posts belonging to the actually chosen Cluster and the sentiment for each post. One can sort by Sentiment's order - ascending or descending.
+
+# Implementation #
+
+## GUI Creation ##
+
+The GUI is created at different location and in different part of the Project. Let's begin with the general creation of a GUI in GWT. <br />
+GWT is completely in **Java-based** and everything you describe in Java, will be compiled via the GWT-compiler into the browser readable HTML and Javascript. You can use widgets, where some functionality (like  a List or a Button) is bundled into one component. You have access to the DOM of the Browser via
+```
+RootPanel.get(someId).doSomething() 
+RootPanel.get('content').add(someWidget)
+```
+In this way you can add Element to your Website. A **Widget** can be defined by creating a Class which extends i.e. Composite. But all Functionality, like adding an option to list, has to be added to a widget via EventHandlers. Classes with the definition a of the view plus its behavior get confusing very fast. Therefore the **UIBinder** was added in the newest version of GWT. <br />
+The UIBinder separates the the basic (static) layout, of your website from the dynamic content and functionality. Ao you don't have to add and set Widets and i.e. text in Java, you do it in XML. You can use Widgets and CSS-style directly and as a bonus you can set **fields** into a widget to interact with it in your Java code - assign a variable and add functionality through annotations. This Example shows how this works:<br />
+UIBinder:
+```
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
+        xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+
+       <ui:style>
+		/*select widgets via their class and style them*/
+        </ui:style>
+
+        <b:Row>
+	  
+           <b:Column size="10" offset="1">
+
+            <g:HTMLPanel>
+                <div>
+                    Hello, <span ui:field='dynamicContent'>.
+                </div>
+            </g:HTMLPanel>
+
+        ...
+```
+Java:
+```
+public class Example extends Composite {
+
+	interface MenuUiBinder extends UiBinder<Widget, Example> {}
+
+	private static MenuUiBinder uiBinder = GWT.create( MenuUiBinder.class );
+
+        @UiField("dynamicContent")
+	SpanElement span;
+	@UiHandler("dynamicContent")
+	void hereCouldBeAClickHandler(ClickEvent e) {
+		//react on click
+	}
+
+	public Example() {
+		initWidget( uiBinder.createAndBindUi( this ) );
+
+	}
+
+        ...
+```
+The functionality of a field can simply be added with the UIHandler-annotation.
+
+## Extending The Base Module ##
+
+As you can see in the example above, the UIBinder makes use of **namespaces** which can make references to certain Components in Modules you have declared in your Module.gwt.xml. Many ready to use widget-libraries exist - in our case the GWT-Widgets are used (standard) and additionally the [GWT-Bootstrap](http://gwtbootstrap.github.io/) (a Twitter-Bootstrap translation for GWT) is bound in.
+
+All Module-extensions will be compiled into Javascript-library equivalents in your final website and every Module-extension has to be declared as mentioned in your Module-base file:
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='YourModule'>
+  <!-- Inherit the core Web Toolkit stuff. -->
+  <inherits name='com.google.gwt.user.User' />
+
+  <!-- Inherit the default GWT style sheet.  You can change -->
+  <!-- the theme of your GWT application by uncommenting -->
+  <!-- any one of the following lines.                            -->
+  <inherits name='com.google.gwt.user.theme.standard.Standard' />
+  <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
+  <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
+
+  <!-- Other module inherits -->
+
+  <!-- Specify the app entry point class. -->
+  <entry-point class='ude.SocialMediaExplorer.client.Start' />
+
+	<!--  inherit the GWT-Bootstrap widget library -->
+	<inherits name="com.github.gwtbootstrap.Bootstrap"/>
+        <!-- this has to be set explicitly since GWT-Bootstrap 3.2 (important) -->         
+	<set-property name="bootstrap.responsiveDesign" value="true"/>
+```
+Through adding the Bootstrap lib to our GWT Module, we can make use of a Cross-browser responsive layout as seen in the UIBinder example and also of a wide range of icons from [Fontawsome](http://fortawesome.github.io/Font-Awesome/icons/)
+
+## JSNI & JSON ##
+
+The TreeMap and the PostList couldn't be realized as widgets easily, so we used native JavaScript libraries. In detail the [Google-Chart library](https://developers.google.com/chart/interactive/docs/index). To bind in a JavaScript lib many ways are provided in GWT (i.e. ScriptInjector, Extra resource, ...), but the most simple one is to add the library in the Module.html page (before the nocache.js - otherwise the Page hasn't access to the lib):
+```
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript"> 
+    	google.load("visualization", "1", {packages:['treemap']});
+    	google.load('visualization', '1', {packages:['orgchart']});
+    	google.load('visualization', '1', {packages:['table']});
+    </script>
+    
+    <!--                                           -->
+    <!-- This script loads your compiled module.   -->
+    <!-- If you add any GWT meta tags, they must   -->
+    <!-- be added before this line.                -->
+    <!--                                           -->
+    <script type="text/javascript" src="Start/Start.nocache.js"></script>
+    ...
+```
+The loaded lib can be accessed in a **JSNI** - [JavaScriptNativeInterface](http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html). A GWT-way to wrap some JavaScript in a Java function. From here the browser-functions can be used directly, this means you can access your lib via the window object ($wnd). You can wrap any thinkable JavaScript code in such an interface (indicated through "native") and call it from your Java code. This is also possible vice versa, but with some limitations (you can call Java methods, Doubles, Strings and Integers).
+
+Complex objects as the ClusterElement aren't passable to the JSNI (the GWT-Compiler hasn't all libraries translated into JavaScript - the ClusterElement uses ArrayList and HashMap...). Thus the ClusterElements are mapped recursively into a JSON-Array on server-side via the Java org.JSON-library. Now the Clusters can be used on client-side. The following example shows how to work with the JSNI
+
+```
+...
+String j = "[['Topcluster', 1, null, 50, 0.5, 0.1, [{post:'i am a tweet',sentiment: 0.5},{...}]],[...]]";
+
+public native void draw() /*-{
+
+	if (!$wnd.google && !wnd.google.visualisation) {
+		$wnd.alert("Something went wrong: no google js lib found... ");
+		return;
+	}
+	
+        try {
+		//try to get and transform the data:
+		var j = this.@ude.SocialMediaExplorer.client.gui.core.ClusterVisualization::jsonData;
+		console.log("received data:");
+		var data = $wnd.JSON.parse(j);
+		console.log(data);
+		var dataSize = data.length;
+		//	first row  = header
+		//	cols:	
+		//		0 = id of the cluster: String
+		//		1 = name of the cluster: String
+		//		2 = parent cluster (id): String
+		//		3 = size: number
+		//		4 = sentiments value: number
+		//		5 = sentiments range: number
+		//		6 = posts belonging to the cluster: {post: msg, sentiment: value}
+
+                var theSentimentValueOfFirstClusterEl = data[1][6].sentiment; 
+                ...
+```
+So the file a user selects is first deserialized into ClusterElements, then mapped to JSON, passed into a Java-String, read via JSNI and finally parsed back to JavaScript objects.
+
+## Google Visualization API - Treemap and Postlist ##
+From the "data" variable, which represents the ClusterElements, in the JSNI a data mapping to the **TreeMap** API is needed. Just passing the Cluster-names causes display problems (i.e. a name appears in two Clusters). We need to pass a formatted value (the displayed) and a value (internal usage: unique id). You can react on a rollup/rolldown event and induce a a rollup - this is done by the "go up"-button over the map (by adding a ClickHandler). The rollup event is used for creating the PostList. Both events are used for updating the Breadcrumbs. The general approach to generate the map:
+```
+var treemapData = [];
+for (var i = 0; i < dataSize; i++){
+	var row = new Array();
+	row.push({v:data[i][0],f:data[i][1]});//value/formatted
+	row.push(data[i][2]);//parent
+	row.push(data[i][3]);//size
+	row.push(data[i][4]);//sentiment
+	treemapData.push(row);
+}
+
+treemapData = new $wnd.google.visualization.arrayToDataTable( treemapData );
+
+var tree = new $wnd.google.visualization.TreeMap(document.getElementById('chart_div'));
+tree.draw(data, {
+          minColor: '#f00',
+          midColor: '#ddd',
+          maxColor: '#0d0',
+          headerHeight: 15,
+          fontColor: 'black',
+          showScale: true
+});
+ ...
+```
+The **PostList** is created similar with each rollup event by reading the events target. A mentionable detail is that the PostList's second column is formatted to the sentiments color by a color formatter:
+```
+var formatter = new $wnd.google.visualization.ColorFormat();
+formatter.addGradientRange(0,0.5, 'black', '#f00', '#ddd');
+formatter.addGradientRange(0.5,1, 'black', '#ddd', '#0d0');
+formatter.format(postListData, 1); // Apply formatter to second column				
+```
+<br />
+<br />
+## read more ##
+
+  * [Purpose of the project](Purpose.md)
+  * [Data](Data.md)
+  * [Architecture](Architecture.md)
+  * [Setup](Setup.md)
+  * [Crawler](Crawler.md)
+  * [Analysis](Analysis.md)
+  * [Visualization](Visualization.md)
+  * [LimitationsOutlook](LimitationsOutlook.md)
